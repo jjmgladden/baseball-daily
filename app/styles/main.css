@@ -540,7 +540,7 @@ pre { padding: 0.75rem; overflow-x: auto; border: 1px solid var(--border); }
   font-size: 0.85rem;
 }
 
-/* ---------- Highlight videos (YouTube embeds) ---------- */
+/* ---------- Highlight videos (YouTube thumbnail links) ---------- */
 
 .highlights-section {
   margin-top: 1rem;
@@ -551,29 +551,72 @@ pre { padding: 0.75rem; overflow-x: auto; border: 1px solid var(--border); }
 }
 .highlights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 0.85rem;
 }
 .highlight-card {
+  display: block;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, transform 0.1s;
 }
+.highlight-card:hover {
+  border-color: var(--accent-info);
+  text-decoration: none;
+}
+.highlight-card:active { transform: translateY(1px); }
+
 .highlight-thumb {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;  /* 16:9 aspect ratio */
+  padding-bottom: 56.25%;  /* 16:9 */
   background: #000;
+  overflow: hidden;
 }
-.highlight-thumb iframe {
+.highlight-thumb img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: 0;
+  object-fit: cover;
+  display: block;
 }
+.highlight-thumb-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--text-muted);
+}
+.highlight-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: background 0.15s, transform 0.15s;
+}
+.highlight-card:hover .highlight-play {
+  background: var(--accent-cards);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
 .highlight-title {
   padding: 0.55rem 0.75rem 0.1rem;
   font-size: 0.9rem;
