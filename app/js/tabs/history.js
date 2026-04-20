@@ -8,20 +8,18 @@
  *   - All Franchises (compact list with link-outs)
  */
 
-import { loadFranchises, loadHistoryLinks, loadHistoricalVideos, loadLegendsGeneral, loadBrothers } from '../data-loader.js';
+import { loadFranchises, loadHistoryLinks, loadHistoricalVideos } from '../data-loader.js';
 
 export async function renderHistory(root, snap) {
   if (!root) return;
   root.innerHTML = `<h1>History</h1><div class="card"><p class="loading">Loading…</p></div>`;
 
-  let franchisesData, historyLinks, videos, legends, brothers;
+  let franchisesData, historyLinks, videos;
   try {
-    [franchisesData, historyLinks, videos, legends, brothers] = await Promise.all([
+    [franchisesData, historyLinks, videos] = await Promise.all([
       loadFranchises(),
       loadHistoryLinks().catch(() => null),
       loadHistoricalVideos().catch(() => null),
-      loadLegendsGeneral().catch(() => null),
-      loadBrothers().catch(() => null),
     ]);
   } catch (err) {
     root.innerHTML = `<h1>History</h1><div class="card"><p class="muted">${escapeHtml(err.message)}</p></div>`;
@@ -40,9 +38,9 @@ export async function renderHistory(root, snap) {
 
     ${renderIconicMoments(moments)}
 
-    ${renderGeneralLegends(legends?.legends || [])}
-
-    ${renderBrothers(brothers?.entries || [])}
+    <div class="card" style="border-left: 3px solid var(--accent-info);">
+      <p class="muted" style="margin: 0;">Looking for legends (Vin Scully, Josh Gibson, Ken Griffey Jr., etc.) or brothers in baseball (DiMaggios, Alous, Waners, etc.)? They live on the <strong><a href="#" onclick="document.querySelector('[data-tab=stories]').click(); return false;">Stories</a></strong> tab now — fully searchable and filterable.</p>
+    </div>
 
     <h2>Franchise Lineages</h2>
     <p class="muted" style="margin-bottom: 1rem;">
@@ -87,77 +85,6 @@ function renderOnThisDay(events) {
           </li>
         `).join('')}
       </ul>
-    </div>
-  `;
-}
-
-function renderGeneralLegends(legends) {
-  if (!legends.length) return '';
-  const byCategory = {};
-  for (const l of legends) {
-    const cat = l.category || 'player';
-    if (!byCategory[cat]) byCategory[cat] = [];
-    byCategory[cat].push(l);
-  }
-  const categoryLabels = {
-    player: 'Players',
-    coach: 'Coaches & Managers',
-    executive: 'Executives & Pioneers',
-    broadcaster: 'Broadcasters',
-    'negro-leagues': 'Negro Leagues',
-    umpire: 'Umpires',
-  };
-  const order = ['player', 'negro-leagues', 'coach', 'executive', 'broadcaster', 'umpire'];
-  const sections = order.filter(c => byCategory[c]).map(c => `
-    <h3 style="margin-top: 1.25rem;">${escapeHtml(categoryLabels[c] || c)} <span class="muted">(${byCategory[c].length})</span></h3>
-    <div class="grid grid-2">
-      ${byCategory[c].map(renderLegendCard).join('')}
-    </div>
-  `).join('');
-
-  return `
-    <h2>Legends <span class="muted">(${legends.length})</span></h2>
-    <p class="muted" style="margin-bottom: 1rem;">
-      Curated external references for Hall of Fame players, managers, executives, broadcasters, and Negro Leagues stars. Expanded weekly via approved curation batches.
-    </p>
-    ${sections}
-  `;
-}
-
-function renderLegendCard(l) {
-  return `
-    <div class="card">
-      <h3>${escapeHtml(l.name)}${l.nickname ? ` <span class="muted">"${escapeHtml(l.nickname)}"</span>` : ''}</h3>
-      <div class="muted">${escapeHtml(l.role || '')}${l.era ? ` · ${escapeHtml(l.era)}` : ''}</div>
-      <p>${escapeHtml(l.headline || '')}</p>
-      ${renderLinkPills(l.links)}
-    </div>
-  `;
-}
-
-function renderBrothers(entries) {
-  if (!entries.length) return '';
-  return `
-    <h2>Brothers and Families <span class="muted">(${entries.length})</span></h2>
-    <p class="muted" style="margin-bottom: 1rem;">
-      Brother pairs, trios, and larger family combinations who played MLB.
-    </p>
-    <div class="grid grid-2">
-      ${entries.map(b => `
-        <div class="card">
-          <h3>${escapeHtml(b.title)}</h3>
-          <div class="muted">${escapeHtml(b.era || '')}</div>
-          <p>${escapeHtml(b.headline || '')}</p>
-          ${b.members?.length ? `
-            <ul class="brothers-members">
-              ${b.members.map(m => `
-                <li><strong>${escapeHtml(m.name)}</strong> — <span class="muted">${escapeHtml(m.note || '')}</span></li>
-              `).join('')}
-            </ul>
-          ` : ''}
-          ${renderLinkPills(b.links)}
-        </div>
-      `).join('')}
     </div>
   `;
 }
