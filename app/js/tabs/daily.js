@@ -141,6 +141,7 @@ function renderTeamPin(label, teamData, cls, teamId) {
         ${homeIsUs ? 'vs.' : '@'} ${escapeHtml(them?.name || '')}${g.venue ? ' · ' + escapeHtml(g.venue) : ''}
       </div>
       ${detail}
+      ${teamData?.recap ? renderRecap(teamData.recap, label, teamId, g) : ''}
       ${renderInjuryList(teamData?.injuries || [])}
     </div>
   `;
