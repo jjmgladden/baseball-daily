@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * fetch-daily — orchestrator v4 (Phase 3B + KB-0003)
+ * fetch-daily — orchestrator v5 (adds game recaps)
  *
- * Additions over v3:
- *   - YouTube highlight ingestion for Cardinals + Nationals (graceful skip when key not set)
- *   - Emits snapshot schemaVersion: 4
+ * Additions over v4:
+ *   - Cardinals + Nationals: full narrative recap via /feed/live
+ *   - Other scoreboard games: classified as notable/not; notable games get recaps too
+ *   - Emits snapshot schemaVersion: 5
  */
 
 // Load local .env (no-op on GitHub Actions where env vars are passed via
@@ -18,6 +19,7 @@ const { fetchAllInjuries } = require('./fetch-injuries');
 const { fetchTransactions } = require('./fetch-transactions');
 const { eventsFor } = require('./on-this-day');
 const { fetchTeamHighlights } = require('./fetch-highlights');
+const { classifyNotable, buildRecap } = require('./lib/recap');
 
 console.log(`[fetch-daily] .env: ${envLoad.found ? `loaded ${envLoad.loaded} var(s)` : 'not present (using process env only)'}`);
 
@@ -36,6 +38,27 @@ async function run() {
   const natsGame = findTeamGame(games, mlb.TEAM_IDS.NATIONALS);
   const cardsBox = cardsGame ? await safeBox(cardsGame.gamePk) : null;
   const natsBox = natsGame ? await safeBox(natsGame.gamePk) : null;
+
+  // --- Game recaps (v5) ---
+  // Cards + Nats always; plus every "notable" scoreboard game
+  const cardsFeed = cardsGame ? await safeFeed(cardsGame.gamePk) : null;
+  const natsFeed  = natsGame  ? await safeFeed(natsGame.gamePk)  : null;
+  const cardsRecap = cardsFeed ? buildRecap(cardsFeed) : null;
+  const natsRecap  = natsFeed  ? buildRecap(natsFeed)  : null;
+
+  const scoreboardGames = games.map(summarizeGame);
+  const notableGames = [];
+  for (const g of scoreboardGames) {
+    if (g.home?.id === mlb.TEAM_IDS.CARDINALS || g.away?.id === mlb.TEAM_IDS.CARDINALS) continue;
+    if (g.home?.id === mlb.TEAM_IDS.NATIONALS || g.away?.id === mlb.TEAM_IDS.NATIONALS) continue;
+    const reasons = classifyNotable(g);
+    if (reasons.length) {
+      const feed = await safeFeed(g.gamePk);
+      const recap = feed ? buildRecap(feed) : null;
+      notableGames.push({ ...g, notableReasons: reasons, recap });
+    }
+  }
+  console.log(`[fetch-daily] Notable non-Cards/Nats games: ${notableGames.length}`);
 
   const standings = await mlb.getStandings(season);
 
@@ -57,15 +80,17 @@ async function run() {
   const trades = (transactions || []).filter(t => t.typeCode === 'TR');
 
   const snapshot = {
-    schemaVersion: 4,
+    schemaVersion: 5,
     date,
     generatedAt: new Date().toISOString(),
     season,
     youtubeEnabled: Boolean(process.env.YOUTUBE_API_KEY),
-    scoreboard: games.map(summarizeGame),
+    scoreboard: scoreboardGames,
+    notableGames,
     cardinals: {
       game: cardsGame ? summarizeGame(cardsGame) : null,
       boxscore: cardsBox ? summarizeBox(cardsBox) : null,
+      recap: cardsRecap,
       injuries: filterInjuriesByTeam(injuries, mlb.TEAM_IDS.CARDINALS),
       recentForm: cardsForm,
       highlights: cardsHighlights || [],
@@ -73,6 +98,7 @@ async function run() {
     nationals: {
       game: natsGame ? summarizeGame(natsGame) : null,
       boxscore: natsBox ? summarizeBox(natsBox) : null,
+      recap: natsRecap,
       injuries: filterInjuriesByTeam(injuries, mlb.TEAM_IDS.NATIONALS),
       recentForm: natsForm,
       highlights: natsHighlights || [],
@@ -115,6 +141,14 @@ async function safeBox(gamePk) {
   try { return await mlb.getBoxscore(gamePk); }
   catch (err) {
     console.warn(`[fetch-daily] Boxscore for gamePk=${gamePk}: ${err.message}`);
+    return null;
+  }
+}
+
+async function safeFeed(gamePk) {
+  try { return await mlb.getGameFeed(gamePk); }
+  catch (err) {
+    console.warn(`[fetch-daily] Feed for gamePk=${gamePk}: ${err.message}`);
     return null;
   }
 }

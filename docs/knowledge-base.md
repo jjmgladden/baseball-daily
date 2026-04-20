@@ -181,6 +181,20 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** app/js/components/trivia.js · data/master/trivia.json
 
+### KB-0023 | Game recaps + curated deep-content + weekly index refresh
+- **Type:** Action
+- **Date:** 2026-04-20
+- **Category:** Features
+- **Tags:** recaps, curated-links, cardinals-legends, weekly-refresh
+- **Finding:** Large feature batch delivered 2026-04-20 addressing user request for richer, dig-deep content:
+  1. **Game recaps** — snapshot schemaVersion rolled 4 → 5. Cardinals and Nationals pinned games now include structured recap with scoring plays (narrative descriptions from play-by-play), linescore table (R/H/E per inning), W/L/Sv decisions, attendance, game duration, weather, venue. Additional scoreboard games classified as "notable" (one-run games, shutouts, blowouts, slugfests, pitchers' duels) get compact recaps in a new "Other Notable Games" section.
+  2. **Cardinals legends deep-dive** — `data/master/cardinals-links.json` seeded with 15 entries (Musial, Gibson, Pujols, Molina, Brock, Smith, Dean, Hornsby, Slaughter, Schoendienst, Sutter, Simmons, Herzog, La Russa + a **featured Jim Bottomley** deep-dive added at owner's request — close friend of owner's grandfather Riley Gladden). Each entry links to BBref, SABR BioProject, Hall of Fame, MLB.com, Wikipedia, and YouTube search URLs.
+  3. **History links + iconic moments** — `data/master/history-links.json` with curated external refs for 15 franchises (expanding). `data/master/historical-videos.json` with 10 iconic moments (Robinson debut, Mays Catch, Maris 61, Aaron 715, Fisk wave, Gibson walk-off, Ripken 2131, McGwire 62, Cubs 2016, Galarraga/Joyce).
+  4. **Weekly player-index refresh** — `.github/workflows/weekly-index.yml` rebuilds `data/master/player-index.json` every Monday 08:00 UTC from Chadwick. Commits back only if changed.
+  5. Players tab now shows `generatedAt` timestamp of the index.
+- **Status:** Closed
+- **Cross-ref:** ingestion/lib/recap.js · app/js/components/recap.js · data/master/cardinals-links.json · data/master/history-links.json · data/master/historical-videos.json · .github/workflows/weekly-index.yml
+
 ### KB-0022 | GitHub Actions Node 20 deprecation
 - **Type:** Action
 - **Tier:** T3

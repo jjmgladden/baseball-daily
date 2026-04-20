@@ -30,6 +30,7 @@ export async function renderPlayers(root) {
   }
 
   const players = index.players || [];
+  const lastUpdated = index.generatedAt ? new Date(index.generatedAt).toLocaleDateString() : 'unknown';
 
   root.innerHTML = `
     <h1>Players <span class="muted">(${players.length.toLocaleString()} indexed)</span></h1>
@@ -43,6 +44,9 @@ export async function renderPlayers(root) {
       </div>
       <p class="muted" style="margin-top: 0.5rem;">
         Results sorted by career length. Click a player name for details · ★ to favorite · ⇄ to add to comparison.
+      </p>
+      <p class="muted" style="margin-top: 0.3rem; font-size: 0.8rem;">
+        Index last rebuilt <strong>${escapeHtml(lastUpdated)}</strong> from the Chadwick Bureau register. Auto-refreshes every Monday via GitHub Actions.
       </p>
     </div>
 

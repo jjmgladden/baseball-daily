@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated external references for MLB franchise histories and iconic historical moments. Expand over time.",
+  "generatedAt": "2026-04-20",
+  "note": "Links take readers to authoritative third-party sources for deeper exploration — BBref franchise encyclopedias, Wikipedia, team-official history pages, and YouTube search URLs for video content.",
+  "franchiseLinks": {
+    "138": {
+      "name": "St. Louis Cardinals",
+      "bbref": "https://www.baseball-reference.com/teams/STL/",
+      "mlb": "https://www.mlb.com/cardinals/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/St._Louis_Cardinals",
+      "youtube": "https://www.youtube.com/results?search_query=st+louis+cardinals+history"
+    },
+    "120": {
+      "name": "Washington Nationals",
+      "bbref": "https://www.baseball-reference.com/teams/WSN/",
+      "mlb": "https://www.mlb.com/nationals/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Washington_Nationals",
+      "youtube": "https://www.youtube.com/results?search_query=washington+nationals+history"
+    },
+    "147": {
+      "name": "New York Yankees",
+      "bbref": "https://www.baseball-reference.com/teams/NYY/",
+      "mlb": "https://www.mlb.com/yankees/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/New_York_Yankees"
+    },
+    "111": {
+      "name": "Boston Red Sox",
+      "bbref": "https://www.baseball-reference.com/teams/BOS/",
+      "mlb": "https://www.mlb.com/redsox/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Boston_Red_Sox"
+    },
+    "112": {
+      "name": "Chicago Cubs",
+      "bbref": "https://www.baseball-reference.com/teams/CHC/",
+      "mlb": "https://www.mlb.com/cubs/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Chicago_Cubs"
+    },
+    "113": {
+      "name": "Cincinnati Reds",
+      "bbref": "https://www.baseball-reference.com/teams/CIN/",
+      "mlb": "https://www.mlb.com/reds/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Cincinnati_Reds"
+    },
+    "144": {
+      "name": "Atlanta Braves",
+      "bbref": "https://www.baseball-reference.com/teams/ATL/",
+      "mlb": "https://www.mlb.com/braves/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Atlanta_Braves"
+    },
+    "119": {
+      "name": "Los Angeles Dodgers",
+      "bbref": "https://www.baseball-reference.com/teams/LAD/",
+      "mlb": "https://www.mlb.com/dodgers/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Los_Angeles_Dodgers"
+    },
+    "137": {
+      "name": "San Francisco Giants",
+      "bbref": "https://www.baseball-reference.com/teams/SFG/",
+      "mlb": "https://www.mlb.com/giants/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/San_Francisco_Giants"
+    },
+    "134": {
+      "name": "Pittsburgh Pirates",
+      "bbref": "https://www.baseball-reference.com/teams/PIT/",
+      "mlb": "https://www.mlb.com/pirates/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Pittsburgh_Pirates"
+    },
+    "114": {
+      "name": "Cleveland Guardians",
+      "bbref": "https://www.baseball-reference.com/teams/CLE/",
+      "mlb": "https://www.mlb.com/guardians/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Cleveland_Guardians"
+    },
+    "116": {
+      "name": "Detroit Tigers",
+      "bbref": "https://www.baseball-reference.com/teams/DET/",
+      "mlb": "https://www.mlb.com/tigers/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Detroit_Tigers"
+    },
+    "110": {
+      "name": "Baltimore Orioles",
+      "bbref": "https://www.baseball-reference.com/teams/BAL/",
+      "mlb": "https://www.mlb.com/orioles/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Baltimore_Orioles"
+    },
+    "133": {
+      "name": "Oakland Athletics",
+      "bbref": "https://www.baseball-reference.com/teams/OAK/",
+      "mlb": "https://www.mlb.com/athletics/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Oakland_Athletics"
+    },
+    "142": {
+      "name": "Minnesota Twins",
+      "bbref": "https://www.baseball-reference.com/teams/MIN/",
+      "mlb": "https://www.mlb.com/twins/history",
+      "wikipedia": "https://en.wikipedia.org/wiki/Minnesota_Twins"
+    }
+  }
+}

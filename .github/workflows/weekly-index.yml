@@ -1,0 +1,42 @@
+name: Weekly Player Index Rebuild
+
+# Rebuilds data/master/player-index.json from the Chadwick Bureau register
+# every Monday. Chadwick updates on their own schedule — usually adding
+# new debutants within 1-3 weeks. This workflow keeps our index current
+# with minimal manual effort.
+#
+# Cron time: 08:00 UTC Monday = 4:00 AM EDT Monday (3:00 AM EST).
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Rebuild player index
+        run: node scripts/build-player-index.js
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/master/player-index.json
+          if git diff --staged --quiet; then
+            echo "No player index changes this week."
+          else
+            git commit -m "Weekly player index rebuild $(date -u +%Y-%m-%d)"
+            git push
+          fi

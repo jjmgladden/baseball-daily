@@ -16,6 +16,7 @@
 import { renderRecentForm } from '../components/streak.js';
 import { renderTriviaCard } from '../components/trivia.js';
 import { renderHighlights } from '../components/highlights.js';
+import { renderRecap, renderRecapCompact } from '../components/recap.js';
 
 const CARDS_ID = 138;
 const NATS_ID = 120;
@@ -43,6 +44,8 @@ export function renderDaily(root, snap) {
     </div>
 
     ${renderHighlightsSection(snap)}
+
+    ${renderNotableGamesSection(snap.notableGames || [])}
 
     <h2>Daily Trivia</h2>
     <div class="card" id="trivia-mount"></div>
@@ -139,6 +142,17 @@ function renderTeamPin(label, teamData, cls, teamId) {
       </div>
       ${detail}
       ${renderInjuryList(teamData?.injuries || [])}
+    </div>
+  `;
+}
+
+function renderNotableGamesSection(games) {
+  if (!games.length) return '';
+  return `
+    <h2>Other Notable Games <span class="muted">(${games.length})</span></h2>
+    <p class="muted" style="margin-bottom: 0.75rem;">Games that stood out — one-run finishes, shutouts, blowouts, and slugfests.</p>
+    <div class="grid grid-2">
+      ${games.map(g => renderRecapCompact(g.recap, g, g.notableReasons)).join('')}
     </div>
   `;
 }

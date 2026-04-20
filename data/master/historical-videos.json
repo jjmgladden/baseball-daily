@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated links to iconic baseball moments. Using YouTube search URLs (not specific video IDs) so the broader catalog surfaces — avoids dead links if a specific upload is removed.",
+  "generatedAt": "2026-04-20",
+  "note": "Add ~5-10 new entries per week. Each entry describes a historically significant moment and links to a YouTube search curated to surface the best available footage.",
+  "moments": [
+    {
+      "id": "robinson-1947-debut",
+      "era": "1940s",
+      "date": "1947-04-15",
+      "title": "Jackie Robinson breaks the MLB color barrier",
+      "teams": ["Brooklyn Dodgers", "Boston Braves"],
+      "description": "Robinson's Brooklyn debut at Ebbets Field. Opening Day of a transformed league. He went 0-for-3 but scored the winning run in a 5-3 Dodgers victory.",
+      "links": [
+        { "label": "Archive footage", "url": "https://www.youtube.com/results?search_query=jackie+robinson+april+15+1947+debut" },
+        { "label": "MLB.com tribute", "url": "https://www.mlb.com/jackie-robinson-day" },
+        { "label": "SABR — the game itself", "url": "https://sabr.org/gamesproj/game/april-15-1947-jackie-robinson-makes-his-debut-with-the-dodgers/" }
+      ]
+    },
+    {
+      "id": "mays-catch-1954",
+      "era": "1950s",
+      "date": "1954-09-29",
+      "title": "Willie Mays's over-the-shoulder catch",
+      "teams": ["New York Giants", "Cleveland Indians"],
+      "description": "Game 1 of the 1954 World Series. Mays tracked Vic Wertz's 420-foot drive with his back to home plate, caught it over his shoulder, and spun to fire the ball back to the infield — often called the greatest defensive play in baseball history.",
+      "links": [
+        { "label": "The Catch — YouTube", "url": "https://www.youtube.com/results?search_query=willie+mays+the+catch+1954" },
+        { "label": "MLB.com — The Catch", "url": "https://www.mlb.com/video/greatest-catch-ever-by-willie-mays" },
+        { "label": "Wikipedia — The Catch", "url": "https://en.wikipedia.org/wiki/The_Catch_(baseball)" }
+      ]
+    },
+    {
+      "id": "maris-61-1961",
+      "era": "1960s",
+      "date": "1961-10-01",
+      "title": "Roger Maris breaks Babe Ruth's single-season home run record",
+      "teams": ["New York Yankees", "Boston Red Sox"],
+      "description": "Maris hit his 61st HR of the season off Tracy Stallard at Yankee Stadium on the final day of the season, breaking the 34-year-old record set by Babe Ruth.",
+      "links": [
+        { "label": "Maris 61st HR — YouTube", "url": "https://www.youtube.com/results?search_query=roger+maris+61st+home+run+1961" },
+        { "label": "MLB.com — Maris 61", "url": "https://www.mlb.com/news/roger-maris-61st-home-run-1961" },
+        { "label": "Wikipedia — Maris 1961", "url": "https://en.wikipedia.org/wiki/Roger_Maris" }
+      ]
+    },
+    {
+      "id": "aaron-715-1974",
+      "era": "1970s",
+      "date": "1974-04-08",
+      "title": "Hank Aaron's 715th home run breaks Babe Ruth's career record",
+      "teams": ["Atlanta Braves", "Los Angeles Dodgers"],
+      "description": "Aaron hit career HR #715 off Al Downing at Atlanta-Fulton County Stadium, passing Babe Ruth's career record of 714. Two fans jumped on the field to run the bases alongside him.",
+      "links": [
+        { "label": "Aaron 715 — YouTube (Vin Scully call)", "url": "https://www.youtube.com/results?search_query=hank+aaron+715+home+run+1974" },
+        { "label": "MLB.com — Aaron 715", "url": "https://www.mlb.com/news/hank-aaron-715th-home-run" },
+        { "label": "Wikipedia — Aaron's record", "url": "https://en.wikipedia.org/wiki/Hank_Aaron" }
+      ]
+    },
+    {
+      "id": "fisk-1975-wave-fair",
+      "era": "1970s",
+      "date": "1975-10-21",
+      "title": "Carlton Fisk waves his HR fair — 1975 World Series Game 6",
+      "teams": ["Boston Red Sox", "Cincinnati Reds"],
+      "description": "12th inning at Fenway. Fisk lined one down the left-field line and famously waved it fair with his arms — the iconic image of one of the greatest World Series games ever played.",
+      "links": [
+        { "label": "Fisk waves it fair — YouTube", "url": "https://www.youtube.com/results?search_query=carlton+fisk+1975+world+series+wave+fair" },
+        { "label": "Wikipedia — 1975 WS", "url": "https://en.wikipedia.org/wiki/1975_World_Series" }
+      ]
+    },
+    {
+      "id": "gibson-1988-walkoff",
+      "era": "1980s",
+      "date": "1988-10-15",
+      "title": "Kirk Gibson's injured-leg walk-off home run",
+      "teams": ["Los Angeles Dodgers", "Oakland Athletics"],
+      "description": "Game 1 of the 1988 World Series. Injured and unable to play the field, Gibson limped to the plate as a pinch-hitter in the bottom of the 9th and hit a two-run walk-off home run off Dennis Eckersley. Vin Scully's call — 'In a year that has been so improbable, the impossible has happened' — is itself legendary.",
+      "links": [
+        { "label": "Gibson walk-off — YouTube", "url": "https://www.youtube.com/results?search_query=kirk+gibson+1988+world+series+home+run" },
+        { "label": "MLB.com — Gibson walk-off", "url": "https://www.mlb.com/news/kirk-gibson-1988-world-series-home-run" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/1988_World_Series" }
+      ]
+    },
+    {
+      "id": "ripken-2131-1995",
+      "era": "1990s",
+      "date": "1995-09-06",
+      "title": "Cal Ripken Jr. breaks Lou Gehrig's consecutive games record",
+      "teams": ["Baltimore Orioles", "California Angels"],
+      "description": "Ripken played his 2,131st consecutive game at Camden Yards, passing Lou Gehrig's 56-year-old record. The game paused for a 22-minute standing ovation in the middle of the 5th inning after the game became official.",
+      "links": [
+        { "label": "Ripken 2131 — YouTube", "url": "https://www.youtube.com/results?search_query=cal+ripken+2131+consecutive+games" },
+        { "label": "MLB.com — Ripken 2131", "url": "https://www.mlb.com/news/cal-ripken-jr-2131-consecutive-games" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Cal_Ripken_Jr." }
+      ]
+    },
+    {
+      "id": "mcgwire-62-1998",
+      "era": "1990s",
+      "date": "1998-09-08",
+      "title": "Mark McGwire breaks Roger Maris's single-season HR record",
+      "teams": ["St. Louis Cardinals", "Chicago Cubs"],
+      "description": "McGwire hit his 62nd HR of the season off Steve Trachsel at Busch Stadium, passing Maris's 37-year-old mark. Sosa crossed the diamond to embrace him after the homer. McGwire finished the season with 70.",
+      "links": [
+        { "label": "McGwire 62 — YouTube", "url": "https://www.youtube.com/results?search_query=mark+mcgwire+62nd+home+run" },
+        { "label": "Wikipedia — 1998 HR chase", "url": "https://en.wikipedia.org/wiki/1998_Major_League_Baseball_home_run_record_chase" }
+      ]
+    },
+    {
+      "id": "cubs-2016-ws",
+      "era": "2010s",
+      "date": "2016-11-02",
+      "title": "Cubs end 108-year championship drought",
+      "teams": ["Chicago Cubs", "Cleveland Indians"],
+      "description": "Game 7 of the 2016 World Series. A 17-minute rain delay before the 10th inning. Cubs won 8-7 in extras. Their first championship since 1908.",
+      "links": [
+        { "label": "Cubs Game 7 — YouTube", "url": "https://www.youtube.com/results?search_query=cubs+2016+world+series+game+7" },
+        { "label": "Wikipedia — 2016 WS", "url": "https://en.wikipedia.org/wiki/2016_World_Series" }
+      ]
+    },
+    {
+      "id": "galarraga-joyce-2010",
+      "era": "2010s",
+      "date": "2010-06-02",
+      "title": "The perfect game that wasn't (Galarraga / Jim Joyce)",
+      "teams": ["Detroit Tigers", "Cleveland Indians"],
+      "description": "Armando Galarraga lost a perfect game on the 27th out when umpire Jim Joyce called Jason Donald safe at first. Joyce apologized to Galarraga in the clubhouse after the game; Galarraga presented the lineup card the next day in a public reconciliation. The incident led to expanded instant replay in MLB.",
+      "links": [
+        { "label": "Galarraga-Joyce — YouTube", "url": "https://www.youtube.com/results?search_query=armando+galarraga+perfect+game+jim+joyce" },
+        { "label": "MLB.com — Galarraga", "url": "https://www.mlb.com/news/armando-galarraga-imperfect-game" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Armando_Galarraga%27s_near-perfect_game" }
+      ]
+    }
+  ]
+}

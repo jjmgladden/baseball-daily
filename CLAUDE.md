@@ -1,6 +1,6 @@
 # Baseball Daily Intelligence — Claude Code Project Instructions
 
-**Version:** 8 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v7.md
+**Version:** 9 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v8.md
 
 ---
 
@@ -79,7 +79,8 @@ Baseball Project/ (also git repo root)
 ├── run_daily.bat                ← Local scheduler target (alternative to GitHub Actions)
 │
 ├── .github/workflows/
-│   └── daily.yml                ← Cloud cron — 3 AM EDT / 2 AM EST — commits fresh snapshot
+│   ├── daily.yml                ← Cloud cron — 3 AM EDT / 2 AM EST — commits fresh snapshot
+│   └── weekly-index.yml         ← Monday 4 AM EDT — rebuilds player-index from Chadwick
 │
 ├── app/                         ← Static PWA (served from root or /baseball-daily/)
 │   ├── index.html               ← All asset paths are RELATIVE for portability
@@ -95,7 +96,8 @@ Baseball Project/ (also git repo root)
 │       │   ├── trivia.js        ← Daily trivia card
 │       │   ├── streak.js        ← Recent-form renderer
 │       │   ├── comparison.js    ← Player comparison widget
-│       │   └── highlights.js    ← YouTube highlight embeds
+│       │   ├── highlights.js    ← YouTube highlight embeds
+│       │   └── recap.js         ← Game narrative + linescore + scoring plays + decisions
 │       └── tabs/
 │           ├── daily.js         ← Cardinals/Nats pins + streak + trivia + on-this-day + trades + scoreboard + standings + injuries
 │           ├── cardinals.js     ← Retired numbers, HOFers, historic seasons, traditions
@@ -105,14 +107,16 @@ Baseball Project/ (also git repo root)
 │           └── stories.js       ← Rotating daily story + archive
 │
 ├── ingestion/
-│   ├── fetch-daily.js           ← Orchestrator (schemaVersion=4)
+│   ├── fetch-daily.js           ← Orchestrator (schemaVersion=5)
 │   ├── fetch-injuries.js
 │   ├── fetch-transactions.js
 │   ├── fetch-highlights.js      ← YouTube Data API (graceful skip without key)
 │   ├── on-this-day.js
 │   └── lib/
-│       ├── mlb-api.js           ← MLB Stats API wrapper
+│       ├── mlb-api.js           ← MLB Stats API wrapper (incl. getGameFeed)
 │       ├── youtube-api.js       ← YouTube Data API wrapper
+│       ├── recap.js             ← Classifies notable games; builds structured recaps
+│       ├── env.js               ← Tiny .env loader (no deps)
 │       └── cache.js
 │
 ├── data/

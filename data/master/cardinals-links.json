@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated external references for deeper reading about Cardinals legends. All links point to authoritative third-party sources — we do not reproduce their content inline.",
+  "generatedAt": "2026-04-20",
+  "note": "Each entry captures external link-outs for people a user would want to explore in depth. Expand at a cadence of ~5-10 new entries per week. YouTube search URLs are used rather than specific video IDs to avoid embedding-policy issues and to surface the full catalog of content.",
+  "legends": [
+    {
+      "id": "musial",
+      "name": "Stan Musial",
+      "nickname": "The Man",
+      "position": "OF / 1B",
+      "stlYears": "1941-1963",
+      "headline": "The standard-bearer of the franchise. 24-time All-Star, 3-time MVP, 3,630 career hits (split exactly 1,815 home and 1,815 road).",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/m/musiast01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/stan-musial/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/musial-stan" },
+        { "label": "MLB.com profile", "url": "https://www.mlb.com/player/stan-musial-118149" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Stan_Musial" },
+        { "label": "YouTube — Musial highlights", "url": "https://www.youtube.com/results?search_query=stan+musial+highlights" }
+      ]
+    },
+    {
+      "id": "gibson",
+      "name": "Bob Gibson",
+      "nickname": "Gibby",
+      "position": "SP",
+      "stlYears": "1959-1975",
+      "headline": "1968 NL MVP and Cy Young — 1.12 ERA that season prompted MLB to lower the mound for 1969. Two-time World Series MVP (1964, 1967).",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/g/gibsobo01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/bob-gibson/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/gibson-bob" },
+        { "label": "MLB.com profile", "url": "https://www.mlb.com/player/bob-gibson-115254" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Bob_Gibson" },
+        { "label": "YouTube — Gibson highlights", "url": "https://www.youtube.com/results?search_query=bob+gibson+cardinals" }
+      ]
+    },
+    {
+      "id": "pujols",
+      "name": "Albert Pujols",
+      "nickname": "The Machine",
+      "position": "1B",
+      "stlYears": "2001-2011, 2022",
+      "headline": "Three-time NL MVP. Finished his career with 703 home runs (4th all-time) and the only player ever with 3,000+ hits and 700+ HRs. Returned to St. Louis for a farewell 2022 season.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/p/pujolal01.shtml" },
+        { "label": "MLB.com profile", "url": "https://www.mlb.com/player/albert-pujols-405395" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Albert_Pujols" },
+        { "label": "Pujols Family Foundation", "url": "https://www.pujolsfamilyfoundation.org/" },
+        { "label": "YouTube — Pujols highlights", "url": "https://www.youtube.com/results?search_query=albert+pujols+cardinals" }
+      ]
+    },
+    {
+      "id": "molina",
+      "name": "Yadier Molina",
+      "nickname": "Yadi",
+      "position": "C",
+      "stlYears": "2004-2022",
+      "headline": "The heart of three pennant winners and the 2006 and 2011 champions. Nine-time Gold Glove catcher. Called more pitches than almost anyone in franchise history.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/m/molinya01.shtml" },
+        { "label": "MLB.com profile", "url": "https://www.mlb.com/player/yadier-molina-425877" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Yadier_Molina" },
+        { "label": "YouTube — Molina highlights", "url": "https://www.youtube.com/results?search_query=yadier+molina+highlights" }
+      ]
+    },
+    {
+      "id": "bottomley",
+      "name": "Jim Bottomley",
+      "nickname": "Sunny Jim",
+      "position": "1B",
+      "stlYears": "1922-1932",
+      "headline": "1928 NL MVP. Holds the MLB record for most RBIs in a single game — 12, vs Brooklyn on September 16, 1924. Inducted into the Hall of Fame in 1974 by the Veterans Committee. Born April 23, 1900 in Oglesby, Illinois.",
+      "featured": true,
+      "personalNote": "Close friend of Riley Gladden (owner's grandfather). Added at owner's request on 2026-04-20.",
+      "deepDive": {
+        "born": "April 23, 1900 — Oglesby, Illinois",
+        "died": "December 11, 1959 — St. Louis, Missouri",
+        "stlCareer": "Signed by the Cardinals in 1920; debuted August 18, 1922. Played 11 seasons for St. Louis.",
+        "twelveRBIgame": "On September 16, 1924 at Ebbets Field, Bottomley went 6-for-6 with two home runs, a double, three singles, and drove in 12 runs — a record he has shared (since tied by Mark Whiten in 1993) but never been surpassed in MLB history.",
+        "mvp1928": "Led the NL in home runs (31), RBIs (136), and triples (20) to win the 1928 MVP and help the Cardinals to another pennant.",
+        "worldSeries": "Two World Series championships with the Cardinals: 1926 (beat the Yankees in 7) and 1931 (beat the Athletics in 7).",
+        "laterYears": "Traded to Cincinnati after the 1932 season; finished his career with the St. Louis Browns (1936-1937). Career line: .310 BA, 219 HR, 1,422 RBI, 465 doubles.",
+        "hof": "Elected to the Hall of Fame in 1974 by the Veterans Committee, 42 years after his last game for the Cardinals.",
+        "legacy": "The small town of Nokomis, Illinois — where Bottomley grew up before moving to Oglesby as a child — still hosts a 'Sunny Jim Bottomley' day on his birthday each year."
+      },
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/b/bottoji01.shtml" },
+        { "label": "SABR BioProject (in-depth bio)", "url": "https://sabr.org/bioproj/person/jim-bottomley/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/bottomley-jim" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Jim_Bottomley" },
+        { "label": "MLB.com — The 12-RBI game", "url": "https://www.mlb.com/news/jim-bottomley-12-rbi-game-record" }
+      ]
+    },
+    {
+      "id": "brock",
+      "name": "Lou Brock",
+      "position": "OF",
+      "stlYears": "1964-1979",
+      "headline": "Hall of Fame left fielder. Traded from the Cubs for Ernie Broglio in 1964 — one of the most lopsided trades in MLB history. 938 career stolen bases; six-time All-Star.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/b/brockl01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/lou-brock/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/brock-lou" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Lou_Brock" },
+        { "label": "YouTube — Brock highlights", "url": "https://www.youtube.com/results?search_query=lou+brock+cardinals" }
+      ]
+    },
+    {
+      "id": "ozzie-smith",
+      "name": "Ozzie Smith",
+      "nickname": "The Wizard of Oz",
+      "position": "SS",
+      "stlYears": "1982-1996",
+      "headline": "Widely considered the greatest defensive shortstop ever. 13-time Gold Glove. 'Go Crazy, Folks!' HR in Game 5 of the 1985 NLCS. First-ballot Hall of Famer.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/s/smithoz01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/ozzie-smith/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/smith-ozzie" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ozzie_Smith" },
+        { "label": "YouTube — Go Crazy, Folks!", "url": "https://www.youtube.com/results?search_query=ozzie+smith+go+crazy+folks" }
+      ]
+    },
+    {
+      "id": "dean",
+      "name": "Dizzy Dean",
+      "position": "SP",
+      "stlYears": "1930-1937",
+      "headline": "1934 NL MVP. Won 30 games that season — the last NL pitcher to do so. Voice of the Gas House Gang era. Hall of Fame 1953.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/d/deandi01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/dizzy-dean/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/dean-dizzy" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Dizzy_Dean" }
+      ]
+    },
+    {
+      "id": "hornsby",
+      "name": "Rogers Hornsby",
+      "position": "2B",
+      "stlYears": "1915-1926",
+      "headline": "Career .358 batting average, second all-time only to Ty Cobb. Two Triple Crowns (1922, 1925). Player-manager of the 1926 World Series champion Cardinals — the team's first title.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/h/hornsro01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/rogers-hornsby/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/hornsby-rogers" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Rogers_Hornsby" }
+      ]
+    },
+    {
+      "id": "slaughter",
+      "name": "Enos Slaughter",
+      "nickname": "Country",
+      "position": "OF",
+      "stlYears": "1938-1953",
+      "headline": "The 'Mad Dash' to score the winning run of Game 7 of the 1946 World Series is one of the most iconic plays in franchise history. Ten-time All-Star. WWII veteran.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/s/slaugen01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/enos-slaughter/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/slaughter-enos" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Enos_Slaughter" },
+        { "label": "YouTube — Mad Dash 1946 WS", "url": "https://www.youtube.com/results?search_query=enos+slaughter+mad+dash+1946" }
+      ]
+    },
+    {
+      "id": "schoendienst",
+      "name": "Red Schoendienst",
+      "position": "2B / Manager",
+      "stlYears": "1945-1956, 1961-1963 (player); 1965-1976, 1980, 1990 (manager)",
+      "headline": "Spent ~70 years in a Cardinals uniform as player, coach, and manager. Managed the 1967 and 1968 pennant winners. Hall of Fame 1989.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/s/schoere01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/red-schoendienst/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/schoendienst-red" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Red_Schoendienst" }
+      ]
+    },
+    {
+      "id": "sutter",
+      "name": "Bruce Sutter",
+      "position": "RP",
+      "stlYears": "1981-1984",
+      "headline": "Split-finger fastball pioneer who helped legitimize the closer role. Threw the final pitch of the 1982 World Series Game 7. Hall of Fame 2006.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/s/suttebr01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/bruce-sutter/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/sutter-bruce" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Bruce_Sutter" }
+      ]
+    },
+    {
+      "id": "simmons",
+      "name": "Ted Simmons",
+      "nickname": "Simba",
+      "position": "C",
+      "stlYears": "1968-1980",
+      "headline": "Eight-time All-Star switch-hitting catcher. Career .285 batting average with 2,472 hits — the third-most ever by a catcher at the time of his retirement. Hall of Fame 2020.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/s/simmote01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/ted-simmons/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/simmons-ted" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ted_Simmons" }
+      ]
+    },
+    {
+      "id": "herzog",
+      "name": "Whitey Herzog",
+      "position": "Manager",
+      "stlYears": "1980-1990",
+      "headline": "Manager of the 1982 World Series champions and architect of 'Whiteyball' — a speed-and-defense style that dominated the 1980s NL. Hall of Fame 2010.",
+      "links": [
+        { "label": "Baseball Reference (as manager)", "url": "https://www.baseball-reference.com/managers/herzowh01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/whitey-herzog/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/herzog-whitey" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Whitey_Herzog" }
+      ]
+    },
+    {
+      "id": "larussa",
+      "name": "Tony La Russa",
+      "position": "Manager",
+      "stlYears": "1996-2011",
+      "headline": "Managed the Cardinals to World Series titles in 2006 and 2011. Third all-time in managerial wins (2,902). Hall of Fame 2014.",
+      "links": [
+        { "label": "Baseball Reference (as manager)", "url": "https://www.baseball-reference.com/managers/larusto01.shtml" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/la-russa-tony" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Tony_La_Russa" }
+      ]
+    }
+  ]
+}

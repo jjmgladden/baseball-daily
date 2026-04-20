@@ -1,13 +1,12 @@
 /**
- * Cardinals tab — v1
+ * Cardinals tab — v2
  *
  * Dedicated Cardinals content: franchise snapshot, retired numbers grid,
- * Hall of Famers roll, historic seasons, traditions, and a panel pulling
- * the latest Cardinals-specific data from today's snapshot (record, recent
- * form, injuries).
+ * Hall of Famers roll, historic seasons, traditions, and a curated
+ * "Legends — dig deeper" section with external links per player.
  */
 
-import { loadMaster, loadFranchises } from '../data-loader.js';
+import { loadMaster, loadFranchises, loadCardinalsLinks } from '../data-loader.js';
 import { renderRecentForm } from '../components/streak.js';
 
 const CARDS_ID = 138;
@@ -16,11 +15,12 @@ export async function renderCardinals(root, snap) {
   if (!root) return;
   root.innerHTML = `<h1>St. Louis Cardinals</h1><div class="card"><p class="loading">Loading Cardinals content…</p></div>`;
 
-  let deep, franchises;
+  let deep, franchises, links;
   try {
-    [deep, franchises] = await Promise.all([
+    [deep, franchises, links] = await Promise.all([
       loadMaster('cardinals-deep.json'),
       loadFranchises(),
+      loadCardinalsLinks().catch(() => null),   // graceful if not yet present
     ]);
   } catch (err) {
     root.innerHTML = `<h1>St. Louis Cardinals</h1><div class="card"><p class="muted">${escapeHtml(err.message)}</p></div>`;
@@ -32,6 +32,7 @@ export async function renderCardinals(root, snap) {
   root.innerHTML = `
     <h1>St. Louis Cardinals</h1>
     ${renderSnapshotPanel(snap, franchise)}
+    ${renderLegendsDeepDive(links)}
     ${renderRetiredNumbers(deep.retiredNumbers || [])}
     ${renderHistoricSeasons(deep.historicSeasons || [])}
     ${renderHallOfFamers(deep.hallOfFamers || [])}
@@ -45,7 +46,6 @@ function renderSnapshotPanel(snap, franchise) {
   const injuryCount = cards.injuries?.length || 0;
   const form = cards.recentForm;
 
-  // Find the Cardinals row in standings if present
   let standingsLine = null;
   if (snap?.standings) {
     for (const div of Object.values(snap.standings)) {
@@ -86,6 +86,82 @@ function formatGameResult(g) {
   if (us?.score == null) return `${homeIsUs ? 'vs' : '@'} ${escapeHtml(them?.name || '')} — ${escapeHtml(g.status || '')}`;
   const win = us.score > them.score;
   return `${win ? 'W' : 'L'} ${us.score}-${them.score} ${homeIsUs ? 'vs' : '@'} ${escapeHtml(them?.name || '')}`;
+}
+
+function renderLegendsDeepDive(links) {
+  if (!links || !links.legends?.length) return '';
+
+  // Featured entries (those with featured: true) render first with a deep-dive card
+  const featured = links.legends.filter(l => l.featured);
+  const standard = links.legends.filter(l => !l.featured);
+
+  return `
+    <h2>Legends — Dig Deeper</h2>
+    <p class="muted" style="margin-bottom: 1rem;">
+      External links to authoritative sources — Baseball Reference, SABR BioProject, Hall of Fame, MLB.com, Wikipedia, and curated YouTube search.
+    </p>
+
+    ${featured.map(renderFeaturedLegend).join('')}
+
+    <div class="grid grid-2">
+      ${standard.map(renderLegendCard).join('')}
+    </div>
+  `;
+}
+
+function renderFeaturedLegend(l) {
+  return `
+    <div class="card legend-featured">
+      <div class="legend-featured-header">
+        <h3>${escapeHtml(l.name)}${l.nickname ? ` <span class="muted">"${escapeHtml(l.nickname)}"</span>` : ''}</h3>
+        <div class="muted">${escapeHtml(l.position || '')} · ${escapeHtml(l.stlYears || '')}</div>
+      </div>
+      ${l.personalNote ? `<div class="legend-personal-note">${escapeHtml(l.personalNote)}</div>` : ''}
+      <p class="legend-headline">${escapeHtml(l.headline || '')}</p>
+      ${l.deepDive ? renderDeepDive(l.deepDive) : ''}
+      ${renderLinkPills(l.links)}
+    </div>
+  `;
+}
+
+function renderDeepDive(dd) {
+  const rows = [];
+  if (dd.born)         rows.push(['Born',         dd.born]);
+  if (dd.died)         rows.push(['Died',         dd.died]);
+  if (dd.stlCareer)    rows.push(['Cardinals',    dd.stlCareer]);
+  if (dd.twelveRBIgame)rows.push(['12-RBI game',  dd.twelveRBIgame]);
+  if (dd.mvp1928)      rows.push(['1928 MVP',     dd.mvp1928]);
+  if (dd.worldSeries)  rows.push(['World Series', dd.worldSeries]);
+  if (dd.laterYears)   rows.push(['Later years',  dd.laterYears]);
+  if (dd.hof)          rows.push(['Hall of Fame', dd.hof]);
+  if (dd.legacy)       rows.push(['Legacy',       dd.legacy]);
+
+  if (!rows.length) return '';
+  return `
+    <dl class="legend-deepdive">
+      ${rows.map(([k, v]) => `<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd>`).join('')}
+    </dl>
+  `;
+}
+
+function renderLegendCard(l) {
+  return `
+    <div class="card">
+      <h3>${escapeHtml(l.name)}${l.nickname ? ` <span class="muted">"${escapeHtml(l.nickname)}"</span>` : ''}</h3>
+      <div class="muted">${escapeHtml(l.position || '')} · ${escapeHtml(l.stlYears || '')}</div>
+      <p>${escapeHtml(l.headline || '')}</p>
+      ${renderLinkPills(l.links)}
+    </div>
+  `;
+}
+
+function renderLinkPills(links) {
+  if (!links?.length) return '';
+  return `
+    <div class="link-pills">
+      ${links.map(lk => `<a href="${escapeAttr(lk.url)}" target="_blank" rel="noopener">${escapeHtml(lk.label)} →</a>`).join('')}
+    </div>
+  `;
 }
 
 function renderRetiredNumbers(nums) {
@@ -177,3 +253,5 @@ function escapeHtml(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
+
+function escapeAttr(s) { return escapeHtml(s); }

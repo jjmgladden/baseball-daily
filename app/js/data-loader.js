@@ -34,8 +34,11 @@ export async function loadMaster(name) {
   return promise;
 }
 
-export async function loadFranchises() { return loadMaster('franchises.json'); }
-export async function loadStories()    { return loadMaster('stories.json'); }
-export async function loadPlayerIndex(){ return loadMaster('player-index.json'); }
-export async function loadTrivia()     { return loadMaster('trivia.json'); }
-export async function loadCardinalsDeep() { return loadMaster('cardinals-deep.json'); }
+export async function loadFranchises()        { return loadMaster('franchises.json'); }
+export async function loadStories()           { return loadMaster('stories.json'); }
+export async function loadPlayerIndex()       { return loadMaster('player-index.json'); }
+export async function loadTrivia()            { return loadMaster('trivia.json'); }
+export async function loadCardinalsDeep()     { return loadMaster('cardinals-deep.json'); }
+export async function loadCardinalsLinks()    { return loadMaster('cardinals-links.json'); }
+export async function loadHistoryLinks()      { return loadMaster('history-links.json'); }
+export async function loadHistoricalVideos()  { return loadMaster('historical-videos.json'); }

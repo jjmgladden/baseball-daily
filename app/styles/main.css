@@ -540,6 +540,193 @@ pre { padding: 0.75rem; overflow-x: auto; border: 1px solid var(--border); }
   font-size: 0.85rem;
 }
 
+/* ---------- Game recaps ---------- */
+
+.recap-block {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+.recap-narrative {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  margin-bottom: 0.35rem;
+}
+.recap-gameinfo {
+  font-size: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+.recap-block h4 {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0.85rem 0 0.35rem;
+}
+
+.linescore-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+}
+.linescore-table th, .linescore-table td {
+  padding: 0.3rem 0.4rem;
+  text-align: left;
+}
+.linescore-table thead th {
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.linescore-table td.num, .linescore-table th.num {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+.linescore-table .total-col {
+  border-left: 1px solid var(--border);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.scoring-plays {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: scoring-item;
+}
+.scoring-plays li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+  align-items: baseline;
+}
+.scoring-plays li:last-child { border-bottom: none; }
+.play-inning {
+  color: var(--accent-info);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.play-desc { color: var(--text-primary); line-height: 1.35; }
+.play-score {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.decisions {
+  margin-top: 0.6rem;
+  padding: 0.4rem 0.65rem;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+/* ---------- Notable (non-Cards/Nats) games ---------- */
+
+.notable-game-card {
+  padding: 0.85rem;
+}
+.notable-game-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+.notable-game-header .team-name { font-weight: 500; }
+.notable-game-header .team-score {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.notable-reasons {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-info);
+}
+.scoring-plays-details summary { cursor: pointer; font-size: 0.85rem; }
+
+/* ---------- Link pills (external references) ---------- */
+
+.link-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+.link-pills a {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--accent-info);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.link-pills a:hover {
+  background: var(--accent-info);
+  color: var(--bg-primary);
+  border-color: var(--accent-info);
+  text-decoration: none;
+}
+.link-pills-compact a { font-size: 0.72rem; padding: 0.12rem 0.45rem; }
+
+/* ---------- Legend featured cards (Cardinals tab) ---------- */
+
+.legend-featured {
+  border-left: 4px solid var(--accent-gold);
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
+}
+.legend-featured-header { margin-bottom: 0.5rem; }
+.legend-featured-header h3 { margin-bottom: 0.2rem; font-size: 1.2rem; }
+.legend-headline {
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.legend-personal-note {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  background: rgba(254, 219, 0, 0.08);
+  border-left: 3px solid var(--accent-gold);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.legend-deepdive {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+.legend-deepdive dt {
+  color: var(--accent-info);
+  font-weight: 500;
+}
+.legend-deepdive dd {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* ---------- Iconic moments (History tab) ---------- */
+
+.iconic-moment { border-left: 3px solid var(--accent-info); }
+.iconic-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  margin-bottom: 0.35rem;
+}
+.iconic-header h3 { margin: 0; }
+
 /* ---------- Highlight videos (YouTube thumbnail links) ---------- */
 
 .highlights-section {

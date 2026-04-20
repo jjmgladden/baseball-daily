@@ -65,6 +65,18 @@ async function getLinescore(gamePk) {
   return get(`/game/${gamePk}/linescore`);
 }
 
+/**
+ * Full live game feed — richest endpoint. Used for recap generation.
+ * Contains scoringPlays, allPlays (descriptions), decisions (W/L/SV),
+ * linescore, gameInfo (attendance/duration), and weather.
+ */
+async function getGameFeed(gamePk) {
+  const url = `https://statsapi.mlb.com/api/v1.1/game/${gamePk}/feed/live`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`MLB API ${res.status} ${res.statusText} for ${url}`);
+  return res.json();
+}
+
 async function getTeams(season) {
   const params = { sportId: 1 };
   if (season) params.season = season;
@@ -103,6 +115,7 @@ module.exports = {
   getStandings,
   getBoxscore,
   getLinescore,
+  getGameFeed,
   getTeams,
   getTeamRoster,
   getPerson,
