@@ -1,6 +1,6 @@
 # Baseball Daily Intelligence — Claude Code Project Instructions
 
-**Version:** 4 | **Date:** April 19, 2026 | **Previous:** archive/CLAUDE_v3.md
+**Version:** 5 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v4.md
 
 ---
 
@@ -53,6 +53,15 @@ Work deliberately. Never chase architecture at the cost of a functional tool. Pr
 - Only claim what the data says. Never fabricate stats, birthdates, achievements, or biographical facts.
 - If a value is missing from the API, render "—", not a guess.
 - The Stories, On-This-Day, Cardinals-deep, and Trivia seed files must cite only publicly documented events. New entries require a verifiable source.
+
+### Service Worker Cache — MUST bump on shell changes
+**Any commit that modifies a file listed in `app/sw.js`'s `SHELL_FILES` array (or `app/index.html`, `app/styles/main.css`, any file under `app/js/`, `app/manifest.webmanifest`, `app/icon.svg`) MUST also bump the `CACHE` constant in `app/sw.js` in the same commit** (e.g. `'baseball-daily-shell-v3'` → `'baseball-daily-shell-v4'`).
+
+**Why:** the SW is cache-first for shell files. Without a cache bump, returning users keep seeing the old page even after a hard refresh — the old SW serves the old cached shell forever. The browser only detects a new SW when `sw.js` file content changes; bumping the cache string is the simplest trigger.
+
+**How to apply:** before finishing any commit that touches the app shell, grep `app/sw.js` for `CACHE =` and increment the trailing number. Mention the bump in the commit message.
+
+**Incident reference:** Chat 2026-04-20 — the "Refresh data" button addition was invisible to the user's browser until `baseball-daily-shell-v2` was rolled to `v3`.
 
 ---
 
