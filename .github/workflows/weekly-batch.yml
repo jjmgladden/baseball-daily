@@ -46,6 +46,8 @@ jobs:
           const title = `Weekly curation batch ${today} — ${batch.length} entries for review`;
 
           const lines = [
+            `@jjmgladden — new weekly curation batch ready for your review.`,
+            '',
             `Automatic weekly pull from \`data/master/curation-backlog.json\`. ${pending.length - batch.length} entries remain pending after this batch.`,
             '',
             '## How to approve',
