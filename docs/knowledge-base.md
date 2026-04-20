@@ -181,6 +181,18 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** app/js/components/trivia.js · data/master/trivia.json
 
+### KB-0022 | GitHub Actions Node 20 deprecation
+- **Type:** Action
+- **Tier:** T3
+- **Dependency:** Claude
+- **Date:** 2026-04-20
+- **Source:** Observed in `daily.yml` workflow log 2026-04-20
+- **Category:** CI / Maintenance
+- **Tags:** github-actions, node, deprecation
+- **Finding:** GitHub Actions emitted a warning that Node.js 20 will be removed from the runner on 2026-09-16. Two actions in `.github/workflows/daily.yml` (`actions/checkout@v4`, `actions/setup-node@v4`) will need to run on Node 24 by default after June 2, 2026. The fix is trivial — update `node-version` to `'22'` or later in the `setup-node` step, and bump checkout/setup-node minor versions if newer ones are out by then. No action needed today; the workflow continues to run fine.
+- **Status:** Open (monitor; fix before September 2026)
+- **Cross-ref:** .github/workflows/daily.yml
+
 ### KB-0021 | Auto-reload on service-worker update
 - **Type:** Action
 - **Tier:** T2
@@ -250,11 +262,11 @@ Static types (Reference, Decision, Limitation) omit Tier.
 ## Quick Index
 
 **Open items (with tier where applicable):**
-- KB-0003 — YouTube API: code landed, owner key acquisition pending — Decision
 - KB-0007 — PNG icon set for iOS — Action, **T3** (deferred, Phase 4)
 - KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
 - KB-0020 — Public on-demand refresh — Action, **T2** (near-term enhancement)
 - KB-0021 — Auto-reload on service-worker update — Action, **T2** (near-term enhancement)
+- KB-0022 — GitHub Actions Node 20 deprecation — Action, **T3** (low-priority maintenance)
 
 **Closed:**
 KB-0001, KB-0002, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019
