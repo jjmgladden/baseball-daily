@@ -157,6 +157,38 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** app/js/components/trivia.js · data/master/trivia.json
 
+### KB-0021 | Auto-reload on service-worker update
+- **Type:** Action
+- **Tier:** T2
+- **Dependency:** Claude
+- **Date:** 2026-04-20
+- **Source:** Chat 2026-04-20 — after repeated manual cache-clear incidents when the shell updated
+- **Category:** UI / PWA / UX
+- **Tags:** service-worker, auto-reload, pwa, ux
+- **Finding:** Currently when the app shell updates, returning visitors must hard-refresh twice, open in incognito, or manually unregister the SW via DevTools to see the new version (workaround documented in `docs/deployment.md` § Seeing old content after an update). An auto-reload pattern in `app/js/app.js` can detect when a new SW takes control and reload the page once invisibly, eliminating the friction.
+
+  **Implementation sketch (~15 lines in `app/js/app.js` registerServiceWorker):**
+  ```js
+  const hadControllerAtLoad = Boolean(navigator.serviceWorker.controller);
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadControllerAtLoad) return;  // first install — don't reload
+    if (refreshing) return;
+    refreshing = true;
+    window.location.reload();
+  });
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' });
+  ```
+
+  **Trade-offs:**
+  - **Pros:** Zero manual cache-clear for returning users. Matches the behavior visitors expect from a modern web app.
+  - **Cons:** More SW lifecycle code to maintain. Every deploy causes one extra page reload for anyone with the app open at that moment.
+  - **One-time caveat:** On the deploy that introduces this logic, *existing* users still need a manual cache-clear once to pick up the new `app.js` containing the auto-reload handler. Every deploy after that is seamless.
+
+  Decision deferred. Current manual workaround is documented and acceptable for owner-level use; may become more important if the site sees external traffic or frequent updates.
+- **Status:** Open
+- **Cross-ref:** CLAUDE.md § Service Worker Cache · docs/deployment.md § Seeing old content after an update
+
 ### KB-0020 | Public on-demand refresh — anyone can trigger ingestion
 - **Type:** Action
 - **Tier:** T2
@@ -195,10 +227,10 @@ Static types (Reference, Decision, Limitation) omit Tier.
 
 **Open items (with tier where applicable):**
 - KB-0003 — YouTube API key acquisition — Decision (static, awaiting trigger)
-- KB-0005 — Public GitHub repo transition — closed 2026-04-20 when repo went live
 - KB-0007 — PNG icon set for iOS — Action, **T3** (deferred, Phase 4)
 - KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
 - KB-0020 — Public on-demand refresh — Action, **T2** (near-term enhancement)
+- KB-0021 — Auto-reload on service-worker update — Action, **T2** (near-term enhancement)
 
 **Closed:**
 KB-0001, KB-0002, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019
