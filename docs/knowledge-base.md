@@ -31,13 +31,25 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** ingestion/lib/mlb-api.js
 
-### KB-0003 | YouTube API: ingestion-only, defer key acquisition
+### KB-0003 | YouTube API: ingestion code landed, key acquisition pending
 - **Type:** Decision
-- **Date:** 2026-04-19
+- **Date:** 2026-04-19 (updated 2026-04-20 — code delivered, awaiting owner key setup)
 - **Category:** Data / APIs / Security
-- **Finding:** YouTube API key used ONLY in local ingestion. Key in `.env` (gitignored). Deferred to Phase 3B when highlight ingestion is triggered.
-- **Status:** Open (Phase 3B)
-- **Cross-ref:** CLAUDE.md § Secret Safety
+- **Tags:** youtube, secrets, highlights
+- **Finding:** YouTube API key used ONLY in local Node ingestion (or GitHub Actions via the `YOUTUBE_API_KEY` secret) — never in the browser.
+
+  **Delivered 2026-04-20:**
+  - `ingestion/lib/youtube-api.js` — API wrapper
+  - `ingestion/fetch-highlights.js` — team-keyed search against the official MLB channel (48h lookback, 3 results default)
+  - `ingestion/fetch-daily.js` v4 — orchestrates highlights; snapshot `schemaVersion` rolled to 4; adds `cardinals.highlights`, `nationals.highlights`, `youtubeEnabled` flag
+  - `app/js/components/highlights.js` — responsive iframe embeds (youtube-nocookie.com, lazy-loaded)
+  - `app/js/tabs/daily.js` — Highlight Videos section below Recent Form with a helpful placeholder when the key isn't set
+  - `docs/youtube-api-setup.md` — step-by-step guide covering Google Cloud Console → `.env` → GitHub Secrets → verification
+  - Graceful degradation: if key is missing, highlights arrays are empty; UI shows a polite placeholder instead of breaking.
+
+  **Remaining:** owner completes Google Cloud Console setup (Steps 1–6 in the setup doc), pastes key into local `.env` and GitHub Actions Secret `YOUTUBE_API_KEY`. Until then, the code runs but returns empty highlight arrays.
+- **Status:** Open (awaiting owner key acquisition — code ready)
+- **Cross-ref:** docs/youtube-api-setup.md · ingestion/fetch-highlights.js · ingestion/lib/youtube-api.js · app/js/components/highlights.js
 
 ### KB-0004 | Player index scope: all-time (Chadwick, 1871+)
 - **Type:** Decision
@@ -238,7 +250,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
 ## Quick Index
 
 **Open items (with tier where applicable):**
-- KB-0003 — YouTube API key acquisition — Decision (static, awaiting trigger)
+- KB-0003 — YouTube API: code landed, owner key acquisition pending — Decision
 - KB-0007 — PNG icon set for iOS — Action, **T3** (deferred, Phase 4)
 - KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
 - KB-0020 — Public on-demand refresh — Action, **T2** (near-term enhancement)
