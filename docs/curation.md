@@ -65,15 +65,21 @@ How new legends, moments, and stories get added to the site. Two inputs feed the
 
 ### How you respond (updated)
 
-Every Issue now renders each entry as a **clickable checkbox**. Open the Issue on phone or laptop:
+Every Issue renders entries as **clickable checkboxes**. Two paths:
 
+**Fast path — approve everything:**
+1. Tap the single **✅ Approve ALL entries below** box at the top
+2. Close the Issue
+3. Done — Claude approves the whole batch on the next session
+
+**Finer path — choose individually:**
 1. Tap the box next to each entry you want added
-2. Leave unchecked for entries you want to skip
+2. Leave unchecked for entries you want to skip (they stay in the backlog)
 3. Close the Issue
 
 Takes ~2 minutes. No typing required for the common case.
 
-**If you want finer control** (edit wording, hold for next week, reject with a reason), add a comment after checking the boxes:
+**If you want even finer control** (edit wording, hold for next week, reject with a reason), add a comment after checking the boxes:
 ```
 approved all checked
 edit 3: lead with "1934 NL MVP and last NL 30-game winner"
