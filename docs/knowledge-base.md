@@ -2,7 +2,14 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-04-19 (Phase 3A rollup)
+**Last updated:** 2026-04-20
+
+**Tier convention (dynamic types only — adopted from MODR):**
+- **T1** — Critical / production-impacting; fix first
+- **T2** — Near-Term; planned for an upcoming session
+- **T3** — Deferred; someday / research
+
+Static types (Reference, Decision, Limitation) omit Tier.
 
 ---
 
@@ -150,6 +157,30 @@ Living record of decisions, open issues, and action items. Updated every session
 - **Status:** Closed
 - **Cross-ref:** app/js/components/trivia.js · data/master/trivia.json
 
+### KB-0020 | Public on-demand refresh — anyone can trigger ingestion
+- **Type:** Action
+- **Tier:** T2
+- **Dependency:** Owner / Claude
+- **Date:** 2026-04-20
+- **Source:** Chat 2026-04-20 — first-pass Refresh Data button reverted
+- **Category:** Features / Deployment
+- **Tags:** refresh, pwa, github-actions, public-trigger, cloudflare
+- **Finding:** The first-pass "Refresh data" button (added commit `3138483`, reverted commit `________`) was a deep-link to the GitHub Actions workflow page. That only works for accounts with write access to `jjmgladden/baseball-daily` — family/friends viewing the public site cannot trigger a refresh and don't even see the "Run workflow" UI. Desired behavior: **anyone viewing the site can click a button and trigger an ingestion run.**
+
+  **Implementation options (trade-offs):**
+
+  | Approach | Pros | Cons |
+  |---|---|---|
+  | Embedded fine-grained PAT in public JS | One click, zero infrastructure | Token visible to any site visitor; could be harvested for noise/abuse; rotate if leaked; posture violation of CLAUDE.md § Secret Safety |
+  | **Cloudflare Worker proxy** (recommended) | One click, token stays server-side, simple rate-limiting, free tier sufficient | Adds one infrastructure dependency (cloudflare.com account, Wrangler CLI) |
+  | GitHub App with installation token | Similar to Worker | More complex setup |
+
+  **Recommended next-pass (when picked up):** Cloudflare Worker with a single `/dispatch` endpoint that holds the PAT in its secret store and calls the GitHub API to trigger `daily.yml`. Worker URL is called by a button on the app. Add basic rate-limiting (e.g. max 1 dispatch per IP per 10 min) to discourage abuse.
+
+  Until then: daily cron handles freshness for all visitors (5 AM CDT); owner can manually trigger via GitHub Actions UI or `gh workflow run`.
+- **Status:** Open
+- **Cross-ref:** CLAUDE.md § Secret Safety · `.github/workflows/daily.yml`
+
 ### KB-0019 | Recent-form 14-day window
 - **Type:** Reference
 - **Date:** 2026-04-19
@@ -162,11 +193,12 @@ Living record of decisions, open issues, and action items. Updated every session
 
 ## Quick Index
 
-**Open items:**
-- KB-0003 — YouTube API key acquisition (Phase 3B trigger)
-- KB-0005 — Public GitHub repo transition (Phase 3B)
-- KB-0007 — PNG icon set for iOS (Phase 4)
-- KB-0013 — On-This-Day seed expansion (content-only)
+**Open items (with tier where applicable):**
+- KB-0003 — YouTube API key acquisition — Decision (static, awaiting trigger)
+- KB-0005 — Public GitHub repo transition — closed 2026-04-20 when repo went live
+- KB-0007 — PNG icon set for iOS — Action, **T3** (deferred, Phase 4)
+- KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
+- KB-0020 — Public on-demand refresh — Action, **T2** (near-term enhancement)
 
 **Closed:**
 KB-0001, KB-0002, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019

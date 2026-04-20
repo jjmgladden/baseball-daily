@@ -1,6 +1,6 @@
 # Baseball Daily Intelligence — Claude Code Project Instructions
 
-**Version:** 5 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v4.md
+**Version:** 6 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v5.md
 
 ---
 
@@ -196,7 +196,30 @@ API keys ONLY in `.env` (gitignored) or GitHub Actions Secrets.
 
 ## Knowledge Base Format
 
-See `docs/knowledge-base.md`. Every KB entry uses the template there. Entry IDs continue sequentially.
+Adopted from the MODR-PBX-Project convention. Every KB entry in `docs/knowledge-base.md`:
+
+```markdown
+### KB-XXXX | [Short descriptive title]
+- **Type:** [Reference / Decision / Limitation / Action / Issue / Concept]
+- **Tier:** [T1 / T2 / T3 — dynamic types only (Action / Issue / Concept); omit for static]
+- **Dependency:** [Owner / Claude / External / Blocked (cite KB) — dynamic types only; omit when Closed]
+- **Date:** YYYY-MM-DD
+- **Source:** [Chat session, test result, external reference]
+- **Category:** [Primary / Subcategory]
+- **Tags:** [lowercase, comma-separated]
+- **Finding:** [Specific, complete description]
+- **Status:** [Open / Closed / Blocked (cite blocker)]
+- **Cross-ref:** [Related KBs or files]
+```
+
+**Tier definitions (dynamic types only):**
+- **T1** — *Critical / Production-impacting.* Something user-facing is broken or a security boundary is in question. Fix first.
+- **T2** — *Near-Term.* Planned enhancement or non-critical gap. Address in an upcoming session.
+- **T3** — *Deferred.* Nice-to-have or someday / research. No active commitment.
+
+Static types (Reference, Decision, Limitation) omit Tier and Dependency — those are facts or finalized choices, not dynamic work.
+
+Entry IDs continue sequentially.
 
 ---
 
