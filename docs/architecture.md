@@ -11,7 +11,7 @@ Three-layer application:
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  SCHEDULE                                                    │
-│  Phase 1-2: Windows Task Scheduler → run_daily.bat @ 5:00 AM │
+│  Phase 1-2: Windows Task Scheduler → run_daily.bat @ 3:00 AM │
 │  Phase 3+:  GitHub Actions cron                              │
 └────────────────────────┬─────────────────────────────────────┘
                          │

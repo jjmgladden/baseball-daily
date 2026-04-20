@@ -35,7 +35,7 @@ Open the browser to http://localhost:1882. The Daily Report tab renders from the
 1. Open **Task Scheduler** → **Create Basic Task**.
 2. Name: *Baseball Daily Ingestion*.
 3. Description: *Pulls previous-day MLB data via MLB Stats API.*
-4. Trigger: **Daily** · Start: 5:00 AM · Recur: every 1 day.
+4. Trigger: **Daily** · Start: 3:00 AM · Recur: every 1 day. (Matches the GitHub Actions cloud cron. You can pick any time; this local path is a backup if Actions ever fails.)
 5. Action: **Start a program**.
    - Program/script: browse to `run_daily.bat`.
    - Start in: the project folder (important — relative paths break otherwise).
@@ -80,7 +80,7 @@ Add `.github/workflows/daily.yml` (not yet written — Phase 3):
 name: Daily Ingestion
 on:
   schedule:
-    - cron: '0 10 * * *'   # 5:00 AM CT = 10:00 UTC (adjust for DST as needed)
+    - cron: '0 7 * * *'    # 3:00 AM Eastern Daylight = 07:00 UTC (2 AM Eastern Standard in winter)
   workflow_dispatch:       # manual trigger
 jobs:
   ingest:

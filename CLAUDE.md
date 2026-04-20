@@ -1,6 +1,6 @@
 # Baseball Daily Intelligence — Claude Code Project Instructions
 
-**Version:** 7 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v6.md
+**Version:** 8 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v7.md
 
 ---
 
@@ -79,7 +79,7 @@ Baseball Project/ (also git repo root)
 ├── run_daily.bat                ← Local scheduler target (alternative to GitHub Actions)
 │
 ├── .github/workflows/
-│   └── daily.yml                ← Cloud cron — 5 AM CDT / 4 AM CST — commits fresh snapshot
+│   └── daily.yml                ← Cloud cron — 3 AM EDT / 2 AM EST — commits fresh snapshot
 │
 ├── app/                         ← Static PWA (served from root or /baseball-daily/)
 │   ├── index.html               ← All asset paths are RELATIVE for portability

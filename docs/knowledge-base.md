@@ -245,7 +245,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
 
   **Recommended next-pass (when picked up):** Cloudflare Worker with a single `/dispatch` endpoint that holds the PAT in its secret store and calls the GitHub API to trigger `daily.yml`. Worker URL is called by a button on the app. Add basic rate-limiting (e.g. max 1 dispatch per IP per 10 min) to discourage abuse.
 
-  Until then: daily cron handles freshness for all visitors (5 AM CDT); owner can manually trigger via GitHub Actions UI or `gh workflow run`.
+  Until then: daily cron handles freshness for all visitors (3 AM Eastern / 07:00 UTC); owner can manually trigger via GitHub Actions UI or `gh workflow run`.
 - **Status:** Open
 - **Cross-ref:** CLAUDE.md § Secret Safety · `.github/workflows/daily.yml`
 

@@ -12,7 +12,7 @@ A personal tool that runs every morning, pulls yesterday's MLB games, standings,
 
 **Pipeline:**
 ```
-5:00 AM local  →  run_daily.bat  →  ingestion/fetch-daily.js
+3:00 AM Eastern →  GitHub Actions cron  →  ingestion/fetch-daily.js
                                      ↓
                   data/snapshots/YYYY-MM-DD.json + latest.json
                                      ↓
@@ -47,7 +47,7 @@ If you see "No snapshot yet" on the Daily Report tab, run `npm run fetch:daily` 
 
 1. Open **Task Scheduler** → **Create Basic Task**
 2. Name: *Baseball Daily Ingestion*
-3. Trigger: **Daily** at **5:00 AM**
+3. Trigger: **Daily** at **3:00 AM** (or any time you prefer — this path is a backup to the GitHub Actions cron)
 4. Action: **Start a program** → browse to `run_daily.bat` in this folder
 5. Start in: this project's folder (important — paths are relative)
 6. Test: right-click the task → **Run**. Check `logs/ingestion.log` afterward.

@@ -1,7 +1,9 @@
 @echo off
 REM ========================================================================
 REM  Baseball Daily Intelligence — Daily Ingestion Runner
-REM  Target: Windows Task Scheduler, 5:00 AM local time.
+REM  Target: Windows Task Scheduler, 3:00 AM local time (aligned with
+REM  the GitHub Actions cloud cron). Pick any time you prefer — this
+REM  local runner is a backup if Actions is ever unavailable.
 REM ========================================================================
 
 cd /d "%~dp0"
