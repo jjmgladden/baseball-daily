@@ -2,10 +2,9 @@ name: Weekly Curation Batch
 
 # Every Monday morning, picks the next 10 pending entries from
 # data/master/curation-backlog.json (sorted by priority then id) and
-# opens a GitHub Issue asking for owner approval. The owner reviews
-# the Issue, approves/edits in chat, and Claude moves accepted entries
-# from the backlog into the appropriate main data file
-# (cardinals-links.json, historical-videos.json, or stories.json).
+# opens a GitHub Issue with clickable checkboxes for per-entry approval.
+# The owner taps boxes in the Issue, closes it, and Claude applies the
+# checked entries on the next session.
 #
 # Cron: 08:00 UTC Monday = 4:00 AM EDT (3:00 AM EST) Monday.
 on:
@@ -46,28 +45,33 @@ jobs:
           const today = new Date().toISOString().slice(0, 10);
           const title = `Weekly curation batch ${today} — ${batch.length} entries for review`;
 
-          const body = [
-            `Automatic weekly pull from \`data/master/curation-backlog.json\`. ${pending.length} entries remain pending after this batch.`,
+          const lines = [
+            `Automatic weekly pull from \`data/master/curation-backlog.json\`. ${pending.length - batch.length} entries remain pending after this batch.`,
             '',
-            '## How to respond',
-            '- Reply **approve all** to green-light every entry as-is.',
-            '- Reply with line-by-line decisions: `1 approve`, `2 reject`, `3 edit: new summary`, etc.',
-            '- Claude reads your response on the next session and moves accepted entries from the backlog into the appropriate main file (cardinals-links.json, historical-videos.json, or stories.json).',
+            '## How to approve',
+            '',
+            '1. **Tap the checkbox** next to each entry you want added to the site.',
+            '2. Leave boxes unchecked for entries you want to skip (they stay in the backlog for future weeks).',
+            '3. **Close the Issue** when done (or add a comment like `done`).',
+            '',
+            'Claude reads the checkbox state on the next session, applies approved entries to the appropriate main file (`cardinals-links.json`, `historical-videos.json`, `stories.json`), and updates the backlog.',
             '',
             '## Batch',
             '',
-            ...batch.map((e, i) => [
-              `### ${i + 1}. ${e.name} (\`${e.id}\`)`,
-              `- **Type:** ${e.type} · **Category:** ${e.category} · **Priority:** ${e.priority}`,
-              `- ${e.summary || '(no summary)'}`,
-              ''
-            ]).flat(),
-          ].join('\n');
+          ];
 
-          fs.writeFileSync('.github/batch-body.md', body);
-          console.log('title=' + title);
-          console.log('count=' + batch.length);
-          // Surface title for the next step
+          for (let i = 0; i < batch.length; i++) {
+            const e = batch[i];
+            lines.push(`- [ ] **${i + 1}. ${e.name}** (\`${e.id}\`) · *${e.type}* · priority ${e.priority}`);
+            lines.push(`  ${e.summary || '(no summary)'}`);
+            lines.push('');
+          }
+
+          lines.push('---');
+          lines.push('');
+          lines.push('💡 **Want a themed batch instead?** Reply in chat with Claude: *"do a [theme] batch"* — examples: *brothers in baseball*, *father-son duos*, *WWII veterans*, *Cardinals managers*, *iconic umpire moments*, *1985 Cardinals stories*. Claude curates the theme and opens a separate Issue for your review.');
+
+          fs.writeFileSync('.github/batch-body.md', lines.join('\n'));
           require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `title=${title}\ncount=${batch.length}\n`);
           EOF
         env:

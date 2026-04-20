@@ -63,30 +63,24 @@ How new legends, moments, and stories get added to the site. Two inputs feed the
 4. Slices the first 10
 5. Creates a GitHub Issue listing them with their summaries
 
-### How you respond
+### How you respond (updated)
 
-Open the Issue (email notification arrives automatically):
+Every Issue now renders each entry as a **clickable checkbox**. Open the Issue on phone or laptop:
 
-**Approve everything:**
-```
-approve all
-```
+1. Tap the box next to each entry you want added
+2. Leave unchecked for entries you want to skip
+3. Close the Issue
 
-**Line-by-line:**
-```
-1 approve
-2 reject — already covered by stories.json entry
-3 edit: Dizzy Dean, lead with "1934 NL MVP and last NL 30-game winner" instead
-4 approve
-...
-```
+Takes ~2 minutes. No typing required for the common case.
 
-**Skip this week:**
+**If you want finer control** (edit wording, hold for next week, reject with a reason), add a comment after checking the boxes:
 ```
-hold all — revisit next week
+approved all checked
+edit 3: lead with "1934 NL MVP and last NL 30-game winner"
+hold 7 until next month — want to revisit
 ```
 
-Close the Issue when you're done deciding (or I'll close it after applying your decisions).
+Claude reads both the checkbox state AND any comments on the next session. Either works.
 
 ### What Claude does next session
 
@@ -109,6 +103,45 @@ Don't want to wait for Monday? Trigger the workflow on demand:
 https://github.com/jjmgladden/baseball-daily/actions/workflows/weekly-batch.yml
 ```
 → Run workflow → optionally adjust batch size.
+
+---
+
+## Themed batches (on demand)
+
+In addition to the automatic Monday batch, you can request a **themed batch** any time. Themed batches are a parallel track — they don't consume the backlog or affect the weekly rotation.
+
+### How to request one
+
+Just tell Claude in chat:
+- *"Do a brothers-in-baseball batch"*
+- *"Father-son duos"*
+- *"10 WWII veterans I haven't added yet"*
+- *"Cardinals managers"*
+- *"Iconic umpire moments"*
+- *"1985 Cardinals stories"*
+- *"Players who debuted before 1900"*
+
+### What Claude does
+
+1. Curates 10 entries on the theme (with verified facts — no fabrication; pulls from training knowledge + external sources)
+2. Opens a new GitHub Issue titled `Themed batch: [Theme] — 10 entries for review`, labeled `themed-batch`
+3. Same checkbox format as the weekly batch
+4. You tap boxes, close Issue
+5. Next session Claude applies approved entries to the appropriate main file
+
+### Example themes worth queuing
+
+- Brothers in baseball (DiMaggios, Alous, Waners, Deans, Niekros, etc.)
+- Father-son / generational (Griffeys, Bondses, Ripkens, Boones, Alomars)
+- WWII combat veterans who played MLB
+- Iconic broadcasters (Ford C. Frick Award winners)
+- Cardinals broadcasters and writers
+- Knuckleball pitchers (Hoyt Wilhelm, Niekros, Dickey, Wakefield, Dickson)
+- Pre-1900 deadball stars
+- Negro Leagues stars not yet in the main files
+- Female pioneers (Toni Stone, Mamie "Peanut" Johnson)
+- Minor-league legends who never made it up
+- Commissioner-era scandals and disciplinary actions
 
 ---
 
