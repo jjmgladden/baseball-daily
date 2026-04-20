@@ -7,12 +7,19 @@
  *   - Emits snapshot schemaVersion: 4
  */
 
+// Load local .env (no-op on GitHub Actions where env vars are passed via
+// the workflow's env: block — the loader doesn't override existing values).
+const { loadEnvFile } = require('./lib/env');
+const envLoad = loadEnvFile();
+
 const mlb = require('./lib/mlb-api');
 const cache = require('./lib/cache');
 const { fetchAllInjuries } = require('./fetch-injuries');
 const { fetchTransactions } = require('./fetch-transactions');
 const { eventsFor } = require('./on-this-day');
 const { fetchTeamHighlights } = require('./fetch-highlights');
+
+console.log(`[fetch-daily] .env: ${envLoad.found ? `loaded ${envLoad.loaded} var(s)` : 'not present (using process env only)'}`);
 
 async function run() {
   const date = cache.yesterdayISO();
