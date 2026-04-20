@@ -1,6 +1,6 @@
-# Baseball Daily Intelligence — Claude Code Project Instructions
+# Ozark Joe's Baseball Daily Intelligence Report — Claude Code Project Instructions
 
-**Version:** 10 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v9.md
+**Version:** 11 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v10.md
 
 ---
 

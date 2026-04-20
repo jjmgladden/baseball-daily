@@ -1,6 +1,6 @@
 {
-  "name": "Baseball Daily Intelligence",
-  "short_name": "Baseball Daily",
+  "name": "Ozark Joe's Baseball Daily Intelligence Report",
+  "short_name": "Ozark Joe's Baseball",
   "description": "Automated daily MLB intelligence with Cardinals and Nationals focus.",
   "start_url": "/app/index.html",
   "scope": "/",

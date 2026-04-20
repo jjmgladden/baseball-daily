@@ -10,7 +10,7 @@
  * GitHub Pages subpath (/baseball-daily/app/).
  */
 
-const CACHE = 'baseball-daily-shell-v9';
+const CACHE = 'baseball-daily-shell-v10';
 
 const SHELL_FILES = [
   './',

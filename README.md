@@ -1,4 +1,4 @@
-# Baseball Daily Intelligence
+# Ozark Joe's Baseball Daily Intelligence Report
 
 Automated daily MLB updates, historical research, and curated baseball intelligence — with the St. Louis Cardinals pinned at the top and the Washington Nationals secondary.
 
