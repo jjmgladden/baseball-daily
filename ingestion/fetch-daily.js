@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 /**
- * fetch-daily — orchestrator v3 (Phase 3)
+ * fetch-daily — orchestrator v4 (Phase 3B + KB-0003)
  *
- * Phase 3 additions over v2:
- *   - Uses /seasons/{season} for exact season dates (replaces hardcoded approximations)
- *   - Adds last-14-day recent form for Cardinals + Nationals (streak tracker)
- *   - Emits snapshot schemaVersion: 3
+ * Additions over v3:
+ *   - YouTube highlight ingestion for Cardinals + Nationals (graceful skip when key not set)
+ *   - Emits snapshot schemaVersion: 4
  */
 
 const mlb = require('./lib/mlb-api');
@@ -13,6 +12,7 @@ const cache = require('./lib/cache');
 const { fetchAllInjuries } = require('./fetch-injuries');
 const { fetchTransactions } = require('./fetch-transactions');
 const { eventsFor } = require('./on-this-day');
+const { fetchTeamHighlights } = require('./fetch-highlights');
 
 async function run() {
   const date = cache.yesterdayISO();
@@ -32,34 +32,43 @@ async function run() {
 
   const standings = await mlb.getStandings(season);
 
-  const [injuries, transactions, onThisDay, cardsForm, natsForm, seasonProgress] = await Promise.all([
-    safeRun('injuries',     () => fetchAllInjuries()),
-    safeRun('transactions', () => fetchTransactions(7)),
-    safeRun('on-this-day',  () => Promise.resolve(eventsFor())),
-    safeRun('cards-form',   () => computeRecentForm(mlb.TEAM_IDS.CARDINALS)),
-    safeRun('nats-form',    () => computeRecentForm(mlb.TEAM_IDS.NATIONALS)),
-    safeRun('season-prog',  () => computeSeasonProgress(season)),
+  const [
+    injuries, transactions, onThisDay,
+    cardsForm, natsForm, seasonProgress,
+    cardsHighlights, natsHighlights,
+  ] = await Promise.all([
+    safeRun('injuries',         () => fetchAllInjuries()),
+    safeRun('transactions',     () => fetchTransactions(7)),
+    safeRun('on-this-day',      () => Promise.resolve(eventsFor())),
+    safeRun('cards-form',       () => computeRecentForm(mlb.TEAM_IDS.CARDINALS)),
+    safeRun('nats-form',        () => computeRecentForm(mlb.TEAM_IDS.NATIONALS)),
+    safeRun('season-prog',      () => computeSeasonProgress(season)),
+    safeRun('cards-highlights', () => fetchTeamHighlights('Cardinals')),
+    safeRun('nats-highlights',  () => fetchTeamHighlights('Nationals')),
   ]);
 
   const trades = (transactions || []).filter(t => t.typeCode === 'TR');
 
   const snapshot = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     date,
     generatedAt: new Date().toISOString(),
     season,
+    youtubeEnabled: Boolean(process.env.YOUTUBE_API_KEY),
     scoreboard: games.map(summarizeGame),
     cardinals: {
       game: cardsGame ? summarizeGame(cardsGame) : null,
       boxscore: cardsBox ? summarizeBox(cardsBox) : null,
       injuries: filterInjuriesByTeam(injuries, mlb.TEAM_IDS.CARDINALS),
       recentForm: cardsForm,
+      highlights: cardsHighlights || [],
     },
     nationals: {
       game: natsGame ? summarizeGame(natsGame) : null,
       boxscore: natsBox ? summarizeBox(natsBox) : null,
       injuries: filterInjuriesByTeam(injuries, mlb.TEAM_IDS.NATIONALS),
       recentForm: natsForm,
+      highlights: natsHighlights || [],
     },
     standings: summarizeStandings(standings),
     seasonProgress: seasonProgress || fallbackSeasonProgress(season),
@@ -76,6 +85,7 @@ async function run() {
   console.log(`[fetch-daily] Transactions (7d): ${(transactions || []).length}  Trades: ${trades.length}`);
   console.log(`[fetch-daily] On-this-day events: ${(onThisDay || []).length}`);
   console.log(`[fetch-daily] Cards recent form: ${cardsForm?.streakCode || 'n/a'}  Nats: ${natsForm?.streakCode || 'n/a'}`);
+  console.log(`[fetch-daily] Cards highlights: ${(cardsHighlights || []).length} videos  Nats: ${(natsHighlights || []).length} videos  (key set: ${Boolean(process.env.YOUTUBE_API_KEY)})`);
   console.log(`[fetch-daily] Done.`);
 }
 

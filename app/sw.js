@@ -10,7 +10,7 @@
  * GitHub Pages subpath (/baseball-daily/app/).
  */
 
-const CACHE = 'baseball-daily-shell-v4';
+const CACHE = 'baseball-daily-shell-v5';
 
 const SHELL_FILES = [
   './',
@@ -30,6 +30,7 @@ const SHELL_FILES = [
   './js/components/trivia.js',
   './js/components/streak.js',
   './js/components/comparison.js',
+  './js/components/highlights.js',
 ];
 
 self.addEventListener('install', event => {

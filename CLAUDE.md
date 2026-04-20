@@ -1,6 +1,6 @@
 # Baseball Daily Intelligence — Claude Code Project Instructions
 
-**Version:** 6 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v5.md
+**Version:** 7 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v6.md
 
 ---
 
@@ -94,7 +94,8 @@ Baseball Project/ (also git repo root)
 │       │   ├── favorites.js     ← localStorage favorite players
 │       │   ├── trivia.js        ← Daily trivia card
 │       │   ├── streak.js        ← Recent-form renderer
-│       │   └── comparison.js    ← Player comparison widget
+│       │   ├── comparison.js    ← Player comparison widget
+│       │   └── highlights.js    ← YouTube highlight embeds
 │       └── tabs/
 │           ├── daily.js         ← Cardinals/Nats pins + streak + trivia + on-this-day + trades + scoreboard + standings + injuries
 │           ├── cardinals.js     ← Retired numbers, HOFers, historic seasons, traditions
@@ -104,12 +105,14 @@ Baseball Project/ (also git repo root)
 │           └── stories.js       ← Rotating daily story + archive
 │
 ├── ingestion/
-│   ├── fetch-daily.js           ← Orchestrator
+│   ├── fetch-daily.js           ← Orchestrator (schemaVersion=4)
 │   ├── fetch-injuries.js
 │   ├── fetch-transactions.js
+│   ├── fetch-highlights.js      ← YouTube Data API (graceful skip without key)
 │   ├── on-this-day.js
 │   └── lib/
 │       ├── mlb-api.js           ← MLB Stats API wrapper
+│       ├── youtube-api.js       ← YouTube Data API wrapper
 │       └── cache.js
 │
 ├── data/
@@ -156,7 +159,7 @@ Baseball Project/ (also git repo root)
 |---|---|---|---|
 | MLB Stats API | `statsapi.mlb.com/api/v1` | Scores, standings, schedule, boxes, transactions, rosters, season dates, team schedule | None |
 | Chadwick Bureau | `github.com/chadwickbureau/register` | Historical player index (~23k players, 1871+) | None |
-| YouTube Data API v3 | `googleapis.com/youtube/v3` | Highlight video search (ingestion only; deferred) | **Required** |
+| YouTube Data API v3 | `googleapis.com/youtube/v3` | Highlight video search (ingestion only) — ACTIVE | **Required** — see [docs/youtube-api-setup.md](docs/youtube-api-setup.md) |
 | Retrosheet | `retrosheet.org` | Historical play-by-play (future) | None |
 
 **Team IDs:** Cardinals = 138 · Nationals = 120 · **League IDs:** AL = 103 · NL = 104

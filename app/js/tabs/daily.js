@@ -15,6 +15,7 @@
 
 import { renderRecentForm } from '../components/streak.js';
 import { renderTriviaCard } from '../components/trivia.js';
+import { renderHighlights } from '../components/highlights.js';
 
 const CARDS_ID = 138;
 const NATS_ID = 120;
@@ -40,6 +41,8 @@ export function renderDaily(root, snap) {
       ${renderRecentForm(snap.cardinals?.recentForm, 'Cardinals')}
       ${renderRecentForm(snap.nationals?.recentForm, 'Nationals')}
     </div>
+
+    ${renderHighlightsSection(snap)}
 
     <h2>Daily Trivia</h2>
     <div class="card" id="trivia-mount"></div>
@@ -137,6 +140,27 @@ function renderTeamPin(label, teamData, cls, teamId) {
       ${detail}
       ${renderInjuryList(teamData?.injuries || [])}
     </div>
+  `;
+}
+
+function renderHighlightsSection(snap) {
+  const cardsV = snap.cardinals?.highlights || [];
+  const natsV = snap.nationals?.highlights || [];
+  if (!cardsV.length && !natsV.length) {
+    if (snap.youtubeEnabled === false) {
+      return `
+        <h2>Highlight Videos</h2>
+        <div class="card">
+          <p class="muted">Highlights will appear here once the YouTube API key is configured. See <code>docs/youtube-api-setup.md</code>.</p>
+        </div>
+      `;
+    }
+    return '';
+  }
+  return `
+    <h2>Highlight Videos</h2>
+    ${renderHighlights(cardsV, 'Cardinals')}
+    ${renderHighlights(natsV, 'Nationals')}
   `;
 }
 

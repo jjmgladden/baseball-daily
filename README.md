@@ -90,9 +90,9 @@ Phase 1 delivers the Daily Report tab backed by real MLB Stats API data. Cardina
 All real, no hallucination. See [docs/data-sources.md](docs/data-sources.md) for detail.
 
 - MLB Stats API (`statsapi.mlb.com`) — primary
-- Chadwick Bureau — historical player index (Phase 2)
-- YouTube Data API v3 — highlights (Phase 3, key required)
-- Retrosheet — historical play-by-play (Phase 2+)
+- Chadwick Bureau — historical player index
+- YouTube Data API v3 — highlights (active; see [docs/youtube-api-setup.md](docs/youtube-api-setup.md) for one-time key setup)
+- Retrosheet — historical play-by-play (future)
 
 ---
 
