@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "date": "2026-04-19",
-  "generatedAt": "2026-04-20T01:28:04.077Z",
+  "generatedAt": "2026-04-20T02:07:04.443Z",
   "season": 2026,
   "scoreboard": [
     {
@@ -2255,7 +2255,102 @@
         "statusLabel": "Restricted List",
         "statusDescription": "Reassigned to Minors"
       }
-    ]
+    ],
+    "recentForm": {
+      "gamesAnalyzed": 12,
+      "streakCode": "W5",
+      "last10": {
+        "wins": 7,
+        "losses": 3,
+        "of": 10
+      },
+      "homeAway": {
+        "home": "3-3",
+        "away": "5-1"
+      },
+      "games": [
+        {
+          "date": "2026-04-08",
+          "opponent": "Washington Nationals",
+          "usScore": 6,
+          "themScore": 1,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-10",
+          "opponent": "Boston Red Sox",
+          "usScore": 3,
+          "themScore": 2,
+          "result": "W",
+          "home": true
+        },
+        {
+          "date": "2026-04-11",
+          "opponent": "Boston Red Sox",
+          "usScore": 1,
+          "themScore": 7,
+          "result": "L",
+          "home": true
+        },
+        {
+          "date": "2026-04-12",
+          "opponent": "Boston Red Sox",
+          "usScore": 3,
+          "themScore": 9,
+          "result": "L",
+          "home": true
+        },
+        {
+          "date": "2026-04-13",
+          "opponent": "Cleveland Guardians",
+          "usScore": 3,
+          "themScore": 9,
+          "result": "L",
+          "home": true
+        },
+        {
+          "date": "2026-04-14",
+          "opponent": "Cleveland Guardians",
+          "usScore": 6,
+          "themScore": 5,
+          "result": "W",
+          "home": true
+        },
+        {
+          "date": "2026-04-15",
+          "opponent": "Cleveland Guardians",
+          "usScore": 5,
+          "themScore": 3,
+          "result": "W",
+          "home": true
+        },
+        {
+          "date": "2026-04-17",
+          "opponent": "Houston Astros",
+          "usScore": 9,
+          "themScore": 4,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-18",
+          "opponent": "Houston Astros",
+          "usScore": 7,
+          "themScore": 5,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-19",
+          "opponent": "Houston Astros",
+          "usScore": 7,
+          "themScore": 5,
+          "result": "W",
+          "home": false
+        }
+      ]
+    }
   },
   "nationals": {
     "game": {
@@ -3673,7 +3768,102 @@
         "statusLabel": "60-day IL",
         "statusDescription": "Injured 60-Day"
       }
-    ]
+    ],
+    "recentForm": {
+      "gamesAnalyzed": 13,
+      "streakCode": "W1",
+      "last10": {
+        "wins": 6,
+        "losses": 4,
+        "of": 10
+      },
+      "homeAway": {
+        "home": "2-4",
+        "away": "5-2"
+      },
+      "games": [
+        {
+          "date": "2026-04-10",
+          "opponent": "Milwaukee Brewers",
+          "usScore": 7,
+          "themScore": 3,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-11",
+          "opponent": "Milwaukee Brewers",
+          "usScore": 3,
+          "themScore": 1,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-12",
+          "opponent": "Milwaukee Brewers",
+          "usScore": 8,
+          "themScore": 6,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-13",
+          "opponent": "Pittsburgh Pirates",
+          "usScore": 5,
+          "themScore": 16,
+          "result": "L",
+          "home": false
+        },
+        {
+          "date": "2026-04-14",
+          "opponent": "Pittsburgh Pirates",
+          "usScore": 5,
+          "themScore": 4,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-15",
+          "opponent": "Pittsburgh Pirates",
+          "usScore": 0,
+          "themScore": 2,
+          "result": "L",
+          "home": false
+        },
+        {
+          "date": "2026-04-16",
+          "opponent": "Pittsburgh Pirates",
+          "usScore": 8,
+          "themScore": 7,
+          "result": "W",
+          "home": false
+        },
+        {
+          "date": "2026-04-17",
+          "opponent": "San Francisco Giants",
+          "usScore": 5,
+          "themScore": 10,
+          "result": "L",
+          "home": true
+        },
+        {
+          "date": "2026-04-18",
+          "opponent": "San Francisco Giants",
+          "usScore": 6,
+          "themScore": 7,
+          "result": "L",
+          "home": true
+        },
+        {
+          "date": "2026-04-19",
+          "opponent": "San Francisco Giants",
+          "usScore": 3,
+          "themScore": 0,
+          "result": "W",
+          "home": true
+        }
+      ]
+    }
   },
   "standings": {
     "200": {
@@ -4068,16 +4258,17 @@
     }
   },
   "seasonProgress": {
-    "regularSeasonPct": 0.12420013574376007,
-    "daysToAllStar": 87,
-    "daysToPlayoffs": 162,
-    "daysToWorldSeriesEnd": 200,
+    "regularSeasonPct": 0.14025937145310632,
+    "daysToAllStar": 85,
+    "daysToPlayoffs": 160,
+    "daysToWorldSeriesEnd": 194,
     "phase": "first-half",
-    "approximateDates": {
-      "start": "2026-03-28",
-      "allStar": "2026-07-15",
-      "regSeasonEnd": "2026-09-28",
-      "postseasonEnd": "2026-11-05"
+    "source": "api",
+    "dates": {
+      "start": "2026-03-25",
+      "allStar": "2026-07-14",
+      "regSeasonEnd": "2026-09-27",
+      "postseasonEnd": "2026-10-31"
     }
   },
   "injuries": [
@@ -50826,15 +51017,125 @@
   ],
   "onThisDay": [
     {
-      "date": "04-19",
-      "year": 1913,
-      "type": "opening",
-      "title": "Ebbets Field opens in Brooklyn",
-      "description": "The Dodgers' home park opened for its first NL game against the Philadelphia Phillies.",
+      "date": "04-20",
+      "year": 1859,
+      "type": "birthday",
+      "title": "Germany Smith born",
+      "description": "Germany Smith, 15 MLB seasons (1884-1898).",
       "tags": [
-        "dodgers",
-        "ballparks"
-      ]
+        "birthday"
+      ],
+      "playerId": 122395
+    },
+    {
+      "date": "04-20",
+      "year": 1869,
+      "type": "birthday",
+      "title": "Tommy Dowd born",
+      "description": "Tommy Dowd, 11 MLB seasons (1891-1901).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 113508
+    },
+    {
+      "date": "04-20",
+      "year": 1876,
+      "type": "birthday",
+      "title": "Charlie Hemphill born",
+      "description": "Charlie Hemphill, 13 MLB seasons (1899-1911).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 115739
+    },
+    {
+      "date": "04-20",
+      "year": 1880,
+      "type": "birthday",
+      "title": "Charlie Smith born",
+      "description": "Charlie Smith, 13 MLB seasons (1902-1914).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 122361
+    },
+    {
+      "date": "04-20",
+      "year": 1891,
+      "type": "birthday",
+      "title": "Dave Bancroft born",
+      "description": "Dave Bancroft, 16 MLB seasons (1915-1930).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 110524
+    },
+    {
+      "date": "04-20",
+      "year": 1895,
+      "type": "birthday",
+      "title": "Heavy Johnson born",
+      "description": "Heavy Johnson, 13 MLB seasons (1920-1932).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 818753
+    },
+    {
+      "date": "04-20",
+      "year": 1946,
+      "type": "birthday",
+      "title": "Tom Hutton born",
+      "description": "Tom Hutton, 16 MLB seasons (1966-1981).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 116374
+    },
+    {
+      "date": "04-20",
+      "year": 1950,
+      "type": "birthday",
+      "title": "Milt Wilcox born",
+      "description": "Milt Wilcox, 17 MLB seasons (1970-1986).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 124253
+    },
+    {
+      "date": "04-20",
+      "year": 1961,
+      "type": "birthday",
+      "title": "Don Mattingly born",
+      "description": "Don Mattingly, 14 MLB seasons (1982-1995).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 118443
+    },
+    {
+      "date": "04-20",
+      "year": 1973,
+      "type": "birthday",
+      "title": "Todd Hollandsworth born",
+      "description": "Todd Hollandsworth, 12 MLB seasons (1995-2006).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 116075
+    },
+    {
+      "date": "04-20",
+      "year": 1988,
+      "type": "birthday",
+      "title": "Brandon Belt born",
+      "description": "Brandon Belt, 13 MLB seasons (2011-2023).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 474832
     }
   ]
 }
