@@ -3,159 +3,1382 @@
   "source": "Hand-curated queue of legends, moments, umpires, broadcasters, executives, and historical events for future addition to the Cardinals tab, History tab, or Stories dataset. Does NOT duplicate entries already in cardinals-links.json, historical-videos.json, stories.json, or on-this-day-seed.json.",
   "generatedAt": "2026-04-20",
   "note": "The weekly-batch GitHub Action (.github/workflows/weekly-batch.yml) pulls the next N entries with status='pending' each Monday and opens a review Issue. When an entry is approved and added to a main file, set status='active' and note the destination. Rejected entries become status='rejected'.",
-  "statusFlow": ["pending", "scheduled", "active", "rejected"],
+  "statusFlow": [
+    "pending",
+    "scheduled",
+    "active",
+    "rejected"
+  ],
   "priorityNote": "1=highest priority (featured material, iconic figures), 2=solid addition, 3=fill-in / deep-cut. Week selector favors lower numbers first, ties broken by id alphabetical for reproducibility.",
   "entries": [
-    {"id": "stl-mcgwire-mark",    "type": "legend",     "category": "cardinals",     "name": "Mark McGwire",            "summary": "1998 NL home run record chase — 70 HRs, broke Maris's 37-year record with #62 off Steve Trachsel at Busch Stadium on Sep 8.", "priority": 1, "status": "pending"},
-    {"id": "stl-mcgee-willie",    "type": "legend",     "category": "cardinals",     "name": "Willie McGee",            "summary": "1985 NL MVP. Two-time batting champion. Beloved Cardinals outfielder across three tours with the team.",                       "priority": 1, "status": "pending"},
-    {"id": "stl-edmonds-jim",     "type": "legend",     "category": "cardinals",     "name": "Jim Edmonds",             "summary": "Eight Gold Gloves in center field. Iconic diving catches. Key bat on 2004 pennant and 2006 World Series champion.",           "priority": 2, "status": "pending"},
-    {"id": "stl-carpenter-chris", "type": "legend",     "category": "cardinals",     "name": "Chris Carpenter",         "summary": "2005 NL Cy Young. Ace of the 2006 and 2011 World Series champions; threw the decisive Game 5 of the 2011 NLDS on three days rest.", "priority": 2, "status": "pending"},
-    {"id": "stl-wainwright-adam", "type": "legend",     "category": "cardinals",     "name": "Adam Wainwright",         "summary": "18-year Cardinal (2005-2023). Threw the curveball that struck out Carlos Beltran to end the 2006 NLCS. 200 career wins. Molina's longtime battery partner.", "priority": 1, "status": "pending"},
-    {"id": "stl-buck-jack",       "type": "broadcaster","category": "cardinals",     "name": "Jack Buck",               "summary": "Voice of the Cardinals for 47 years. Coined 'Go crazy, folks, go crazy!' for Ozzie Smith's 1985 NLCS walk-off. Ford C. Frick Award 1987.", "priority": 1, "status": "pending"},
-    {"id": "stl-boyer-ken",       "type": "legend",     "category": "cardinals",     "name": "Ken Boyer",               "summary": "1964 NL MVP and 1964 World Series champion. Retired #14. Captain of the Cardinals during their return to glory.",              "priority": 2, "status": "pending"},
-    {"id": "stl-flood-curt",      "type": "legend",     "category": "cardinals",     "name": "Curt Flood",              "summary": "Challenged MLB's reserve clause in 1969 after being traded; his lawsuit (Flood v. Kuhn) paved the way for free agency. Seven Gold Gloves in CF for the Cardinals.", "priority": 1, "status": "pending"},
-    {"id": "stl-freese-david",    "type": "legend",     "category": "cardinals",     "name": "David Freese",            "summary": "2011 NLCS and World Series MVP. Hit the walk-off HR in Game 6 of the 2011 World Series — twice rallying the Cardinals from their final strike.", "priority": 1, "status": "pending"},
-    {"id": "stl-hernandez-keith", "type": "legend",     "category": "cardinals",     "name": "Keith Hernandez",         "summary": "1979 NL co-MVP. Eleven straight Gold Gloves at first base (several with STL). Key piece of the 1982 World Series champion.", "priority": 2, "status": "pending"},
-    {"id": "stl-herr-tommy",      "type": "legend",     "category": "cardinals",     "name": "Tommy Herr",              "summary": "Second baseman on the 1982 WS champion and 1985 and 1987 pennant winners. 110 RBIs in 1985 — remarkable for a non-power hitter (only 8 HRs).", "priority": 3, "status": "pending"},
-    {"id": "stl-forsch-bob",      "type": "legend",     "category": "cardinals",     "name": "Bob Forsch",              "summary": "Two no-hitters for the Cardinals (1978, 1983). 15-year Cardinal. Brother of Phillies/Astros pitcher Ken Forsch.",              "priority": 3, "status": "pending"},
-    {"id": "stl-ankiel-rick",     "type": "legend",     "category": "cardinals",     "name": "Rick Ankiel",             "summary": "Rare pitcher-to-outfielder conversion. Top pitching prospect whose control vanished in the 2000 NLDS; returned to MLB years later as a power-hitting OF.", "priority": 2, "status": "pending"},
-    {"id": "stl-tudor-john",      "type": "legend",     "category": "cardinals",     "name": "John Tudor",              "summary": "1985 season for the ages: 21-8 with 10 shutouts and 1.93 ERA — finished second to Doc Gooden in Cy Young voting.",             "priority": 2, "status": "pending"},
-    {"id": "stl-lankford-ray",    "type": "legend",     "category": "cardinals",     "name": "Ray Lankford",            "summary": "One of the best all-around Cardinals outfielders of the 1990s. Ranks high on franchise leaderboards in HRs, extra-base hits, and stolen bases.", "priority": 3, "status": "pending"},
-    {"id": "stl-holliday-matt",   "type": "legend",     "category": "cardinals",     "name": "Matt Holliday",           "summary": "2009 trade acquisition who signed long-term. Batted in the middle of the order through the 2011 World Series title run.",      "priority": 3, "status": "pending"},
-    {"id": "stl-goldschmidt-paul","type": "legend",     "category": "cardinals",     "name": "Paul Goldschmidt",        "summary": "2022 NL MVP. Seven-time All-Star first baseman. Anchored the Cardinals' lineup since the 2019 trade from Arizona.",            "priority": 2, "status": "pending"},
-    {"id": "stl-arenado-nolan",   "type": "legend",     "category": "cardinals",     "name": "Nolan Arenado",           "summary": "Ten Gold Gloves at third base and counting. Acquired from Colorado in 2021. 10-time All-Star.",                                "priority": 2, "status": "pending"},
-    {"id": "stl-worrell-todd",    "type": "legend",     "category": "cardinals",     "name": "Todd Worrell",            "summary": "1986 NL Rookie of the Year. Closer for the 1985 and 1987 pennant winners. Three-time All-Star.",                              "priority": 3, "status": "pending"},
-    {"id": "stl-smith-lee",       "type": "legend",     "category": "cardinals",     "name": "Lee Smith",               "summary": "Dominant closer during his 1990-93 Cardinals run. Hall of Fame 2019 (Veterans Committee). 478 career saves.",                 "priority": 3, "status": "pending"},
-    {"id": "stl-cepeda-orlando",  "type": "legend",     "category": "cardinals",     "name": "Orlando Cepeda",          "summary": "1967 NL MVP with the pennant-winning Cardinals — first unanimous selection in NL history at that point. Hall of Fame 1999.",   "priority": 2, "status": "pending"},
-    {"id": "stl-rolen-scott",     "type": "legend",     "category": "cardinals",     "name": "Scott Rolen",             "summary": "Third baseman on the 2006 World Series champion. Eight Gold Gloves overall. Hall of Fame 2023.",                              "priority": 2, "status": "pending"},
-    {"id": "stl-martin-pepper",   "type": "legend",     "category": "cardinals",     "name": "Pepper Martin",           "summary": "Gas House Gang leadoff man and face of the 1934 champions. Stole home in the 1931 World Series. Three-time All-Star.",        "priority": 2, "status": "pending"},
-    {"id": "stl-medwick-joe",     "type": "legend",     "category": "cardinals",     "name": "Joe Medwick",             "summary": "1937 NL Triple Crown and MVP — the last NL Triple Crown winner until 2012. Ejected from Game 7 of the 1934 WS for his own safety after Tigers fans threw fruit at him. HOF 1968.", "priority": 1, "status": "pending"},
-    {"id": "stl-coleman-vince",   "type": "legend",     "category": "cardinals",     "name": "Vince Coleman",           "summary": "Led the NL in stolen bases his first six seasons (1985-1990). 752 career steals. Infamous 1985 tarp-accident injury during the NLCS.", "priority": 3, "status": "pending"},
-    {"id": "stl-renteria-edgar",  "type": "legend",     "category": "cardinals",     "name": "Edgar Renteria",          "summary": "Shortstop on the 2004 pennant winner and 2006 WS champion. Two-time Gold Glove with the Cardinals.",                           "priority": 3, "status": "pending"},
-    {"id": "stl-carpenter-matt",  "type": "legend",     "category": "cardinals",     "name": "Matt Carpenter",          "summary": "Three-time All-Star during his Cardinals prime (2013-2019). Led the NL in runs, hits, and doubles in 2013.",                    "priority": 3, "status": "pending"},
-    {"id": "stl-isringhausen",    "type": "legend",     "category": "cardinals",     "name": "Jason Isringhausen",      "summary": "300 career saves, most in Cardinals franchise history at the time of his departure. Anchor of the 2006 WS champion bullpen.", "priority": 3, "status": "pending"},
-    {"id": "stl-berkman-lance",   "type": "legend",     "category": "cardinals",     "name": "Lance Berkman",           "summary": "2011 World Series MVP runner-up. Tied David Freese's Game 6 rally with a two-out, two-strike single in the 10th.",            "priority": 2, "status": "pending"},
-    {"id": "stl-shannon-mike",    "type": "legend",     "category": "cardinals",     "name": "Mike Shannon",            "summary": "Played for the 1964 and 1967 WS champions as a third baseman/OF, then 50+ years broadcasting the Cardinals. Ford C. Frick Award 2021.", "priority": 2, "status": "pending"},
-    {"id": "stl-caray-harry",     "type": "broadcaster","category": "cardinals",     "name": "Harry Caray",             "summary": "Voice of the Cardinals 1945-1969 before his later Cubs tenure. Ford C. Frick Award 1989.",                                    "priority": 2, "status": "pending"},
-    {"id": "stl-hendrick-george", "type": "legend",     "category": "cardinals",     "name": "George Hendrick",         "summary": "Known as Silent George. Drove in the run that clinched the 1982 World Series. Four-time All-Star.",                          "priority": 3, "status": "pending"},
-    {"id": "stl-vanslyke-andy",  "type": "legend",     "category": "cardinals",     "name": "Andy Van Slyke",           "summary": "Standout defensive outfielder on the 1982 WS champion. Later starred for Pittsburgh after the Tony Pena trade.",              "priority": 3, "status": "pending"},
-    {"id": "stl-mcbride-bake",    "type": "legend",     "category": "cardinals",     "name": "Bake McBride",            "summary": "1974 NL Rookie of the Year. Played on the 1974 Cardinals who finished 2nd in the NL East with 86 wins.",                     "priority": 3, "status": "pending"},
-    {"id": "stl-smith-reggie",    "type": "legend",     "category": "cardinals",     "name": "Reggie Smith",            "summary": "Switch-hitting OF. Two seasons with the Cardinals (1974-1975) between his Red Sox and Dodgers years. Seven-time All-Star.",    "priority": 3, "status": "pending"},
-    {"id": "stl-tenace-gene",     "type": "legend",     "category": "cardinals",     "name": "Gene Tenace",             "summary": "1972 World Series MVP with Oakland. Spent 1981-1982 with the Cardinals, winning a second ring in 1982.",                      "priority": 3, "status": "pending"},
-    {"id": "stl-andujar-joaquin", "type": "legend",     "category": "cardinals",     "name": "Joaquín Andújar",         "summary": "Three-time All-Star pitcher. Ace of the 1982 and 1985 Cardinals. Won Games 3 and 7 of the 1982 World Series.",                "priority": 3, "status": "pending"},
-    {"id": "stl-m-1926-alexander","type": "moment",     "category": "cardinals",     "name": "1926 WS Game 7 — Alexander strikes out Lazzeri", "summary": "Grover Cleveland Alexander, pulled from the rotation for relief duty, fanned Tony Lazzeri with the bases loaded in the 7th inning of Game 7 to preserve the Cardinals' first title.", "priority": 1, "status": "pending"},
-    {"id": "stl-m-1944-streetcar","type": "moment",     "category": "cardinals",     "name": "1944 Streetcar Series",   "summary": "The Cardinals beat the St. Louis Browns in the only all-St. Louis World Series, played entirely at Sportsman's Park during WWII.", "priority": 2, "status": "pending"},
-    {"id": "stl-m-1982-sutter-out","type": "moment",    "category": "cardinals",     "name": "1982 WS — Sutter's final out", "summary": "Bruce Sutter froze Gorman Thomas with a split-finger fastball for the final out of the 1982 World Series, giving the Cardinals their first title in 15 years.", "priority": 1, "status": "pending"},
-    {"id": "stl-m-1985-denkinger","type": "moment",     "category": "cardinals",     "name": "1985 WS Game 6 — The Denkinger Call", "summary": "Umpire Don Denkinger called Jorge Orta safe at first in the 9th inning of Game 6 with the Cardinals one out from the title. The Royals rallied, won Game 6, and took Game 7.", "priority": 1, "status": "pending"},
-    {"id": "stl-m-2006-ws-eckstein","type": "moment",   "category": "cardinals",     "name": "2006 WS — Eckstein MVP",  "summary": "5'7\" shortstop David Eckstein won World Series MVP, going 8-for-22 with three doubles as the Cardinals beat Detroit in 5.",  "priority": 2, "status": "pending"},
-    {"id": "stl-m-2011-rally-sq",  "type": "moment",    "category": "cardinals",     "name": "2011 NLDS — The Rally Squirrel", "summary": "During Game 4 of the 2011 NLDS at Busch Stadium, a squirrel ran across home plate during a pitch. It returned for Game 5 and became the unofficial mascot of the championship run.", "priority": 2, "status": "pending"},
-    {"id": "stl-m-2011-ws-freese","type": "moment",     "category": "cardinals",     "name": "2011 WS Game 6 — Freese walk-off", "summary": "Down to their final strike twice, the Cardinals rallied against Texas. David Freese tripled to tie it in the 9th, then walked it off with a HR in the 11th. Game 7 won the next night.", "priority": 1, "status": "pending"},
-    {"id": "stl-m-1985-go-crazy", "type": "moment",     "category": "cardinals",     "name": "Ozzie Smith's 1985 NLCS walk-off", "summary": "Smith's first career left-handed HR won Game 5 of the 1985 NLCS vs. the Dodgers, prompting Jack Buck's famous 'Go crazy, folks!' call.", "priority": 1, "status": "pending"},
-    {"id": "gen-ruth-babe",       "type": "legend",     "category": "general",       "name": "Babe Ruth",               "summary": "714 career HR. Seven-time World Series champion (3 with Red Sox as a pitcher, 4 with Yankees). First-ever Hall of Fame class, 1936. Arguably the most consequential figure in baseball history.", "priority": 1, "status": "pending"},
-    {"id": "gen-cobb-ty",         "type": "legend",     "category": "general",       "name": "Ty Cobb",                 "summary": "Career .366 batting average — highest in MLB history. 4,189 hits (2nd all-time). First player elected to the Hall of Fame (1936, with Ruth).", "priority": 1, "status": "pending"},
-    {"id": "gen-wagner-honus",    "type": "legend",     "category": "general",       "name": "Honus Wagner",            "summary": "Eight-time NL batting champion, all with Pittsburgh. First-ballot Hall of Famer (1936). His T206 tobacco card is the most valuable baseball card in existence.", "priority": 1, "status": "pending"},
-    {"id": "gen-mathewson",       "type": "legend",     "category": "general",       "name": "Christy Mathewson",       "summary": "373 career wins (T-3rd all-time). Threw three shutouts in the 1905 World Series. WWI veteran — damaged lungs from accidental mustard gas exposure hastened his death at 45. HOF 1936.", "priority": 1, "status": "pending"},
-    {"id": "gen-johnson-walter",  "type": "legend",     "category": "general",       "name": "Walter Johnson",          "summary": "417 career wins (2nd all-time). 110 career shutouts — still the MLB record. 21 seasons with the Washington Senators. HOF 1936.", "priority": 1, "status": "pending"},
-    {"id": "gen-gehrig-lou",      "type": "legend",     "category": "general",       "name": "Lou Gehrig",              "summary": "'The Iron Horse.' 2,130 consecutive games. Seven-time WS champion with the Yankees. ALS forced retirement in 1939 — his 'luckiest man' speech is one of the most famous in sports history.", "priority": 1, "status": "pending"},
-    {"id": "gen-dimaggio-joe",    "type": "legend",     "category": "general",       "name": "Joe DiMaggio",            "summary": "56-game hitting streak in 1941 — still the MLB record. Three-time MVP. Nine-time WS champion. WWII veteran.",                   "priority": 1, "status": "pending"},
-    {"id": "gen-williams-ted",    "type": "legend",     "category": "general",       "name": "Ted Williams",            "summary": "Last player to hit .400 (.406 in 1941). Two-time MVP. Two Triple Crowns. Marine pilot in WWII and Korea (missed ~5 seasons total).", "priority": 1, "status": "pending"},
-    {"id": "gen-mantle-mickey",   "type": "legend",     "category": "general",       "name": "Mickey Mantle",           "summary": "Three-time AL MVP. 1956 Triple Crown. Seven-time WS champion. 18 career WS home runs is still the record.",                     "priority": 1, "status": "pending"},
-    {"id": "gen-berra-yogi",      "type": "legend",     "category": "general",       "name": "Yogi Berra",              "summary": "Three-time AL MVP. 10 World Series rings as a player — most in MLB history. Later managed the Yankees and Mets to pennants. D-Day veteran.", "priority": 1, "status": "pending"},
-    {"id": "gen-koufax-sandy",    "type": "legend",     "category": "general",       "name": "Sandy Koufax",            "summary": "Four no-hitters including a perfect game (1965). Three Cy Youngs (first three ever). Retired at 30 due to elbow arthritis. HOF 1972 at 36 — youngest ever.", "priority": 1, "status": "pending"},
-    {"id": "gen-clemente-roberto","type": "legend",     "category": "general",       "name": "Roberto Clemente",        "summary": "First Latin American Hall of Famer (1973 — five-year wait waived after his death delivering earthquake aid to Nicaragua). 1966 NL MVP. 3,000 career hits.", "priority": 1, "status": "pending"},
-    {"id": "gen-robinson-frank",  "type": "legend",     "category": "general",       "name": "Frank Robinson",          "summary": "Only player to win MVP in both leagues (NL 1961 Cincinnati, AL 1966 Baltimore Triple Crown). First Black MLB manager (1975, Cleveland).", "priority": 1, "status": "pending"},
-    {"id": "gen-mccovey-willie",  "type": "legend",     "category": "general",       "name": "Willie McCovey",          "summary": "1969 NL MVP. 521 career HR. Six-time All-Star first baseman for the Giants. HOF 1986.",                                       "priority": 2, "status": "pending"},
-    {"id": "gen-ryan-nolan",      "type": "legend",     "category": "general",       "name": "Nolan Ryan",              "summary": "5,714 career strikeouts — still the MLB record by nearly 850. Seven no-hitters (also a record). 27-year career across four teams.", "priority": 1, "status": "pending"},
-    {"id": "gen-seaver-tom",      "type": "legend",     "category": "general",       "name": "Tom Seaver",              "summary": "Three-time Cy Young. 311 career wins. Led the 1969 Miracle Mets to the World Series title. HOF 1992 with 98.8% of the vote (a record at the time).", "priority": 1, "status": "pending"},
-    {"id": "gen-campanella-roy",  "type": "legend",     "category": "general",       "name": "Roy Campanella",          "summary": "Three-time NL MVP Brooklyn Dodgers catcher. Career cut short by a 1958 car accident that paralyzed him. HOF 1969.",             "priority": 2, "status": "pending"},
-    {"id": "gen-drysdale-don",    "type": "legend",     "category": "general",       "name": "Don Drysdale",            "summary": "1962 Cy Young. Set the MLB consecutive-scoreless-innings record at 58 2/3 in 1968 (broken by Hershiser in 1988).",            "priority": 2, "status": "pending"},
-    {"id": "gen-jackson-reggie",  "type": "legend",     "category": "general",       "name": "Reggie Jackson",          "summary": "'Mr. October.' Three HRs on three pitches in Game 6 of the 1977 World Series. Five WS rings across three teams. HOF 1993.",    "priority": 1, "status": "pending"},
-    {"id": "gen-brett-george",    "type": "legend",     "category": "general",       "name": "George Brett",            "summary": "1980 AL MVP (.390 batting average that season). 13-time All-Star. Pine Tar Incident of 1983 became one of the most famous umpire disputes ever.", "priority": 1, "status": "pending"},
-    {"id": "gen-gwynn-tony",      "type": "legend",     "category": "general",       "name": "Tony Gwynn",              "summary": "Eight NL batting titles. Career .338 average. 3,141 career hits — all with the Padres across 20 seasons. HOF 2007.",           "priority": 1, "status": "pending"},
-    {"id": "gen-henderson-rickey","type": "legend",     "category": "general",       "name": "Rickey Henderson",        "summary": "1,406 career stolen bases — most in MLB history by nearly 500. 2,295 runs scored, also the all-time record. 1990 AL MVP.",     "priority": 1, "status": "pending"},
-    {"id": "gen-griffey-ken",     "type": "legend",     "category": "general",       "name": "Ken Griffey Jr.",         "summary": "1997 AL MVP. 630 career HRs. 10 Gold Gloves in center field. Hall of Fame 2016 with 99.3% — a record at the time.",            "priority": 1, "status": "pending"},
-    {"id": "gen-jeter-derek",     "type": "legend",     "category": "general",       "name": "Derek Jeter",             "summary": "Captain of five Yankees championship teams. 3,465 career hits (6th all-time). Hall of Fame 2020 (unanimous but one voter).",   "priority": 1, "status": "pending"},
-    {"id": "gen-johnson-randy",   "type": "legend",     "category": "general",       "name": "Randy Johnson",           "summary": "Five Cy Youngs. Perfect game in 2004 at age 40 — oldest ever. 303 career wins. Co-MVP of the 2001 World Series.",              "priority": 1, "status": "pending"},
-    {"id": "gen-martinez-pedro",  "type": "legend",     "category": "general",       "name": "Pedro Martínez",          "summary": "Three Cy Youngs. Historic 1999-2000 Boston seasons (ERA+ of 291 and 243 — among the best two-year runs ever). HOF 2015.",      "priority": 1, "status": "pending"},
-    {"id": "gen-maddux-greg",     "type": "legend",     "category": "general",       "name": "Greg Maddux",             "summary": "Four consecutive Cy Youngs (1992-95). 355 career wins. 18 Gold Gloves. Master of movement and command.",                     "priority": 1, "status": "pending"},
-    {"id": "gen-ortiz-david",     "type": "legend",     "category": "general",       "name": "David Ortiz",             "summary": "'Big Papi.' Three-time World Series champion with the Red Sox. Key figure in ending the 86-year curse (2004). 541 career HRs.","priority": 1, "status": "pending"},
-    {"id": "gen-jones-chipper",   "type": "legend",     "category": "general",       "name": "Chipper Jones",           "summary": "1999 NL MVP. 19-year Brave. Switch-hitter with a career .303 average. 2018 first-ballot Hall of Famer.",                      "priority": 1, "status": "pending"},
-    {"id": "gen-suzuki-ichiro",   "type": "legend",     "category": "general",       "name": "Ichiro Suzuki",           "summary": "2001 AL MVP and Rookie of the Year. 257 hits in 2004 — single-season MLB record. 4,367 combined hits (Japan + MLB).",           "priority": 1, "status": "pending"},
-    {"id": "gen-rose-pete",       "type": "legend",     "category": "general",       "name": "Pete Rose",               "summary": "4,256 career hits — the all-time record. 1973 NL MVP. Banned from baseball in 1989 for gambling on games as a manager.",        "priority": 1, "status": "pending"},
-    {"id": "gen-bench-johnny",    "type": "legend",     "category": "general",       "name": "Johnny Bench",            "summary": "Two-time NL MVP. 10 Gold Gloves behind the plate. Widely considered the greatest catcher of all time. Big Red Machine's backbone.", "priority": 1, "status": "pending"},
-    {"id": "gen-morgan-joe",      "type": "legend",     "category": "general",       "name": "Joe Morgan",              "summary": "Back-to-back NL MVPs 1975-76 with the Big Red Machine. Five Gold Gloves at second base. Longtime ESPN broadcaster.",           "priority": 2, "status": "pending"},
-    {"id": "gen-yastrzemski",     "type": "legend",     "category": "general",       "name": "Carl Yastrzemski",        "summary": "1967 Triple Crown and AL MVP. Last player to win a Triple Crown until 2012. 23-year Red Sox.",                                 "priority": 1, "status": "pending"},
-    {"id": "gen-ford-whitey",     "type": "legend",     "category": "general",       "name": "Whitey Ford",             "summary": "'The Chairman of the Board.' Six-time WS champion Yankees ace. 1961 Cy Young. Career 2.75 ERA.",                                 "priority": 2, "status": "pending"},
-    {"id": "gen-fingers-rollie",  "type": "legend",     "category": "general",       "name": "Rollie Fingers",          "summary": "1981 AL Cy Young and MVP. Iconic handlebar mustache. First reliever to reach 300 saves. Three WS rings with Oakland.",         "priority": 2, "status": "pending"},
-    {"id": "gen-eckersley-dennis","type": "legend",     "category": "general",       "name": "Dennis Eckersley",        "summary": "Starter-turned-closer transition defined the modern role. 1992 AL Cy Young and MVP as a reliever. 390 career saves.",           "priority": 2, "status": "pending"},
-    {"id": "gen-hoffman-trevor",  "type": "legend",     "category": "general",       "name": "Trevor Hoffman",          "summary": "601 career saves. His 'Hells Bells' entrance in San Diego remains one of the most memorable in MLB. HOF 2018.",                  "priority": 2, "status": "pending"},
-    {"id": "gen-biggio-craig",    "type": "legend",     "category": "general",       "name": "Craig Biggio",            "summary": "3,060 career hits — all with the Astros. Played catcher, second base, and outfield at All-Star level. HOF 2015.",               "priority": 2, "status": "pending"},
-    {"id": "gen-bagwell-jeff",    "type": "legend",     "category": "general",       "name": "Jeff Bagwell",            "summary": "1994 NL MVP. Long-tenured Astro first baseman. Retired 3rd all-time among Astros in games played. HOF 2017.",                 "priority": 2, "status": "pending"},
-    {"id": "gen-puckett-kirby",   "type": "legend",     "category": "general",       "name": "Kirby Puckett",           "summary": "Minnesota Twin for his entire 12-year career. Clutch HR in Game 6 of the 1991 World Series. Career ended abruptly by glaucoma. HOF 2001.", "priority": 2, "status": "pending"},
-    {"id": "gen-murray-eddie",    "type": "legend",     "category": "general",       "name": "Eddie Murray",            "summary": "Switch-hitting first baseman. One of only six players with 3,000 hits and 500 HRs. HOF 2003.",                                "priority": 2, "status": "pending"},
-    {"id": "ngl-gibson-josh",     "type": "legend",     "category": "negro-leagues", "name": "Josh Gibson",             "summary": "Widely considered the greatest catcher of all time. Negro Leagues career batting average reported above .370. MLB officially recognized his NL stats in 2020. Died at 35 in 1947, months before Jackie Robinson's debut.", "priority": 1, "status": "pending"},
-    {"id": "ngl-charleston-oscar","type": "legend",     "category": "negro-leagues", "name": "Oscar Charleston",        "summary": "Widely considered the greatest all-around Negro Leagues player. Bill James ranked him among the 10 best players ever. HOF 1976.",    "priority": 1, "status": "pending"},
-    {"id": "ngl-bell-cool-papa",  "type": "legend",     "category": "negro-leagues", "name": "Cool Papa Bell",          "summary": "Famed for his speed — Satchel Paige said he was 'so fast he could turn off the light and be in bed before the room got dark.' HOF 1974.", "priority": 1, "status": "pending"},
-    {"id": "ngl-oneil-buck",      "type": "legend",     "category": "negro-leagues", "name": "Buck O'Neil",             "summary": "Kansas City Monarchs first baseman. First Black coach in MLB (Cubs, 1962). Tireless Negro Leagues historian and ambassador. Posthumous HOF 2022.", "priority": 1, "status": "pending"},
-    {"id": "ngl-foster-rube",     "type": "legend",     "category": "negro-leagues", "name": "Rube Foster",             "summary": "'The Father of Black Baseball.' Founded the first successful Negro National League in 1920. HOF 1981.",                       "priority": 2, "status": "pending"},
-    {"id": "ngl-williams-smokey", "type": "legend",     "category": "negro-leagues", "name": "Smokey Joe Williams",     "summary": "Pre-Negro Leagues pitcher (1910s-20s) who reportedly beat barnstorming Ty Cobb-led teams. HOF 1999.",                         "priority": 2, "status": "pending"},
-    {"id": "ngl-lloyd-pop",       "type": "legend",     "category": "negro-leagues", "name": "Pop Lloyd",               "summary": "Shortstop compared favorably to Honus Wagner in his prime. Deadball era Negro Leagues great. HOF 1977.",                      "priority": 2, "status": "pending"},
-    {"id": "ngl-dihigo-martin",   "type": "legend",     "category": "negro-leagues", "name": "Martín Dihigo",           "summary": "Cuban-born two-way star who played every position. Member of Cuban, Mexican, Dominican, Venezuelan, and American halls of fame. MLB HOF 1977.", "priority": 2, "status": "pending"},
-    {"id": "ump-klem-bill",       "type": "umpire",     "category": "umpires",       "name": "Bill Klem",               "summary": "'The Old Arbitrator.' 36-year NL umpire. Invented the umpire's arm signals that are still used today. HOF 1953.",              "priority": 2, "status": "pending"},
-    {"id": "ump-chylak-nestor",   "type": "umpire",     "category": "umpires",       "name": "Nestor Chylak",           "summary": "AL umpire 1954-1978. WWII Bronze Star and Purple Heart at the Battle of the Bulge. HOF 1999.",                                 "priority": 2, "status": "pending"},
-    {"id": "ump-barlick-al",      "type": "umpire",     "category": "umpires",       "name": "Al Barlick",              "summary": "28-year NL umpire. Worked seven World Series. HOF 1989. Known for his booming strike call.",                                 "priority": 3, "status": "pending"},
-    {"id": "brd-scully-vin",      "type": "broadcaster","category": "broadcasters",  "name": "Vin Scully",              "summary": "Voice of the Dodgers 1950-2016 — 67 seasons. Called Hank Aaron's 715th, Koufax's perfect game, Gibson's 1988 walk-off. Ford C. Frick Award 1982.", "priority": 1, "status": "pending"},
-    {"id": "brd-harwell-ernie",  "type": "broadcaster","category": "broadcasters",  "name": "Ernie Harwell",            "summary": "Voice of the Detroit Tigers for 42 years. Known for his poetic phrasing. Ford C. Frick Award 1981.",                         "priority": 2, "status": "pending"},
-    {"id": "brd-uecker-bob",      "type": "broadcaster","category": "broadcasters",  "name": "Bob Uecker",              "summary": "'Mr. Baseball.' Brewers broadcaster since 1971. Brief playing career, including with the 1964 Cardinals WS champions. Ford C. Frick Award 2003.", "priority": 2, "status": "pending"},
-    {"id": "brd-allen-mel",       "type": "broadcaster","category": "broadcasters",  "name": "Mel Allen",               "summary": "'The Voice of the Yankees' from 1940s-60s. First Ford C. Frick Award recipient (1978, tied with Red Barber).",                 "priority": 2, "status": "pending"},
-    {"id": "brd-barber-red",      "type": "broadcaster","category": "broadcasters",  "name": "Red Barber",              "summary": "Brooklyn Dodgers radio announcer 1939-1953. Called Jackie Robinson's debut. Known for Southern phrasing like 'sittin' in the catbird seat.'", "priority": 2, "status": "pending"},
-    {"id": "brd-miller-jon",      "type": "broadcaster","category": "broadcasters",  "name": "Jon Miller",              "summary": "Giants lead broadcaster since 1997. ESPN Sunday Night Baseball voice 1990-2010. Ford C. Frick Award 2010.",                   "priority": 3, "status": "pending"},
-    {"id": "brd-rizzuto-phil",    "type": "broadcaster","category": "broadcasters",  "name": "Phil Rizzuto",            "summary": "Yankees shortstop (1941-56, missed WWII) turned broadcaster (1957-1996). 'Holy cow!' catchphrase. Ford C. Frick 1994.",        "priority": 3, "status": "pending"},
-    {"id": "cch-mack-connie",     "type": "coach",      "category": "coaches",       "name": "Connie Mack",             "summary": "Managed the Philadelphia Athletics for 50 seasons (1901-1950). 3,731 career wins — the all-time record, likely never to be broken.", "priority": 1, "status": "pending"},
-    {"id": "cch-stengel-casey",   "type": "coach",      "category": "coaches",       "name": "Casey Stengel",           "summary": "Managed seven Yankees World Series champions (1949-1960). Also led the expansion 1962 Mets. Famously quotable. HOF 1966.",    "priority": 1, "status": "pending"},
-    {"id": "cch-anderson-sparky", "type": "coach",      "category": "coaches",       "name": "Sparky Anderson",         "summary": "First manager to win World Series in both leagues (Reds 1975-76, Tigers 1984). Big Red Machine architect. HOF 2000.",           "priority": 1, "status": "pending"},
-    {"id": "cch-weaver-earl",     "type": "coach",      "category": "coaches",       "name": "Earl Weaver",             "summary": "Baltimore manager 1968-82, 1985-86. Famous for his belief in 'pitching, defense, and the three-run homer.' Six division titles. HOF 1996.", "priority": 2, "status": "pending"},
-    {"id": "cch-lasorda-tommy",   "type": "coach",      "category": "coaches",       "name": "Tommy Lasorda",           "summary": "Dodgers manager 1976-96. Two World Series titles (1981, 1988). 'I bleed Dodger blue.' HOF 1997.",                              "priority": 2, "status": "pending"},
-    {"id": "cch-cox-bobby",       "type": "coach",      "category": "coaches",       "name": "Bobby Cox",               "summary": "Managed the Braves' 14 consecutive division titles run (1991-2005). 1995 World Series champion. HOF 2014.",                   "priority": 2, "status": "pending"},
-    {"id": "cch-torre-joe",      "type": "coach",      "category": "coaches",       "name": "Joe Torre",               "summary": "Four Yankees World Series titles as manager (1996, 1998-2000). 2,326 career wins. 1971 NL MVP as a player. HOF 2014.",        "priority": 2, "status": "pending"},
-    {"id": "cch-martin-billy",   "type": "coach",      "category": "coaches",       "name": "Billy Martin",             "summary": "Five stints as Yankees manager (1975-79, 1983, 1985, 1988). Fiery personality. 1977 World Series champion.",                   "priority": 3, "status": "pending"},
-    {"id": "cch-williams-dick",  "type": "coach",      "category": "coaches",       "name": "Dick Williams",            "summary": "Managed the Impossible Dream 1967 Red Sox, the Swingin' A's 1972-73 titles, and the 1984 NL champion Padres. HOF 2008.",        "priority": 3, "status": "pending"},
-    {"id": "cch-johnson-davey",  "type": "coach",      "category": "coaches",       "name": "Davey Johnson",            "summary": "Managed the 1986 Mets to a World Series title. Also led the Nationals to the 2012 NL East title.",                             "priority": 3, "status": "pending"},
-    {"id": "exc-rickey-branch",   "type": "executive",  "category": "executives",    "name": "Branch Rickey",           "summary": "Beyond signing Jackie Robinson: invented the modern farm system in St. Louis in the 1920s. Signed the first Venezuelan and Puerto Rican stars. HOF 1967.", "priority": 1, "status": "pending"},
-    {"id": "exc-veeck-bill",      "type": "executive",  "category": "executives",    "name": "Bill Veeck",              "summary": "Innovative owner (Indians, Browns, White Sox). Signed Larry Doby in 1947. Sent 3'7\" Eddie Gaedel to the plate in 1951. Invented the exploding scoreboard. HOF 1991.", "priority": 1, "status": "pending"},
-    {"id": "exc-miller-marvin",  "type": "executive",  "category": "executives",    "name": "Marvin Miller",            "summary": "MLBPA Executive Director 1966-83. Won free agency and ended the reserve clause. Transformed player rights more than any non-player in baseball history. HOF 2020.", "priority": 1, "status": "pending"},
-    {"id": "exc-giamatti-bart",  "type": "executive",  "category": "executives",    "name": "Bart Giamatti",            "summary": "Yale president turned MLB commissioner (1988-89). Banned Pete Rose for life. Died of a heart attack just days after the ban, age 51.",    "priority": 2, "status": "pending"},
-    {"id": "exc-kuhn-bowie",     "type": "executive",  "category": "executives",    "name": "Bowie Kuhn",                "summary": "MLB commissioner 1969-84. Oversaw the beginning of free agency and expansion. Suspended George Steinbrenner. HOF 2008.",             "priority": 3, "status": "pending"},
-    {"id": "exc-johnson-ban",    "type": "executive",  "category": "executives",    "name": "Ban Johnson",               "summary": "Founded the American League in 1901 as a major league. First AL president. Shaped early 20th-century baseball. HOF 1937.",             "priority": 2, "status": "pending"},
-    {"id": "exc-landis-kenesaw", "type": "executive",  "category": "executives",    "name": "Kenesaw Mountain Landis",    "summary": "First MLB commissioner (1920-44), appointed after the Black Sox scandal. Banned the eight White Sox players for life. HOF 1944.",     "priority": 1, "status": "pending"},
-    {"id": "mil-lewis-buddy",    "type": "story",      "category": "military",      "name": "Buddy Lewis",              "summary": "Two-time All-Star Senators outfielder. Flew 368 combat missions in the China-Burma-India theater as a C-47 pilot. Distinguished Flying Cross.", "priority": 2, "status": "pending"},
-    {"id": "mil-martin-morrie",  "type": "story",      "category": "military",      "name": "Morrie Martin",             "summary": "WWII infantryman. Shot twice, captured by the Germans, escaped, recaptured — shot at again during a Death March. Pitched 10 MLB seasons post-war.", "priority": 2, "status": "pending"},
-    {"id": "mil-musial-stan",    "type": "story",      "category": "military",      "name": "Stan Musial — Navy service", "summary": "Served in the Navy 1945 as a ship repairman in Hawaii, missing the 1945 season. Returned to win three MVPs in the next five years.",     "priority": 2, "status": "pending"},
-    {"id": "mil-rizzuto-phil",   "type": "story",      "category": "military",      "name": "Phil Rizzuto — Navy Pacific", "summary": "Lost three seasons (1943-45) in the Navy. Caught malaria in the Pacific. Returned to win 1950 AL MVP.",                                "priority": 3, "status": "pending"},
-    {"id": "mil-branca-ralph",   "type": "story",      "category": "military",      "name": "Ralph Branca — Army service", "summary": "Served in the Army between 1951 and 1952 seasons. Four years after giving up the Shot Heard 'Round the World, his military service bookended the most famous pitch of his life.", "priority": 3, "status": "pending"},
-    {"id": "mil-southworth-jr",  "type": "story",      "category": "military",      "name": "Billy Southworth Jr.",      "summary": "Son of Cardinals manager Billy Southworth. Minor leaguer who enlisted after Pearl Harbor. Killed February 15, 1945 when his B-29 crashed in Flushing Bay during a training flight.", "priority": 2, "status": "pending"},
-    {"id": "mmt-thomson-shot",   "type": "moment",     "category": "general",       "name": "The Shot Heard 'Round the World (Thomson 1951)", "summary": "Bobby Thomson's 3-run HR off Ralph Branca at the Polo Grounds won the NL pennant playoff for the Giants. Russ Hodges: 'The Giants win the pennant! The Giants win the pennant!'", "priority": 1, "status": "pending"},
-    {"id": "mmt-mazeroski-1960", "type": "moment",     "category": "general",       "name": "Bill Mazeroski 1960 WS walk-off", "summary": "Only walk-off HR in a World Series Game 7. Pirates over Yankees 10-9 to end the 1960 series. 9th inning, bottom of the inning, off Ralph Terry.", "priority": 1, "status": "pending"},
-    {"id": "mmt-larsen-1956",    "type": "moment",     "category": "general",       "name": "Don Larsen's perfect game 1956 WS", "summary": "Only perfect game in World Series history. Yankees' Larsen retired all 27 Brooklyn Dodgers in Game 5. Yogi Berra's leap into his arms is the iconic image.", "priority": 1, "status": "pending"},
-    {"id": "mmt-black-sox-1919", "type": "moment",     "category": "general",       "name": "1919 Black Sox scandal",     "summary": "Eight Chicago White Sox players banned for life for throwing the 1919 World Series to the Reds. Led to the creation of the MLB commissioner role.",     "priority": 1, "status": "pending"},
-    {"id": "mmt-pine-tar-1983",  "type": "moment",     "category": "general",       "name": "The Pine Tar Incident (Brett 1983)", "summary": "George Brett's HR off Goose Gossage was initially disallowed because pine tar on his bat extended beyond the legal limit. Brett's eruption from the dugout became iconic. AL president Lee MacPhail overturned the call; game resumed weeks later.", "priority": 1, "status": "pending"},
-    {"id": "mmt-buckner-1986",   "type": "moment",     "category": "general",       "name": "1986 WS Game 6 — Buckner's error", "summary": "Red Sox one out from ending the 68-year title drought; Mookie Wilson's grounder went through Bill Buckner's legs, scoring Ray Knight for a Mets win. Boston lost Game 7. The curse continued until 2004.", "priority": 1, "status": "pending"},
-    {"id": "mmt-murderers-row",  "type": "moment",     "category": "general",       "name": "1927 Yankees Murderers' Row", "summary": "110-44 record, widely considered the greatest team ever assembled. Ruth hit 60 HRs; Gehrig drove in 175. Swept the Pirates in the World Series.",     "priority": 2, "status": "pending"},
-    {"id": "mmt-red-sox-2004",   "type": "moment",     "category": "general",       "name": "2004 Red Sox ALCS comeback",  "summary": "Down 0-3 to the Yankees, Boston won four straight — the only 0-3 comeback in MLB postseason history — and went on to win the World Series, ending the 86-year curse.", "priority": 1, "status": "pending"},
-    {"id": "mmt-haddix-1959",    "type": "moment",     "category": "general",       "name": "Harvey Haddix 12 perfect innings", "summary": "May 26, 1959: Pirates' Haddix retired 36 straight Milwaukee Braves before an error in the 13th. Lost the game 1-0. Not officially a perfect game but one of the greatest pitching performances ever.", "priority": 2, "status": "pending"},
-    {"id": "mmt-kerry-wood-20k", "type": "moment",     "category": "general",       "name": "Kerry Wood's 20-strikeout game", "summary": "May 6, 1998: 20-year-old Cubs rookie struck out 20 Astros in 9 innings — tying the MLB record. He allowed one infield hit in a dominating performance.",  "priority": 2, "status": "pending"},
-    {"id": "mmt-abbott-no-hit",  "type": "moment",     "category": "general",       "name": "Jim Abbott's no-hitter",     "summary": "September 4, 1993: Yankees' Abbott — born without a right hand — no-hit the Indians 4-0. One of the most inspirational pitching performances in MLB history.", "priority": 2, "status": "pending"},
-    {"id": "mmt-rjohnson-2004",  "type": "moment",     "category": "general",       "name": "Randy Johnson's 2004 perfect game", "summary": "May 18, 2004: Diamondbacks' Johnson retired all 27 Braves at age 40 — the oldest ever to throw a perfect game.",                                 "priority": 2, "status": "pending"},
-    {"id": "mmt-ichiro-257",     "type": "moment",     "category": "general",       "name": "Ichiro 257-hit season (2004)", "summary": "Ichiro Suzuki's 2004 single-season MLB hit record. Broke George Sisler's 84-year-old mark of 257. Finished 7th in AL MVP voting.",                  "priority": 2, "status": "pending"},
-    {"id": "mmt-2002-angels-ws", "type": "moment",     "category": "general",       "name": "2002 Angels World Series",    "summary": "Wild card Angels came back from 5-0 down in Game 6 to beat the Giants. Salmon, Spiezio, Erstad, Glaus — the Rally Monkey era's championship.",       "priority": 3, "status": "pending"},
-    {"id": "mmt-subway-series",  "type": "moment",     "category": "general",       "name": "2000 Subway Series",         "summary": "First Yankees vs Mets World Series since the subway-era NY teams. Yankees won in 5. Iconic Game 2 moment: Clemens throwing the broken bat at Piazza.", "priority": 3, "status": "pending"},
-    {"id": "mmt-big-red-machine","type": "moment",     "category": "general",       "name": "Big Red Machine 1975-76",     "summary": "Back-to-back World Series titles for Cincinnati. Rose, Morgan, Bench, Perez, Foster, Griffey Sr., Concepcion. One of the greatest teams ever assembled.", "priority": 2, "status": "pending"},
-    {"id": "mmt-1984-tigers",    "type": "moment",     "category": "general",       "name": "1984 Tigers start 35-5",      "summary": "The Tigers started 35-5 and never looked back en route to a 104-win season and a World Series win over the Padres.",                                "priority": 3, "status": "pending"},
-    {"id": "mmt-1993-phillies",  "type": "moment",     "category": "general",       "name": "1993 Phillies and Carter HR", "summary": "Joe Carter's walk-off 3-run HR off Mitch Williams in Game 6 clinched back-to-back titles for Toronto and ended Philadelphia's upstart run.",         "priority": 3, "status": "pending"},
-    {"id": "mmt-77-78-yankees",  "type": "moment",     "category": "general",       "name": "1977-78 Yankees dynasty",     "summary": "Back-to-back World Series over the Dodgers. 'The Bronx Zoo' era: Reggie, Munson, Billy Martin, George Steinbrenner, chaos and championships.",     "priority": 3, "status": "pending"},
-    {"id": "mmt-1968-year-pitch","type": "moment",     "category": "general",       "name": "1968 — The Year of the Pitcher", "summary": "Gibson 1.12 ERA, McLain 31 wins, Yaz batted title at .301 (lowest ever). Mound was lowered and strike zone shrunk the following year in response.", "priority": 2, "status": "pending"},
-    {"id": "mmt-guidry-1978",    "type": "moment",     "category": "general",       "name": "Ron Guidry's 1978",          "summary": "25-3, 1.74 ERA, 9 shutouts, 248 K. One of the greatest single-season pitching performances ever. AL Cy Young. Yankees won the World Series.",         "priority": 3, "status": "pending"},
-    {"id": "mmt-doc-gooden",     "type": "moment",     "category": "general",       "name": "Doc Gooden's 1984-85",       "summary": "1984 NL Rookie of the Year at 19. 1985 Cy Young at 20: 24-4, 1.53 ERA, 268 K. Among the most dominant consecutive seasons by a young pitcher.",       "priority": 3, "status": "pending"},
-    {"id": "mmt-fidrych-1976",   "type": "moment",     "category": "general",       "name": "Mark 'The Bird' Fidrych 1976", "summary": "Tigers rookie's cultural phenomenon: talking to baseballs, patting down the mound. AL Rookie of the Year. Injuries ended his career 2 years later.", "priority": 3, "status": "pending"}
+    {
+      "id": "stl-mcgwire-mark",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Mark McGwire",
+      "summary": "1998 NL home run record chase — 70 HRs, broke Maris's 37-year record with #62 off Steve Trachsel at Busch Stadium on Sep 8.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-mcgee-willie",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Willie McGee",
+      "summary": "1985 NL MVP. Two-time batting champion. Beloved Cardinals outfielder across three tours with the team.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-edmonds-jim",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Jim Edmonds",
+      "summary": "Eight Gold Gloves in center field. Iconic diving catches. Key bat on 2004 pennant and 2006 World Series champion.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-carpenter-chris",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Chris Carpenter",
+      "summary": "2005 NL Cy Young. Ace of the 2006 and 2011 World Series champions; threw the decisive Game 5 of the 2011 NLDS on three days rest.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-wainwright-adam",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Adam Wainwright",
+      "summary": "18-year Cardinal (2005-2023). Threw the curveball that struck out Carlos Beltran to end the 2006 NLCS. 200 career wins. Molina's longtime battery partner.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-buck-jack",
+      "type": "broadcaster",
+      "category": "cardinals",
+      "name": "Jack Buck",
+      "summary": "Voice of the Cardinals for 47 years. Coined 'Go crazy, folks, go crazy!' for Ozzie Smith's 1985 NLCS walk-off. Ford C. Frick Award 1987.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-boyer-ken",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Ken Boyer",
+      "summary": "1964 NL MVP and 1964 World Series champion. Retired #14. Captain of the Cardinals during their return to glory.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-flood-curt",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Curt Flood",
+      "summary": "Challenged MLB's reserve clause in 1969 after being traded; his lawsuit (Flood v. Kuhn) paved the way for free agency. Seven Gold Gloves in CF for the Cardinals.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-freese-david",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "David Freese",
+      "summary": "2011 NLCS and World Series MVP. Hit the walk-off HR in Game 6 of the 2011 World Series — twice rallying the Cardinals from their final strike.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-hernandez-keith",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Keith Hernandez",
+      "summary": "1979 NL co-MVP. Eleven straight Gold Gloves at first base (several with STL). Key piece of the 1982 World Series champion.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-herr-tommy",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Tommy Herr",
+      "summary": "Second baseman on the 1982 WS champion and 1985 and 1987 pennant winners. 110 RBIs in 1985 — remarkable for a non-power hitter (only 8 HRs).",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-forsch-bob",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Bob Forsch",
+      "summary": "Two no-hitters for the Cardinals (1978, 1983). 15-year Cardinal. Brother of Phillies/Astros pitcher Ken Forsch.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-ankiel-rick",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Rick Ankiel",
+      "summary": "Rare pitcher-to-outfielder conversion. Top pitching prospect whose control vanished in the 2000 NLDS; returned to MLB years later as a power-hitting OF.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-tudor-john",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "John Tudor",
+      "summary": "1985 season for the ages: 21-8 with 10 shutouts and 1.93 ERA — finished second to Doc Gooden in Cy Young voting.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-lankford-ray",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Ray Lankford",
+      "summary": "One of the best all-around Cardinals outfielders of the 1990s. Ranks high on franchise leaderboards in HRs, extra-base hits, and stolen bases.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-holliday-matt",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Matt Holliday",
+      "summary": "2009 trade acquisition who signed long-term. Batted in the middle of the order through the 2011 World Series title run.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-goldschmidt-paul",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Paul Goldschmidt",
+      "summary": "2022 NL MVP. Seven-time All-Star first baseman. Anchored the Cardinals' lineup since the 2019 trade from Arizona.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-arenado-nolan",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Nolan Arenado",
+      "summary": "Ten Gold Gloves at third base and counting. Acquired from Colorado in 2021. 10-time All-Star.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-worrell-todd",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Todd Worrell",
+      "summary": "1986 NL Rookie of the Year. Closer for the 1985 and 1987 pennant winners. Three-time All-Star.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-smith-lee",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Lee Smith",
+      "summary": "Dominant closer during his 1990-93 Cardinals run. Hall of Fame 2019 (Veterans Committee). 478 career saves.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-cepeda-orlando",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Orlando Cepeda",
+      "summary": "1967 NL MVP with the pennant-winning Cardinals — first unanimous selection in NL history at that point. Hall of Fame 1999.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-rolen-scott",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Scott Rolen",
+      "summary": "Third baseman on the 2006 World Series champion. Eight Gold Gloves overall. Hall of Fame 2023.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-martin-pepper",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Pepper Martin",
+      "summary": "Gas House Gang leadoff man and face of the 1934 champions. Stole home in the 1931 World Series. Three-time All-Star.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-medwick-joe",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Joe Medwick",
+      "summary": "1937 NL Triple Crown and MVP — the last NL Triple Crown winner until 2012. Ejected from Game 7 of the 1934 WS for his own safety after Tigers fans threw fruit at him. HOF 1968.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-coleman-vince",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Vince Coleman",
+      "summary": "Led the NL in stolen bases his first six seasons (1985-1990). 752 career steals. Infamous 1985 tarp-accident injury during the NLCS.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-renteria-edgar",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Edgar Renteria",
+      "summary": "Shortstop on the 2004 pennant winner and 2006 WS champion. Two-time Gold Glove with the Cardinals.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-carpenter-matt",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Matt Carpenter",
+      "summary": "Three-time All-Star during his Cardinals prime (2013-2019). Led the NL in runs, hits, and doubles in 2013.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-isringhausen",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Jason Isringhausen",
+      "summary": "300 career saves, most in Cardinals franchise history at the time of his departure. Anchor of the 2006 WS champion bullpen.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-berkman-lance",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Lance Berkman",
+      "summary": "2011 World Series MVP runner-up. Tied David Freese's Game 6 rally with a two-out, two-strike single in the 10th.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-shannon-mike",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Mike Shannon",
+      "summary": "Played for the 1964 and 1967 WS champions as a third baseman/OF, then 50+ years broadcasting the Cardinals. Ford C. Frick Award 2021.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-caray-harry",
+      "type": "broadcaster",
+      "category": "cardinals",
+      "name": "Harry Caray",
+      "summary": "Voice of the Cardinals 1945-1969 before his later Cubs tenure. Ford C. Frick Award 1989.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-hendrick-george",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "George Hendrick",
+      "summary": "Known as Silent George. Drove in the run that clinched the 1982 World Series. Four-time All-Star.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-vanslyke-andy",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Andy Van Slyke",
+      "summary": "Standout defensive outfielder on the 1982 WS champion. Later starred for Pittsburgh after the Tony Pena trade.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-mcbride-bake",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Bake McBride",
+      "summary": "1974 NL Rookie of the Year. Played on the 1974 Cardinals who finished 2nd in the NL East with 86 wins.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-smith-reggie",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Reggie Smith",
+      "summary": "Switch-hitting OF. Two seasons with the Cardinals (1974-1975) between his Red Sox and Dodgers years. Seven-time All-Star.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-tenace-gene",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Gene Tenace",
+      "summary": "1972 World Series MVP with Oakland. Spent 1981-1982 with the Cardinals, winning a second ring in 1982.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-andujar-joaquin",
+      "type": "legend",
+      "category": "cardinals",
+      "name": "Joaquín Andújar",
+      "summary": "Three-time All-Star pitcher. Ace of the 1982 and 1985 Cardinals. Won Games 3 and 7 of the 1982 World Series.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-1926-alexander",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "1926 WS Game 7 — Alexander strikes out Lazzeri",
+      "summary": "Grover Cleveland Alexander, pulled from the rotation for relief duty, fanned Tony Lazzeri with the bases loaded in the 7th inning of Game 7 to preserve the Cardinals' first title.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-1944-streetcar",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "1944 Streetcar Series",
+      "summary": "The Cardinals beat the St. Louis Browns in the only all-St. Louis World Series, played entirely at Sportsman's Park during WWII.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-1982-sutter-out",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "1982 WS — Sutter's final out",
+      "summary": "Bruce Sutter froze Gorman Thomas with a split-finger fastball for the final out of the 1982 World Series, giving the Cardinals their first title in 15 years.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-1985-denkinger",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "1985 WS Game 6 — The Denkinger Call",
+      "summary": "Umpire Don Denkinger called Jorge Orta safe at first in the 9th inning of Game 6 with the Cardinals one out from the title. The Royals rallied, won Game 6, and took Game 7.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-2006-ws-eckstein",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "2006 WS — Eckstein MVP",
+      "summary": "5'7\" shortstop David Eckstein won World Series MVP, going 8-for-22 with three doubles as the Cardinals beat Detroit in 5.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-2011-rally-sq",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "2011 NLDS — The Rally Squirrel",
+      "summary": "During Game 4 of the 2011 NLDS at Busch Stadium, a squirrel ran across home plate during a pitch. It returned for Game 5 and became the unofficial mascot of the championship run.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-2011-ws-freese",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "2011 WS Game 6 — Freese walk-off",
+      "summary": "Down to their final strike twice, the Cardinals rallied against Texas. David Freese tripled to tie it in the 9th, then walked it off with a HR in the 11th. Game 7 won the next night.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "stl-m-1985-go-crazy",
+      "type": "moment",
+      "category": "cardinals",
+      "name": "Ozzie Smith's 1985 NLCS walk-off",
+      "summary": "Smith's first career left-handed HR won Game 5 of the 1985 NLCS vs. the Dodgers, prompting Jack Buck's famous 'Go crazy, folks!' call.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-ruth-babe",
+      "type": "legend",
+      "category": "general",
+      "name": "Babe Ruth",
+      "summary": "714 career HR. Seven-time World Series champion (3 with Red Sox as a pitcher, 4 with Yankees). First-ever Hall of Fame class, 1936. Arguably the most consequential figure in baseball history.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-cobb-ty",
+      "type": "legend",
+      "category": "general",
+      "name": "Ty Cobb",
+      "summary": "Career .366 batting average — highest in MLB history. 4,189 hits (2nd all-time). First player elected to the Hall of Fame (1936, with Ruth).",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-wagner-honus",
+      "type": "legend",
+      "category": "general",
+      "name": "Honus Wagner",
+      "summary": "Eight-time NL batting champion, all with Pittsburgh. First-ballot Hall of Famer (1936). His T206 tobacco card is the most valuable baseball card in existence.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-mathewson",
+      "type": "legend",
+      "category": "general",
+      "name": "Christy Mathewson",
+      "summary": "373 career wins (T-3rd all-time). Threw three shutouts in the 1905 World Series. WWI veteran — damaged lungs from accidental mustard gas exposure hastened his death at 45. HOF 1936.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-johnson-walter",
+      "type": "legend",
+      "category": "general",
+      "name": "Walter Johnson",
+      "summary": "417 career wins (2nd all-time). 110 career shutouts — still the MLB record. 21 seasons with the Washington Senators. HOF 1936.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-gehrig-lou",
+      "type": "legend",
+      "category": "general",
+      "name": "Lou Gehrig",
+      "summary": "'The Iron Horse.' 2,130 consecutive games. Seven-time WS champion with the Yankees. ALS forced retirement in 1939 — his 'luckiest man' speech is one of the most famous in sports history.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-dimaggio-joe",
+      "type": "legend",
+      "category": "general",
+      "name": "Joe DiMaggio",
+      "summary": "56-game hitting streak in 1941 — still the MLB record. Three-time MVP. Nine-time WS champion. WWII veteran.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-williams-ted",
+      "type": "legend",
+      "category": "general",
+      "name": "Ted Williams",
+      "summary": "Last player to hit .400 (.406 in 1941). Two-time MVP. Two Triple Crowns. Marine pilot in WWII and Korea (missed ~5 seasons total).",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-mantle-mickey",
+      "type": "legend",
+      "category": "general",
+      "name": "Mickey Mantle",
+      "summary": "Three-time AL MVP. 1956 Triple Crown. Seven-time WS champion. 18 career WS home runs is still the record.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-berra-yogi",
+      "type": "legend",
+      "category": "general",
+      "name": "Yogi Berra",
+      "summary": "Three-time AL MVP. 10 World Series rings as a player — most in MLB history. Later managed the Yankees and Mets to pennants. D-Day veteran.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-koufax-sandy",
+      "type": "legend",
+      "category": "general",
+      "name": "Sandy Koufax",
+      "summary": "Four no-hitters including a perfect game (1965). Three Cy Youngs (first three ever). Retired at 30 due to elbow arthritis. HOF 1972 at 36 — youngest ever.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-clemente-roberto",
+      "type": "legend",
+      "category": "general",
+      "name": "Roberto Clemente",
+      "summary": "First Latin American Hall of Famer (1973 — five-year wait waived after his death delivering earthquake aid to Nicaragua). 1966 NL MVP. 3,000 career hits.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-robinson-frank",
+      "type": "legend",
+      "category": "general",
+      "name": "Frank Robinson",
+      "summary": "Only player to win MVP in both leagues (NL 1961 Cincinnati, AL 1966 Baltimore Triple Crown). First Black MLB manager (1975, Cleveland).",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-mccovey-willie",
+      "type": "legend",
+      "category": "general",
+      "name": "Willie McCovey",
+      "summary": "1969 NL MVP. 521 career HR. Six-time All-Star first baseman for the Giants. HOF 1986.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-ryan-nolan",
+      "type": "legend",
+      "category": "general",
+      "name": "Nolan Ryan",
+      "summary": "5,714 career strikeouts — still the MLB record by nearly 850. Seven no-hitters (also a record). 27-year career across four teams.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-seaver-tom",
+      "type": "legend",
+      "category": "general",
+      "name": "Tom Seaver",
+      "summary": "Three-time Cy Young. 311 career wins. Led the 1969 Miracle Mets to the World Series title. HOF 1992 with 98.8% of the vote (a record at the time).",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-campanella-roy",
+      "type": "legend",
+      "category": "general",
+      "name": "Roy Campanella",
+      "summary": "Three-time NL MVP Brooklyn Dodgers catcher. Career cut short by a 1958 car accident that paralyzed him. HOF 1969.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-drysdale-don",
+      "type": "legend",
+      "category": "general",
+      "name": "Don Drysdale",
+      "summary": "1962 Cy Young. Set the MLB consecutive-scoreless-innings record at 58 2/3 in 1968 (broken by Hershiser in 1988).",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-jackson-reggie",
+      "type": "legend",
+      "category": "general",
+      "name": "Reggie Jackson",
+      "summary": "'Mr. October.' Three HRs on three pitches in Game 6 of the 1977 World Series. Five WS rings across three teams. HOF 1993.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-brett-george",
+      "type": "legend",
+      "category": "general",
+      "name": "George Brett",
+      "summary": "1980 AL MVP (.390 batting average that season). 13-time All-Star. Pine Tar Incident of 1983 became one of the most famous umpire disputes ever.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-gwynn-tony",
+      "type": "legend",
+      "category": "general",
+      "name": "Tony Gwynn",
+      "summary": "Eight NL batting titles. Career .338 average. 3,141 career hits — all with the Padres across 20 seasons. HOF 2007.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-henderson-rickey",
+      "type": "legend",
+      "category": "general",
+      "name": "Rickey Henderson",
+      "summary": "1,406 career stolen bases — most in MLB history by nearly 500. 2,295 runs scored, also the all-time record. 1990 AL MVP.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-griffey-ken",
+      "type": "legend",
+      "category": "general",
+      "name": "Ken Griffey Jr.",
+      "summary": "1997 AL MVP. 630 career HRs. 10 Gold Gloves in center field. Hall of Fame 2016 with 99.3% — a record at the time.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-jeter-derek",
+      "type": "legend",
+      "category": "general",
+      "name": "Derek Jeter",
+      "summary": "Captain of five Yankees championship teams. 3,465 career hits (6th all-time). Hall of Fame 2020 (unanimous but one voter).",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-johnson-randy",
+      "type": "legend",
+      "category": "general",
+      "name": "Randy Johnson",
+      "summary": "Five Cy Youngs. Perfect game in 2004 at age 40 — oldest ever. 303 career wins. Co-MVP of the 2001 World Series.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-martinez-pedro",
+      "type": "legend",
+      "category": "general",
+      "name": "Pedro Martínez",
+      "summary": "Three Cy Youngs. Historic 1999-2000 Boston seasons (ERA+ of 291 and 243 — among the best two-year runs ever). HOF 2015.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-maddux-greg",
+      "type": "legend",
+      "category": "general",
+      "name": "Greg Maddux",
+      "summary": "Four consecutive Cy Youngs (1992-95). 355 career wins. 18 Gold Gloves. Master of movement and command.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-ortiz-david",
+      "type": "legend",
+      "category": "general",
+      "name": "David Ortiz",
+      "summary": "'Big Papi.' Three-time World Series champion with the Red Sox. Key figure in ending the 86-year curse (2004). 541 career HRs.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-jones-chipper",
+      "type": "legend",
+      "category": "general",
+      "name": "Chipper Jones",
+      "summary": "1999 NL MVP. 19-year Brave. Switch-hitter with a career .303 average. 2018 first-ballot Hall of Famer.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-suzuki-ichiro",
+      "type": "legend",
+      "category": "general",
+      "name": "Ichiro Suzuki",
+      "summary": "2001 AL MVP and Rookie of the Year. 257 hits in 2004 — single-season MLB record. 4,367 combined hits (Japan + MLB).",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-rose-pete",
+      "type": "legend",
+      "category": "general",
+      "name": "Pete Rose",
+      "summary": "4,256 career hits — the all-time record. 1973 NL MVP. Banned from baseball in 1989 for gambling on games as a manager.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-bench-johnny",
+      "type": "legend",
+      "category": "general",
+      "name": "Johnny Bench",
+      "summary": "Two-time NL MVP. 10 Gold Gloves behind the plate. Widely considered the greatest catcher of all time. Big Red Machine's backbone.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-morgan-joe",
+      "type": "legend",
+      "category": "general",
+      "name": "Joe Morgan",
+      "summary": "Back-to-back NL MVPs 1975-76 with the Big Red Machine. Five Gold Gloves at second base. Longtime ESPN broadcaster.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-yastrzemski",
+      "type": "legend",
+      "category": "general",
+      "name": "Carl Yastrzemski",
+      "summary": "1967 Triple Crown and AL MVP. Last player to win a Triple Crown until 2012. 23-year Red Sox.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "gen-ford-whitey",
+      "type": "legend",
+      "category": "general",
+      "name": "Whitey Ford",
+      "summary": "'The Chairman of the Board.' Six-time WS champion Yankees ace. 1961 Cy Young. Career 2.75 ERA.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-fingers-rollie",
+      "type": "legend",
+      "category": "general",
+      "name": "Rollie Fingers",
+      "summary": "1981 AL Cy Young and MVP. Iconic handlebar mustache. First reliever to reach 300 saves. Three WS rings with Oakland.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-eckersley-dennis",
+      "type": "legend",
+      "category": "general",
+      "name": "Dennis Eckersley",
+      "summary": "Starter-turned-closer transition defined the modern role. 1992 AL Cy Young and MVP as a reliever. 390 career saves.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-hoffman-trevor",
+      "type": "legend",
+      "category": "general",
+      "name": "Trevor Hoffman",
+      "summary": "601 career saves. His 'Hells Bells' entrance in San Diego remains one of the most memorable in MLB. HOF 2018.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-biggio-craig",
+      "type": "legend",
+      "category": "general",
+      "name": "Craig Biggio",
+      "summary": "3,060 career hits — all with the Astros. Played catcher, second base, and outfield at All-Star level. HOF 2015.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-bagwell-jeff",
+      "type": "legend",
+      "category": "general",
+      "name": "Jeff Bagwell",
+      "summary": "1994 NL MVP. Long-tenured Astro first baseman. Retired 3rd all-time among Astros in games played. HOF 2017.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-puckett-kirby",
+      "type": "legend",
+      "category": "general",
+      "name": "Kirby Puckett",
+      "summary": "Minnesota Twin for his entire 12-year career. Clutch HR in Game 6 of the 1991 World Series. Career ended abruptly by glaucoma. HOF 2001.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "gen-murray-eddie",
+      "type": "legend",
+      "category": "general",
+      "name": "Eddie Murray",
+      "summary": "Switch-hitting first baseman. One of only six players with 3,000 hits and 500 HRs. HOF 2003.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ngl-gibson-josh",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Josh Gibson",
+      "summary": "Widely considered the greatest catcher of all time. Negro Leagues career batting average reported above .370. MLB officially recognized his NL stats in 2020. Died at 35 in 1947, months before Jackie Robinson's debut.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "ngl-charleston-oscar",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Oscar Charleston",
+      "summary": "Widely considered the greatest all-around Negro Leagues player. Bill James ranked him among the 10 best players ever. HOF 1976.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "ngl-bell-cool-papa",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Cool Papa Bell",
+      "summary": "Famed for his speed — Satchel Paige said he was 'so fast he could turn off the light and be in bed before the room got dark.' HOF 1974.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "ngl-oneil-buck",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Buck O'Neil",
+      "summary": "Kansas City Monarchs first baseman. First Black coach in MLB (Cubs, 1962). Tireless Negro Leagues historian and ambassador. Posthumous HOF 2022.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "ngl-foster-rube",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Rube Foster",
+      "summary": "'The Father of Black Baseball.' Founded the first successful Negro National League in 1920. HOF 1981.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ngl-williams-smokey",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Smokey Joe Williams",
+      "summary": "Pre-Negro Leagues pitcher (1910s-20s) who reportedly beat barnstorming Ty Cobb-led teams. HOF 1999.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ngl-lloyd-pop",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Pop Lloyd",
+      "summary": "Shortstop compared favorably to Honus Wagner in his prime. Deadball era Negro Leagues great. HOF 1977.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ngl-dihigo-martin",
+      "type": "legend",
+      "category": "negro-leagues",
+      "name": "Martín Dihigo",
+      "summary": "Cuban-born two-way star who played every position. Member of Cuban, Mexican, Dominican, Venezuelan, and American halls of fame. MLB HOF 1977.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ump-klem-bill",
+      "type": "umpire",
+      "category": "umpires",
+      "name": "Bill Klem",
+      "summary": "'The Old Arbitrator.' 36-year NL umpire. Invented the umpire's arm signals that are still used today. HOF 1953.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ump-chylak-nestor",
+      "type": "umpire",
+      "category": "umpires",
+      "name": "Nestor Chylak",
+      "summary": "AL umpire 1954-1978. WWII Bronze Star and Purple Heart at the Battle of the Bulge. HOF 1999.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "ump-barlick-al",
+      "type": "umpire",
+      "category": "umpires",
+      "name": "Al Barlick",
+      "summary": "28-year NL umpire. Worked seven World Series. HOF 1989. Known for his booming strike call.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "brd-scully-vin",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Vin Scully",
+      "summary": "Voice of the Dodgers 1950-2016 — 67 seasons. Called Hank Aaron's 715th, Koufax's perfect game, Gibson's 1988 walk-off. Ford C. Frick Award 1982.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "brd-harwell-ernie",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Ernie Harwell",
+      "summary": "Voice of the Detroit Tigers for 42 years. Known for his poetic phrasing. Ford C. Frick Award 1981.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "brd-uecker-bob",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Bob Uecker",
+      "summary": "'Mr. Baseball.' Brewers broadcaster since 1971. Brief playing career, including with the 1964 Cardinals WS champions. Ford C. Frick Award 2003.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "brd-allen-mel",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Mel Allen",
+      "summary": "'The Voice of the Yankees' from 1940s-60s. First Ford C. Frick Award recipient (1978, tied with Red Barber).",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "brd-barber-red",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Red Barber",
+      "summary": "Brooklyn Dodgers radio announcer 1939-1953. Called Jackie Robinson's debut. Known for Southern phrasing like 'sittin' in the catbird seat.'",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "brd-miller-jon",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Jon Miller",
+      "summary": "Giants lead broadcaster since 1997. ESPN Sunday Night Baseball voice 1990-2010. Ford C. Frick Award 2010.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "brd-rizzuto-phil",
+      "type": "broadcaster",
+      "category": "broadcasters",
+      "name": "Phil Rizzuto",
+      "summary": "Yankees shortstop (1941-56, missed WWII) turned broadcaster (1957-1996). 'Holy cow!' catchphrase. Ford C. Frick 1994.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "cch-mack-connie",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Connie Mack",
+      "summary": "Managed the Philadelphia Athletics for 50 seasons (1901-1950). 3,731 career wins — the all-time record, likely never to be broken.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "cch-stengel-casey",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Casey Stengel",
+      "summary": "Managed seven Yankees World Series champions (1949-1960). Also led the expansion 1962 Mets. Famously quotable. HOF 1966.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "cch-anderson-sparky",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Sparky Anderson",
+      "summary": "First manager to win World Series in both leagues (Reds 1975-76, Tigers 1984). Big Red Machine architect. HOF 2000.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "cch-weaver-earl",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Earl Weaver",
+      "summary": "Baltimore manager 1968-82, 1985-86. Famous for his belief in 'pitching, defense, and the three-run homer.' Six division titles. HOF 1996.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "cch-lasorda-tommy",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Tommy Lasorda",
+      "summary": "Dodgers manager 1976-96. Two World Series titles (1981, 1988). 'I bleed Dodger blue.' HOF 1997.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "cch-cox-bobby",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Bobby Cox",
+      "summary": "Managed the Braves' 14 consecutive division titles run (1991-2005). 1995 World Series champion. HOF 2014.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "cch-torre-joe",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Joe Torre",
+      "summary": "Four Yankees World Series titles as manager (1996, 1998-2000). 2,326 career wins. 1971 NL MVP as a player. HOF 2014.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "cch-martin-billy",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Billy Martin",
+      "summary": "Five stints as Yankees manager (1975-79, 1983, 1985, 1988). Fiery personality. 1977 World Series champion.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "cch-williams-dick",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Dick Williams",
+      "summary": "Managed the Impossible Dream 1967 Red Sox, the Swingin' A's 1972-73 titles, and the 1984 NL champion Padres. HOF 2008.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "cch-johnson-davey",
+      "type": "coach",
+      "category": "coaches",
+      "name": "Davey Johnson",
+      "summary": "Managed the 1986 Mets to a World Series title. Also led the Nationals to the 2012 NL East title.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "exc-rickey-branch",
+      "type": "executive",
+      "category": "executives",
+      "name": "Branch Rickey",
+      "summary": "Beyond signing Jackie Robinson: invented the modern farm system in St. Louis in the 1920s. Signed the first Venezuelan and Puerto Rican stars. HOF 1967.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "exc-veeck-bill",
+      "type": "executive",
+      "category": "executives",
+      "name": "Bill Veeck",
+      "summary": "Innovative owner (Indians, Browns, White Sox). Signed Larry Doby in 1947. Sent 3'7\" Eddie Gaedel to the plate in 1951. Invented the exploding scoreboard. HOF 1991.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "exc-miller-marvin",
+      "type": "executive",
+      "category": "executives",
+      "name": "Marvin Miller",
+      "summary": "MLBPA Executive Director 1966-83. Won free agency and ended the reserve clause. Transformed player rights more than any non-player in baseball history. HOF 2020.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "exc-giamatti-bart",
+      "type": "executive",
+      "category": "executives",
+      "name": "Bart Giamatti",
+      "summary": "Yale president turned MLB commissioner (1988-89). Banned Pete Rose for life. Died of a heart attack just days after the ban, age 51.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "exc-kuhn-bowie",
+      "type": "executive",
+      "category": "executives",
+      "name": "Bowie Kuhn",
+      "summary": "MLB commissioner 1969-84. Oversaw the beginning of free agency and expansion. Suspended George Steinbrenner. HOF 2008.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "exc-johnson-ban",
+      "type": "executive",
+      "category": "executives",
+      "name": "Ban Johnson",
+      "summary": "Founded the American League in 1901 as a major league. First AL president. Shaped early 20th-century baseball. HOF 1937.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "exc-landis-kenesaw",
+      "type": "executive",
+      "category": "executives",
+      "name": "Kenesaw Mountain Landis",
+      "summary": "First MLB commissioner (1920-44), appointed after the Black Sox scandal. Banned the eight White Sox players for life. HOF 1944.",
+      "priority": 1,
+      "status": "scheduled",
+      "scheduledInIssue": 1
+    },
+    {
+      "id": "mil-lewis-buddy",
+      "type": "story",
+      "category": "military",
+      "name": "Buddy Lewis",
+      "summary": "Two-time All-Star Senators outfielder. Flew 368 combat missions in the China-Burma-India theater as a C-47 pilot. Distinguished Flying Cross.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mil-martin-morrie",
+      "type": "story",
+      "category": "military",
+      "name": "Morrie Martin",
+      "summary": "WWII infantryman. Shot twice, captured by the Germans, escaped, recaptured — shot at again during a Death March. Pitched 10 MLB seasons post-war.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mil-musial-stan",
+      "type": "story",
+      "category": "military",
+      "name": "Stan Musial — Navy service",
+      "summary": "Served in the Navy 1945 as a ship repairman in Hawaii, missing the 1945 season. Returned to win three MVPs in the next five years.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mil-rizzuto-phil",
+      "type": "story",
+      "category": "military",
+      "name": "Phil Rizzuto — Navy Pacific",
+      "summary": "Lost three seasons (1943-45) in the Navy. Caught malaria in the Pacific. Returned to win 1950 AL MVP.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mil-branca-ralph",
+      "type": "story",
+      "category": "military",
+      "name": "Ralph Branca — Army service",
+      "summary": "Served in the Army between 1951 and 1952 seasons. Four years after giving up the Shot Heard 'Round the World, his military service bookended the most famous pitch of his life.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mil-southworth-jr",
+      "type": "story",
+      "category": "military",
+      "name": "Billy Southworth Jr.",
+      "summary": "Son of Cardinals manager Billy Southworth. Minor leaguer who enlisted after Pearl Harbor. Killed February 15, 1945 when his B-29 crashed in Flushing Bay during a training flight.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-thomson-shot",
+      "type": "moment",
+      "category": "general",
+      "name": "The Shot Heard 'Round the World (Thomson 1951)",
+      "summary": "Bobby Thomson's 3-run HR off Ralph Branca at the Polo Grounds won the NL pennant playoff for the Giants. Russ Hodges: 'The Giants win the pennant! The Giants win the pennant!'",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-mazeroski-1960",
+      "type": "moment",
+      "category": "general",
+      "name": "Bill Mazeroski 1960 WS walk-off",
+      "summary": "Only walk-off HR in a World Series Game 7. Pirates over Yankees 10-9 to end the 1960 series. 9th inning, bottom of the inning, off Ralph Terry.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-larsen-1956",
+      "type": "moment",
+      "category": "general",
+      "name": "Don Larsen's perfect game 1956 WS",
+      "summary": "Only perfect game in World Series history. Yankees' Larsen retired all 27 Brooklyn Dodgers in Game 5. Yogi Berra's leap into his arms is the iconic image.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-black-sox-1919",
+      "type": "moment",
+      "category": "general",
+      "name": "1919 Black Sox scandal",
+      "summary": "Eight Chicago White Sox players banned for life for throwing the 1919 World Series to the Reds. Led to the creation of the MLB commissioner role.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-pine-tar-1983",
+      "type": "moment",
+      "category": "general",
+      "name": "The Pine Tar Incident (Brett 1983)",
+      "summary": "George Brett's HR off Goose Gossage was initially disallowed because pine tar on his bat extended beyond the legal limit. Brett's eruption from the dugout became iconic. AL president Lee MacPhail overturned the call; game resumed weeks later.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-buckner-1986",
+      "type": "moment",
+      "category": "general",
+      "name": "1986 WS Game 6 — Buckner's error",
+      "summary": "Red Sox one out from ending the 68-year title drought; Mookie Wilson's grounder went through Bill Buckner's legs, scoring Ray Knight for a Mets win. Boston lost Game 7. The curse continued until 2004.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-murderers-row",
+      "type": "moment",
+      "category": "general",
+      "name": "1927 Yankees Murderers' Row",
+      "summary": "110-44 record, widely considered the greatest team ever assembled. Ruth hit 60 HRs; Gehrig drove in 175. Swept the Pirates in the World Series.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-red-sox-2004",
+      "type": "moment",
+      "category": "general",
+      "name": "2004 Red Sox ALCS comeback",
+      "summary": "Down 0-3 to the Yankees, Boston won four straight — the only 0-3 comeback in MLB postseason history — and went on to win the World Series, ending the 86-year curse.",
+      "priority": 1,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-haddix-1959",
+      "type": "moment",
+      "category": "general",
+      "name": "Harvey Haddix 12 perfect innings",
+      "summary": "May 26, 1959: Pirates' Haddix retired 36 straight Milwaukee Braves before an error in the 13th. Lost the game 1-0. Not officially a perfect game but one of the greatest pitching performances ever.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-kerry-wood-20k",
+      "type": "moment",
+      "category": "general",
+      "name": "Kerry Wood's 20-strikeout game",
+      "summary": "May 6, 1998: 20-year-old Cubs rookie struck out 20 Astros in 9 innings — tying the MLB record. He allowed one infield hit in a dominating performance.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-abbott-no-hit",
+      "type": "moment",
+      "category": "general",
+      "name": "Jim Abbott's no-hitter",
+      "summary": "September 4, 1993: Yankees' Abbott — born without a right hand — no-hit the Indians 4-0. One of the most inspirational pitching performances in MLB history.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-rjohnson-2004",
+      "type": "moment",
+      "category": "general",
+      "name": "Randy Johnson's 2004 perfect game",
+      "summary": "May 18, 2004: Diamondbacks' Johnson retired all 27 Braves at age 40 — the oldest ever to throw a perfect game.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-ichiro-257",
+      "type": "moment",
+      "category": "general",
+      "name": "Ichiro 257-hit season (2004)",
+      "summary": "Ichiro Suzuki's 2004 single-season MLB hit record. Broke George Sisler's 84-year-old mark of 257. Finished 7th in AL MVP voting.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-2002-angels-ws",
+      "type": "moment",
+      "category": "general",
+      "name": "2002 Angels World Series",
+      "summary": "Wild card Angels came back from 5-0 down in Game 6 to beat the Giants. Salmon, Spiezio, Erstad, Glaus — the Rally Monkey era's championship.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-subway-series",
+      "type": "moment",
+      "category": "general",
+      "name": "2000 Subway Series",
+      "summary": "First Yankees vs Mets World Series since the subway-era NY teams. Yankees won in 5. Iconic Game 2 moment: Clemens throwing the broken bat at Piazza.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-big-red-machine",
+      "type": "moment",
+      "category": "general",
+      "name": "Big Red Machine 1975-76",
+      "summary": "Back-to-back World Series titles for Cincinnati. Rose, Morgan, Bench, Perez, Foster, Griffey Sr., Concepcion. One of the greatest teams ever assembled.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-1984-tigers",
+      "type": "moment",
+      "category": "general",
+      "name": "1984 Tigers start 35-5",
+      "summary": "The Tigers started 35-5 and never looked back en route to a 104-win season and a World Series win over the Padres.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-1993-phillies",
+      "type": "moment",
+      "category": "general",
+      "name": "1993 Phillies and Carter HR",
+      "summary": "Joe Carter's walk-off 3-run HR off Mitch Williams in Game 6 clinched back-to-back titles for Toronto and ended Philadelphia's upstart run.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-77-78-yankees",
+      "type": "moment",
+      "category": "general",
+      "name": "1977-78 Yankees dynasty",
+      "summary": "Back-to-back World Series over the Dodgers. 'The Bronx Zoo' era: Reggie, Munson, Billy Martin, George Steinbrenner, chaos and championships.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-1968-year-pitch",
+      "type": "moment",
+      "category": "general",
+      "name": "1968 — The Year of the Pitcher",
+      "summary": "Gibson 1.12 ERA, McLain 31 wins, Yaz batted title at .301 (lowest ever). Mound was lowered and strike zone shrunk the following year in response.",
+      "priority": 2,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-guidry-1978",
+      "type": "moment",
+      "category": "general",
+      "name": "Ron Guidry's 1978",
+      "summary": "25-3, 1.74 ERA, 9 shutouts, 248 K. One of the greatest single-season pitching performances ever. AL Cy Young. Yankees won the World Series.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-doc-gooden",
+      "type": "moment",
+      "category": "general",
+      "name": "Doc Gooden's 1984-85",
+      "summary": "1984 NL Rookie of the Year at 19. 1985 Cy Young at 20: 24-4, 1.53 ERA, 268 K. Among the most dominant consecutive seasons by a young pitcher.",
+      "priority": 3,
+      "status": "pending"
+    },
+    {
+      "id": "mmt-fidrych-1976",
+      "type": "moment",
+      "category": "general",
+      "name": "Mark 'The Bird' Fidrych 1976",
+      "summary": "Tigers rookie's cultural phenomenon: talking to baseballs, patting down the mound. AL Rookie of the Year. Injuries ended his career 2 years later.",
+      "priority": 3,
+      "status": "pending"
+    }
   ]
 }
