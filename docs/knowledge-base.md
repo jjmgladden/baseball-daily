@@ -64,11 +64,23 @@ Static types (Reference, Decision, Limitation) omit Tier.
 
 ### KB-0007 | PWA icons — SVG delivered, PNG deferred
 - **Type:** Action
-- **Date:** 2026-04-19
+- **Tier:** T3
+- **Dependency:** Claude
+- **Date:** 2026-04-19 (updated 2026-04-20 with comprehensive reference doc)
 - **Category:** UI / PWA
-- **Finding:** Phase 3A ships `app/icon.svg` (baseball on deep-navy). Works on modern browsers and Android. iOS Safari full-PWA support still prefers PNG — deferred to Phase 4.
-- **Status:** Open (Phase 4 — PNG set)
-- **Cross-ref:** app/icon.svg · app/manifest.webmanifest
+- **Tags:** pwa, icons, ios, apple-touch-icon, deferred
+- **Finding:** Phase 3A ships `app/icon.svg` (baseball on deep-navy). Works on modern browsers and Android Chrome (which reads SVG in manifest and even generates a WebAPK — a real installed Android app). iOS Safari historically ignores SVG for the home-screen icon and looks for a legacy `<link rel="apple-touch-icon" href="...png">` tag with a PNG at 180×180. Without PNGs, an iPhone user installing the site to their home screen sees a generic grey square or a low-res screenshot instead of the intended baseball graphic. **Functionally nothing breaks** — only icon polish on iOS is affected.
+
+  **Implementation when picked up:**
+  1. Generate PNGs from `app/icon.svg` at 180×180, 192×192, 512×512 (via online converter, a Node script using `sharp`, or a vector editor)
+  2. Save as `app/icon-180.png`, `app/icon-192.png`, `app/icon-512.png`
+  3. Add `<link rel="apple-touch-icon" href="icon-180.png">` to `app/index.html`
+  4. Add PNG entries to `app/manifest.webmanifest` alongside the existing SVG entry
+  5. Add the new PNG files to `SHELL_FILES` in `app/sw.js` and bump `CACHE` (per CLAUDE.md § Service Worker Cache rule)
+
+  **Comprehensive background** — how PWAs differ from native apps, how iOS treats them differently than Android, what "install" actually means on each platform, and the full before/after impact of this work: see [docs/pwa-platform-reference.md](pwa-platform-reference.md).
+- **Status:** Open (deferred — functional impact is zero, polish-only, only for iPhone home-screen installs)
+- **Cross-ref:** app/icon.svg · app/manifest.webmanifest · docs/pwa-platform-reference.md
 
 ### KB-0008 | Season-progress exact dates
 - **Type:** Limitation → Closed
