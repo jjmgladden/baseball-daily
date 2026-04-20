@@ -10,7 +10,7 @@
  * GitHub Pages subpath (/baseball-daily/app/).
  */
 
-const CACHE = 'baseball-daily-shell-v10';
+const CACHE = 'baseball-daily-shell-v11';
 
 const SHELL_FILES = [
   './',
@@ -33,6 +33,7 @@ const SHELL_FILES = [
   './js/components/highlights.js',
   './js/components/recap.js',
   './js/components/suggest.js',
+  './js/components/story-state.js',
 ];
 
 self.addEventListener('install', event => {
