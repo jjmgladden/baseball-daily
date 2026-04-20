@@ -1,4 +1,4 @@
-# Deployment — v1
+# Deployment — v2
 
 Three targets, in order of adoption:
 
@@ -129,3 +129,33 @@ copy data\snapshots\2026-04-15.json data\snapshots\latest.json
 ```
 
 Master data (`data/master/`) is versioned separately — previous versions live in `data/archive/` once rolled.
+
+---
+
+## Seeing old content after an update (service worker cache)
+
+The app is a PWA. Its service worker caches the shell (HTML/CSS/JS/icon) aggressively for offline use. When we deploy a UI change, **returning visitors may keep seeing the old page** — even after a normal refresh — until the service worker picks up the new version.
+
+**This is expected behavior.** Per the CLAUDE.md § Service Worker Cache rule, every shell change bumps the SW cache name, which triggers the browser to install a fresh SW. But the new SW only activates on the *next* page visit, and the currently-open page keeps running the old shell until you reload.
+
+### If a change you expect to see isn't showing up
+
+Try in this order:
+
+1. **Hard refresh twice**: `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac). The first reload detects the new SW; the second reload runs under it.
+2. **Open in a private / incognito window**: no cached SW, shows the live version. Useful for quick sanity checks that the deploy is good.
+3. **Explicitly clear the SW**: open DevTools (`F12`) → **Application** tab → **Service Workers** (left sidebar) → click **Unregister** next to `baseball-daily`. Then refresh normally.
+4. **Clear all site data** (nuclear option): DevTools → **Application** → **Storage** (left sidebar) → **Clear site data**. Refresh.
+
+### What others viewing the site experience
+
+Same service worker lifecycle. Most users won't notice — GitHub Pages serves static content and browsers check for SW updates on each page visit. For a typical viewer:
+
+- First visit after a deploy: they get the new version automatically.
+- Actively-open tab during a deploy: they see the old version until they navigate or refresh once.
+
+This almost never manifests for casual visitors. It bites more for you (the maintainer) because you tend to keep the site open across deploys.
+
+### Enhancement worth flagging
+
+An auto-reload pattern can make this invisible — the page detects when a new SW takes control and refreshes itself once. Small code change in `app/js/app.js`. Flagged as a potential Phase 4 item. Say the word if you want it built.
