@@ -13,6 +13,7 @@ import { renderTeams } from './tabs/teams.js';
 import { renderHistory } from './tabs/history.js';
 import { renderStories } from './tabs/stories.js';
 import { renderCardinals } from './tabs/cardinals.js';
+import { attachSuggestHandler } from './components/suggest.js';
 
 const state = {
   snapshot: null,
@@ -84,6 +85,7 @@ function registerServiceWorker() {
 async function main() {
   bindTabs();
   registerServiceWorker();
+  attachSuggestHandler('[data-suggest]');
 
   try {
     state.snapshot = await loadLatestSnapshot();

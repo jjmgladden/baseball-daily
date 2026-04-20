@@ -1,0 +1,89 @@
+name: Weekly Curation Batch
+
+# Every Monday morning, picks the next 10 pending entries from
+# data/master/curation-backlog.json (sorted by priority then id) and
+# opens a GitHub Issue asking for owner approval. The owner reviews
+# the Issue, approves/edits in chat, and Claude moves accepted entries
+# from the backlog into the appropriate main data file
+# (cardinals-links.json, historical-videos.json, or stories.json).
+#
+# Cron: 08:00 UTC Monday = 4:00 AM EDT (3:00 AM EST) Monday.
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Number of entries to include this batch'
+        required: false
+        default: '10'
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build batch Issue body
+        id: build
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const batchSize = parseInt(process.env.BATCH_SIZE || '10', 10);
+          const data = JSON.parse(fs.readFileSync('data/master/curation-backlog.json', 'utf8'));
+          const pending = (data.entries || []).filter(e => e.status === 'pending');
+          pending.sort((a, b) => {
+            if ((a.priority ?? 9) !== (b.priority ?? 9)) return (a.priority ?? 9) - (b.priority ?? 9);
+            return (a.id || '').localeCompare(b.id || '');
+          });
+          const batch = pending.slice(0, batchSize);
+
+          const today = new Date().toISOString().slice(0, 10);
+          const title = `Weekly curation batch ${today} — ${batch.length} entries for review`;
+
+          const body = [
+            `Automatic weekly pull from \`data/master/curation-backlog.json\`. ${pending.length} entries remain pending after this batch.`,
+            '',
+            '## How to respond',
+            '- Reply **approve all** to green-light every entry as-is.',
+            '- Reply with line-by-line decisions: `1 approve`, `2 reject`, `3 edit: new summary`, etc.',
+            '- Claude reads your response on the next session and moves accepted entries from the backlog into the appropriate main file (cardinals-links.json, historical-videos.json, or stories.json).',
+            '',
+            '## Batch',
+            '',
+            ...batch.map((e, i) => [
+              `### ${i + 1}. ${e.name} (\`${e.id}\`)`,
+              `- **Type:** ${e.type} · **Category:** ${e.category} · **Priority:** ${e.priority}`,
+              `- ${e.summary || '(no summary)'}`,
+              ''
+            ]).flat(),
+          ].join('\n');
+
+          fs.writeFileSync('.github/batch-body.md', body);
+          console.log('title=' + title);
+          console.log('count=' + batch.length);
+          // Surface title for the next step
+          require('fs').appendFileSync(process.env.GITHUB_OUTPUT, `title=${title}\ncount=${batch.length}\n`);
+          EOF
+        env:
+          BATCH_SIZE: ${{ github.event.inputs.batch_size || '10' }}
+
+      - name: Create Issue
+        if: steps.build.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --repo ${{ github.repository }} \
+            --title "${{ steps.build.outputs.title }}" \
+            --label "weekly-batch,needs-review" \
+            --body-file .github/batch-body.md
+
+      - name: No-op if backlog empty
+        if: steps.build.outputs.count == '0'
+        run: echo "Backlog is empty — no Issue created."

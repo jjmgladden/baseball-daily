@@ -1,6 +1,6 @@
 # Baseball Daily Intelligence — Claude Code Project Instructions
 
-**Version:** 9 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v8.md
+**Version:** 10 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v9.md
 
 ---
 
@@ -80,7 +80,8 @@ Baseball Project/ (also git repo root)
 │
 ├── .github/workflows/
 │   ├── daily.yml                ← Cloud cron — 3 AM EDT / 2 AM EST — commits fresh snapshot
-│   └── weekly-index.yml         ← Monday 4 AM EDT — rebuilds player-index from Chadwick
+│   ├── weekly-index.yml         ← Monday 4 AM EDT — rebuilds player-index from Chadwick
+│   └── weekly-batch.yml         ← Monday 4 AM EDT — creates curation-review Issue
 │
 ├── app/                         ← Static PWA (served from root or /baseball-daily/)
 │   ├── index.html               ← All asset paths are RELATIVE for portability
@@ -97,7 +98,8 @@ Baseball Project/ (also git repo root)
 │       │   ├── streak.js        ← Recent-form renderer
 │       │   ├── comparison.js    ← Player comparison widget
 │       │   ├── highlights.js    ← YouTube highlight embeds
-│       │   └── recap.js         ← Game narrative + linescore + scoring plays + decisions
+│       │   ├── recap.js         ← Game narrative + linescore + scoring plays + decisions
+│       │   └── suggest.js       ← "Suggest a player or moment" modal (posts to Worker)
 │       └── tabs/
 │           ├── daily.js         ← Cardinals/Nats pins + streak + trivia + on-this-day + trades + scoreboard + standings + injuries
 │           ├── cardinals.js     ← Retired numbers, HOFers, historic seasons, traditions
@@ -134,6 +136,12 @@ Baseball Project/ (also git repo root)
 │   ├── serve.js                 ← Local static server (port 1882)
 │   ├── check-secrets.js
 │   └── build-player-index.js
+│
+├── worker/                      ← Cloudflare Worker (submission endpoint)
+│   ├── src/index.js             ← POST handler → GitHub Issue
+│   ├── wrangler.toml
+│   ├── package.json
+│   └── README.md                ← Deployment walkthrough
 │
 ├── docs/
 │   ├── knowledge-base.md

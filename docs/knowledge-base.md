@@ -181,6 +181,20 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** app/js/components/trivia.js · data/master/trivia.json
 
+### KB-0024 | Curation pipeline: weekly-batch workflow + public submission Worker
+- **Type:** Action
+- **Date:** 2026-04-20
+- **Category:** Features / Ops
+- **Tags:** curation, weekly-batch, cloudflare-worker, submissions
+- **Finding:** Two-input curation pipeline delivered. (1) **Weekly batch:** `.github/workflows/weekly-batch.yml` fires every Monday 08:00 UTC, slices the next 10 pending entries from `data/master/curation-backlog.json` (150-entry seed), and opens a labeled review Issue. Owner replies in chat with per-entry approve/reject/edit decisions; Claude moves approved entries into the appropriate main file on the next session. (2) **Public submissions:** A Cloudflare Worker (`worker/`) exposes a POST endpoint that accepts form submissions from the site's "Suggest a player or moment" footer link; Worker creates a labeled GitHub Issue. Rate-limited 3/IP/10min; honeypot field catches bots. Owner triages Issues in chat — add to backlog / add directly / reject. Worker deployment requires a fine-grained GitHub PAT scoped to Issues-write on this repo only; setup walkthrough in `worker/README.md`.
+  
+  **Status at time of close:**
+  - Weekly batch workflow: committed, will fire next Monday (or via workflow_dispatch today).
+  - Worker code: committed to `worker/`. **Owner still needs to deploy** per `worker/README.md` (first-time Cloudflare setup + PAT creation + `wrangler deploy`). After deploy, update `SUBMIT_URL` in `app/js/components/suggest.js`.
+  - Until Worker is deployed, the Suggest modal opens but shows a "not yet configured" message on submit — graceful degradation.
+- **Status:** Open (code ready; awaiting owner Worker deployment)
+- **Cross-ref:** data/master/curation-backlog.json · .github/workflows/weekly-batch.yml · worker/ · app/js/components/suggest.js · docs/curation.md
+
 ### KB-0023 | Game recaps + curated deep-content + weekly index refresh
 - **Type:** Action
 - **Date:** 2026-04-20
@@ -281,6 +295,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - KB-0020 — Public on-demand refresh — Action, **T2** (near-term enhancement)
 - KB-0021 — Auto-reload on service-worker update — Action, **T2** (near-term enhancement)
 - KB-0022 — GitHub Actions Node 20 deprecation — Action, **T3** (low-priority maintenance)
+- KB-0024 — Submission Worker — Action (code ready, awaiting owner deploy)
 
 **Closed:**
 KB-0001, KB-0002, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019

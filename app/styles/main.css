@@ -539,6 +539,144 @@ pre { padding: 0.75rem; overflow-x: auto; border: 1px solid var(--border); }
   color: var(--text-muted);
   font-size: 0.85rem;
 }
+.suggest-link { color: var(--accent-info); }
+.suggest-link:hover { text-decoration: underline; }
+
+/* ---------- Suggest modal ---------- */
+
+.suggest-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 24, 33, 0.78);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+.suggest-modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.suggest-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.suggest-modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.suggest-close {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.2rem 0.55rem;
+  line-height: 1;
+  border-radius: var(--radius);
+}
+.suggest-close:hover { background: var(--bg-secondary); color: var(--text-primary); }
+
+.suggest-form {
+  padding: 1rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.suggest-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+.suggest-form label > span .req { color: var(--accent-bad); }
+
+.suggest-form input,
+.suggest-form select,
+.suggest-form textarea {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  padding: 0.55rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+.suggest-form textarea { resize: vertical; min-height: 5rem; }
+.suggest-form input:focus,
+.suggest-form select:focus,
+.suggest-form textarea:focus {
+  outline: 2px solid var(--accent-info);
+  outline-offset: 0;
+  border-color: var(--accent-info);
+}
+
+.suggest-honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+
+.suggest-message {
+  margin: 0.35rem 0 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.88rem;
+  border-radius: var(--radius);
+  min-height: 0;
+}
+.suggest-message:empty { padding: 0; }
+.suggest-message.error {
+  background: rgba(248, 113, 113, 0.18);
+  border-left: 3px solid var(--accent-bad);
+  color: var(--text-primary);
+}
+.suggest-message.success {
+  background: rgba(74, 222, 128, 0.18);
+  border-left: 3px solid var(--accent-good);
+  color: var(--text-primary);
+}
+
+.suggest-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-top: 0.35rem;
+}
+.btn-primary, .btn-secondary {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+.btn-primary {
+  background: var(--accent-info);
+  color: var(--bg-primary);
+  border-color: var(--accent-info);
+  font-weight: 600;
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text-primary); }
 
 /* ---------- Game recaps ---------- */
 

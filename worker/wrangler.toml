@@ -1,0 +1,15 @@
+name = "baseball-daily-submit"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Free tier is more than enough: 100k requests/day.
+# This Worker serves a single endpoint that accepts form submissions
+# and creates a GitHub Issue via the GitHub REST API.
+
+[vars]
+GITHUB_REPO = "jjmgladden/baseball-daily"
+ALLOWED_ORIGINS = "https://jjmgladden.github.io,http://localhost:1882"
+
+# Secret (set via `wrangler secret put GITHUB_TOKEN`):
+#   GITHUB_TOKEN — fine-grained PAT scoped to Issues:write on the
+#                  jjmgladden/baseball-daily repository only.
