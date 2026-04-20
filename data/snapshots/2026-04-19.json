@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 4,
+  "schemaVersion": 5,
   "date": "2026-04-19",
-  "generatedAt": "2026-04-20T03:58:09.691Z",
+  "generatedAt": "2026-04-20T04:33:23.941Z",
   "season": 2026,
   "youtubeEnabled": true,
   "scoreboard": [
@@ -409,6 +409,470 @@
       "venue": "Citizens Bank Park",
       "gameType": "R",
       "dayNight": "night"
+    }
+  ],
+  "notableGames": [
+    {
+      "gamePk": 823556,
+      "status": "Final",
+      "home": {
+        "id": 147,
+        "name": "New York Yankees",
+        "score": 7,
+        "record": {
+          "wins": 13,
+          "losses": 9,
+          "pct": ".591"
+        }
+      },
+      "away": {
+        "id": 118,
+        "name": "Kansas City Royals",
+        "score": 0,
+        "record": {
+          "wins": 7,
+          "losses": 15,
+          "pct": ".318"
+        }
+      },
+      "venue": "Yankee Stadium",
+      "gameType": "R",
+      "dayNight": "day",
+      "notableReasons": [
+        "shutout"
+      ],
+      "recap": {
+        "status": "Final",
+        "venue": "Yankee Stadium",
+        "weather": "Rain, 42°F, wind 14 mph, Out To RF",
+        "gameInfo": {
+          "attendance": 40198,
+          "firstPitch": "2026-04-19T20:20:00.000Z",
+          "gameDurationMinutes": 154
+        },
+        "decisions": {
+          "winner": {
+            "id": 677960,
+            "name": "Ryan Weathers"
+          },
+          "loser": {
+            "id": 666142,
+            "name": "Cole Ragans"
+          },
+          "save": null
+        },
+        "linescore": {
+          "innings": [
+            {
+              "num": 1,
+              "home": 3,
+              "away": 0
+            },
+            {
+              "num": 2,
+              "home": 1,
+              "away": 0
+            },
+            {
+              "num": 3,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 4,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 5,
+              "home": 3,
+              "away": 0
+            },
+            {
+              "num": 6,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 7,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 8,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 9,
+              "home": null,
+              "away": 0
+            }
+          ],
+          "totals": {
+            "home": {
+              "runs": 7,
+              "hits": 7,
+              "errors": 0
+            },
+            "away": {
+              "runs": 0,
+              "hits": 6,
+              "errors": 0
+            }
+          }
+        },
+        "scoringPlays": [
+          {
+            "inning": 1,
+            "halfInning": "bottom",
+            "description": "Aaron Judge homers (9) on a fly ball to center field. Ben Rice scores.",
+            "eventType": "home_run",
+            "rbi": 2,
+            "awayScore": 0,
+            "homeScore": 2,
+            "batter": "Aaron Judge",
+            "pitcher": "Cole Ragans"
+          },
+          {
+            "inning": 1,
+            "halfInning": "bottom",
+            "description": "Austin Wells out on a sacrifice fly to left fielder Isaac Collins. Cody Bellinger scores.",
+            "eventType": "sac_fly",
+            "rbi": 1,
+            "awayScore": 0,
+            "homeScore": 3,
+            "batter": "Austin Wells",
+            "pitcher": "Cole Ragans"
+          },
+          {
+            "inning": 2,
+            "halfInning": "bottom",
+            "description": "Ben Rice homers (8) on a fly ball to right field.",
+            "eventType": "home_run",
+            "rbi": 1,
+            "awayScore": 0,
+            "homeScore": 4,
+            "batter": "Ben Rice",
+            "pitcher": "Cole Ragans"
+          },
+          {
+            "inning": 5,
+            "halfInning": "bottom",
+            "description": "Trent Grisham homers (3) on a fly ball to right field. Cody Bellinger scores. Paul Goldschmidt scores.",
+            "eventType": "home_run",
+            "rbi": 3,
+            "awayScore": 0,
+            "homeScore": 7,
+            "batter": "Trent Grisham",
+            "pitcher": "Cole Ragans"
+          }
+        ]
+      }
+    },
+    {
+      "gamePk": 824691,
+      "status": "Final",
+      "home": {
+        "id": 112,
+        "name": "Chicago Cubs",
+        "score": 2,
+        "record": {
+          "wins": 12,
+          "losses": 9,
+          "pct": ".571"
+        }
+      },
+      "away": {
+        "id": 121,
+        "name": "New York Mets",
+        "score": 1,
+        "record": {
+          "wins": 7,
+          "losses": 15,
+          "pct": ".318"
+        }
+      },
+      "venue": "Wrigley Field",
+      "gameType": "R",
+      "dayNight": "day",
+      "notableReasons": [
+        "one-run game",
+        "pitchers' duel"
+      ],
+      "recap": {
+        "status": "Final",
+        "venue": "Wrigley Field",
+        "weather": "Partly Cloudy, 48°F, wind 4 mph, L To R",
+        "gameInfo": {
+          "attendance": 35497,
+          "firstPitch": "2026-04-19T18:20:00.000Z",
+          "gameDurationMinutes": 164
+        },
+        "decisions": {
+          "winner": {
+            "id": 573204,
+            "name": "Caleb Thielbar"
+          },
+          "loser": {
+            "id": 518886,
+            "name": "Craig Kimbrel"
+          },
+          "save": null
+        },
+        "linescore": {
+          "innings": [
+            {
+              "num": 1,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 2,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 3,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 4,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 5,
+              "home": 0,
+              "away": 1
+            },
+            {
+              "num": 6,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 7,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 8,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 9,
+              "home": 1,
+              "away": 0
+            },
+            {
+              "num": 10,
+              "home": 1,
+              "away": 0
+            }
+          ],
+          "totals": {
+            "home": {
+              "runs": 2,
+              "hits": 7,
+              "errors": 0
+            },
+            "away": {
+              "runs": 1,
+              "hits": 6,
+              "errors": 0
+            }
+          }
+        },
+        "scoringPlays": [
+          {
+            "inning": 5,
+            "halfInning": "top",
+            "description": "MJ Melendez homers (1) on a fly ball to right center field.",
+            "eventType": "home_run",
+            "rbi": 1,
+            "awayScore": 1,
+            "homeScore": 0,
+            "batter": "MJ Melendez",
+            "pitcher": "Javier Assad"
+          },
+          {
+            "inning": 9,
+            "halfInning": "bottom",
+            "description": "Michael Conforto doubles (3) on a line drive to right fielder Tyrone Taylor. Scott Kingery scores.",
+            "eventType": "double",
+            "rbi": 1,
+            "awayScore": 1,
+            "homeScore": 1,
+            "batter": "Michael Conforto",
+            "pitcher": "Devin Williams"
+          },
+          {
+            "inning": 10,
+            "halfInning": "bottom",
+            "description": "Nico Hoerner out on a sacrifice fly to right fielder Tyrone Taylor. Pete Crow-Armstrong scores.",
+            "eventType": "sac_fly",
+            "rbi": 1,
+            "awayScore": 1,
+            "homeScore": 2,
+            "batter": "Nico Hoerner",
+            "pitcher": "Craig Kimbrel"
+          }
+        ]
+      }
+    },
+    {
+      "gamePk": 824047,
+      "status": "Final",
+      "home": {
+        "id": 108,
+        "name": "Los Angeles Angels",
+        "score": 1,
+        "record": {
+          "wins": 11,
+          "losses": 12,
+          "pct": ".478"
+        }
+      },
+      "away": {
+        "id": 135,
+        "name": "San Diego Padres",
+        "score": 2,
+        "record": {
+          "wins": 15,
+          "losses": 7,
+          "pct": ".682"
+        }
+      },
+      "venue": "Angel Stadium",
+      "gameType": "R",
+      "dayNight": "day",
+      "notableReasons": [
+        "one-run game",
+        "pitchers' duel"
+      ],
+      "recap": {
+        "status": "Final",
+        "venue": "Angel Stadium",
+        "weather": "Cloudy, 78°F, wind 8 mph, R To L",
+        "gameInfo": {
+          "attendance": 44560,
+          "firstPitch": "2026-04-19T20:07:00.000Z",
+          "gameDurationMinutes": 172
+        },
+        "decisions": {
+          "winner": {
+            "id": 650633,
+            "name": "Michael King"
+          },
+          "loser": {
+            "id": 700712,
+            "name": "Walbert Urena"
+          },
+          "save": {
+            "id": 695243,
+            "name": "Mason Miller"
+          }
+        },
+        "linescore": {
+          "innings": [
+            {
+              "num": 1,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 2,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 3,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 4,
+              "home": 0,
+              "away": 1
+            },
+            {
+              "num": 5,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 6,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 7,
+              "home": 1,
+              "away": 1
+            },
+            {
+              "num": 8,
+              "home": 0,
+              "away": 0
+            },
+            {
+              "num": 9,
+              "home": 0,
+              "away": 0
+            }
+          ],
+          "totals": {
+            "home": {
+              "runs": 1,
+              "hits": 2,
+              "errors": 0
+            },
+            "away": {
+              "runs": 2,
+              "hits": 5,
+              "errors": 0
+            }
+          }
+        },
+        "scoringPlays": [
+          {
+            "inning": 4,
+            "halfInning": "top",
+            "description": "Xander Bogaerts singles on a sharp ground ball to center fielder Mike Trout. Fernando Tatis Jr. scores.",
+            "eventType": "single",
+            "rbi": 1,
+            "awayScore": 1,
+            "homeScore": 0,
+            "batter": "Xander Bogaerts",
+            "pitcher": "Walbert Urena"
+          },
+          {
+            "inning": 7,
+            "halfInning": "top",
+            "description": "Bryce Johnson singles on a ground ball to left fielder Josh Lowe. Xander Bogaerts scores. Gavin Sheets to 3rd.",
+            "eventType": "single",
+            "rbi": 1,
+            "awayScore": 2,
+            "homeScore": 0,
+            "batter": "Bryce Johnson",
+            "pitcher": "Sam Bachman"
+          },
+          {
+            "inning": 7,
+            "halfInning": "bottom",
+            "description": "Zach Neto grounds out, shortstop Xander Bogaerts to first baseman Gavin Sheets. Oswald Peraza scores.",
+            "eventType": "field_out",
+            "rbi": 1,
+            "awayScore": 2,
+            "homeScore": 1,
+            "batter": "Zach Neto",
+            "pitcher": "Bradgley Rodriguez"
+          }
+        ]
+      }
     }
   ],
   "cardinals": {
@@ -2101,6 +2565,186 @@
         ]
       }
     },
+    "recap": {
+      "status": "Final",
+      "venue": "Daikin Park",
+      "weather": "Roof Closed, 73°F, wind 0 mph, None",
+      "gameInfo": {
+        "attendance": 33491,
+        "firstPitch": "2026-04-19T18:10:00.000Z",
+        "gameDurationMinutes": 190
+      },
+      "decisions": {
+        "winner": {
+          "id": 676617,
+          "name": "Riley O'Brien"
+        },
+        "loser": {
+          "id": 687911,
+          "name": "Bryan King"
+        },
+        "save": {
+          "id": 700669,
+          "name": "Gordon Graceffo"
+        }
+      },
+      "linescore": {
+        "innings": [
+          {
+            "num": 1,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 2,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 3,
+            "home": 1,
+            "away": 0
+          },
+          {
+            "num": 4,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 5,
+            "home": 0,
+            "away": 4
+          },
+          {
+            "num": 6,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 7,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 8,
+            "home": 3,
+            "away": 0
+          },
+          {
+            "num": 9,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 10,
+            "home": 1,
+            "away": 3
+          }
+        ],
+        "totals": {
+          "home": {
+            "runs": 5,
+            "hits": 8,
+            "errors": 1
+          },
+          "away": {
+            "runs": 7,
+            "hits": 8,
+            "errors": 1
+          }
+        }
+      },
+      "scoringPlays": [
+        {
+          "inning": 3,
+          "halfInning": "bottom",
+          "description": "Carlos Correa out on a sacrifice fly to center fielder Victor Scott II. Taylor Trammell scores.",
+          "eventType": "sac_fly",
+          "rbi": 1,
+          "awayScore": 0,
+          "homeScore": 1,
+          "batter": "Carlos Correa",
+          "pitcher": "Matthew Liberatore"
+        },
+        {
+          "inning": 5,
+          "halfInning": "top",
+          "description": "Victor Scott II walks. Masyn Winn scores. Nathan Church to 3rd. Pedro Pagés to 2nd.",
+          "eventType": "walk",
+          "rbi": 1,
+          "awayScore": 1,
+          "homeScore": 1,
+          "batter": "Victor Scott II",
+          "pitcher": "Mike Burrows"
+        },
+        {
+          "inning": 5,
+          "halfInning": "top",
+          "description": "JJ Wetherholt singles on a line drive to right fielder Cam Smith. Nathan Church scores. Pedro Pagés scores. Victor Scott II to 3rd.",
+          "eventType": "single",
+          "rbi": 2,
+          "awayScore": 3,
+          "homeScore": 1,
+          "batter": "JJ Wetherholt",
+          "pitcher": "Mike Burrows"
+        },
+        {
+          "inning": 5,
+          "halfInning": "top",
+          "description": "Iván Herrera singles on a sharp line drive to left fielder Shay Whitcomb. Victor Scott II scores. JJ Wetherholt to 2nd.",
+          "eventType": "single",
+          "rbi": 1,
+          "awayScore": 4,
+          "homeScore": 1,
+          "batter": "Iván Herrera",
+          "pitcher": "Steven Okert"
+        },
+        {
+          "inning": 8,
+          "halfInning": "bottom",
+          "description": "Yordan Alvarez homers (10) on a fly ball to right field.",
+          "eventType": "home_run",
+          "rbi": 1,
+          "awayScore": 4,
+          "homeScore": 2,
+          "batter": "Yordan Alvarez",
+          "pitcher": "JoJo Romero"
+        },
+        {
+          "inning": 8,
+          "halfInning": "bottom",
+          "description": "Isaac Paredes singles on a line drive to right fielder Jordan Walker. Jose Altuve scores. Christian Walker scores.",
+          "eventType": "single",
+          "rbi": 2,
+          "awayScore": 4,
+          "homeScore": 4,
+          "batter": "Isaac Paredes",
+          "pitcher": "Riley O'Brien"
+        },
+        {
+          "inning": 10,
+          "halfInning": "top",
+          "description": "Masyn Winn doubles (4) on a ground ball to left fielder Dustin Harris. Iván Herrera scores. Jordan Walker scores. Ramón Urías scores.",
+          "eventType": "double",
+          "rbi": 3,
+          "awayScore": 7,
+          "homeScore": 4,
+          "batter": "Masyn Winn",
+          "pitcher": "Bryan King"
+        },
+        {
+          "inning": 10,
+          "halfInning": "bottom",
+          "description": "Jose Altuve singles on a ground ball to shortstop Masyn Winn. Taylor Trammell scores. Carlos Correa to 3rd.",
+          "eventType": "single",
+          "rbi": 1,
+          "awayScore": 7,
+          "homeScore": 5,
+          "batter": "Jose Altuve",
+          "pitcher": "Gordon Graceffo"
+        }
+      ]
+    },
     "injuries": [
       {
         "teamId": 138,
@@ -3585,6 +4229,112 @@
         ]
       }
     },
+    "recap": {
+      "status": "Final",
+      "venue": "Nationals Park",
+      "weather": "Cloudy, 51°F, wind 8 mph, L To R",
+      "gameInfo": {
+        "attendance": 20026,
+        "firstPitch": "2026-04-19T17:35:00.000Z",
+        "gameDurationMinutes": 148
+      },
+      "decisions": {
+        "winner": {
+          "id": 674841,
+          "name": "Andrew Alvarez"
+        },
+        "loser": {
+          "id": 592662,
+          "name": "Robbie Ray"
+        },
+        "save": null
+      },
+      "linescore": {
+        "innings": [
+          {
+            "num": 1,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 2,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 3,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 4,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 5,
+            "home": 3,
+            "away": 0
+          },
+          {
+            "num": 6,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 7,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 8,
+            "home": 0,
+            "away": 0
+          },
+          {
+            "num": 9,
+            "home": null,
+            "away": 0
+          }
+        ],
+        "totals": {
+          "home": {
+            "runs": 3,
+            "hits": 7,
+            "errors": 3
+          },
+          "away": {
+            "runs": 0,
+            "hits": 8,
+            "errors": 0
+          }
+        }
+      },
+      "scoringPlays": [
+        {
+          "inning": 5,
+          "halfInning": "bottom",
+          "description": "Keibert Ruiz doubles (3) on a line drive to left fielder Heliot Ramos. Nasim Nuñez scores.",
+          "eventType": "double",
+          "rbi": 1,
+          "awayScore": 0,
+          "homeScore": 1,
+          "batter": "Keibert Ruiz",
+          "pitcher": "Robbie Ray"
+        },
+        {
+          "inning": 5,
+          "halfInning": "bottom",
+          "description": "Curtis Mead homers (2) on a fly ball to left field. Keibert Ruiz scores.",
+          "eventType": "home_run",
+          "rbi": 2,
+          "awayScore": 0,
+          "homeScore": 3,
+          "batter": "Curtis Mead",
+          "pitcher": "Robbie Ray"
+        }
+      ]
+    },
     "injuries": [
       {
         "teamId": 120,
@@ -4311,7 +5061,7 @@
     }
   },
   "seasonProgress": {
-    "regularSeasonPct": 0.14067410076911588,
+    "regularSeasonPct": 0.14080566893170052,
     "daysToAllStar": 85,
     "daysToPlayoffs": 160,
     "daysToWorldSeriesEnd": 194,
