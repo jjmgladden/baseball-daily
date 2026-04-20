@@ -1,0 +1,42 @@
+# ===== Secrets (NEVER commit) =====
+.env
+.env.local
+.env.*.local
+credentials*.json
+secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# ===== Dependencies =====
+node_modules/
+
+# ===== Logs =====
+logs/
+*.log
+npm-debug.log*
+
+# ===== OS noise =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Editors =====
+.vscode/
+.idea/
+*.swp
+*~
+
+# ===== Local-only notes =====
+sessions/private/
+notes-private.md
+scratch/
+
+# ===== Build artifacts (none expected in Phase 1) =====
+dist/
+build/
+
+# ===== Chadwick CSVs — large, rebuildable =====
+# Run `node scripts/build-player-index.js` to re-download and rebuild the index.
+data/master/chadwick/

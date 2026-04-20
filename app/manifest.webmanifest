@@ -1,0 +1,19 @@
+{
+  "name": "Baseball Daily Intelligence",
+  "short_name": "Baseball Daily",
+  "description": "Automated daily MLB intelligence with Cardinals and Nationals focus.",
+  "start_url": "/app/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0E1821",
+  "theme_color": "#0E1821",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/app/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

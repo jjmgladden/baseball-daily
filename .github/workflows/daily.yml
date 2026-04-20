@@ -1,0 +1,46 @@
+name: Daily Ingestion
+
+# Runs the MLB ingestion every morning and commits a fresh snapshot.
+# Replaces the local run_daily.bat on Windows Task Scheduler.
+#
+# Cron time is 10:00 UTC = 5:00 AM Central Daylight Time.
+# During Central Standard Time (Nov-Mar) this fires at 4:00 AM local,
+# which is still well before the morning read — acceptable trade-off for
+# a single cron expression.
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch: {}   # allow manual "Run workflow" from the Actions tab
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # needed to commit the snapshot back to the repo
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch daily data
+        run: node ingestion/fetch-daily.js
+        env:
+          # Empty for now; add when YouTube ingestion is wired (KB-0003).
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
+      - name: Commit and push snapshot
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/snapshots/
+          if git diff --staged --quiet; then
+            echo "No snapshot changes to commit."
+          else
+            git commit -m "Daily snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi

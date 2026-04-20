@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated from MLB.com, Baseball Hall of Fame, Baseball Reference franchise pages, and Cardinals team history records",
+  "generatedAt": "2026-04-19",
+  "note": "Rosters of Hall of Famers and retired numbers are standing team records. Historic seasons are summaries, not comprehensive game recaps.",
+
+  "retiredNumbers": [
+    { "number": "1",  "player": "Ozzie Smith",      "retired": 1996, "note": "HOF shortstop, 13-time Gold Glove" },
+    { "number": "2",  "player": "Red Schoendienst", "retired": 1996, "note": "HOF 2B, later manager and coach for ~70 years with the organization" },
+    { "number": "6",  "player": "Stan Musial",      "retired": 1963, "note": "HOF 1969 · 3-time MVP · .331 career BA · 475 HR · 3,630 hits" },
+    { "number": "9",  "player": "Enos Slaughter",   "retired": 1996, "note": "HOF outfielder · 'Mad Dash' in 1946 World Series" },
+    { "number": "14", "player": "Ken Boyer",        "retired": 1984, "note": "1964 NL MVP · World Series champion" },
+    { "number": "17", "player": "Dizzy Dean",       "retired": 1974, "note": "HOF 1953 · 1934 NL MVP · last NL 30-game winner" },
+    { "number": "20", "player": "Lou Brock",        "retired": 1979, "note": "HOF outfielder · 938 career SB" },
+    { "number": "24", "player": "Whitey Herzog",    "retired": 2010, "note": "HOF manager · 1982 World Series champion" },
+    { "number": "42", "player": "Bruce Sutter",     "retired": 2006, "note": "HOF closer · split-finger fastball pioneer (also MLB-wide retirement for Jackie Robinson)" },
+    { "number": "45", "player": "Bob Gibson",       "retired": 1975, "note": "HOF 1981 · 1968 NL MVP/Cy Young · 1.12 ERA in 1968 · Game 1 WS-record 17 K vs Tigers" },
+    { "number": "85", "player": "August Busch Jr.", "retired": 1984, "note": "Team owner · number equals his age when honored" }
+  ],
+
+  "hallOfFamers": [
+    { "name": "Rogers Hornsby",            "position": "2B",       "stlYears": "1915-1926", "hofYear": 1942, "note": "Career .358 BA, second only to Cobb. Two Triple Crowns." },
+    { "name": "Grover Cleveland Alexander", "position": "SP",       "stlYears": "1926-1929", "hofYear": 1938, "note": "Game 7 strikeout of Tony Lazzeri sealed 1926 WS." },
+    { "name": "Jim Bottomley",             "position": "1B",       "stlYears": "1922-1932", "hofYear": 1974, "note": "1928 NL MVP." },
+    { "name": "Frankie Frisch",            "position": "2B/Mgr",   "stlYears": "1927-1937", "hofYear": 1947, "note": "Player-manager of the 1934 Gas House Gang." },
+    { "name": "Chick Hafey",               "position": "OF",       "stlYears": "1924-1931", "hofYear": 1971, "note": "1931 NL batting champion." },
+    { "name": "Dizzy Dean",                "position": "SP",       "stlYears": "1930-1937", "hofYear": 1953, "note": "30-7 in 1934, last NL 30-game winner." },
+    { "name": "Joe Medwick",               "position": "OF",       "stlYears": "1932-1940", "hofYear": 1968, "note": "1937 NL Triple Crown winner." },
+    { "name": "Johnny Mize",               "position": "1B",       "stlYears": "1936-1941", "hofYear": 1981, "note": "Three-time NL HR leader." },
+    { "name": "Enos Slaughter",            "position": "OF",       "stlYears": "1938-1953", "hofYear": 1985, "note": "'Mad Dash' to score winning run in Game 7 of 1946 WS." },
+    { "name": "Stan Musial",               "position": "OF/1B",    "stlYears": "1941-1963", "hofYear": 1969, "note": "The standard Cardinal. 24-time All-Star." },
+    { "name": "Red Schoendienst",          "position": "2B/Mgr",   "stlYears": "1945-1956, 1961-1963", "hofYear": 1989, "note": "Manager of 1967 and 1968 pennant winners." },
+    { "name": "Bob Gibson",                "position": "SP",       "stlYears": "1959-1975", "hofYear": 1981, "note": "1968 MVP/Cy Young. 1.12 ERA that year led to the mound being lowered in 1969." },
+    { "name": "Lou Brock",                 "position": "OF",       "stlYears": "1964-1979", "hofYear": 1985, "note": "Traded from Cubs for Ernie Broglio — one of the most lopsided trades in MLB history." },
+    { "name": "Steve Carlton",             "position": "SP",       "stlYears": "1965-1971", "hofYear": 1994, "note": "Won four Cy Youngs after leaving for Philadelphia." },
+    { "name": "Ted Simmons",               "position": "C",        "stlYears": "1968-1980", "hofYear": 2020, "note": "Eight-time All-Star switch-hitting catcher." },
+    { "name": "Ozzie Smith",               "position": "SS",       "stlYears": "1982-1996", "hofYear": 2002, "note": "Perhaps the greatest defensive shortstop ever. 'Go Crazy, Folks!' HR in 1985 NLCS." },
+    { "name": "Bruce Sutter",              "position": "RP",       "stlYears": "1981-1984", "hofYear": 2006, "note": "Won 1982 WS Game 7, throwing the final pitch." },
+    { "name": "Whitey Herzog",             "position": "Mgr",      "stlYears": "1980-1990", "hofYear": 2010, "note": "Architect of Whiteyball — speed, defense, pitching." },
+    { "name": "Tony La Russa",             "position": "Mgr",      "stlYears": "1996-2011", "hofYear": 2014, "note": "Two World Series titles (2006, 2011). 3rd all-time in wins as manager." }
+  ],
+
+  "historicSeasons": [
+    {
+      "year": 1926,
+      "finish": "NL pennant, beat Yankees in 7",
+      "headline": "First championship",
+      "description": "Rogers Hornsby player-manager. Grover Cleveland Alexander — picked up mid-season — struck out Tony Lazzeri in Game 7 with the bases loaded to preserve the title."
+    },
+    {
+      "year": 1934,
+      "finish": "World Series champions",
+      "headline": "The Gas House Gang",
+      "description": "Dizzy Dean 30-7, brother Paul 19-11. Beat Detroit in 7. Joe Medwick ejected from Game 7 for his own safety after being pelted with fruit by Tigers fans."
+    },
+    {
+      "year": 1942,
+      "finish": "World Series champions",
+      "headline": "Musial era begins",
+      "description": "Stan Musial's first full season. Cardinals won 106 games and beat the Yankees in 5 — New York's first WS loss since 1926."
+    },
+    {
+      "year": 1944,
+      "finish": "World Series champions",
+      "headline": "Streetcar Series",
+      "description": "Cardinals beat the St. Louis Browns in the only all-St. Louis World Series, played entirely at Sportsman's Park."
+    },
+    {
+      "year": 1946,
+      "finish": "World Series champions",
+      "headline": "The Mad Dash",
+      "description": "Enos Slaughter scored from first on a single in the 8th of Game 7 against the Red Sox, winning the title. Musial's first postseason MVP-caliber season."
+    },
+    {
+      "year": 1964,
+      "finish": "World Series champions",
+      "headline": "Gibson arrives",
+      "description": "Philadelphia's late-season collapse handed the Cardinals the pennant. Bob Gibson won Games 5 and 7 over the Yankees. Ken Boyer won NL MVP."
+    },
+    {
+      "year": 1967,
+      "finish": "World Series champions",
+      "headline": "El Birdos",
+      "description": "Lou Brock set the WS record for steals (7). Gibson won three games in the Series over Boston."
+    },
+    {
+      "year": 1968,
+      "finish": "NL pennant, lost WS in 7",
+      "headline": "Year of the Pitcher",
+      "description": "Gibson's 1.12 ERA and 13 shutouts. Lost Game 7 to Mickey Lolich and the Tigers. The mound was lowered for 1969 partly in response to this season."
+    },
+    {
+      "year": 1982,
+      "finish": "World Series champions",
+      "headline": "Whiteyball",
+      "description": "Whitey Herzog's first title. Bruce Sutter threw the final pitch of Game 7 against Milwaukee. Ozzie Smith's first season in St. Louis."
+    },
+    {
+      "year": 1985,
+      "finish": "NL pennant, lost WS in 7",
+      "headline": "The Denkinger Call",
+      "description": "Ozzie Smith's 'Go Crazy, Folks!' walk-off HR clinched NLCS vs Dodgers. Lost WS to Royals after a controversial call by 1B umpire Don Denkinger in Game 6."
+    },
+    {
+      "year": 2006,
+      "finish": "World Series champions",
+      "headline": "Pujols era peak",
+      "description": "Beat Detroit in 5. Cardinals won 83 regular-season games — fewest for any WS champion since 1888."
+    },
+    {
+      "year": 2011,
+      "finish": "World Series champions",
+      "headline": "The Rally Squirrel",
+      "description": "10.5 games back in late August, Cardinals made the playoffs on the final day. Came within one strike of losing twice in Game 6 vs Texas. Won Game 7 the next night."
+    }
+  ],
+
+  "traditions": [
+    {
+      "name": "The Rally Squirrel",
+      "description": "During Game 4 of the 2011 NLDS at Busch Stadium, a squirrel ran across home plate during a pitch. It returned for Game 5 and became the unofficial mascot of the 2011 championship run."
+    },
+    {
+      "name": "Clydesdales",
+      "description": "The Anheuser-Busch Clydesdales circle the warning track on Opening Day and for special occasions — a tradition dating to 1933 when August Busch Sr. used Clydesdales to deliver the first Budweiser after Prohibition's end."
+    },
+    {
+      "name": "Two birds on the bat",
+      "description": "The classic Cardinals logo — two cardinals perched on a baseball bat — was inspired by Allie May Schmidt, who saw cardinals at a church picnic in 1921 and sketched the image. Used ever since."
+    }
+  ]
+}

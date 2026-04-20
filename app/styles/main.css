@@ -1,0 +1,541 @@
+/* =========================================================================
+   Baseball Daily Intelligence — Stylesheet v3
+   Dark theme per project CSS-variable standard.
+   ========================================================================= */
+
+:root {
+  --text-primary:   #FFFFFF;
+  --text-secondary: #E8EAED;
+  --text-muted:     #C4C7CC;
+
+  --bg-primary:     #0E1821;
+  --bg-secondary:   #152230;
+  --bg-card:        #1E3148;
+  --bg-card-hover:  #27405E;
+
+  --accent-cards:   #C41E3A;
+  --accent-nats:    #AB0003;
+  --accent-gold:    #FEDB00;
+  --accent-info:    #00B4D8;
+  --accent-good:    #4ADE80;
+  --accent-bad:     #F87171;
+  --accent-warn:    #F59E0B;
+
+  --border:         #2A3F5A;
+
+  --radius:         8px;
+  --radius-lg:      12px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-mono: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent-info); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Topbar + tabs ---------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+.brand-icon { font-size: 1.4rem; }
+
+.tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.tab {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.tab:hover { background: var(--bg-card); color: var(--text-primary); }
+.tab:focus-visible { outline: 2px solid var(--accent-info); outline-offset: 2px; }
+.tab.active { background: var(--accent-cards); color: var(--text-primary); font-weight: 600; }
+
+/* ---------- Main / panels ---------- */
+
+main { padding: 1.5rem; max-width: 1400px; margin: 0 auto; }
+.panel { display: none; }
+.panel.active { display: block; }
+
+h1, h2, h3 { color: var(--text-primary); margin-top: 0; }
+h1 { font-size: 1.6rem; margin-bottom: 1rem; }
+h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin: 1.5rem 0 1rem; }
+h3 { font-size: 1.05rem; color: var(--text-secondary); margin: 0 0 0.75rem; }
+
+p { color: var(--text-secondary); }
+.muted { color: var(--text-muted); }
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--bg-secondary);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+pre { padding: 0.75rem; overflow-x: auto; border: 1px solid var(--border); }
+
+/* ---------- Cards ---------- */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.card.pinned-cards { border-left: 4px solid var(--accent-cards); }
+.card.pinned-nats  { border-left: 4px solid var(--accent-nats); }
+
+/* ---------- Grid ---------- */
+
+.grid { display: grid; gap: 1rem; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.grid-6 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+/* ---------- Game rows ---------- */
+
+.game-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.game-row:last-child { border-bottom: none; }
+
+.team-line { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; }
+.team-line + .team-line { margin-top: 0.35rem; }
+
+.team-name { font-weight: 500; color: var(--text-primary); }
+.team-score {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  min-width: 2.2rem;
+  text-align: right;
+  color: var(--text-secondary);
+}
+.team-score.winner { color: var(--accent-gold); }
+
+.status-pill {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* ---------- Season progress ---------- */
+
+.progress-block { margin-bottom: 1rem; }
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.35rem;
+}
+.progress-bar { height: 10px; background: var(--bg-secondary); border-radius: 999px; overflow: hidden; }
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-info), var(--accent-gold));
+  transition: width 0.4s ease;
+}
+
+/* ---------- Standings ---------- */
+
+.standings-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; color: var(--text-primary); }
+.standings-table th, .standings-table td { padding: 0.4rem 0.6rem; text-align: left; }
+.standings-table th { color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+.standings-table td { border-bottom: 1px solid var(--border); }
+.standings-table tr:last-child td { border-bottom: none; }
+.standings-table td.num { font-family: var(--font-mono); text-align: right; }
+.standings-table tr.highlight-cards td { background: rgba(196, 30, 58, 0.15); }
+.standings-table tr.highlight-nats  td { background: rgba(171, 0,  3, 0.15); }
+
+/* ---------- Injuries ---------- */
+
+.injury-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  background: var(--accent-warn);
+  color: #0E1821;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+}
+.injury-details { margin-top: 0.75rem; }
+.injury-list { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+.injury-list li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  font-size: 0.9rem;
+}
+.injury-list li:last-child { border-bottom: none; }
+.injury-status {
+  color: var(--accent-warn);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  min-width: 6rem;
+}
+
+/* ---------- On This Day ---------- */
+
+.on-this-day-list { list-style: none; padding: 0; margin: 0; }
+.on-this-day-list li {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.on-this-day-list li:last-child { border-bottom: none; }
+
+.year-badge {
+  display: inline-block;
+  min-width: 3rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--accent-info);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ---------- Trades / trivia ---------- */
+
+.trade-list { list-style: none; padding: 0; margin: 0; }
+.trade-list li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: 0.9rem;
+}
+.trade-list li:last-child { border-bottom: none; }
+
+.trivia-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-info);
+  margin-bottom: 0.4rem;
+}
+.trivia-question { font-size: 1.05rem; margin-bottom: 0.75rem; }
+.trivia-answer { margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-secondary); border-radius: var(--radius); border-left: 3px solid var(--accent-gold); }
+.btn-reveal {
+  background: var(--accent-info);
+  color: var(--bg-primary);
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.btn-reveal:hover { filter: brightness(1.1); }
+
+/* ---------- Recent form / streak ---------- */
+
+.streak-pill {
+  display: inline-block;
+  padding: 0.15rem 0.65rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.streak-pill.streak-win  { background: rgba(74, 222, 128, 0.2); color: var(--accent-good); border-color: var(--accent-good); }
+.streak-pill.streak-loss { background: rgba(248, 113, 113, 0.2); color: var(--accent-bad); border-color: var(--accent-bad); }
+
+.form-strip {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.form-game {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: default;
+}
+.form-game.g-w { background: rgba(74, 222, 128, 0.25); color: var(--accent-good); }
+.form-game.g-l { background: rgba(248, 113, 113, 0.25); color: var(--accent-bad); }
+
+/* ---------- Search / players ---------- */
+
+.search-bar { display: flex; gap: 0.5rem; }
+.search-input {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.search-input:focus {
+  outline: 2px solid var(--accent-info);
+  outline-offset: 0;
+  border-color: var(--accent-info);
+}
+
+.player-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  position: relative;
+}
+.player-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-info);
+}
+.player-card:active { transform: translateY(1px); }
+.player-name { font-weight: 600; margin-bottom: 0.2rem; }
+
+.player-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.player-actions { display: flex; gap: 0.25rem; flex-shrink: 0; }
+.btn-star, .btn-compare {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 1.9rem;
+  height: 1.9rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-star:hover   { border-color: var(--accent-gold); color: var(--accent-gold); }
+.btn-star.active  { background: var(--accent-gold); color: var(--bg-primary); border-color: var(--accent-gold); }
+.btn-compare:hover{ border-color: var(--accent-info); color: var(--accent-info); }
+
+.player-detail .external-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ---------- Comparison ---------- */
+
+.comparison-card { border-left: 4px solid var(--accent-info); }
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.comparison-slot {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem;
+}
+.comparison-slot.empty { border-style: dashed; text-align: center; padding: 2rem 0.85rem; }
+.comparison-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-info);
+  margin-bottom: 0.25rem;
+}
+.cmp-list { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.85rem; margin: 0.5rem 0 0; font-size: 0.9rem; }
+.cmp-list dt { color: var(--text-muted); }
+.cmp-list dd { margin: 0; color: var(--text-primary); }
+.comparison-summary { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--text-secondary); }
+
+/* ---------- Team cards / Franchise timeline ---------- */
+
+.team-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.team-card:hover { background: var(--bg-card-hover); border-color: var(--accent-info); }
+.team-card-name { font-weight: 600; margin-bottom: 0.2rem; }
+.team-card-stats { display: flex; gap: 1rem; font-size: 0.85rem; margin-top: 0.6rem; }
+
+.franchise-timeline { list-style: none; padding: 0; margin: 0; }
+.franchise-timeline li {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.franchise-timeline li:last-child { border-bottom: none; }
+
+.era-list { list-style: none; padding: 0; margin: 0; }
+.era-list li { padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+.era-list li:last-child { border-bottom: none; }
+
+.lineage-compact {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- Cardinals tab specifics ---------- */
+
+.retired-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+.retired-slot {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-cards);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  text-align: center;
+}
+.retired-number {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.retired-name { font-weight: 600; font-size: 0.95rem; }
+.retired-note { font-size: 0.8rem; margin-top: 0.25rem; }
+
+.season-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; }
+.season-year {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+.season-finish { font-size: 0.85rem; }
+
+.hof-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.hof-table th, .hof-table td { padding: 0.4rem 0.6rem; text-align: left; border-bottom: 1px solid var(--border); }
+.hof-table tr:last-child td { border-bottom: none; }
+.hof-table th { color: var(--text-muted); font-weight: 500; }
+.hof-table td.num { font-family: var(--font-mono); text-align: right; }
+
+/* ---------- Stories ---------- */
+
+.story-featured { border-left: 4px solid var(--accent-gold); }
+.story-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-info);
+  margin-bottom: 0.4rem;
+}
+.story-teaser { font-style: italic; }
+.story-body p { margin: 0.75rem 0; line-height: 1.65; }
+.story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.story-card:hover { background: var(--bg-card-hover); border-color: var(--accent-gold); }
+
+.category-filter { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+.tag {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tag.active { background: var(--accent-info); color: var(--bg-primary); border-color: var(--accent-info); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.5rem; }
+
+/* ---------- Utility ---------- */
+
+.loading { text-align: center; padding: 3rem; color: var(--text-muted); }
+.empty { padding: 2rem; color: var(--text-muted); text-align: center; }
+
+/* ---------- Footer ---------- */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}

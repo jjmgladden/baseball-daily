@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated from public biographies, MLB historical records, and Hall of Fame references",
+  "generatedAt": "2026-04-19",
+  "note": "Seed of 20 stories. Rotated daily on the Stories tab. Expand via additions to this file — no schema change required. All facts are drawn from commonly-cited public records; see each story's sources for verification pointers.",
+  "stories": [
+    {
+      "id": "bob-feller-navy-volunteer",
+      "title": "Bob Feller: First MLB Player to Enlist After Pearl Harbor",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "Cleveland's 23-year-old ace volunteered on December 8, 1941 and served four years as a Navy gunnery officer aboard the USS Alabama.",
+      "body": "Bob Feller was already a six-time All-Star and MLB's strikeout leader when the attack on Pearl Harbor came on December 7, 1941. The next day, Feller drove to Chicago and enlisted in the Navy, becoming the first American professional athlete to volunteer after the attack. He served as a gun captain aboard the battleship USS Alabama, earning eight battle stars in both the Atlantic and Pacific theaters. Feller returned to Cleveland in 1945 and pitched through 1956, finishing with 266 wins and 2,581 strikeouts. He was inducted into the Hall of Fame in 1962 and often said the war was the greatest honor of his life, not baseball.",
+      "tags": ["military", "wwii", "indians", "cleveland", "enlistment"],
+      "sources": ["National Baseball Hall of Fame bio", "USS Alabama Memorial Park records"]
+    },
+    {
+      "id": "ted-williams-korea-pilot",
+      "title": "Ted Williams: Marine Pilot in Two Wars",
+      "category": "military",
+      "era": "WWII/Korea",
+      "teaser": "The last .400 hitter missed nearly five prime seasons flying combat missions — including 39 in Korea, several as John Glenn's wingman.",
+      "body": "Ted Williams trained as a Marine aviator during WWII but did not see combat. Recalled to active duty for the Korean War in 1952, he flew 39 combat missions as an F9F Panther pilot with VMF-311. He crash-landed a burning aircraft after being hit by enemy fire and walked away. On several missions he flew as wingman to Major John Glenn, the future astronaut and senator. Williams returned to Boston partway through 1953, missing parts of five total seasons to military service. He retired in 1960 with a .344 career batting average, the 1941 .406 season, and two Triple Crowns.",
+      "tags": ["military", "wwii", "korea", "red-sox", "boston", "marine-corps"],
+      "sources": ["Marine Corps University archives", "Ted Williams biography (Leigh Montville)"]
+    },
+    {
+      "id": "warren-spahn-bulge",
+      "title": "Warren Spahn: Bronze Star at the Battle of the Bulge",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "The winningest left-hander in MLB history earned a battlefield commission and the Bronze Star defending a critical bridge.",
+      "body": "Warren Spahn made his MLB debut in April 1942, then entered the Army. As a combat engineer with the 276th Engineer Battalion, Spahn fought at the Battle of the Bulge and was part of the force that captured and defended the Ludendorff Bridge at Remagen — the only intact bridge across the Rhine. He received a battlefield commission to second lieutenant, the Bronze Star, and a Purple Heart after being wounded by shrapnel. He returned to the Braves in 1946 at age 25 and went on to win 363 games, still the most by any left-handed pitcher in MLB history.",
+      "tags": ["military", "wwii", "braves", "battle-of-the-bulge", "bronze-star"],
+      "sources": ["U.S. Army 276th Engineer Battalion records", "Baseball Hall of Fame"]
+    },
+    {
+      "id": "yogi-berra-dday",
+      "title": "Yogi Berra: Gunner's Mate at D-Day",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "Nineteen years old and a career minor-leaguer, the future Yankees catcher fired rockets off Omaha Beach on June 6, 1944.",
+      "body": "Before his 10 World Series rings and 18 All-Star selections, Yogi Berra served as a gunner's mate aboard the USS Bayfield, an attack transport leading the Normandy invasion. On D-Day he was assigned to an LCSS (Landing Craft Support, Small) firing rockets at German positions to cover the initial infantry landings on Omaha Beach. Berra later said the mission was more exciting than any baseball game. He returned from the Navy to the Yankees in 1946 and debuted in September of that year.",
+      "tags": ["military", "wwii", "yankees", "d-day", "navy"],
+      "sources": ["U.S. Navy personnel records", "Yogi Berra Museum archives"]
+    },
+    {
+      "id": "jerry-coleman-two-wars",
+      "title": "Jerry Coleman: The Only MLB Player to See Combat in Two Wars",
+      "category": "military",
+      "era": "WWII/Korea",
+      "teaser": "A Yankees All-Star and later a Padres broadcaster, Coleman flew 120 combat missions across WWII and Korea.",
+      "body": "Jerry Coleman was the only major-league player to see combat in both World War II and the Korean War. A Marine dive-bomber pilot, he flew 57 combat missions in the Pacific during WWII and another 63 during Korea, earning two Distinguished Flying Crosses and 13 Air Medals. He played for the Yankees from 1949 to 1957, winning four World Series and the 1950 World Series MVP. Coleman later became the beloved radio voice of the San Diego Padres from 1972 to 2014 (with a one-year break to manage the team in 1980).",
+      "tags": ["military", "wwii", "korea", "yankees", "padres", "marine-corps"],
+      "sources": ["Marine Corps historical records", "Ford C. Frick Award citation"]
+    },
+    {
+      "id": "jackie-robinson-military",
+      "title": "Jackie Robinson: Court-Martialed for Refusing a Bus Driver",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "Two years before Rosa Parks, a young Army lieutenant refused to move to the back of a military bus — and was acquitted at court-martial.",
+      "body": "In July 1944, two years before breaking MLB's color barrier, Army Lt. Jackie Robinson boarded a bus at Camp Hood, Texas and refused the driver's order to move to the back. Military Police arrested him, and he faced a court-martial on charges including insubordination. Robinson was acquitted of all charges and received an honorable discharge a few months later. The incident foreshadowed both his civil rights legacy and the 1947 Brooklyn Dodgers debut that would integrate modern MLB.",
+      "tags": ["military", "wwii", "civil-rights", "dodgers", "army"],
+      "sources": ["U.S. Army court-martial transcripts (declassified)", "Arnold Rampersad biography"]
+    },
+    {
+      "id": "clemente-plane-crash",
+      "title": "Roberto Clemente: Killed Delivering Aid to Nicaragua",
+      "category": "charity",
+      "era": "1970s",
+      "teaser": "On New Year's Eve 1972, Clemente boarded an overloaded plane carrying earthquake relief to Managua. It never arrived.",
+      "body": "After the December 23, 1972 earthquake devastated Managua, Nicaragua, Roberto Clemente personally organized relief flights because he had learned that earlier shipments were being diverted by the Somoza regime. On December 31 he boarded a heavily overloaded DC-7 from San Juan with the plan of overseeing distribution himself. The plane crashed into the Atlantic shortly after takeoff. Clemente's body was never recovered. He was 38 years old, had exactly 3,000 career hits, and was the first Latin American player inducted into the Hall of Fame (1973, waiver of the five-year waiting period). MLB's annual humanitarian award bears his name.",
+      "tags": ["charity", "pirates", "latin-american", "humanitarian"],
+      "sources": ["Federal Aviation Administration crash report", "Baseball Hall of Fame"]
+    },
+    {
+      "id": "hank-greenberg-first-draftee",
+      "title": "Hank Greenberg: First MLB Player Drafted for WWII",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "The reigning AL MVP was drafted in 1941, discharged on December 5, then re-enlisted two days after Pearl Harbor.",
+      "body": "Hank Greenberg had just won the 1940 AL MVP and led Detroit to the World Series when he was drafted in May 1941. He served at Fort Custer and Camp Livingston, then was honorably discharged on December 5, 1941 under a law releasing draftees over 28. Two days later, Pearl Harbor was attacked. Greenberg immediately re-enlisted — becoming the first MLB player to do so — and served four and a half years, most of them with the Army Air Forces in the China-Burma-India theater. He returned to the Tigers in mid-1945 and hit a pennant-clinching grand slam in his first week back.",
+      "tags": ["military", "wwii", "tigers", "jewish-history", "army-air-forces"],
+      "sources": ["Detroit Historical Society", "Aviva Kempner documentary sources"]
+    },
+    {
+      "id": "emmett-ashford-first-black-umpire",
+      "title": "Emmett Ashford: First Black Umpire in MLB",
+      "category": "umpires",
+      "era": "1960s",
+      "teaser": "On April 11, 1966, a 51-year-old umpire from Los Angeles became the first Black man to umpire a major-league game.",
+      "body": "Emmett Ashford worked his way up through Pacific Coast League crews during the 1950s, becoming the first Black umpire in professional baseball in 1951. Fifteen years later, on April 11, 1966, he worked the plate for a game between Cleveland and Washington, becoming the first Black umpire in MLB history. Ashford was known for his showmanship and sharp out-calls. He retired in 1970 after the season's end. The Society for American Baseball Research (SABR) has documented his full career; his MLB career was short but historically singular.",
+      "tags": ["umpires", "civil-rights", "historic-firsts"],
+      "sources": ["SABR BioProject", "MLB historical records"]
+    },
+    {
+      "id": "doug-harvey-god",
+      "title": "Doug Harvey: The Umpire They Called 'God'",
+      "category": "umpires",
+      "era": "1960s-1990s",
+      "teaser": "Harvey's thirty-one-year NL career was so authoritative that players called him God. He was inducted into Cooperstown in 2010.",
+      "body": "Doug Harvey umpired in the National League from 1962 to 1992 — 4,673 games, 9 NL Championship Series, and 5 World Series. He was called 'God' for the finality of his calls and his refusal to be intimidated. A lifelong student of the rule book, he often corrected league officials on interpretation. Harvey was elected to the Hall of Fame by the Veterans Committee in 2010, becoming only the ninth umpire so honored. He died in 2018.",
+      "tags": ["umpires", "hall-of-fame"],
+      "sources": ["Baseball Hall of Fame plaque", "NL records"]
+    },
+    {
+      "id": "branch-rickey-signs-robinson",
+      "title": "Branch Rickey: Faith, Ethics, and the Signing of Jackie Robinson",
+      "category": "faith",
+      "era": "1940s",
+      "teaser": "A devout Methodist who never worked on Sundays as a player, Rickey made signing Robinson a moral mission, not a marketing move.",
+      "body": "Branch Rickey was a Methodist who had refused to play on Sundays during his own brief catching career, and he carried that ethical framework into his executive work. As Dodgers president in 1945, he began scouting Black players with the intent of integrating MLB. Rickey signed Jackie Robinson in October 1945 after a famous three-hour meeting in which he tested whether Robinson could absorb the abuse that would come without retaliating. Rickey told Robinson he needed a Black player 'with the guts not to fight back.' Robinson debuted with Brooklyn in April 1947. Rickey later integrated the Pirates with Clemente and others, and said his proudest achievement was the Robinson signing.",
+      "tags": ["faith", "civil-rights", "dodgers", "executives", "methodist"],
+      "sources": ["Jules Tygiel, 'Baseball's Great Experiment'", "Rickey's own papers at Library of Congress"]
+    },
+    {
+      "id": "mariano-rivera-ministry",
+      "title": "Mariano Rivera: From Panama Fisherman to Pentecostal Minister",
+      "category": "faith",
+      "era": "Current",
+      "teaser": "The only unanimously elected Hall of Famer is an ordained minister who has preached throughout Latin America and funded his own church in New Rochelle.",
+      "body": "Mariano Rivera grew up in Puerto Caimito, Panama, working on his father's fishing boat before signing with the Yankees in 1990. He became a Christian during his minor-league years and has been vocal about his faith throughout a career that produced 652 saves (MLB record), 13 All-Star selections, and five World Series rings. After retiring in 2013 he purchased an abandoned church in New Rochelle, NY and converted it into the Refugio de Esperanza (Refuge of Hope) congregation, where he preaches. He is ordained in the Pentecostal tradition and has led mission trips across Central and South America. In 2019 he became the first player unanimously elected to the Hall of Fame.",
+      "tags": ["faith", "yankees", "hall-of-fame", "panama"],
+      "sources": ["Rivera's memoir 'The Closer'", "Refugio de Esperanza public records"]
+    },
+    {
+      "id": "pujols-family-foundation",
+      "title": "Albert Pujols's Foundation and Down Syndrome Advocacy",
+      "category": "charity",
+      "era": "Current",
+      "teaser": "After his daughter Isabella was born with Down syndrome, Pujols built one of MLB's most visible family foundations.",
+      "body": "Albert Pujols married Deidre Corona in 2000; her three-month-old daughter Isabella, who had Down syndrome, was part of the family from the start. The Pujols Family Foundation launched in 2005 with a mission focused on Down syndrome awareness, family support, and poverty relief in the Dominican Republic. Annual events include a prom night for adults with Down syndrome and medical mission trips to Santo Domingo. Pujols himself naturalized as a U.S. citizen in 2007 and received the Roberto Clemente Award in 2008 for humanitarian work. He retired from MLB in 2022 with 703 home runs.",
+      "tags": ["charity", "faith", "cardinals", "angels", "down-syndrome", "dominican-republic"],
+      "sources": ["Pujols Family Foundation public records", "MLB Roberto Clemente Award citation"]
+    },
+    {
+      "id": "larry-doby-al-first",
+      "title": "Larry Doby: The Second Man to Break the Color Barrier",
+      "category": "civil-rights",
+      "era": "1940s",
+      "teaser": "Eleven weeks after Jackie Robinson, Doby debuted for Cleveland — the first Black player in the American League.",
+      "body": "Larry Doby served in the Navy in the South Pacific during World War II before resuming his Negro Leagues career with the Newark Eagles. On July 5, 1947 — 11 weeks after Jackie Robinson's Brooklyn debut — he pinch-hit for the Cleveland Indians, becoming the first Black player in the American League. Doby received less national attention than Robinson but faced the same hostility. He led the AL in home runs in 1952 and 1954 and helped Cleveland win the 1948 World Series. He was inducted into the Hall of Fame in 1998. In 1978 he became the second Black manager in MLB when he managed the Chicago White Sox.",
+      "tags": ["civil-rights", "military", "wwii", "indians", "navy", "historic-firsts"],
+      "sources": ["Joseph Thomas Moore biography", "National Baseball Hall of Fame"]
+    },
+    {
+      "id": "monte-irvin-negro-leagues",
+      "title": "Monte Irvin: Army Service, Negro Leagues, and Integration",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "Irvin was considered for the color-barrier role that went to Robinson. He served in the Army, then starred for the NY Giants.",
+      "body": "Monte Irvin starred for the Newark Eagles in the Negro National League before being drafted into the Army in 1943. He served three years in an engineering battalion in Europe, returning in 1946 to resume his Negro Leagues career. Branch Rickey had considered Irvin for the Dodgers' color-barrier signing, but concluded Irvin needed time to regain form after the war. Irvin signed with the Giants in 1949, becoming one of the first Black players in the NL. He batted .299 across eight MLB seasons, played in two World Series, and was elected to the Hall of Fame in 1973.",
+      "tags": ["military", "wwii", "civil-rights", "giants", "negro-leagues"],
+      "sources": ["Irvin autobiography 'Nice Guys Finish First'", "Hall of Fame records"]
+    },
+    {
+      "id": "hoyt-wilhelm-knuckleball-purple-heart",
+      "title": "Hoyt Wilhelm: Purple Heart at the Bulge, Then a 21-Year MLB Career",
+      "category": "military",
+      "era": "WWII",
+      "teaser": "Hit by shrapnel in the back at the Battle of the Bulge, Wilhelm didn't debut in MLB until age 29 — then pitched until he was 49.",
+      "body": "Hoyt Wilhelm was drafted in 1942 and fought as an Army infantryman in Europe, earning a Purple Heart after shrapnel struck his back during the Battle of the Bulge. The wound never fully left his spine; he carried fragments for decades. After the war he worked his way through the minors and did not reach MLB until 1952, at age 29. His knuckleball kept him in the majors for 21 seasons across nine teams. He retired in 1972 at age 49, at the time the oldest position player or pitcher in MLB. Wilhelm was the first relief pitcher elected to the Hall of Fame (1985).",
+      "tags": ["military", "wwii", "giants", "battle-of-the-bulge", "purple-heart", "knuckleball"],
+      "sources": ["U.S. Army records", "Hall of Fame plaque"]
+    },
+    {
+      "id": "cardinals-gashouse-gang",
+      "title": "The Gas House Gang: Depression-Era Cardinals",
+      "category": "cardinals",
+      "era": "1930s",
+      "teaser": "They played like carnival barkers and won the 1934 World Series with 49 wins from the Dean brothers alone.",
+      "body": "The 1934 Cardinals — nicknamed the Gas House Gang for their scrappy, unkempt style — won 95 games and beat Detroit in the World Series. Dizzy Dean won 30 games that year (the last NL pitcher to do so); his brother Paul 'Daffy' Dean added 19. Leftfielder Joe Medwick led the NL in triples and RBIs. Shortstop Leo Durocher and third baseman Pepper Martin gave the team its brawler identity. Medwick was pulled from Game 7 of the 1934 Series after Tigers fans pelted him with fruit, becoming the first (and only) player ejected from a World Series game for his own safety. The nickname came from a newspaperman's line that the team 'looked like the gas house gang' after a rainy, dirty doubleheader.",
+      "tags": ["cardinals", "history", "world-series", "depression-era"],
+      "sources": ["St. Louis Post-Dispatch archives", "Stan Musial Museum"]
+    },
+    {
+      "id": "walter-johnson-big-train",
+      "title": "Walter Johnson: The Big Train of Washington",
+      "category": "washington",
+      "era": "1907-1927",
+      "teaser": "417 wins. 3,509 strikeouts. 21 seasons, all in Washington. One World Series title, earned at age 36.",
+      "body": "Walter Johnson signed with the Washington Senators in 1907 and never pitched for another team. Over 21 seasons he won 417 games (second all-time), recorded 110 shutouts (still the all-time record), and struck out 3,509 batters — a mark that stood until Nolan Ryan broke it in 1983. Washington was a second-division team for most of Johnson's career, but in 1924 the Senators finally won a pennant. Johnson lost two starts in the World Series but came in in relief of Game 7 and earned the win as Washington beat the Giants for the franchise's only championship while in the capital. He was one of the original five Hall of Fame inductees in 1936.",
+      "tags": ["senators", "washington", "hall-of-fame", "fastball"],
+      "sources": ["Henry W. Thomas biography", "Hall of Fame inaugural class records"]
+    },
+    {
+      "id": "satchel-paige-ageless",
+      "title": "Satchel Paige: Pitching Past Sixty",
+      "category": "negro-leagues",
+      "era": "1920s-1960s",
+      "teaser": "The first Negro Leagues star elected to Cooperstown made his MLB debut at 42 and his final appearance at 59.",
+      "body": "Satchel Paige was already a legend in the Negro Leagues when Cleveland owner Bill Veeck signed him in July 1948. At age 42 he became the oldest rookie in MLB history, going 6-1 with a 2.48 ERA down the stretch as the Indians won the pennant and World Series. Paige pitched in the majors off and on through 1953, then made one final appearance for the Kansas City Athletics on September 25, 1965 — at age 59, he pitched three shutout innings against the Red Sox. He was elected to the Hall of Fame in 1971 as the first Negro Leagues star so honored, with the Hall initially planning a separate wing until Paige insisted on full integration of the plaque gallery.",
+      "tags": ["negro-leagues", "indians", "hall-of-fame", "civil-rights"],
+      "sources": ["Larry Tye biography 'Satchel'", "Hall of Fame records"]
+    },
+    {
+      "id": "armando-galarraga-jim-joyce",
+      "title": "The Perfect Game That Wasn't: Galarraga and Jim Joyce",
+      "category": "umpires",
+      "era": "2010",
+      "teaser": "Two outs from perfection, then a blown call. What made it a story was what happened after.",
+      "body": "On June 2, 2010, Detroit's Armando Galarraga retired the first 26 Cleveland batters. With two outs in the ninth, Jason Donald hit a grounder fielded by Miguel Cabrera, and umpire Jim Joyce called Donald safe at first — despite video later showing a clear out. Galarraga got the next batter for the one-hitter. Joyce watched the replay after the game, walked into the Tigers clubhouse, and apologized with tears in his eyes. Galarraga accepted immediately. The next day Galarraga delivered the Tigers' lineup card to Joyce before the game in a public reconciliation. Commissioner Bud Selig declined to overturn the call. The incident eventually contributed to MLB's adoption of expanded instant replay in 2014. Galarraga and Joyce later co-wrote a book titled 'Nobody's Perfect.'",
+      "tags": ["umpires", "tigers", "replay", "sportsmanship"],
+      "sources": ["Detroit Tigers game records", "MLB official report"]
+    }
+  ]
+}

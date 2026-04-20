@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Baseball Daily Intelligence icon -->
+  <!-- Deep-navy background per project theme -->
+  <rect width="512" height="512" rx="96" fill="#0E1821"/>
+  <!-- Baseball ball -->
+  <circle cx="256" cy="256" r="170" fill="#F8F6EE" stroke="#1E3148" stroke-width="4"/>
+  <!-- Red stitch seams (Cardinals red) -->
+  <g fill="none" stroke="#C41E3A" stroke-width="8" stroke-linecap="round">
+    <!-- Left-arc seam -->
+    <path d="M 128 180 Q 200 256 128 332"/>
+    <!-- Right-arc seam -->
+    <path d="M 384 180 Q 312 256 384 332"/>
+  </g>
+  <!-- Stitch hatches on left seam -->
+  <g stroke="#C41E3A" stroke-width="4" stroke-linecap="round">
+    <line x1="148" y1="196" x2="138" y2="188"/>
+    <line x1="152" y1="226" x2="140" y2="222"/>
+    <line x1="154" y1="256" x2="140" y2="256"/>
+    <line x1="152" y1="286" x2="140" y2="290"/>
+    <line x1="148" y1="316" x2="138" y2="324"/>
+  </g>
+  <!-- Stitch hatches on right seam -->
+  <g stroke="#C41E3A" stroke-width="4" stroke-linecap="round">
+    <line x1="364" y1="196" x2="374" y2="188"/>
+    <line x1="360" y1="226" x2="372" y2="222"/>
+    <line x1="358" y1="256" x2="372" y2="256"/>
+    <line x1="360" y1="286" x2="372" y2="290"/>
+    <line x1="364" y1="316" x2="374" y2="324"/>
+  </g>
+</svg>

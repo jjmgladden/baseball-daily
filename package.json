@@ -1,0 +1,15 @@
+{
+  "name": "baseball-daily",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Baseball Daily Intelligence — automated MLB updates, historical research, and curated baseball stories. Cardinals primary, Nationals secondary.",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "fetch:daily": "node ingestion/fetch-daily.js",
+    "serve": "node scripts/serve.js",
+    "check-secrets": "node scripts/check-secrets.js"
+  },
+  "dependencies": {}
+}
