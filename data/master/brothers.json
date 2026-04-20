@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "source": "Curated brother pairs, trios, and groups who played in MLB.",
+  "generatedAt": "2026-04-20",
+  "note": "From approved themed batch 'Brothers in Baseball' (2026-04-20). Each entry links to authoritative sources for verification.",
+  "entries": [
+    {
+      "id": "bros-dimaggio",
+      "title": "Joe, Dom, and Vince DiMaggio",
+      "era": "1937-1953",
+      "headline": "Three brothers in MLB outfields in the 1940s.",
+      "members": [
+        { "name": "Joe DiMaggio",   "note": "Yankees CF 1936-51. HOF 1955. 3 MVPs, 56-game streak, 9 World Series titles." },
+        { "name": "Dom DiMaggio",   "note": "Red Sox CF 1940-53. 7-time All-Star. Missed 3 seasons to WWII Navy service." },
+        { "name": "Vince DiMaggio", "note": "Five NL teams 1937-46. Two-time All-Star." }
+      ],
+      "links": [
+        { "label": "Joe DiMaggio — HoF", "url": "https://baseballhall.org/hall-of-famers/dimaggio-joe" },
+        { "label": "Dom DiMaggio — SABR", "url": "https://sabr.org/bioproj/person/dom-dimaggio/" },
+        { "label": "Wikipedia — DiMaggio family", "url": "https://en.wikipedia.org/wiki/DiMaggio_family" }
+      ]
+    },
+    {
+      "id": "bros-alou",
+      "title": "Felipe, Matty, and Jesús Alou",
+      "era": "1958-1979",
+      "headline": "On September 10 and 15, 1963, all three Alou brothers played in the same Giants outfield simultaneously — the only time three brothers have done so in MLB history.",
+      "members": [
+        { "name": "Felipe Alou", "note": "3-time All-Star. Later a 14-year MLB manager (Expos, Giants)." },
+        { "name": "Matty Alou",  "note": "1966 NL batting champion (.342)." },
+        { "name": "Jesús Alou",  "note": "15-year MLB outfielder." }
+      ],
+      "links": [
+        { "label": "SABR — Alou brothers in same outfield", "url": "https://sabr.org/gamesproj/game/september-15-1963-three-alou-brothers-play-in-same-outfield/" },
+        { "label": "Wikipedia — Alou family", "url": "https://en.wikipedia.org/wiki/Alou_family" },
+        { "label": "Felipe Alou — BBref", "url": "https://www.baseball-reference.com/players/a/aloufe01.shtml" }
+      ]
+    },
+    {
+      "id": "bros-waner",
+      "title": "Paul and Lloyd Waner",
+      "era": "1926-1945",
+      "headline": "Both Hall of Famers. Both Pittsburgh Pirates. Roughly 5,600 combined career hits — among the most by any brother pair in MLB history.",
+      "members": [
+        { "name": "Paul \"Big Poison\" Waner",  "note": "1927 NL MVP. 3,152 career hits. HOF 1952." },
+        { "name": "Lloyd \"Little Poison\" Waner", "note": "2,459 career hits. HOF 1967 (Veterans Committee)." }
+      ],
+      "links": [
+        { "label": "Paul Waner — HoF", "url": "https://baseballhall.org/hall-of-famers/waner-paul" },
+        { "label": "Lloyd Waner — HoF", "url": "https://baseballhall.org/hall-of-famers/waner-lloyd" },
+        { "label": "Wikipedia — Waner brothers", "url": "https://en.wikipedia.org/wiki/Paul_Waner" }
+      ]
+    },
+    {
+      "id": "bros-dean",
+      "title": "Dizzy and Paul \"Daffy\" Dean",
+      "era": "1930-1941",
+      "headline": "49 combined wins for the 1934 Gas House Gang Cardinals (Dizzy 30-7, Paul 19-11). Each brother won two games in the 1934 World Series.",
+      "members": [
+        { "name": "Dizzy Dean", "note": "1934 NL MVP. Last NL pitcher to win 30 games in a season. HOF 1953." },
+        { "name": "Paul Dean",  "note": "19-11 as a 21-year-old rookie in 1934. Arm injuries cut his career short." }
+      ],
+      "links": [
+        { "label": "Dizzy Dean — HoF", "url": "https://baseballhall.org/hall-of-famers/dean-dizzy" },
+        { "label": "Paul Dean — BBref", "url": "https://www.baseball-reference.com/players/d/deanpa01.shtml" },
+        { "label": "1934 World Series — Wikipedia", "url": "https://en.wikipedia.org/wiki/1934_World_Series" }
+      ]
+    },
+    {
+      "id": "bros-delahanty",
+      "title": "The five Delahanty brothers",
+      "era": "1888-1915",
+      "headline": "Ed, Frank, Jim, Joe, and Tom Delahanty — the only five-brother combination to appear in MLB. Ed's career .346 batting average is still among the highest ever recorded.",
+      "members": [
+        { "name": "Ed Delahanty",   "note": "HOF 1945. Career .346 BA — 5th all-time. Died mysteriously at Niagara Falls in 1903." },
+        { "name": "Frank Delahanty","note": "Six MLB seasons 1905-1915." },
+        { "name": "Jim Delahanty",  "note": "13 MLB seasons 1901-1915." },
+        { "name": "Joe Delahanty",  "note": "Three seasons with the Cardinals 1907-1909." },
+        { "name": "Tom Delahanty",  "note": "Brief 1890s MLB appearances." }
+      ],
+      "links": [
+        { "label": "Ed Delahanty — HoF", "url": "https://baseballhall.org/hall-of-famers/delahanty-ed" },
+        { "label": "SABR — Delahanty brothers", "url": "https://sabr.org/bioproj/person/ed-delahanty/" },
+        { "label": "Wikipedia — Delahanty family", "url": "https://en.wikipedia.org/wiki/Delahanty_family" }
+      ]
+    },
+    {
+      "id": "bros-niekro",
+      "title": "Phil and Joe Niekro",
+      "era": "1964-1987",
+      "headline": "539 combined career wins — the most by any brother pair in MLB history. Both knuckleball specialists.",
+      "members": [
+        { "name": "Phil Niekro", "note": "318 career wins. 5-time All-Star. HOF 1997." },
+        { "name": "Joe Niekro",  "note": "221 career wins. 1979 NL co-wins leader (21). Longtime Astros ace." }
+      ],
+      "links": [
+        { "label": "Phil Niekro — HoF", "url": "https://baseballhall.org/hall-of-famers/niekro-phil" },
+        { "label": "Joe Niekro — BBref", "url": "https://www.baseball-reference.com/players/n/niekrjo01.shtml" },
+        { "label": "Wikipedia — Niekro brothers", "url": "https://en.wikipedia.org/wiki/Phil_Niekro" }
+      ]
+    },
+    {
+      "id": "bros-perry",
+      "title": "Gaylord and Jim Perry",
+      "era": "1959-1983",
+      "headline": "The only brothers to both win a Cy Young Award. Gaylord remains one of very few pitchers to win the award in both leagues.",
+      "members": [
+        { "name": "Gaylord Perry", "note": "1972 AL Cy Young (Cleveland), 1978 NL Cy Young (San Diego). 314 career wins. HOF 1991." },
+        { "name": "Jim Perry",     "note": "1970 AL Cy Young (Minnesota). 215 career wins. Three-time All-Star." }
+      ],
+      "links": [
+        { "label": "Gaylord Perry — HoF", "url": "https://baseballhall.org/hall-of-famers/perry-gaylord" },
+        { "label": "Jim Perry — BBref", "url": "https://www.baseball-reference.com/players/p/perryji01.shtml" },
+        { "label": "Wikipedia — Gaylord Perry", "url": "https://en.wikipedia.org/wiki/Gaylord_Perry" }
+      ]
+    },
+    {
+      "id": "bros-molina",
+      "title": "Bengie, José, and Yadier Molina",
+      "era": "1998-2022",
+      "headline": "Three catching brothers, all World Series champions.",
+      "members": [
+        { "name": "Bengie Molina", "note": "2002 WS champion (Angels). Two-time Gold Glove." },
+        { "name": "José Molina",   "note": "WS rings with Yankees (2009) and earlier. Renowned pitch framer." },
+        { "name": "Yadier Molina", "note": "Cardinals 2004-2022. 2006 and 2011 WS champion. Nine Gold Gloves." }
+      ],
+      "links": [
+        { "label": "Yadier Molina — BBref", "url": "https://www.baseball-reference.com/players/m/molinya01.shtml" },
+        { "label": "Bengie Molina — BBref", "url": "https://www.baseball-reference.com/players/m/molinbe01.shtml" },
+        { "label": "José Molina — BBref", "url": "https://www.baseball-reference.com/players/m/molinjo01.shtml" }
+      ]
+    },
+    {
+      "id": "bros-boyer",
+      "title": "Ken and Clete Boyer",
+      "era": "1955-1971",
+      "headline": "Opposing third basemen in the 1964 World Series — Cards' Ken (that year's NL MVP) and Yankees' Clete. Both homered in Game 7; the Cardinals won the series.",
+      "members": [
+        { "name": "Ken Boyer",   "note": "1964 NL MVP. 7-time All-Star. Retired #14 by the Cardinals." },
+        { "name": "Clete Boyer", "note": "Gold Glove 3B for the Yankees. Homered off teammate Ken in 1964 WS Game 7." }
+      ],
+      "links": [
+        { "label": "Ken Boyer — BBref", "url": "https://www.baseball-reference.com/players/b/boyerke01.shtml" },
+        { "label": "Clete Boyer — BBref", "url": "https://www.baseball-reference.com/players/b/boyercl01.shtml" },
+        { "label": "1964 World Series — Wikipedia", "url": "https://en.wikipedia.org/wiki/1964_World_Series" }
+      ]
+    },
+    {
+      "id": "bros-upton",
+      "title": "B.J. (Melvin) and Justin Upton",
+      "era": "2004-2022",
+      "headline": "Both first-round draft picks. Played together in the Atlanta Braves outfield in 2013.",
+      "members": [
+        { "name": "B.J. (Melvin) Upton", "note": "2002 #2 overall draft pick. Two-time All-Star CF." },
+        { "name": "Justin Upton",         "note": "2005 #1 overall draft pick. Four-time All-Star. 324+ career HRs." }
+      ],
+      "links": [
+        { "label": "Justin Upton — BBref", "url": "https://www.baseball-reference.com/players/u/uptonju01.shtml" },
+        { "label": "B.J. Upton — BBref", "url": "https://www.baseball-reference.com/players/u/uptonbj01.shtml" }
+      ]
+    }
+  ]
+}

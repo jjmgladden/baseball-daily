@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated external references for non-Cardinals-specific MLB legends — broadcasters, coaches, executives, Negro Leagues stars, and all-time great players. Populated from approved weekly curation batches.",
+  "generatedAt": "2026-04-20",
+  "note": "Each entry links to authoritative third-party sources (Baseball Reference, SABR BioProject, Hall of Fame, Wikipedia, MLB.com, YouTube). Expand via approved weekly batches.",
+  "legends": [
+    {
+      "id": "brd-scully-vin",
+      "name": "Vin Scully",
+      "role": "Broadcaster",
+      "era": "1950-2016",
+      "category": "broadcaster",
+      "headline": "Voice of the Dodgers for 67 seasons — the longest tenure with one team in sports broadcasting history. Called Hank Aaron's 715th HR, Koufax's perfect game, Gibson's 1988 walk-off, and countless other defining moments. Ford C. Frick Award 1982.",
+      "links": [
+        { "label": "Baseball Hall of Fame (Frick Award)", "url": "https://baseballhall.org/discover-more/stories/frick-awards/scully-vin" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/vin-scully/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Vin_Scully" },
+        { "label": "MLB.com tribute", "url": "https://www.mlb.com/news/vin-scully-career-highlights" },
+        { "label": "YouTube — Scully calls", "url": "https://www.youtube.com/results?search_query=vin+scully+greatest+calls" }
+      ]
+    },
+    {
+      "id": "cch-anderson-sparky",
+      "name": "Sparky Anderson",
+      "role": "Manager",
+      "era": "1970-1995",
+      "category": "coach",
+      "headline": "First manager to win a World Series in both leagues (Reds 1975-76, Tigers 1984). 2,194 career wins. Architect of the Big Red Machine. Hall of Fame 2000.",
+      "links": [
+        { "label": "Baseball Reference (as manager)", "url": "https://www.baseball-reference.com/managers/anderspa01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/sparky-anderson/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/anderson-sparky" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Sparky_Anderson" }
+      ]
+    },
+    {
+      "id": "cch-mack-connie",
+      "name": "Connie Mack",
+      "role": "Manager / Owner",
+      "era": "1894-1950",
+      "category": "coach",
+      "headline": "Managed the Philadelphia Athletics for 50 consecutive seasons (1901-1950). 3,731 career wins — the all-time record, likely never to be broken. Five World Series championships. Hall of Fame 1937.",
+      "links": [
+        { "label": "Baseball Reference (as manager)", "url": "https://www.baseball-reference.com/managers/mackco01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/connie-mack/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/mack-connie" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Connie_Mack" }
+      ]
+    },
+    {
+      "id": "cch-stengel-casey",
+      "name": "Casey Stengel",
+      "role": "Manager",
+      "era": "1934-1965",
+      "category": "coach",
+      "headline": "Managed seven Yankees World Series champions (1949-1953 consecutive + 1956, 1958). Also led the expansion 1962 Mets. Famously quotable 'Stengelese.' Hall of Fame 1966.",
+      "links": [
+        { "label": "Baseball Reference (as manager)", "url": "https://www.baseball-reference.com/managers/stengca01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/casey-stengel/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/stengel-casey" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Casey_Stengel" }
+      ]
+    },
+    {
+      "id": "exc-landis-kenesaw",
+      "name": "Kenesaw Mountain Landis",
+      "role": "Commissioner",
+      "era": "1920-1944",
+      "category": "executive",
+      "headline": "First MLB commissioner, appointed after the 1919 Black Sox scandal. Banned the eight implicated White Sox players for life. Reshaped baseball's governance. Hall of Fame 1944.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/kenesaw-mountain-landis/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/landis-kenesaw-mountain" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Kenesaw_Mountain_Landis" }
+      ]
+    },
+    {
+      "id": "exc-veeck-bill",
+      "name": "Bill Veeck",
+      "role": "Owner / Showman",
+      "era": "1941-1980",
+      "category": "executive",
+      "headline": "Innovative owner of the Indians, Browns, and White Sox. Signed Larry Doby in 1947 to integrate the American League. Sent 3'7\" Eddie Gaedel to the plate in 1951. Invented the exploding scoreboard. Hall of Fame 1991.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/bill-veeck/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/veeck-bill" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Bill_Veeck" }
+      ]
+    },
+    {
+      "id": "ngl-charleston-oscar",
+      "name": "Oscar Charleston",
+      "role": "Outfielder / Manager",
+      "era": "1915-1941",
+      "category": "negro-leagues",
+      "headline": "Widely considered the greatest all-around Negro Leagues player. Bill James ranked him among the 10 best players in baseball history. Powerful left-handed hitter with speed and defensive brilliance. Hall of Fame 1976.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/oscar-charleston/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/charleston-oscar" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Oscar_Charleston" }
+      ]
+    },
+    {
+      "id": "ngl-gibson-josh",
+      "name": "Josh Gibson",
+      "role": "Catcher",
+      "era": "1930-1946",
+      "category": "negro-leagues",
+      "headline": "Widely considered the greatest catcher of all time. Negro Leagues career batting average reported above .370. MLB officially recognized his Negro Leagues statistics in 2020 — after that, he holds multiple MLB records. Died at 35 in January 1947, months before Jackie Robinson's debut.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/g/gibsojo01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/josh-gibson/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/gibson-josh" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Josh_Gibson" }
+      ]
+    },
+    {
+      "id": "ngl-oneil-buck",
+      "name": "Buck O'Neil",
+      "role": "First Baseman / Manager / Ambassador",
+      "era": "1937-1962 (playing) · 1962-2006 (beyond)",
+      "category": "negro-leagues",
+      "headline": "Kansas City Monarchs first baseman and later the first Black coach in MLB history (Cubs, 1962). Tireless Negro Leagues historian and ambassador for 40+ years after his playing career. Posthumous Hall of Fame 2022.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/buck-oneil/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/oneil-buck" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Buck_O%27Neil" },
+        { "label": "Negro Leagues Museum", "url": "https://nlbm.com/" }
+      ]
+    },
+    {
+      "id": "ngl-bell-cool-papa",
+      "name": "Cool Papa Bell",
+      "role": "Outfielder",
+      "era": "1922-1946",
+      "category": "negro-leagues",
+      "headline": "Famed for his speed. Satchel Paige said he was 'so fast he could turn off the light and be in bed before the room got dark.' Hall of Fame 1974.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/cool-papa-bell/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/bell-cool-papa" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Cool_Papa_Bell" }
+      ]
+    },
+    {
+      "id": "exc-rickey-branch",
+      "name": "Branch Rickey",
+      "role": "Executive",
+      "era": "1913-1964",
+      "category": "executive",
+      "headline": "Beyond signing Jackie Robinson in 1945 to integrate MLB: invented the modern farm system as Cardinals GM in the 1920s. Signed the first Venezuelan and Puerto Rican stars. Shaped baseball's front-office practice for generations. Hall of Fame 1967.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/branch-rickey/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/rickey-branch" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Branch_Rickey" }
+      ]
+    },
+    {
+      "id": "gen-bench-johnny",
+      "name": "Johnny Bench",
+      "role": "Catcher",
+      "era": "1967-1983",
+      "category": "player",
+      "headline": "Two-time NL MVP (1970, 1972). 10 Gold Gloves behind the plate. Widely considered the greatest catcher of all time. Big Red Machine's backbone. Hall of Fame 1989 (first-ballot, 96.4%).",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/b/benchjo01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/johnny-bench/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/bench-johnny" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Johnny_Bench" }
+      ]
+    },
+    {
+      "id": "gen-brett-george",
+      "name": "George Brett",
+      "role": "Third Baseman",
+      "era": "1973-1993",
+      "category": "player",
+      "headline": "1980 AL MVP (.390 batting average — the highest since Ted Williams). 13-time All-Star. 3,154 career hits. The 1983 Pine Tar Incident remains one of the most famous umpire disputes ever. Hall of Fame 1999.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/b/brettge01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/george-brett/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/brett-george" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/George_Brett" }
+      ]
+    },
+    {
+      "id": "gen-clemente-roberto",
+      "name": "Roberto Clemente",
+      "role": "Outfielder",
+      "era": "1955-1972",
+      "category": "player",
+      "headline": "First Latin American Hall of Famer (1973 — five-year waiting period waived after his death delivering earthquake relief to Nicaragua on New Year's Eve 1972). 1966 NL MVP. 3,000 career hits. 12 Gold Gloves. MLB's annual humanitarian award bears his name.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/c/clemero01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/roberto-clemente/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/clemente-roberto" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Roberto_Clemente" },
+        { "label": "Roberto Clemente Award", "url": "https://www.mlb.com/awards/clemente" }
+      ]
+    },
+    {
+      "id": "gen-cobb-ty",
+      "name": "Ty Cobb",
+      "role": "Outfielder",
+      "era": "1905-1928",
+      "category": "player",
+      "headline": "Career .366 batting average — the highest in MLB history. 4,189 hits (2nd all-time). 897 career stolen bases. First player elected to the Hall of Fame (1936, with Ruth, Wagner, Mathewson, and Walter Johnson).",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/c/cobbty01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/ty-cobb/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/cobb-ty" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ty_Cobb" }
+      ]
+    },
+    {
+      "id": "gen-dimaggio-joe",
+      "name": "Joe DiMaggio",
+      "role": "Center Fielder",
+      "era": "1936-1951",
+      "category": "player",
+      "headline": "56-game hitting streak in 1941 — still the MLB record, widely regarded as baseball's unbreakable record. Three-time AL MVP. Nine-time World Series champion with the Yankees. WWII veteran. Hall of Fame 1955.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/d/dimagjo01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/joe-dimaggio/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/dimaggio-joe" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Joe_DiMaggio" }
+      ]
+    },
+    {
+      "id": "gen-gehrig-lou",
+      "name": "Lou Gehrig",
+      "role": "First Baseman",
+      "era": "1923-1939",
+      "category": "player",
+      "headline": "'The Iron Horse.' 2,130 consecutive games — the record for 56 years until Cal Ripken Jr. Seven-time WS champion. 1934 Triple Crown. ALS forced retirement in 1939; his 'luckiest man on the face of the earth' farewell speech is one of the most famous in American sports.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/g/gehrilo01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/lou-gehrig/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/gehrig-lou" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Lou_Gehrig" }
+      ]
+    },
+    {
+      "id": "gen-griffey-ken",
+      "name": "Ken Griffey Jr.",
+      "role": "Center Fielder",
+      "era": "1989-2010",
+      "category": "player",
+      "headline": "1997 AL MVP. 630 career home runs (7th all-time). 10 Gold Gloves in center field. 13-time All-Star. Hall of Fame 2016 with 99.3% of the vote — a record at the time.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/g/griffke02.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/ken-griffey-jr/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/griffey-ken-jr" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ken_Griffey_Jr." }
+      ]
+    },
+    {
+      "id": "gen-gwynn-tony",
+      "name": "Tony Gwynn",
+      "role": "Outfielder",
+      "era": "1982-2001",
+      "category": "player",
+      "headline": "Eight NL batting titles — most by any NL player ever. Career .338 batting average. 3,141 career hits, all with the San Diego Padres across 20 seasons. Hall of Fame 2007. Died from salivary gland cancer in 2014 at age 54.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/g/gwynnto01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/tony-gwynn/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/gwynn-tony" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Tony_Gwynn" }
+      ]
+    },
+    {
+      "id": "gen-henderson-rickey",
+      "name": "Rickey Henderson",
+      "role": "Outfielder",
+      "era": "1979-2003",
+      "category": "player",
+      "headline": "1,406 career stolen bases — most in MLB history by nearly 500. 2,295 career runs scored — also the all-time record. 1990 AL MVP. 81 career leadoff home runs. Hall of Fame 2009.",
+      "links": [
+        { "label": "Baseball Reference", "url": "https://www.baseball-reference.com/players/h/henderi01.shtml" },
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/rickey-henderson/" },
+        { "label": "Hall of Fame", "url": "https://baseballhall.org/hall-of-famers/henderson-rickey" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Rickey_Henderson" }
+      ]
+    }
+  ]
+}

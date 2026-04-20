@@ -432,7 +432,9 @@
       "name": "Ty Cobb",
       "summary": "Career .366 batting average — highest in MLB history. 4,189 hits (2nd all-time). First player elected to the Hall of Fame (1936, with Ruth).",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-wagner-honus",
@@ -468,7 +470,9 @@
       "name": "Lou Gehrig",
       "summary": "'The Iron Horse.' 2,130 consecutive games. Seven-time WS champion with the Yankees. ALS forced retirement in 1939 — his 'luckiest man' speech is one of the most famous in sports history.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-dimaggio-joe",
@@ -477,7 +481,9 @@
       "name": "Joe DiMaggio",
       "summary": "56-game hitting streak in 1941 — still the MLB record. Three-time MVP. Nine-time WS champion. WWII veteran.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-williams-ted",
@@ -522,7 +528,9 @@
       "name": "Roberto Clemente",
       "summary": "First Latin American Hall of Famer (1973 — five-year wait waived after his death delivering earthquake aid to Nicaragua). 1966 NL MVP. 3,000 career hits.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-robinson-frank",
@@ -594,7 +602,9 @@
       "name": "George Brett",
       "summary": "1980 AL MVP (.390 batting average that season). 13-time All-Star. Pine Tar Incident of 1983 became one of the most famous umpire disputes ever.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-gwynn-tony",
@@ -603,7 +613,9 @@
       "name": "Tony Gwynn",
       "summary": "Eight NL batting titles. Career .338 average. 3,141 career hits — all with the Padres across 20 seasons. HOF 2007.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-henderson-rickey",
@@ -612,7 +624,9 @@
       "name": "Rickey Henderson",
       "summary": "1,406 career stolen bases — most in MLB history by nearly 500. 2,295 runs scored, also the all-time record. 1990 AL MVP.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-griffey-ken",
@@ -621,7 +635,9 @@
       "name": "Ken Griffey Jr.",
       "summary": "1997 AL MVP. 630 career HRs. 10 Gold Gloves in center field. Hall of Fame 2016 with 99.3% — a record at the time.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-jeter-derek",
@@ -702,7 +718,9 @@
       "name": "Johnny Bench",
       "summary": "Two-time NL MVP. 10 Gold Gloves behind the plate. Widely considered the greatest catcher of all time. Big Red Machine's backbone.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "gen-morgan-joe",
@@ -801,8 +819,9 @@
       "name": "Josh Gibson",
       "summary": "Widely considered the greatest catcher of all time. Negro Leagues career batting average reported above .370. MLB officially recognized his NL stats in 2020. Died at 35 in 1947, months before Jackie Robinson's debut.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "ngl-charleston-oscar",
@@ -811,8 +830,9 @@
       "name": "Oscar Charleston",
       "summary": "Widely considered the greatest all-around Negro Leagues player. Bill James ranked him among the 10 best players ever. HOF 1976.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "ngl-bell-cool-papa",
@@ -821,8 +841,9 @@
       "name": "Cool Papa Bell",
       "summary": "Famed for his speed — Satchel Paige said he was 'so fast he could turn off the light and be in bed before the room got dark.' HOF 1974.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "ngl-oneil-buck",
@@ -831,8 +852,9 @@
       "name": "Buck O'Neil",
       "summary": "Kansas City Monarchs first baseman. First Black coach in MLB (Cubs, 1962). Tireless Negro Leagues historian and ambassador. Posthumous HOF 2022.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "ngl-foster-rube",
@@ -904,8 +926,9 @@
       "name": "Vin Scully",
       "summary": "Voice of the Dodgers 1950-2016 — 67 seasons. Called Hank Aaron's 715th, Koufax's perfect game, Gibson's 1988 walk-off. Ford C. Frick Award 1982.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "brd-harwell-ernie",
@@ -968,8 +991,9 @@
       "name": "Connie Mack",
       "summary": "Managed the Philadelphia Athletics for 50 seasons (1901-1950). 3,731 career wins — the all-time record, likely never to be broken.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "cch-stengel-casey",
@@ -978,8 +1002,9 @@
       "name": "Casey Stengel",
       "summary": "Managed seven Yankees World Series champions (1949-1960). Also led the expansion 1962 Mets. Famously quotable. HOF 1966.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "cch-anderson-sparky",
@@ -988,8 +1013,9 @@
       "name": "Sparky Anderson",
       "summary": "First manager to win World Series in both leagues (Reds 1975-76, Tigers 1984). Big Red Machine architect. HOF 2000.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "cch-weaver-earl",
@@ -1061,7 +1087,9 @@
       "name": "Branch Rickey",
       "summary": "Beyond signing Jackie Robinson: invented the modern farm system in St. Louis in the 1920s. Signed the first Venezuelan and Puerto Rican stars. HOF 1967.",
       "priority": 1,
-      "status": "pending"
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "exc-veeck-bill",
@@ -1070,8 +1098,9 @@
       "name": "Bill Veeck",
       "summary": "Innovative owner (Indians, Browns, White Sox). Signed Larry Doby in 1947. Sent 3'7\" Eddie Gaedel to the plate in 1951. Invented the exploding scoreboard. HOF 1991.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "exc-miller-marvin",
@@ -1116,8 +1145,9 @@
       "name": "Kenesaw Mountain Landis",
       "summary": "First MLB commissioner (1920-44), appointed after the Black Sox scandal. Banned the eight White Sox players for life. HOF 1944.",
       "priority": 1,
-      "status": "scheduled",
-      "scheduledInIssue": 1
+      "status": "active",
+      "activatedAt": "2026-04-20",
+      "activatedInFile": "data/master/legends-general.json"
     },
     {
       "id": "mil-lewis-buddy",

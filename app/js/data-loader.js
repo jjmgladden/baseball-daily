@@ -42,3 +42,5 @@ export async function loadCardinalsDeep()     { return loadMaster('cardinals-dee
 export async function loadCardinalsLinks()    { return loadMaster('cardinals-links.json'); }
 export async function loadHistoryLinks()      { return loadMaster('history-links.json'); }
 export async function loadHistoricalVideos()  { return loadMaster('historical-videos.json'); }
+export async function loadLegendsGeneral()    { return loadMaster('legends-general.json'); }
+export async function loadBrothers()          { return loadMaster('brothers.json'); }
