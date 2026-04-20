@@ -47,9 +47,9 @@ Static types (Reference, Decision, Limitation) omit Tier.
   - `docs/youtube-api-setup.md` — step-by-step guide covering Google Cloud Console → `.env` → GitHub Secrets → verification
   - Graceful degradation: if key is missing, highlights arrays are empty; UI shows a polite placeholder instead of breaking.
 
-  **Remaining:** owner completes Google Cloud Console setup (Steps 1–6 in the setup doc), pastes key into local `.env` and GitHub Actions Secret `YOUTUBE_API_KEY`. Until then, the code runs but returns empty highlight arrays.
-- **Status:** Open (awaiting owner key acquisition — code ready)
-- **Cross-ref:** docs/youtube-api-setup.md · ingestion/fetch-highlights.js · ingestion/lib/youtube-api.js · app/js/components/highlights.js
+  **Activation completed 2026-04-20:** key created in Google Cloud Console "My First Project" (shared with owner's other Google APIs), restricted to YouTube Data API v3 only, pasted into local `.env` and GitHub Secret `YOUTUBE_API_KEY`. Verified end-to-end — local `npm run fetch:daily` returns 3 Cards + 3 Nats videos; cloud workflow log confirms `key set: true` with same results.
+- **Status:** Closed (fully operational)
+- **Cross-ref:** docs/youtube-api-setup.md · ingestion/fetch-highlights.js · ingestion/lib/youtube-api.js · ingestion/lib/env.js · app/js/components/highlights.js
 
 ### KB-0004 | Player index scope: all-time (Chadwick, 1871+)
 - **Type:** Decision
