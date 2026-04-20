@@ -44,3 +44,4 @@ export async function loadHistoryLinks()      { return loadMaster('history-links
 export async function loadHistoricalVideos()  { return loadMaster('historical-videos.json'); }
 export async function loadLegendsGeneral()    { return loadMaster('legends-general.json'); }
 export async function loadBrothers()          { return loadMaster('brothers.json'); }
+export async function loadStrangePlays()      { return loadMaster('strange-plays.json'); }

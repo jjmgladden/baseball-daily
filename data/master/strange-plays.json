@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "source": "Hand-curated from verified public records (SABR, Baseball Reference, MLB.com, Wikipedia). Each entry is a genuinely unusual or bizarre event in MLB history.",
+  "generatedAt": "2026-04-20",
+  "note": "Different from Iconic Moments (which celebrate greatness). These are oddities — forfeits, riots, bizarre individual feats, absurd officiating, and things you have to see to believe.",
+  "plays": [
+    {
+      "id": "strange-gaedel-1951",
+      "title": "Eddie Gaedel: the 3'7\" pinch hitter",
+      "date": "1951-08-19",
+      "era": "1950s",
+      "teams": ["St. Louis Browns", "Detroit Tigers"],
+      "description": "Browns owner Bill Veeck sent 3'7\" Eddie Gaedel to pinch-hit wearing uniform #1/8. He walked on four pitches and was pulled for a pinch runner. MLB voided his contract the next day. Career line: 1 plate appearance, 1 walk.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/eddie-gaedel/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Eddie_Gaedel" },
+        { "label": "YouTube — footage", "url": "https://www.youtube.com/results?search_query=eddie+gaedel+1951+at+bat" }
+      ]
+    },
+    {
+      "id": "strange-disco-1979",
+      "title": "Disco Demolition Night",
+      "date": "1979-07-12",
+      "era": "1970s",
+      "teams": ["Chicago White Sox", "Detroit Tigers"],
+      "description": "Between games of a doubleheader, a radio DJ blew up a crate of disco records in center field. Tens of thousands of fans stormed the field. The White Sox forfeited game two to Detroit — one of only a handful of forfeits in modern MLB history.",
+      "links": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Disco_Demolition_Night" },
+        { "label": "MLB.com retrospective", "url": "https://www.mlb.com/news/disco-demolition-night-40th-anniversary" },
+        { "label": "YouTube — news footage", "url": "https://www.youtube.com/results?search_query=disco+demolition+night+1979" }
+      ]
+    },
+    {
+      "id": "strange-ten-cent-beer-1974",
+      "title": "Ten Cent Beer Night",
+      "date": "1974-06-04",
+      "era": "1970s",
+      "teams": ["Cleveland Indians", "Texas Rangers"],
+      "description": "Cleveland offered 10-cent beer as a promotion. Thousands of intoxicated fans stormed the field in the 9th. Umpire Nestor Chylak declared a forfeit to the Rangers. MLB banned discount-alcohol promotions shortly after.",
+      "links": [
+        { "label": "SABR game account", "url": "https://sabr.org/gamesproj/game/june-4-1974-ten-cent-beer-night/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Ten_Cent_Beer_Night" },
+        { "label": "YouTube — archival", "url": "https://www.youtube.com/results?search_query=ten+cent+beer+night+1974" }
+      ]
+    },
+    {
+      "id": "strange-rick-monday-flag-1976",
+      "title": "Rick Monday saves the flag",
+      "date": "1976-04-25",
+      "era": "1970s",
+      "teams": ["Chicago Cubs", "Los Angeles Dodgers"],
+      "description": "Two protesters ran onto Dodger Stadium's outfield and attempted to set fire to an American flag. Cubs center fielder Rick Monday sprinted over and snatched it away before they could light it. Honored widely as one of baseball's most patriotic moments.",
+      "links": [
+        { "label": "MLB.com", "url": "https://www.mlb.com/news/rick-monday-flag-save" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Rick_Monday#Flag_rescue" },
+        { "label": "YouTube", "url": "https://www.youtube.com/results?search_query=rick+monday+saves+flag+1976" }
+      ]
+    },
+    {
+      "id": "strange-dock-ellis-lsd-1970",
+      "title": "Dock Ellis's LSD no-hitter",
+      "date": "1970-06-12",
+      "era": "1970s",
+      "teams": ["Pittsburgh Pirates", "San Diego Padres"],
+      "description": "Dock Ellis later said he was under the influence of LSD — believing he was pitching at the wrong stadium — when he threw a no-hitter against the Padres. He walked 8 batters and hit 1, but allowed no hits. The story became baseball folklore after his 1984 interview.",
+      "links": [
+        { "label": "SABR BioProject", "url": "https://sabr.org/bioproj/person/dock-ellis/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Dock_Ellis" },
+        { "label": "YouTube — NPR Radiolab animation", "url": "https://www.youtube.com/results?search_query=dock+ellis+lsd+no+hitter" }
+      ]
+    },
+    {
+      "id": "strange-merkle-1908",
+      "title": "Fred Merkle's Boner",
+      "date": "1908-09-23",
+      "era": "1900s",
+      "teams": ["New York Giants", "Chicago Cubs"],
+      "description": "With two out in the 9th, Giants runner Fred Merkle failed to touch second base on what appeared to be the winning hit. The Cubs appealed; umpires called him out, negating the run. The tied game was replayed, Chicago won, and went on to win the pennant — and the World Series. Merkle's name became baseball shorthand for 'a mistake.'",
+      "links": [
+        { "label": "SABR — Merkle's Boner", "url": "https://sabr.org/bioproj/person/fred-merkle/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Merkle%27s_Boner" }
+      ]
+    },
+    {
+      "id": "strange-canseco-head-hr-1993",
+      "title": "José Canseco's head home run",
+      "date": "1993-05-26",
+      "era": "1990s",
+      "teams": ["Texas Rangers", "Cleveland Indians"],
+      "description": "A fly ball to right field bounced off José Canseco's head and over the fence for a home run. Canseco joked about it for the rest of his career. The play is still one of the most replayed outfield bloopers in MLB history.",
+      "links": [
+        { "label": "MLB.com", "url": "https://www.mlb.com/news/jose-canseco-head-home-run" },
+        { "label": "YouTube — the play", "url": "https://www.youtube.com/results?search_query=jose+canseco+home+run+off+head+1993" }
+      ]
+    },
+    {
+      "id": "strange-randy-johnson-bird-2001",
+      "title": "Randy Johnson vs. the bird",
+      "date": "2001-03-24",
+      "era": "2000s",
+      "teams": ["Arizona Diamondbacks", "San Francisco Giants"],
+      "description": "During a spring-training game, Randy Johnson delivered a fastball that struck a dove mid-flight, killing the bird instantly. Both teams watched in stunned silence. The at-bat was recorded as no pitch. Johnson later said it was the strangest moment of his career.",
+      "links": [
+        { "label": "MLB.com retrospective", "url": "https://www.mlb.com/news/randy-johnson-bird-video" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Randy_Johnson#The_bird_incident" },
+        { "label": "YouTube", "url": "https://www.youtube.com/results?search_query=randy+johnson+hits+bird" }
+      ]
+    },
+    {
+      "id": "strange-pine-tar-1983",
+      "title": "The Pine Tar Game — George Brett",
+      "date": "1983-07-24",
+      "era": "1980s",
+      "teams": ["Kansas City Royals", "New York Yankees"],
+      "description": "Brett hit a 2-run HR in the 9th to put the Royals ahead. Yankees manager Billy Martin pointed out pine tar on Brett's bat exceeded the 18-inch legal limit; umpires ruled the HR invalid and Brett out. Brett erupted from the dugout in a now-iconic fury. AL president Lee MacPhail later overturned the ruling. The game resumed 25 days later with two outs in the top of the 9th and the HR reinstated.",
+      "links": [
+        { "label": "MLB.com", "url": "https://www.mlb.com/news/pine-tar-game-george-brett" },
+        { "label": "SABR", "url": "https://sabr.org/gamesproj/game/july-24-1983-pine-tar-game/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Pine_Tar_Incident" },
+        { "label": "YouTube — the ejection", "url": "https://www.youtube.com/results?search_query=george+brett+pine+tar+game+1983" }
+      ]
+    },
+    {
+      "id": "strange-haddix-12-perfect-1959",
+      "title": "Harvey Haddix: 12 perfect innings, and he lost",
+      "date": "1959-05-26",
+      "era": "1950s",
+      "teams": ["Pittsburgh Pirates", "Milwaukee Braves"],
+      "description": "Pirates' Harvey Haddix retired 36 consecutive Braves batters — the longest perfect-game streak in MLB history. An error in the 13th ended the perfect game; a Joe Adcock hit in the 13th ended his no-hitter and the game, 1-0. MLB later changed its rules so the game no longer counts as a perfect game despite 12 perfect innings.",
+      "links": [
+        { "label": "SABR game account", "url": "https://sabr.org/gamesproj/game/may-26-1959-harvey-haddix-throws-12-perfect-innings/" },
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Harvey_Haddix" }
+      ]
+    },
+    {
+      "id": "strange-bartman-2003",
+      "title": "The Steve Bartman foul ball",
+      "date": "2003-10-14",
+      "era": "2000s",
+      "teams": ["Chicago Cubs", "Florida Marlins"],
+      "description": "Cubs were 5 outs from the World Series in Game 6 of the NLCS when Luis Castillo hit a foul ball into the left field stands. Fan Steve Bartman reached for it, as did LF Moises Alou — the ball was deflected. The Cubs unraveled, losing Game 6 and Game 7. Bartman went into hiding for years; the Cubs presented him with a 2016 World Series ring in 2017.",
+      "links": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Steve_Bartman_incident" },
+        { "label": "ESPN 30 for 30 — Catching Hell", "url": "https://www.espn.com/30for30/film?page=catching-hell" }
+      ]
+    },
+    {
+      "id": "strange-jeffrey-maier-1996",
+      "title": "The Jeffrey Maier home run",
+      "date": "1996-10-09",
+      "era": "1990s",
+      "teams": ["New York Yankees", "Baltimore Orioles"],
+      "description": "Game 1 of the 1996 ALCS. Yankees shortstop Derek Jeter hit a fly ball to right field that Orioles RF Tony Tarasco appeared set to catch. 12-year-old fan Jeffrey Maier reached over the wall and pulled it into the stands. Umpire Rich Garcia ruled it a home run — no fan-interference call. Yankees won the game, the series, and the World Series. MLB added right-field instant replay partly in response.",
+      "links": [
+        { "label": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Jeffrey_Maier" },
+        { "label": "MLB.com retrospective", "url": "https://www.mlb.com/news/jeffrey-maier-home-run-1996" },
+        { "label": "YouTube", "url": "https://www.youtube.com/results?search_query=jeffrey+maier+1996+alcs" }
+      ]
+    }
+  ]
+}

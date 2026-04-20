@@ -13,6 +13,7 @@ import { renderTeams } from './tabs/teams.js';
 import { renderHistory } from './tabs/history.js';
 import { renderStories } from './tabs/stories.js';
 import { renderCardinals } from './tabs/cardinals.js';
+import { renderTrivia } from './tabs/trivia.js';
 import { attachSuggestHandler } from './components/suggest.js';
 import { showSplash } from './components/splash.js';
 
@@ -51,6 +52,7 @@ async function activateTab(name) {
       case 'teams':     await renderTeams(panel); break;
       case 'history':   await renderHistory(panel, state.snapshot); break;
       case 'stories':   await renderStories(panel); break;
+      case 'trivia':    await renderTrivia(panel); break;
       case 'cardinals': await renderCardinals(panel, state.snapshot); break;
       default:          panel.innerHTML = `<h1>${name}</h1>`;
     }

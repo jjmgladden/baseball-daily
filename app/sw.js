@@ -10,7 +10,7 @@
  * GitHub Pages subpath (/baseball-daily/app/).
  */
 
-const CACHE = 'baseball-daily-shell-v13';
+const CACHE = 'baseball-daily-shell-v14';
 
 const SHELL_FILES = [
   './',
@@ -26,6 +26,7 @@ const SHELL_FILES = [
   './js/tabs/players.js',
   './js/tabs/history.js',
   './js/tabs/stories.js',
+  './js/tabs/trivia.js',
   './js/components/favorites.js',
   './js/components/trivia.js',
   './js/components/streak.js',

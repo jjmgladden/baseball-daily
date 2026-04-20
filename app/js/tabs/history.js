@@ -8,18 +8,19 @@
  *   - All Franchises (compact list with link-outs)
  */
 
-import { loadFranchises, loadHistoryLinks, loadHistoricalVideos } from '../data-loader.js';
+import { loadFranchises, loadHistoryLinks, loadHistoricalVideos, loadStrangePlays } from '../data-loader.js';
 
 export async function renderHistory(root, snap) {
   if (!root) return;
   root.innerHTML = `<h1>History</h1><div class="card"><p class="loading">Loading…</p></div>`;
 
-  let franchisesData, historyLinks, videos;
+  let franchisesData, historyLinks, videos, strangePlays;
   try {
-    [franchisesData, historyLinks, videos] = await Promise.all([
+    [franchisesData, historyLinks, videos, strangePlays] = await Promise.all([
       loadFranchises(),
       loadHistoryLinks().catch(() => null),
       loadHistoricalVideos().catch(() => null),
+      loadStrangePlays().catch(() => null),
     ]);
   } catch (err) {
     root.innerHTML = `<h1>History</h1><div class="card"><p class="muted">${escapeHtml(err.message)}</p></div>`;
@@ -37,6 +38,8 @@ export async function renderHistory(root, snap) {
     ${renderOnThisDay(events)}
 
     ${renderIconicMoments(moments)}
+
+    ${renderStrangePlays(strangePlays?.plays || [])}
 
     <div class="card" style="border-left: 3px solid var(--accent-info);">
       <p class="muted" style="margin: 0;">Looking for legends (Vin Scully, Josh Gibson, Ken Griffey Jr., etc.) or brothers in baseball (DiMaggios, Alous, Waners, etc.)? They live on the <strong><a href="#" onclick="document.querySelector('[data-tab=stories]').click(); return false;">Stories</a></strong> tab now — fully searchable and filterable.</p>
@@ -85,6 +88,29 @@ function renderOnThisDay(events) {
           </li>
         `).join('')}
       </ul>
+    </div>
+  `;
+}
+
+function renderStrangePlays(plays) {
+  if (!plays.length) return '';
+  return `
+    <h2>Strangest Plays in History <span class="muted">(${plays.length})</span></h2>
+    <p class="muted" style="margin-bottom: 1rem;">
+      Oddities, bizarre feats, and you-have-to-see-it-to-believe-it moments.
+    </p>
+    <div class="grid grid-2">
+      ${plays.map(p => `
+        <div class="card strange-play">
+          <div class="iconic-header">
+            <span class="year-badge">${escapeHtml(p.date || p.era || '')}</span>
+            <h3>${escapeHtml(p.title || '')}</h3>
+          </div>
+          ${p.teams?.length ? `<div class="muted">${escapeHtml(p.teams.join(' vs '))}</div>` : ''}
+          <p>${escapeHtml(p.description || '')}</p>
+          ${renderLinkPills(p.links)}
+        </div>
+      `).join('')}
     </div>
   `;
 }
