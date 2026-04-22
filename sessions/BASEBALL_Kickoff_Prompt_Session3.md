@@ -69,25 +69,34 @@ Narrow single-feature session on 2026-04-22. Owner asked for a daily morning ema
 
 ## Top Priorities for Session 3 — Pick ONE Main Track
 
-### Option A — **Pickleball sibling project (spawns a SEPARATE Claude Code project)**
+### Option A — **Draft the Pickleball Session 1 kickoff prompt (inside THIS baseball session)**
 
-> **Important distinction:** If the owner picks this track, Session 3 of the Baseball project **does not continue into pickleball work**. Instead, the owner opens a brand-new Claude Code project in a different folder, and pickleball begins there as **Pickleball Session 1** — its own parallel timeline with its own CLAUDE.md, its own git repo, its own handoff/kickoff files, its own session numbering.
+> **Important distinction:** Pickleball is a SEPARATE Claude Code project — different folder, different CLAUDE.md, different git repo, different session numbering. Baseball Session 3 does **not** do pickleball Phase 0 planning. Instead, Session 3 leverages its warm baseball context to **draft a comprehensive, ready-to-paste kickoff prompt** for the brand-new pickleball Claude session. The owner then copy-pastes that prompt into a fresh Claude Code session in `...\Pickleball Project\`, and pickleball Phase 0 begins there.
 >
-> Baseball Session 3 effectively ends at "owner has decided to kick off pickleball" — Claude's role here is to produce a short handoff memo (see below) and then close baseball Session 3. The actual Phase 0 pickleball planning happens in the new Claude Code project, not this one.
+> **Rationale for this workflow (owner confirmed 2026-04-22):** Baseball Claude has warm context — knows file paths, critical rules, MODR conventions, architectural patterns, the owner's working style. Baking all of that into a single prompt is faster and more accurate than writing a memo for a human to re-translate to a cold pickleball Claude.
 
-**What the owner does to kick it off (outside Claude Code, then inside the new project):**
+**What Session 3 delivers:**
+
+1. A file at `sessions/PICKLEBALL_Session1_KickoffPrompt.md` (committed to the baseball repo), ~200-400 lines, containing:
+   - **Identity & context** — owner name, GitHub handle `jjmgladden`, brother in Virginia, working style (directive, ATP-gated, pushes back on overcomplication)
+   - **Project concept** — "Ozark Joe's Pickleball Daily Intelligence Report" (or whatever the owner chooses), equivalent scope to baseball
+   - **Critical Rules — verbatim copy from Baseball CLAUDE.md v12** (ATP, Secret Safety, Whole-number versioning, SW cache bump, Pre-push JS check, Flag-unrequested-features)
+   - **Architectural patterns to reuse** — static PWA, GitHub Actions ingestion, MODR handoff/kickoff convention, curation backlog + weekly-batch workflow, splash screen, email delivery mirror pattern
+   - **Absolute paths to baseball files for reference** — `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Baseball Project\CLAUDE.md`, `sessions\BASEBALL_Handoff_Prompt_V1.md`, `docs\Daily-Email-Setup-Guide.docx`, `docs\architecture.md`
+   - **Cross-project sharing rules** — ONE Resend account/key shared; everything else (CLAUDE.md, git repo, recipient lists, data sources) separate
+   - **Phase 0 deliverables requested** — data-source research (PPA Tour, MLP, APP Tour, DUPR — all less mature than MLB Stats API), architecture proposal, tab layout, folder structure, a fresh pickleball `CLAUDE.md` draft
+   - **Closing instructions** — "Report Phase 0 proposal back for ATP before any Phase 1 code"
+
+2. Then Session 3 closes cleanly with Handoff V3 + Kickoff Session 4. Baseball project moves on unaffected.
+
+**What the owner does after Session 3 (outside Claude Code):**
 
 1. Create folder: `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\`
-2. Open Claude Code in that new folder (fresh project, no CLAUDE.md yet)
-3. Tell Claude in the new session: *"This is Pickleball Project Session 1. Read `...\Baseball Project\CLAUDE.md` and `...\Baseball Project\sessions\BASEBALL_Handoff_Prompt_V1.md` as architectural reference only. Copy the Critical Rules section verbatim from baseball v12. Then draft a fresh pickleball CLAUDE.md + Phase 0 plan for my ATP."*
-4. Pickleball proceeds from there. Baseball is unaffected.
+2. Open Claude Code in that new folder (fresh project — no CLAUDE.md yet, no git history).
+3. Copy the contents of `...\Baseball Project\sessions\PICKLEBALL_Session1_KickoffPrompt.md` and paste it as the first message.
+4. Pickleball Session 1 begins from there. Claude reads baseball reference files (via absolute paths in the prompt), then drafts pickleball CLAUDE.md + Phase 0 proposal, then awaits ATP.
 
-**What Session 3 (of baseball) does in this case:**
-
-- Short session. Claude writes a **Pickleball-Kickoff-Handoff memo** at `sessions/PICKLEBALL_KICKOFF_MEMO.md` (a single file in the baseball repo) summarizing: what pickleball should reuse from baseball (email pattern, splash screen pattern, weekly-batch workflow, MODR session conventions), what it should NOT share (CLAUDE.md, git repo, Secrets other than the Resend key), and a pointer to `docs/Daily-Email-Setup-Guide.docx` §5 for the email mirror pattern.
-- Then Session 3 closes cleanly with Handoff V3 + Kickoff Session 4. Baseball moves on.
-
-**Session 3 output in this case:** 1 memo + clean handoff. ~20 minutes of baseball-session work. Pickleball Phase 0 proposal lives in the NEW Claude Code project, not here.
+**Session 3 scope estimate:** ~30-60 minutes of baseball-session work to draft the prompt thoroughly. Short, focused. Actual pickleball Phase 0 proposal (architecture, data sources, tab layout) lives in the NEW Claude Code project, not here.
 
 ### Option B — **Owner activation tasks (hand-walk or verify)**
 
@@ -192,9 +201,9 @@ Per CLAUDE.md § Session-End Protocol (MANDATORY — never skip):
 **End of Kickoff Session 3. Site is autonomous; email code-shipped; content pipeline running.**
 
 **Main-track choice is yours:**
-- **Pickleball kickoff** — spawns a SEPARATE Claude Code project in a new folder (`...\Pickleball Project\`). Baseball Session 3 writes a short handoff memo and closes; pickleball begins as its own Session 1 elsewhere.
-- **Owner-activation hand-walk** — 5-30 min inside THIS (baseball) session. Covers email activation (KB-0025) or Worker deploy (KB-0024).
-- **Backlog item** — KB-0020 (public refresh) or KB-0021 (auto-reload on SW update). Done inside THIS (baseball) session.
-- **Weekly batch triage** — once Monday 2026-04-27 fires. Done inside THIS (baseball) session.
+- **Draft the Pickleball Session 1 kickoff prompt** (~30-60 min, inside THIS baseball session). Delivers `sessions/PICKLEBALL_Session1_KickoffPrompt.md` — a ready-to-paste prompt that primes a fresh Claude Code session in `...\Pickleball Project\`. Baseball stays clean; pickleball begins as its own Session 1 AFTER this baseball session closes.
+- **Owner-activation hand-walk** — 5-30 min inside THIS baseball session. Covers email activation (KB-0025) or Worker deploy (KB-0024).
+- **Backlog item** — KB-0020 (public refresh) or KB-0021 (auto-reload on SW update). Done inside THIS baseball session.
+- **Weekly batch triage** — once Monday 2026-04-27 fires. Done inside THIS baseball session.
 
-Only the Pickleball option crosses project boundaries. The other three are pure baseball work.
+**All four options happen inside the baseball Claude Code project.** Option A produces an artifact that bootstraps a *future* separate pickleball Claude Code project; it does not start pickleball work here.
