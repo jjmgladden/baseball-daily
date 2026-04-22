@@ -69,16 +69,25 @@ Narrow single-feature session on 2026-04-22. Owner asked for a daily morning ema
 
 ## Top Priorities for Session 3 — Pick ONE Main Track
 
-### Option A — **Pickleball sibling project (major new build)**
+### Option A — **Pickleball sibling project (spawns a SEPARATE Claude Code project)**
 
-Same recommendation as Kickoff Session 2. Not yet started. Owner flagged it as equivalent scope to the entire baseball project. **Start in a NEW project folder:**
+> **Important distinction:** If the owner picks this track, Session 3 of the Baseball project **does not continue into pickleball work**. Instead, the owner opens a brand-new Claude Code project in a different folder, and pickleball begins there as **Pickleball Session 1** — its own parallel timeline with its own CLAUDE.md, its own git repo, its own handoff/kickoff files, its own session numbering.
+>
+> Baseball Session 3 effectively ends at "owner has decided to kick off pickleball" — Claude's role here is to produce a short handoff memo (see below) and then close baseball Session 3. The actual Phase 0 pickleball planning happens in the new Claude Code project, not this one.
 
-- New folder: `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\`
-- Fresh `CLAUDE.md` (copy Critical Rules from baseball v12)
-- Fresh Phase 0 planning (data-source research: PPA Tour, MLP, APP Tour, DUPR)
-- Reuse email pattern from baseball — see `docs/Daily-Email-Setup-Guide.docx` §5 for the mirror pattern (same Resend account, separate Secrets in pickleball repo)
+**What the owner does to kick it off (outside Claude Code, then inside the new project):**
 
-Expected output: Phase 0 proposal (architecture, data sources, tab layout) awaiting owner ATP. Actual Phase 1 code probably needs Session 4.
+1. Create folder: `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\`
+2. Open Claude Code in that new folder (fresh project, no CLAUDE.md yet)
+3. Tell Claude in the new session: *"This is Pickleball Project Session 1. Read `...\Baseball Project\CLAUDE.md` and `...\Baseball Project\sessions\BASEBALL_Handoff_Prompt_V1.md` as architectural reference only. Copy the Critical Rules section verbatim from baseball v12. Then draft a fresh pickleball CLAUDE.md + Phase 0 plan for my ATP."*
+4. Pickleball proceeds from there. Baseball is unaffected.
+
+**What Session 3 (of baseball) does in this case:**
+
+- Short session. Claude writes a **Pickleball-Kickoff-Handoff memo** at `sessions/PICKLEBALL_KICKOFF_MEMO.md` (a single file in the baseball repo) summarizing: what pickleball should reuse from baseball (email pattern, splash screen pattern, weekly-batch workflow, MODR session conventions), what it should NOT share (CLAUDE.md, git repo, Secrets other than the Resend key), and a pointer to `docs/Daily-Email-Setup-Guide.docx` §5 for the email mirror pattern.
+- Then Session 3 closes cleanly with Handoff V3 + Kickoff Session 4. Baseball moves on.
+
+**Session 3 output in this case:** 1 memo + clean handoff. ~20 minutes of baseball-session work. Pickleball Phase 0 proposal lives in the NEW Claude Code project, not here.
 
 ### Option B — **Owner activation tasks (hand-walk or verify)**
 
@@ -180,4 +189,12 @@ Per CLAUDE.md § Session-End Protocol (MANDATORY — never skip):
 
 ---
 
-**End of Kickoff Session 3. Site is autonomous; email code-shipped; content pipeline running. Main-track choice is yours — Pickleball kickoff (new folder), owner-activation hand-walk (5-30 min), backlog item (KB-0020 / KB-0021), or weekly batch triage once Monday 2026-04-27 fires.**
+**End of Kickoff Session 3. Site is autonomous; email code-shipped; content pipeline running.**
+
+**Main-track choice is yours:**
+- **Pickleball kickoff** — spawns a SEPARATE Claude Code project in a new folder (`...\Pickleball Project\`). Baseball Session 3 writes a short handoff memo and closes; pickleball begins as its own Session 1 elsewhere.
+- **Owner-activation hand-walk** — 5-30 min inside THIS (baseball) session. Covers email activation (KB-0025) or Worker deploy (KB-0024).
+- **Backlog item** — KB-0020 (public refresh) or KB-0021 (auto-reload on SW update). Done inside THIS (baseball) session.
+- **Weekly batch triage** — once Monday 2026-04-27 fires. Done inside THIS (baseball) session.
+
+Only the Pickleball option crosses project boundaries. The other three are pure baseball work.
