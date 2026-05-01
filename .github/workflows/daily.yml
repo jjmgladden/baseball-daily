@@ -12,38 +12,59 @@ on:
     - cron: '0 7 * * *'
   workflow_dispatch: {}   # allow manual "Run workflow" from the Actions tab
 
+permissions:
+  contents: write          # needed to commit the snapshot back to the repo
+
+concurrency:
+  group: daily-ingestion
+  cancel-in-progress: false
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write      # needed to commit the snapshot back to the repo
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
 
       - name: Fetch daily data
         run: node ingestion/fetch-daily.js
         env:
-          # Empty for now; add when YouTube ingestion is wired (KB-0003).
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 
       - name: Commit and push snapshot
+        # Retry-with-rebase on push rejection. Two runs started close together
+        # can race at push time; the loser rebases on the winner and retries.
+        # Snapshot files are append-only from our POV so `-X theirs` keeps our
+        # fresher snapshot on conflict. Mirrors pickleball KB-0027 fix.
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/snapshots/
           if git diff --staged --quiet; then
             echo "No snapshot changes to commit."
-          else
-            git commit -m "Daily snapshot $(date -u +%Y-%m-%d)"
-            git push
+            exit 0
           fi
+          git commit -m "Daily snapshot $(date -u +%Y-%m-%d)"
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "push succeeded (attempt $attempt)"
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt) — rebasing on origin/main and retrying"
+            git pull --rebase -X theirs origin main || {
+              echo "::error::rebase failed on attempt $attempt"
+              exit 1
+            }
+          done
+          echo "::error::push failed after 3 attempts"
+          exit 1
 
       - name: Send morning email
         # Skips silently if RESEND_API_KEY or EMAIL_RECIPIENTS aren't configured,
