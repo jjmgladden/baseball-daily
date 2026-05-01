@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-04-22
+**Last updated:** 2026-04-22 (Session 3)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -219,6 +219,31 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Open (code shipped; awaiting owner Resend signup + Secrets config to activate)
 - **Cross-ref:** docs/Daily-Email-Setup-Guide.docx · docs/email-setup.md · ingestion/send-email.js · ingestion/lib/email-template.js · .github/workflows/daily.yml · scripts/build-email-doc.py
 
+### KB-0026 | Pickleball Daily Intelligence Report — sibling project bootstrapped
+- **Type:** Reference
+- **Date:** 2026-04-22
+- **Source:** Chat session 2026-04-22 — Session 3 Option A executed
+- **Category:** Sibling-projects / Cross-references
+- **Tags:** pickleball, sibling-project, bootstrap, kickoff-prompt, ai-qa-future
+- **Finding:** Owner confirmed and created sibling project folder at `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\`. Separate Claude Code project, separate folder, separate future git repo, separate CLAUDE.md. Bootstrap deliverables produced this session and placed in the new folder:
+  - `CLAUDE.md` — 18-line bootstrap stub. Auto-loads when Claude Code opens the folder; redirects to the kickoff prompt. Will be replaced by the pickleball Phase 0 deliverable §8.4 (full pickleball CLAUDE.md v1).
+  - `PICKLEBALL_Session1_KickoffPrompt.md` — 523-line comprehensive kickoff. Identity, working style, project concept, read-these-first paths to baseball + PBX reference files, Critical Rules verbatim from Baseball CLAUDE.md v12 (all 9), locked tech stack inheritance, cross-project sharing rules, Phase 0 research brief (compressed from owner's Perplexity draft — PPA / MLP / DUPR / USAP / video / influencer / feeder ecosystem coverage), five Phase 0 deliverables, phased roadmap (Phase 0 → 4), future AI Q&A schema implications, MODR conventions, 10 lessons learned from baseball, closing instructions, inherit-vs-decide quick-reference table.
+
+  **Cross-project sharing rules locked in the kickoff:**
+  - Resend account/key: **shared** (paste same `re_...` into pickleball's `RESEND_API_KEY` Secret)
+  - YouTube API key: **shared** (same `AIza...`)
+  - GitHub repo: **separate** (`jjmgladden/pickleball-daily` proposed)
+  - Email recipient list: **separate per repo** (manual sync if owner wants identical)
+  - PAT for Cloudflare Worker: **separate per repo** (minimum-scope posture)
+  - KB, CLAUDE.md, sessions/, memory: **separate per project** (automatic — Claude Code memory is per-project)
+
+  **Future feature noted for schema-design implications now (Phase 4 add-on, not initial build):**
+  Natural-language Q&A layer (Claude API or similar) over the JSON corpus. The kickoff requires Phase 0 schemas to be designed AI-retrievable: stable IDs, ID-not-name cross-references, ISO 8601 timestamps with timezone, denormalized text fields for retrieval, structured source citations (`{sourceId, url, retrievedAt}`), T1/T2/T3 confidence as first-class fields, append-only snapshot history. Cheap now, expensive to retrofit.
+
+  **Owner workflow after this session:** Open Claude Code in `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\`, submit `PICKLEBALL_Session1_KickoffPrompt.md` contents as the first message. Pickleball Session 1 begins there. Baseball stays unaffected.
+- **Status:** Closed (baseball-side spawn complete; pickleball is now its own independent project)
+- **Cross-ref:** `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\PICKLEBALL_Session1_KickoffPrompt.md` · `C:\Users\John & Cindy Gladden\Desktop\AI\Claude\Pickleball Project\CLAUDE.md`
+
 ### KB-0024 | Curation pipeline: weekly-batch workflow + public submission Worker
 - **Type:** Action
 - **Date:** 2026-04-20
@@ -336,4 +361,4 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - KB-0024 — Submission Worker — Action (code ready, awaiting owner deploy)
 
 **Closed:**
-KB-0001, KB-0002, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0023, KB-0026
