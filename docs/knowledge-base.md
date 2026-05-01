@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-04-22 (Session 3)
+**Last updated:** 2026-05-01 (Session 4 — Phase B1 complete: KB-0025 + KB-0022 + KB-0005 closed; KB-0027 + KB-0028 added; pickleball-parity multi-phase plan B1-B7 locked in)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -64,7 +64,9 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Date:** 2026-04-19
 - **Category:** Deployment / Security
 - **Finding:** No remote yet. Phase 3B: `.gitignore` enforcement, check-secrets clean, CLAUDE.md PII-strip, narrow scope, John ATP. GitHub username confirmed `jjmgladden` (see memory).
-- **Status:** Open (awaiting Phase 3B trigger)
+
+  **Session 4 (2026-05-01) — Closed.** Housekeeping closure. Phase 3B trigger fired in Session 1 — repo is public at https://github.com/jjmgladden/baseball-daily, GitHub Pages live at https://jjmgladden.github.io/baseball-daily/, daily cron firing successfully at 07:00 UTC every morning, weekly-index + weekly-batch crons firing on Mondays. KB stayed marked Open due to oversight at the Phase 3B closure session. Closing now as the work it described is long-since complete.
+- **Status:** Closed (Session 4 — housekeeping; Phase 3B trigger fired Session 1)
 - **Cross-ref:** CLAUDE.md § Repo Privacy Posture · memory/github_deployment.md
 
 ### KB-0006 | Versioning convention: whole numbers
@@ -216,8 +218,16 @@ Static types (Reference, Decision, Limitation) omit Tier.
   4. Trigger test: `gh workflow run daily.yml --repo jjmgladden/baseball-daily`
   5. *(Optional, future)* Register custom domain, add `EMAIL_FROM` secret.
 
-- **Status:** Open (code shipped; awaiting owner Resend signup + Secrets config to activate)
-- **Cross-ref:** docs/Daily-Email-Setup-Guide.docx · docs/email-setup.md · ingestion/send-email.js · ingestion/lib/email-template.js · .github/workflows/daily.yml · scripts/build-email-doc.py
+- **Session 4 (2026-05-01) — Closed.** Path A activation complete end-to-end. Three GitHub Secrets pushed via `gh secret set` over stdin from local `Baseball Project/.env` (option β from owner walkthrough — owner pasted values once into local .env, Claude piped each to the GitHub API without echoing to chat):
+  - `RESEND_API_KEY` — same `re_...` value already used by sibling pickleball project (Resend free-tier 3,000/mo ceiling shared across both projects)
+  - `EMAIL_FROM = "Ozark Joe's Baseball Daily <baseball@glad-fam.com>"` — reuses the `glad-fam.com` Path B custom domain pickleball verified in their Session 6 (no DNS work needed; `daily@`, `baseball@`, and any other `@glad-fam.com` sender are pre-authorized)
+  - `EMAIL_RECIPIENTS` — 1 address (owner-only smoke test). Expansion to 3 (owner + brother + brother's wife matching pickleball list) deferred to a follow-up; multi-recipient is unblocked from day one because Path B is in effect (no Path A free-tier 403 risk).
+  
+  First send via manual `workflow_dispatch` run `25228703199` succeeded in 18 seconds — `[send-email] Recipients: 1  From: ***`, `[send-email] Subject: ⚾ Cardinals win 10-5 vs Pittsburgh Pirates — Thursday, April 30, 2026`, `[send-email] Sent. Resend id: 328b5393-a842-4939-ab8d-27c49bd725e9`. Owner visually confirmed email arrived cleanly in Gmail inbox.
+  
+  Daily 07:00 UTC cron will now send a fresh briefing each morning. Email format is v1 — Cardinals pin + Nationals pin + On This Day (top 2) + CTA + small stats footer. v2 upgrade scoped as Phase B2 in the pickleball-parity plan (KB-0028) — adds scoring play in pin, Today's Schedule, highlight thumbnails, all-NL+AL standings, notable games, news section.
+- **Status:** Closed (Session 4 — Path A 1-recipient activated; v2 email upgrade tracked under KB-0028 Phase B2)
+- **Cross-ref:** docs/Daily-Email-Setup-Guide.docx · docs/email-setup.md · ingestion/send-email.js · ingestion/lib/email-template.js · .github/workflows/daily.yml · scripts/build-email-doc.py · KB-0028 (Phase B2 v2 upgrade) · workflow_dispatch run 25228703199 · Resend id 328b5393-a842-4939-ab8d-27c49bd725e9 · pickleball KB-0007 + KB-0033 + KB-0034 (Path A → Path B precedent)
 
 ### KB-0026 | Pickleball Daily Intelligence Report — sibling project bootstrapped
 - **Type:** Reference
@@ -281,8 +291,10 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Category:** CI / Maintenance
 - **Tags:** github-actions, node, deprecation
 - **Finding:** GitHub Actions emitted a warning that Node.js 20 will be removed from the runner on 2026-09-16. Two actions in `.github/workflows/daily.yml` (`actions/checkout@v4`, `actions/setup-node@v4`) will need to run on Node 24 by default after June 2, 2026. The fix is trivial — update `node-version` to `'22'` or later in the `setup-node` step, and bump checkout/setup-node minor versions if newer ones are out by then. No action needed today; the workflow continues to run fine.
-- **Status:** Open (monitor; fix before September 2026)
-- **Cross-ref:** .github/workflows/daily.yml
+
+  **Session 4 (2026-05-01) — Closed.** All 3 baseball workflows bumped: `actions/checkout@v4` → `@v6`, `actions/setup-node@v4` → `@v6` in `daily.yml` + `weekly-index.yml` + `weekly-batch.yml`. Bundled with Phase B1 hardening in commit `1fb2520`. Pickleball ran past v5 to v6 first (KB-0023 closure pattern); baseball matched. Tomorrow's 07:00 UTC scheduled cron run will be the first to execute on `@v6` actions; if green, no further action.
+- **Status:** Closed (Session 4 — bumped to @v6/@v6; verification on next scheduled run)
+- **Cross-ref:** .github/workflows/daily.yml · .github/workflows/weekly-index.yml · .github/workflows/weekly-batch.yml · commit `1fb2520` · KB-0027 · pickleball KB-0023
 
 ### KB-0021 | Auto-reload on service-worker update
 - **Type:** Action
@@ -340,6 +352,64 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Open
 - **Cross-ref:** CLAUDE.md § Secret Safety · `.github/workflows/daily.yml`
 
+### KB-0027 | Push-race retry-with-rebase ported from pickleball KB-0027
+- **Type:** Action
+- **Date:** 2026-05-01 (Session 4)
+- **Category:** Ops / CI / Hardening
+- **Tags:** ci, github-actions, race-condition, hardening, snapshot-commit, pickleball-parity
+- **Finding:** Direct port of pickleball KB-0027 fix to baseball's `daily.yml`. Snapshot push step wrapped in 3-attempt loop with `git pull --rebase -X theirs origin main` between retries. Defensive — protects against the same race condition pickleball hit (two cron-triggered runs starting close together both try to push, loser sees `[rejected] main -> main (fetch first)` and fails the workflow, sending the owner a "All jobs have failed" email despite ingestion being healthy).
+
+  **Bundled with KB-0022 + KB-0025 in commit `1fb2520` (Phase B1 hardening).** Same commit also added:
+  - Top-level `permissions: { contents: write }` block (was previously inline on the `ingest` job)
+  - `concurrency: { group: daily-ingestion, cancel-in-progress: false }` block (queues overlapping runs instead of allowing the race in the first place — belt-and-suspenders with the retry loop)
+  - `timeout-minutes: 15` on the `ingest` job
+
+  Race itself is rare under cron-only operation; triggers when manual workflow_dispatch overlaps with the scheduled cron, or when two manual dispatches fire close together. Pickleball's incident was during a burst of manual verification runs.
+- **Status:** Closed (proactive port — no in-the-wild incident in baseball; verified by passing first run on the new workflow shape via the Phase B1 activation cycle)
+- **Cross-ref:** .github/workflows/daily.yml · commit `1fb2520` · pickleball KB-0027 (parent / source) · KB-0022 · KB-0025 · KB-0028
+
+### KB-0028 | Pickleball-parity multi-phase plan (B1 ✓ · B2-B7 pending)
+- **Type:** Decision
+- **Tier:** T2
+- **Dependency:** Owner (per-phase ATP) + Claude (implementation)
+- **Date:** 2026-05-01 (Session 4)
+- **Category:** Roadmap / Cross-project / Pickleball-parity
+- **Tags:** pickleball-parity, phases, email, ai-qa, news, ui, roadmap
+- **Source:** Session 4 chat 2026-05-01 — owner asked Claude to "bring the Baseball Project up to the same level as the Pickleball Project where it makes sense" after pickleball reached Session 9 with daily email + AI Q&A + News + Learn tab + custom domain all live. Detailed plan presented + 8 owner questions answered + ATP'd 7-phase sequencing.
+- **Finding:** Multi-session plan to close the feature gap between baseball (Session 3 state) and pickleball (Session 9 state). Plan locked 2026-05-01 with 7 phases:
+
+  | Phase | Scope | Effort | Status |
+  |---|---|---|---|
+  | **B1 — Activation** | Email Path A activation (KB-0025 close) · Actions @v6/@v6 bumps (KB-0022 close) · push-race retry-with-rebase port (KB-0027) | ~30 min owner + ~45 min Claude | **✓ DONE Session 4 (commit `1fb2520` + workflow run `25228703199`)** |
+  | **B2 — Email upgrade** | `email-template.js` v1 → v2: Cards/Nats pins gain scoring play + W/L/Sv decisions · Today's Schedule (Cards+Nats + 3-5 league marquee games) · Top Highlights with thumbnails (mqdefault.jpg) · all-NL+AL standings (top 3 per division — 18 rows compact) · Notable Games one-liners · existing On This Day · footer | ~3-4 hr | Open (next session candidate) |
+  | **B3 — Process improvements** | `docs/credentials.md` skeleton ported from pickleball KB-0029 · CLAUDE.md v12 → v13 (adds Session-End Step 2 credentials-update mandate + APP_VERSION pairing rule for SW cache bumps) · `scripts/check-esm.js` standalone runtime-import script · cross-link to pickleball's `docs/concepts-primer.md` (no duplication) | ~2-3 hr | Open |
+  | **B4 — UI polish** | APP_VERSION pill in app header (paired with SW CACHE constant) · iOS PNG icon set via `scripts/build-icons.js` + `sharp` (closes KB-0007) · `error-messages.js` component retrofit (severity-gated soft-banner from pickleball KB-0021 item 4) · `date-utils.js` audit + parseLocalDate/fmtDateShort port if any baseball date renders off-by-one | ~2-3 hr | Open |
+  | **B5 — News tab** | Direct port of pickleball KB-0035: `ingestion/lib/rss-parser.js` (RSS 2.0 + Atom 1.0 auto-detection) · `ingestion/fetch-news.js` · 7 sources (T1+T2 mix): MLB.com + MLB Trade Rumors + ESPN MLB + Viva El Birdos + Cardinals.com + Federal Baseball + MASN · `app/js/components/news-card.js` + `confidence-badge.js` · `app/js/tabs/news.js` · Top News section appended to email v2 | ~3-4 hr | Open |
+  | **B6 — AI Q&A** | Mirrors pickleball KB-0008 architecture: `ingestion/build-ai-context.js` produces `data/snapshots/ai-context.json` · new Cloudflare Worker `baseball-daily-api.jjmgladden.workers.dev` (revives KB-0024 with new purpose — submission route stays scaffolded behind kill switch, AI route becomes primary) · Anthropic Haiku 4.5 with prompt caching · cost guards (spend cap $5/mo, per-IP rate limit 10/hr + 50/day, env-var kill switch `AI_DISABLED`) · `app/js/tabs/ask.js` chat tab (would be 8th nav slot) · `data/master/ai-config.json` browser-side gate | ~6-8 hr | Open (largest phase) |
+  | **B7 — TOC + accordion backport** | Copy `.tab-toc` / `.tab-section` / `.tab-callout` CSS from pickleball KB-0040 Phase L1 (~104 lines) into `app/styles/main.css` · Refactor `app/js/tabs/cardinals.js` (sections: Retired Numbers · HOFers · Historic Seasons · Traditions · Legends deep-dive) · Refactor `app/js/tabs/history.js` (sections: On This Day · Iconic Moments · Strangest Plays · Franchise Lineages) · Refactor B5's new `app/js/tabs/news.js` (today/this-week/recent buckets) · SW cache + APP_VERSION bump · Pre-push ESM check | ~3-4 hr | Open (depends on B5) |
+
+  **Cumulative effort across B2-B7:** ~17-22 hr across 4-6 future sessions.
+
+  **Owner-locked answers (Session 4):**
+  1. Email sender domain: Path B `baseball@glad-fam.com` (reuse pickleball's verified domain) ✓ ACTIVATED B1
+  2. Recipient list: same 3 as pickleball (deferred — currently 1, expand in B2 or sooner)
+  3. Standings section in email v2: All NL + All AL (6 divisions × top-3 = 18 rows compact)
+  4. Today's Schedule: Cards + Nats + 3-5 league-wide marquee games
+  5. News tab sources: 7 sources (3 league-wide + 2 Cardinals-specific + 2 Nationals-specific)
+  6. AI Q&A timing: Phase B6 of this build effort (NOT deferred indefinitely)
+  7. CLAUDE.md v12 → v13: ATP'd for B3
+  8. TOC + accordion backport: ATP'd as Phase B7
+
+  **NOT applicable from pickleball to baseball (rationale captured for future reference):**
+  - DUPR vs PPA Ratings/Rankings duality — no MLB equivalent
+  - MLP team-centric vs PPA event-centric duality — single MLB season
+  - Headless-browser scraping (Playwright) — MLB Stats API is clean JSON
+  - WordPress REST API discovery — MLB-specific data sources differ
+  - Glossary / Court Etiquette / DUPR Explainer / Tournament Prep / Equipment / Where-to-Play tab — pickleball-specific knowledge content
+  - Cloudflare Tunnel → home Ollama (pickleball KB-0041) — future-design, applies equally to either project later
+- **Status:** Open (B1 done; B2-B7 awaiting per-phase ATP)
+- **Cross-ref:** sessions/BASEBALL_Handoff_Prompt_V4.md · sessions/BASEBALL_Kickoff_Prompt_Session5.md · KB-0007 · KB-0024 · KB-0025 · KB-0027 · pickleball KB-0008 · pickleball KB-0023 · pickleball KB-0027 · pickleball KB-0029 · pickleball KB-0035 · pickleball KB-0040
+
 ### KB-0019 | Recent-form 14-day window
 - **Type:** Reference
 - **Date:** 2026-04-19
@@ -353,12 +423,12 @@ Static types (Reference, Decision, Limitation) omit Tier.
 ## Quick Index
 
 **Open items (with tier where applicable):**
-- KB-0007 — PNG icon set for iOS — Action, **T3** (deferred, Phase 4)
+- KB-0007 — PNG icon set for iOS — Action, **T3** (will close in Phase B4 per KB-0028)
 - KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
-- KB-0020 — Public on-demand refresh — Action, **T2** (near-term enhancement)
-- KB-0021 — Auto-reload on service-worker update — Action, **T2** (near-term enhancement)
-- KB-0022 — GitHub Actions Node 20 deprecation — Action, **T3** (low-priority maintenance)
-- KB-0024 — Submission Worker — Action (code ready, awaiting owner deploy)
+- KB-0020 — Public on-demand refresh — Action, **T2** (Cloudflare Worker proxy; partially overlaps B6 Worker setup)
+- KB-0021 — Auto-reload on service-worker update — Action, **T2** (could fold into B4)
+- KB-0024 — Submission Worker — Action (code ready, will revive in Phase B6 for AI proxy use case)
+- KB-0028 — Pickleball-parity multi-phase plan (B2-B7) — Decision, **T2** (active roadmap)
 
 **Closed:**
-KB-0001, KB-0002, KB-0003, KB-0004, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0023, KB-0026
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027
