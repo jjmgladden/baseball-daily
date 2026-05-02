@@ -47,13 +47,12 @@ Run every item before proposing work:
    head -5 data/snapshots/latest.json
    ```
    Should show `schemaVersion: 6` and `generatedAt` within the last 24 hours.
-4. **CRITICAL: Verify the 3-recipient v2 email scheduled cron delivered cleanly.** This is **TRIPLE-DEFERRED** (Sessions 5, 6, 7). It was scheduled to fire ~2 hours after Session 7 close at 07:00 UTC on 2026-05-02. By the time Session 8 starts, multiple scheduled cron runs should have fired:
+4. **Daily-cron health check** — the 3-recipient scheduled send was verified clean at the end of Session 7 (owner confirmed all 3 inboxes received the morning email; KB-0025 + KB-0028 updated). Going forward this is a routine spot-check, not a critical verification:
    ```
-   gh run list --repo jjmgladden/baseball-daily --workflow=daily.yml --limit 5
-   gh run view <latest-scheduled-run-id> --repo jjmgladden/baseball-daily --log | grep -E '\[send-email\]|Resend id|Sent\.|Push attempt|main -> main|Recipients'
+   gh run list --repo jjmgladden/baseball-daily --workflow=daily.yml --limit 3
    ```
-   Look for: **`Recipients: 3`** + `Sent. Resend id: ...` + clean push (`main -> main` on first attempt).
-5. **Confirm with owner that all 3 recipients received the email in their inboxes.** Schedule and Resend may report success but a recipient might still be missing it (spam folder, address typo, etc.).
+   Last run should show `success` with reasonable duration (~12-20s). If anything looks off, dig into the send-email step.
+5. (If anything looked off in step 4, ask the owner to confirm inbox delivery.)
 6. **Check for open weekly-batch Issues:**
    ```
    gh issue list --repo jjmgladden/baseball-daily --label weekly-batch --state open
@@ -218,7 +217,7 @@ If the 3-recipient morning email arrived clean for several days running and owne
 
 7. **Pages needs 1-2 minutes to rebuild after push** — verify via `gh api repos/jjmgladden/baseball-daily/pages/builds/latest --jq .status` before telling owner the site is ready.
 
-8. **Email is LIVE with 3 recipients** — failure mode is silent. `[send-email] RESEND_API_KEY not set` would skip silently and exit 0; the cron would look green but no email would arrive. Always check the most recent run's send-email step output during session-start. **First 3-recipient scheduled v2 send is TRIPLE-deferred (Sessions 5 + 6 + 7) — verify FIRST THING in Session 8.**
+8. **Email is LIVE with 3 recipients — verified clean end of Session 7** — failure mode is still silent (`[send-email] RESEND_API_KEY not set` would skip silently and exit 0). Spot-check the most recent run's send-email step during session-start; if anything looks off, ask owner to confirm inbox delivery.
 
 9. **Worker is not yet deployed (KB-0024)** — Suggest modal still shows "not yet configured" message. Will revive in Phase B6.
 

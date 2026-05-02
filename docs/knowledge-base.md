@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-02 (Session 7 — Phase B4 complete: KB-0031 added (UI polish: APP_VERSION pill + iOS PNG icons + error-messages component); B4 sub-task on KB-0028 marked done; KB-0007 closed; SW cache rolled v15 → v16; APP_VERSION pill introduced — pairing rule now active going forward)
+**Last updated:** 2026-05-02 (Session 7 — Phase B4 complete: KB-0031 added (UI polish: APP_VERSION pill + iOS PNG icons + error-messages component); B4 sub-task on KB-0028 marked done; KB-0007 closed; SW cache rolled v15 → v16; APP_VERSION pill introduced — pairing rule now active going forward; **3-recipient email verification CLEARED — owner confirmed all 3 morning inboxes received the v2 scheduled-cron send, closing the triple-deferral from Sessions 5+6+7**)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -217,7 +217,8 @@ Static types (Reference, Decision, Limitation) omit Tier.
   First send via manual `workflow_dispatch` run `25228703199` succeeded in 18 seconds — `[send-email] Recipients: 1  From: ***`, `[send-email] Subject: ⚾ Cardinals win 10-5 vs Pittsburgh Pirates — Thursday, April 30, 2026`, `[send-email] Sent. Resend id: 328b5393-a842-4939-ab8d-27c49bd725e9`. Owner visually confirmed email arrived cleanly in Gmail inbox.
   
   Daily 07:00 UTC cron will now send a fresh briefing each morning. Email format is v1 — Cardinals pin + Nationals pin + On This Day (top 2) + CTA + small stats footer. v2 upgrade scoped as Phase B2 in the pickleball-parity plan (KB-0028) — adds scoring play in pin, Today's Schedule, highlight thumbnails, all-NL+AL standings, notable games, news section.
-- **Status:** Closed (Session 4 — Path A 1-recipient activated; v2 email upgrade tracked under KB-0028 Phase B2)
+  **Session 7 close (2026-05-02) — 3-recipient scheduled-cron verification CLEARED.** Owner confirmed all 3 inboxes received the v2 scheduled-cron morning email. This closes the triple-deferral from Sessions 5+6+7 (recipient expansion to 3 happened 2026-05-02T02:51:45Z, but no scheduled cron had fired between then and Sessions 5/6/7 close). The email pipeline is now fully validated end-to-end at the 3-recipient configuration.
+- **Status:** Closed (Session 4 — Path A 1-recipient activated; v2 email upgrade in KB-0029; 3-recipient scheduled cron verified Session 7)
 - **Cross-ref:** docs/Daily-Email-Setup-Guide.docx · docs/email-setup.md · ingestion/send-email.js · ingestion/lib/email-template.js · .github/workflows/daily.yml · scripts/build-email-doc.py · KB-0028 (Phase B2 v2 upgrade) · workflow_dispatch run 25228703199 · Resend id 328b5393-a842-4939-ab8d-27c49bd725e9 · pickleball KB-0007 + KB-0033 + KB-0034 (Path A → Path B precedent)
 
 ### KB-0026 | Pickleball Daily Intelligence Report — sibling project bootstrapped
