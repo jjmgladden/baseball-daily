@@ -1,10 +1,6 @@
 # Ozark Joe's Baseball Daily Intelligence Report — Claude Code Project Instructions
 
-**Version:** 13 | **Date:** May 2, 2026 | **Previous:** archive/CLAUDE_v12.md
-
-**v13 changes (Session 6 — pickleball-parity Phase B3):**
-1. New Critical Rule — `APP_VERSION` pairing rule: when bumping `CACHE` in `app/sw.js`, also bump `APP_VERSION` in `app/index.html` header pill (the visible-version pill is added in Phase B4).
-2. Session-End Protocol — new Step 2 mandates updating `docs/credentials.md` whenever credentials change. Subsequent steps renumbered 3–8.
+**Version:** 12 | **Date:** April 20, 2026 | **Previous:** archive/CLAUDE_v11.md
 
 ---
 
@@ -64,11 +60,6 @@ Work deliberately. Never chase architecture at the cost of a functional tool. Pr
 **Any commit that modifies a file listed in `app/sw.js`'s `SHELL_FILES` array (or `app/index.html`, `app/styles/main.css`, any file under `app/js/`, `app/manifest.webmanifest`, `app/icon.svg`) MUST also bump the `CACHE` constant in `app/sw.js` in the same commit.**
 
 Incident reference: 2026-04-20 — the "Refresh data" button addition was invisible to the user's browser until the cache was rolled.
-
-### APP_VERSION pairing rule (paired with the SW cache bump rule)
-**When bumping `CACHE` in `app/sw.js`, also bump `APP_VERSION` in `app/index.html`'s header version pill in the same commit.** The pill is the user-visible signal that they're on the new build (matches the SW cache version, e.g. `v15`). Pairing keeps the cache version and the visible version in lockstep so the owner can confirm at-a-glance that a returning visitor's PWA reloaded onto the new shell.
-
-The version pill is introduced in Phase B4 (KB-0028); until then, this rule applies forward-only — every shell change after B4 must update both constants. If a session changes `app/` files but B4 hasn't shipped yet, only the `CACHE` bump applies; flag in the commit message that APP_VERSION pairing is a B4 forward-debt.
 
 ### Pre-Push JS Syntax Verification
 **Any commit that modifies JS files in `app/js/` MUST be verified via runtime import check before push.** `node --check` misses ES-module-specific errors (template literals, imports). Required check:
@@ -308,9 +299,8 @@ If the session was resumed from a prior conversation summary (compacted), add: `
 Every session must end with these steps, in order:
 
 1. **Update `docs/knowledge-base.md`** — add new entries, close completed items, flip statuses, bump the file's "Last updated" date. This is a full merged file, never a delta.
-2. **Update `docs/credentials.md`** if any credential was added, rotated, revoked, moved between storage locations, or had its status change this session. Update the inventory table + the relevant per-credential detail section + add a maintenance-log entry. Triggers include: new API key created, new Personal Access Token created, new account opened (Resend, Cloudflare, Google Cloud, Anthropic, etc.), key rotation, status flip (⏸ → ✅ or ✅ → ❌), credential moved (e.g., added to local `.env` after only being in GitHub Secrets), or revocation. The doc never lists actual credential values — placeholders + pointers only.
-3. **Archive any previous versions** if a whole number rolled this session (CLAUDE.md, data schemas, etc. → `archive/`). Never delete.
-4. **Write the Handoff Prompt** — `sessions/BASEBALL_Handoff_Prompt_V{N+1}.md`. Full session record:
+2. **Archive any previous versions** if a whole number rolled this session (CLAUDE.md, data schemas, etc. → `archive/`). Never delete.
+3. **Write the Handoff Prompt** — `sessions/BASEBALL_Handoff_Prompt_V{N+1}.md`. Full session record:
    - Session number, date range, predecessor chain
    - Current-versions table with changes bolded
    - "What Happened" — work tracks chronologically
@@ -318,7 +308,7 @@ Every session must end with these steps, in order:
    - System state at end
    - Known issues / tech debt
    - Open KB items — dumped with tier
-5. **Write the Kickoff Prompt** — `sessions/BASEBALL_Kickoff_Prompt_Session{N+2}.md`. Concise start-here for the *next* session:
+4. **Write the Kickoff Prompt** — `sessions/BASEBALL_Kickoff_Prompt_Session{N+2}.md`. Concise start-here for the *next* session:
    - "Read these first" (ordered list of files)
    - Session-start protocol reminders
    - What just happened (1-paragraph summary)
@@ -328,9 +318,9 @@ Every session must end with these steps, in order:
    - System state snapshot (one-pager)
    - Critical reminders (things that bit us this session)
    - Session-end reminders for next session
-6. **List file changes** explicitly for the owner — what changed, what's new, what moved
-7. **Release-readiness check** — if any user-facing change shipped, note it in CHANGELOG-compatible format (Added / Changed / Fixed / Security)
-8. **Report to owner**: brief summary — what was done, what's next, any blockers
+5. **List file changes** explicitly for the owner — what changed, what's new, what moved
+6. **Release-readiness check** — if any user-facing change shipped, note it in CHANGELOG-compatible format (Added / Changed / Fixed / Security)
+7. **Report to owner**: brief summary — what was done, what's next, any blockers
 
 ### Naming conventions
 

@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-02 (Session 5 — Phase B2 complete: KB-0029 added (email v2 + snapshot schema v6); B2 sub-task on KB-0028 marked done)
+**Last updated:** 2026-05-02 (Session 6 — Phase B3 complete: KB-0030 added (process improvements: credentials.md + CLAUDE.md v13 + check-esm.js); B3 sub-task on KB-0028 marked done; CLAUDE.md rolled v12 → v13; SW cache rolled v14 → v15)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -382,7 +382,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
   |---|---|---|---|
   | **B1 — Activation** | Email Path A activation (KB-0025 close) · Actions @v6/@v6 bumps (KB-0022 close) · push-race retry-with-rebase port (KB-0027) | ~30 min owner + ~45 min Claude | **✓ DONE Session 4 (commit `1fb2520` + workflow run `25228703199`)** |
   | **B2 — Email upgrade** | `email-template.js` v1 → v2: Cards/Nats pins gain scoring play + W/L/Sv decisions · Today's Schedule (Cards+Nats + 3-5 league marquee games) · Top Highlights with thumbnails (mqdefault.jpg) · all-NL+AL standings (top 3 per division — 18 rows compact) · Notable Games one-liners · existing On This Day · footer | ~3-4 hr | **✓ DONE Session 5 (path β: schema bumped v5 → v6 to add `todaysSchedule[]`; KB-0029)** |
-  | **B3 — Process improvements** | `docs/credentials.md` skeleton ported from pickleball KB-0029 · CLAUDE.md v12 → v13 (adds Session-End Step 2 credentials-update mandate + APP_VERSION pairing rule for SW cache bumps) · `scripts/check-esm.js` standalone runtime-import script · cross-link to pickleball's `docs/concepts-primer.md` (no duplication) | ~2-3 hr | Open |
+  | **B3 — Process improvements** | `docs/credentials.md` ported from pickleball · CLAUDE.md v12 → v13 (adds Session-End Step 2 credentials-update mandate + APP_VERSION pairing rule for SW cache bumps) · `scripts/check-esm.js` standalone runtime-import script + `npm run check:esm` · `app/js/app.js` `typeof document` guard so check:esm exits 0 (mirrors pickleball pattern) · SW cache v14 → v15 | ~2-3 hr | **✓ DONE Session 6 (KB-0030)** |
   | **B4 — UI polish** | APP_VERSION pill in app header (paired with SW CACHE constant) · iOS PNG icon set via `scripts/build-icons.js` + `sharp` (closes KB-0007) · `error-messages.js` component retrofit (severity-gated soft-banner from pickleball KB-0021 item 4) · `date-utils.js` audit + parseLocalDate/fmtDateShort port if any baseball date renders off-by-one | ~2-3 hr | Open |
   | **B5 — News tab** | Direct port of pickleball KB-0035: `ingestion/lib/rss-parser.js` (RSS 2.0 + Atom 1.0 auto-detection) · `ingestion/fetch-news.js` · 7 sources (T1+T2 mix): MLB.com + MLB Trade Rumors + ESPN MLB + Viva El Birdos + Cardinals.com + Federal Baseball + MASN · `app/js/components/news-card.js` + `confidence-badge.js` · `app/js/tabs/news.js` · Top News section appended to email v2 | ~3-4 hr | Open |
   | **B6 — AI Q&A** | Mirrors pickleball KB-0008 architecture: `ingestion/build-ai-context.js` produces `data/snapshots/ai-context.json` · new Cloudflare Worker `baseball-daily-api.jjmgladden.workers.dev` (revives KB-0024 with new purpose — submission route stays scaffolded behind kill switch, AI route becomes primary) · Anthropic Haiku 4.5 with prompt caching · cost guards (spend cap $5/mo, per-IP rate limit 10/hr + 50/day, env-var kill switch `AI_DISABLED`) · `app/js/tabs/ask.js` chat tab (would be 8th nav slot) · `data/master/ai-config.json` browser-side gate | ~6-8 hr | Open (largest phase) |
@@ -458,6 +458,56 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed (B2 complete; B2 sub-task of KB-0028 marked done)
 - **Cross-ref:** ingestion/fetch-daily.js · ingestion/lib/email-template.js · archive/email-template_v1.js · KB-0025 (parent email feature) · KB-0028 (pickleball-parity roadmap) · KB-0023 (snapshot v5 baseline) · pickleball KB-0007 (email template v2 source pattern)
 
+### KB-0030 | Phase B3 — process improvements (credentials.md + CLAUDE.md v13 + check-esm.js)
+- **Type:** Action
+- **Date:** 2026-05-02 (Session 6 — Phase B3)
+- **Category:** Process / Conventions / Pickleball-parity
+- **Tags:** credentials, claude-md, check-esm, app-version, pickleball-parity, process
+- **Source:** Session 6 chat 2026-05-02 — Claude recommended Option A (B3) as the natural next step after B2; owner ATP'd ("you are doing the work")
+- **Finding:** Pickleball-parity Phase B3 executed end-to-end. Three primary deliverables + two secondary fixes shipped in one commit:
+
+  **(1) `docs/credentials.md` (NEW, ~280 lines)** — port adapted from pickleball's `docs/credentials.md` (v3). Inventory of all credentials baseball uses: 4 active (`YOUTUBE_API_KEY`, `RESEND_API_KEY`, `EMAIL_RECIPIENTS`, `EMAIL_FROM`) + 1 owned domain (`glad-fam.com`, shared with pickleball) + accounts (Resend, Google Cloud, GitHub, Cloudflare, Anthropic). Documents storage locations, sharing posture with sibling pickleball project, add/rotate/lost-key checklists, per-credential detail sections (including pre-creation entries for the future `ANTHROPIC_API_KEY` for Phase B6 and `GITHUB_TOKEN` for KB-0024 Worker submission route). Sibling-project sharing posture section is the canonical record of what's shared (YouTube key, Resend key, glad-fam.com domain, Cloudflare account, Anthropic account) and what's separate per project (recipient lists, future Worker PATs, future API key VALUES).
+
+  **(2) CLAUDE.md v12 → v13** — two adds:
+  - **New Critical Rule: APP_VERSION pairing.** When bumping `CACHE` in `app/sw.js`, also bump `APP_VERSION` in `app/index.html` header pill in the same commit. Keeps cache version and visible version in lockstep so a returning user can confirm at-a-glance that their PWA reloaded onto the new shell. Pill itself is added in Phase B4 — until then, rule applies forward-only with a documented "B4 forward-debt" escape clause.
+  - **Session-End Protocol new Step 2.** Mandates updating `docs/credentials.md` whenever credentials change (add, rotate, revoke, move between storage locations, or status flip). Subsequent steps renumbered 3–8.
+  - v12 archived to `archive/CLAUDE_v12.md` per whole-number versioning rule.
+
+  **(3) `scripts/check-esm.js` (NEW, ~46 lines) + `npm run check:esm` script.** Direct port of pickleball's `scripts/check-esm.js`. Walks `app/js/**/*.js` and runtime-imports each file via dynamic `import(pathToFileURL(...))`, catching ESM-specific errors that `node --check` misses (template-literal escapes, bad imports, etc.). Exits 0 if all 18 modules import clean; 1 on any failure. Standalone — does NOT live in `app/`, so the SW cache rule is not triggered by changes to it.
+
+  **Secondary fixes required to make check-esm exit 0 (revealed by first-run validation):**
+
+  **(4) `app/js/app.js` — `typeof document` guard.** Original code called `main();` synchronously at module load. `main()` is `async` and references `window.matchMedia` via `showSplash() → splash.js`. When Node imports the file, `main()` runs, hits `window`, throws `ReferenceError`, and the rejection is caught after the import promise resolves — exit code 1 even though all 18 files appeared to import cleanly. Fix: changed bottom of file from `main();` to `if (typeof document !== 'undefined') main();`. Mirrors pickleball's pattern (`if (typeof document !== 'undefined') boot();`). Zero impact in browser (where `document` always exists). Without this fix, check-esm.js would always exit 1, defeating its purpose as a pre-push gate.
+
+  **(5) `app/sw.js` — CACHE rolled v14 → v15.** Required by the SW cache bump rule because (4) modified `app/js/app.js`. APP_VERSION pairing not yet applicable (visible pill is added in Phase B4); B4 forward-debt flagged in commit message per the new rule's escape clause.
+
+  **Files:**
+  ```
+  A  docs/credentials.md           (NEW; ~280 lines)
+  M  CLAUDE.md                     (v12 → v13; +2 sections)
+  A  archive/CLAUDE_v12.md         (v12 archive)
+  A  scripts/check-esm.js          (NEW; ~46 lines)
+  M  package.json                  (added "check:esm" script)
+  M  app/js/app.js                 (typeof document guard at bottom)
+  M  app/sw.js                     (CACHE v14 → v15)
+  M  docs/knowledge-base.md        (this entry; KB-0028 B3 sub-task done; Last-updated bumped)
+  ```
+
+  **Triggers per CLAUDE.md Critical Rules:**
+  - SW cache rule: **TRIGGERED** by `app/js/app.js` change → CACHE bumped v14 → v15. Documented above.
+  - APP_VERSION pairing rule (NEW v13 rule): forward-debt for B4 (visible pill not yet present in HTML).
+  - Pre-push ESM check: TRIGGERED → re-ran `npm run check:esm` after the app.js guard added; exit 0 with all 18 modules importing clean.
+  - Whole-number version bump: applied (CLAUDE.md v12 → archive; SW cache v14 → v15).
+  - Session-End Step 2 (credentials.md): triggered by the doc's own creation; this entry serves as the maintenance-log entry for Session 6.
+
+  **Verification:** `npm run check:esm` from baseline (no fix) reported 18 OK + caught a runtime `ReferenceError: window is not defined` and exited 1. After the `typeof document` guard, same command exits 0 with 18 OK and no trailing error. Side-by-side parity check against pickleball's check:esm output confirmed identical exit posture.
+
+  **Closes:** Phase B3 sub-task of KB-0028. Four phases remain on the pickleball-parity roadmap (B4-B7).
+
+  **Note on `docs/concepts-primer.md` cross-link (kickoff suggestion):** The kickoff Optional sub-step suggested cross-linking to pickleball's `docs/concepts-primer.md`. That file does not exist in pickleball (only KB references). Skipped — no useful cross-link to make. Future shared-concepts doc could be created if the patterns warrant, but not B3's job.
+- **Status:** Closed (B3 complete; B3 sub-task of KB-0028 marked done)
+- **Cross-ref:** docs/credentials.md · CLAUDE.md (v13) · archive/CLAUDE_v12.md · scripts/check-esm.js · package.json · app/js/app.js · app/sw.js · KB-0028 (pickleball-parity roadmap) · pickleball KB-0029 (credentials.md source pattern) · pickleball KB-0021 (check-esm.js source pattern)
+
 ### KB-0019 | Recent-form 14-day window
 - **Type:** Reference
 - **Date:** 2026-04-19
@@ -479,4 +529,4 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - KB-0028 — Pickleball-parity multi-phase plan (B2-B7) — Decision, **T2** (active roadmap)
 
 **Closed:**
-KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029, KB-0030

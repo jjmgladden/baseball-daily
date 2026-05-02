@@ -115,4 +115,4 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-main();
+if (typeof document !== 'undefined') main();
