@@ -10,7 +10,10 @@
     "fetch:daily": "node ingestion/fetch-daily.js",
     "serve": "node scripts/serve.js",
     "check-secrets": "node scripts/check-secrets.js",
-    "check:esm": "node scripts/check-esm.js"
+    "check:esm": "node scripts/check-esm.js",
+    "build:icons": "node scripts/build-icons.js"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
 }

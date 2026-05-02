@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-02 (Session 6 — Phase B3 complete: KB-0030 added (process improvements: credentials.md + CLAUDE.md v13 + check-esm.js); B3 sub-task on KB-0028 marked done; CLAUDE.md rolled v12 → v13; SW cache rolled v14 → v15)
+**Last updated:** 2026-05-02 (Session 7 — Phase B4 complete: KB-0031 added (UI polish: APP_VERSION pill + iOS PNG icons + error-messages component); B4 sub-task on KB-0028 marked done; KB-0007 closed; SW cache rolled v15 → v16; APP_VERSION pill introduced — pairing rule now active going forward)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -76,25 +76,16 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** CLAUDE.md § Versioning · archive/CLAUDE_v1.md · archive/CLAUDE_v2.md
 
-### KB-0007 | PWA icons — SVG delivered, PNG deferred
+### KB-0007 | PWA icons — SVG + PNG set delivered
 - **Type:** Action
-- **Tier:** T3
-- **Dependency:** Claude
-- **Date:** 2026-04-19 (updated 2026-04-20 with comprehensive reference doc)
+- **Date:** 2026-04-19 (updated 2026-04-20 with comprehensive reference doc; closed 2026-05-02 Session 7)
 - **Category:** UI / PWA
-- **Tags:** pwa, icons, ios, apple-touch-icon, deferred
-- **Finding:** Phase 3A ships `app/icon.svg` (baseball on deep-navy). Works on modern browsers and Android Chrome (which reads SVG in manifest and even generates a WebAPK — a real installed Android app). iOS Safari historically ignores SVG for the home-screen icon and looks for a legacy `<link rel="apple-touch-icon" href="...png">` tag with a PNG at 180×180. Without PNGs, an iPhone user installing the site to their home screen sees a generic grey square or a low-res screenshot instead of the intended baseball graphic. **Functionally nothing breaks** — only icon polish on iOS is affected.
+- **Tags:** pwa, icons, ios, apple-touch-icon
+- **Finding:** Phase 3A shipped `app/icon.svg` (baseball on deep-navy). Phase B4 (Session 7) added the iOS PNG set via `scripts/build-icons.js` + `sharp` (devDep). Six PNGs generated from the single SVG source: `apple-touch-icon-180x180.png` / `167x167.png` / `152x152.png` / `120x120.png` (iOS home-screen variants) plus `icon-192.png` / `icon-512.png` (PWA manifest standard sizes). Output written to `app/icons/`. iPhone home-screen installs now show the proper baseball graphic instead of a generic grey square. `<link rel="apple-touch-icon" sizes="...">` tags added to `app/index.html` for all 4 iOS variants; `app/manifest.webmanifest` extended with PNG entries alongside the existing SVG. All 6 PNGs added to `SHELL_FILES` in `app/sw.js`; CACHE rolled v15 → v16; APP_VERSION pill introduced in same commit (paired per CLAUDE.md v13 rule). `npm run build:icons` re-runnable when icon.svg changes.
 
-  **Implementation when picked up:**
-  1. Generate PNGs from `app/icon.svg` at 180×180, 192×192, 512×512 (via online converter, a Node script using `sharp`, or a vector editor)
-  2. Save as `app/icon-180.png`, `app/icon-192.png`, `app/icon-512.png`
-  3. Add `<link rel="apple-touch-icon" href="icon-180.png">` to `app/index.html`
-  4. Add PNG entries to `app/manifest.webmanifest` alongside the existing SVG entry
-  5. Add the new PNG files to `SHELL_FILES` in `app/sw.js` and bump `CACHE` (per CLAUDE.md § Service Worker Cache rule)
-
-  **Comprehensive background** — how PWAs differ from native apps, how iOS treats them differently than Android, what "install" actually means on each platform, and the full before/after impact of this work: see [docs/pwa-platform-reference.md](pwa-platform-reference.md).
-- **Status:** Open (deferred — functional impact is zero, polish-only, only for iPhone home-screen installs)
-- **Cross-ref:** app/icon.svg · app/manifest.webmanifest · docs/pwa-platform-reference.md
+  Comprehensive background: see [docs/pwa-platform-reference.md](pwa-platform-reference.md).
+- **Status:** Closed (Session 7 — Phase B4)
+- **Cross-ref:** app/icon.svg · app/icons/ · app/manifest.webmanifest · scripts/build-icons.js · docs/pwa-platform-reference.md · KB-0031 · KB-0028
 
 ### KB-0008 | Season-progress exact dates
 - **Type:** Limitation → Closed
@@ -383,7 +374,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
   | **B1 — Activation** | Email Path A activation (KB-0025 close) · Actions @v6/@v6 bumps (KB-0022 close) · push-race retry-with-rebase port (KB-0027) | ~30 min owner + ~45 min Claude | **✓ DONE Session 4 (commit `1fb2520` + workflow run `25228703199`)** |
   | **B2 — Email upgrade** | `email-template.js` v1 → v2: Cards/Nats pins gain scoring play + W/L/Sv decisions · Today's Schedule (Cards+Nats + 3-5 league marquee games) · Top Highlights with thumbnails (mqdefault.jpg) · all-NL+AL standings (top 3 per division — 18 rows compact) · Notable Games one-liners · existing On This Day · footer | ~3-4 hr | **✓ DONE Session 5 (path β: schema bumped v5 → v6 to add `todaysSchedule[]`; KB-0029)** |
   | **B3 — Process improvements** | `docs/credentials.md` ported from pickleball · CLAUDE.md v12 → v13 (adds Session-End Step 2 credentials-update mandate + APP_VERSION pairing rule for SW cache bumps) · `scripts/check-esm.js` standalone runtime-import script + `npm run check:esm` · `app/js/app.js` `typeof document` guard so check:esm exits 0 (mirrors pickleball pattern) · SW cache v14 → v15 | ~2-3 hr | **✓ DONE Session 6 (KB-0030)** |
-  | **B4 — UI polish** | APP_VERSION pill in app header (paired with SW CACHE constant) · iOS PNG icon set via `scripts/build-icons.js` + `sharp` (closes KB-0007) · `error-messages.js` component retrofit (severity-gated soft-banner from pickleball KB-0021 item 4) · `date-utils.js` audit + parseLocalDate/fmtDateShort port if any baseball date renders off-by-one | ~2-3 hr | Open |
+  | **B4 — UI polish** | APP_VERSION pill in app header (paired with SW CACHE constant; pill text = `v16`, sunsets the v13 "B4 forward-debt" escape clause) · iOS PNG icon set via `scripts/build-icons.js` + `sharp` (closes KB-0007; 4 apple-touch-icon variants + 2 manifest PNGs) · `error-messages.js` component (severity-gated soft-banner ported from pickleball) + soft-banner/freshness-tag CSS · daily-tab snapshot-load failure + players-tab index-missing failure now use soft-banner · `date-utils.js` audit found no off-by-one risk in baseball, port skipped · SW cache v15 → v16 | ~2-3 hr | **✓ DONE Session 7 (KB-0031)** |
   | **B5 — News tab** | Direct port of pickleball KB-0035: `ingestion/lib/rss-parser.js` (RSS 2.0 + Atom 1.0 auto-detection) · `ingestion/fetch-news.js` · 7 sources (T1+T2 mix): MLB.com + MLB Trade Rumors + ESPN MLB + Viva El Birdos + Cardinals.com + Federal Baseball + MASN · `app/js/components/news-card.js` + `confidence-badge.js` · `app/js/tabs/news.js` · Top News section appended to email v2 | ~3-4 hr | Open |
   | **B6 — AI Q&A** | Mirrors pickleball KB-0008 architecture: `ingestion/build-ai-context.js` produces `data/snapshots/ai-context.json` · new Cloudflare Worker `baseball-daily-api.jjmgladden.workers.dev` (revives KB-0024 with new purpose — submission route stays scaffolded behind kill switch, AI route becomes primary) · Anthropic Haiku 4.5 with prompt caching · cost guards (spend cap $5/mo, per-IP rate limit 10/hr + 50/day, env-var kill switch `AI_DISABLED`) · `app/js/tabs/ask.js` chat tab (would be 8th nav slot) · `data/master/ai-config.json` browser-side gate | ~6-8 hr | Open (largest phase) |
   | **B7 — TOC + accordion backport** | Copy `.tab-toc` / `.tab-section` / `.tab-callout` CSS from pickleball KB-0040 Phase L1 (~104 lines) into `app/styles/main.css` · Refactor `app/js/tabs/cardinals.js` (sections: Retired Numbers · HOFers · Historic Seasons · Traditions · Legends deep-dive) · Refactor `app/js/tabs/history.js` (sections: On This Day · Iconic Moments · Strangest Plays · Franchise Lineages) · Refactor B5's new `app/js/tabs/news.js` (today/this-week/recent buckets) · SW cache + APP_VERSION bump · Pre-push ESM check | ~3-4 hr | Open (depends on B5) |
@@ -508,6 +499,86 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed (B3 complete; B3 sub-task of KB-0028 marked done)
 - **Cross-ref:** docs/credentials.md · CLAUDE.md (v13) · archive/CLAUDE_v12.md · scripts/check-esm.js · package.json · app/js/app.js · app/sw.js · KB-0028 (pickleball-parity roadmap) · pickleball KB-0029 (credentials.md source pattern) · pickleball KB-0021 (check-esm.js source pattern)
 
+### KB-0031 | Phase B4 — UI polish (APP_VERSION pill + iOS PNGs + error-messages)
+- **Type:** Action
+- **Date:** 2026-05-02 (Session 7 — Phase B4)
+- **Category:** UI / PWA / Pickleball-parity
+- **Tags:** app-version, ios-icons, apple-touch-icon, sharp, error-messages, soft-banner, pickleball-parity
+- **Source:** Session 7 chat 2026-05-02 — owner ATP'd Phase B4 from the Session 7 kickoff; Claude executed three of four sub-deliverables (date-utils audit determined the port was unnecessary)
+- **Finding:** Pickleball-parity Phase B4 executed end-to-end. Three primary deliverables shipped + one audit-only deliverable resolved by skip:
+
+  **(1) iOS PNG icon set + `scripts/build-icons.js` + `npm run build:icons`.** Direct port of pickleball's `scripts/build-icons.js` (background color adjusted from pickleball's `#0e1420` to baseball's `#0e1821`). Adds `sharp ^0.33.5` as a devDep. Generates 6 PNGs from `app/icon.svg`:
+  - `apple-touch-icon-180x180.png` (5,663 bytes) — primary iOS touch icon
+  - `apple-touch-icon-167x167.png` (5,374 bytes) — iPad Pro
+  - `apple-touch-icon-152x152.png` (4,634 bytes) — iPad
+  - `apple-touch-icon-120x120.png` (3,304 bytes) — iPhone non-Retina
+  - `icon-192.png` (6,228 bytes) — PWA manifest standard
+  - `icon-512.png` (20,469 bytes) — PWA manifest standard
+
+  Output written to `app/icons/`. `app/index.html` gains 4 `<link rel="apple-touch-icon" sizes="...">` tags (one per iOS variant). `app/manifest.webmanifest` extended: original SVG entry preserved as `purpose: "any maskable"`, two PNG entries added with `purpose: "any"` (192 + 512). All 6 PNGs added to `SHELL_FILES` in `app/sw.js` so the PWA caches them offline. `npm run build:icons` is re-runnable when icon.svg changes (script overwrites in place). **Closes KB-0007** (T3 → Closed).
+
+  **(2) APP_VERSION pill in app header (sunsets the v13 "B4 forward-debt" escape clause).** Adds `<span id="app-version" class="app-version">` to the header `.brand` div in `app/index.html`. `app/js/app.js` declares `const APP_VERSION = 'v16'` at the top with a comment documenting the SW cache pairing rule. Pill is populated in `main()` after splash + bindTabs + SW register (early enough to render before snapshot load). CSS in `app/styles/main.css`: `.app-version` rule — small uppercase muted-text pill with thin border, `0.7rem` font-size, tabular-nums, `text-transform: uppercase` (so the constant's `'v16'` displays as `V16`).
+
+  Pairing posture going forward: Session 7 establishes the pattern. Every future shell change must roll BOTH `CACHE` in `app/sw.js` AND `APP_VERSION` in `app/js/app.js` in the same commit. The "B4 forward-debt" escape clause in CLAUDE.md v13 is now sunset — no longer applicable.
+
+  **(3) `app/js/components/error-messages.js` + soft-banner CSS.** Direct port of pickleball's `app/js/components/error-messages.js` with baseball-specific code adjustments:
+  - `MESSAGES` table adapted for baseball context (no `playwright-not-installed` since baseball doesn't scrape; added `snapshot-missing` / `snapshot-stale` / `index-missing` for baseball-specific failure modes)
+  - `DEV_ONLY_CODES` set: keeps `seed-missing` + `no-youtube-key`; drops `no-handle-available` (pickleball-specific)
+  - `friendlyErrorMessage()` + `errorBannerHtml()` + `freshnessTagHtml()` exports preserved; signatures identical
+
+  CSS additions to `app/styles/main.css`: `.soft-banner` (calm card-style notice with accent-info left-border) + `.freshness-tag` (small muted "as of {timestamp}" tag for stale-data fallbacks). Adapted to baseball's CSS-variable names (`--bg-secondary`, `--accent-info`, etc.) — pickleball used `--bg-2` / `--accent`.
+
+  Retrofit applied to two failure paths (severity-gated — only user-impacting failures show a banner):
+  - `app/js/app.js` → `renderNoSnapshot()` now accepts an optional error parameter; renders `errorBannerHtml('fetch-failed', { source: 'Daily snapshot' })` on load failure or `errorBannerHtml('snapshot-missing')` on first-run.
+  - `app/js/tabs/players.js` → catch-block on `loadPlayerIndex()` failure now renders `errorBannerHtml('index-missing')` and removes the raw `Error: ...` line (was leaking dev-error text to users).
+
+  Other tabs not retrofitted this phase — they don't have hard-fail paths. Future tabs (B5 News tab) will use the helpers from day one.
+
+  **(4) `date-utils.js` audit — port determined unnecessary, skipped.** Grepped baseball's `app/js/` for `new Date(` and `toLocaleDateString` patterns. Findings:
+  - All `new Date()` calls take full ISO timestamps (e.g. `state.snapshot.generatedAt = "2026-05-02T01:06:00.625Z"`) — these include time + Z and are timezone-safe.
+  - `players.js:33` uses `new Date(index.generatedAt).toLocaleDateString()` — also full ISO, safe.
+  - `daily.js:32` renders `snap.date` (`"2026-05-01"`) as plain text via `escapeHtml()` — never re-parsed through `Date()`, so no off-by-one.
+  - Other dates: trivia day-of-year math uses `new Date()` (no args, current time) and `new Date(year, 0, 0)` (numeric constructor) — both safe.
+
+  Conclusion: baseball has zero off-by-one risk from the pickleball KB-0016 pattern (which was: `new Date("YYYY-MM-DD")` parses as UTC midnight and renders as previous day in negative-offset timezones). Skipping the port avoids dead code per the "don't add features beyond what the task requires" rule.
+
+  **Files:**
+  ```
+  A  scripts/build-icons.js               (NEW; ~50 lines)
+  A  app/icons/apple-touch-icon-180x180.png (NEW; 5,663 B)
+  A  app/icons/apple-touch-icon-167x167.png (NEW; 5,374 B)
+  A  app/icons/apple-touch-icon-152x152.png (NEW; 4,634 B)
+  A  app/icons/apple-touch-icon-120x120.png (NEW; 3,304 B)
+  A  app/icons/icon-192.png                  (NEW; 6,228 B)
+  A  app/icons/icon-512.png                  (NEW; 20,469 B)
+  M  app/index.html                       (+APP_VERSION pill, +4 apple-touch-icon link tags)
+  M  app/manifest.webmanifest             (+2 PNG icon entries)
+  M  app/sw.js                            (CACHE v15 → v16; +6 PNGs +error-messages.js in SHELL_FILES; pairing comment added)
+  M  app/styles/main.css                  (+.app-version, +.soft-banner, +.freshness-tag)
+  A  app/js/components/error-messages.js  (NEW; ~62 lines)
+  M  app/js/app.js                        (+APP_VERSION constant, +pill wiring, +error-messages import, +renderNoSnapshot error param)
+  M  app/js/tabs/players.js               (+error-messages import, index-missing soft-banner)
+  M  package.json                         (+sharp devDep ^0.33.5, +"build:icons" script)
+  A  .claude/launch.json                  (NEW; preview-server config for Claude Preview MCP — port 1882)
+  M  docs/knowledge-base.md               (this entry; KB-0007 closed; KB-0028 B4 sub-task done; Last-updated bumped)
+  ```
+
+  **Triggers per CLAUDE.md Critical Rules:**
+  - SW cache rule: **TRIGGERED** by `app/index.html`, `app/manifest.webmanifest`, `app/styles/main.css`, `app/js/app.js`, `app/js/tabs/players.js`, new `app/js/components/error-messages.js`, and 6 new PNG files. CACHE bumped v15 → v16.
+  - APP_VERSION pairing rule (NEW v13 rule): **TRIGGERED** and applied — `APP_VERSION = 'v16'` in `app/js/app.js` paired with `CACHE = 'baseball-daily-shell-v16'` in `app/sw.js`. The B4 forward-debt escape clause from v13 is now sunset.
+  - Pre-push ESM check: TRIGGERED → `npm run check:esm` passes with all 19 modules importing clean (was 18; +error-messages.js).
+  - Whole-number version bump: applied (SW cache v15 → v16 + APP_VERSION pill set to v16).
+  - Session-End Step 2 (credentials.md): NOT triggered (no credential changes this session).
+
+  **Verification:**
+  - `npm run build:icons` produced all 6 PNGs cleanly.
+  - `npm run check:esm` exit 0 with 19 OK modules.
+  - Live browser smoke test via Claude Preview MCP (port 1882): snapshot loaded (`Updated 5/1/2026, 8:06:00 PM` text rendered in footer), 4 apple-touch-icon links present in document head, APP_VERSION pill renders "V16" with computed color `rgb(196, 199, 204)` (= `--text-muted`), 11.2px font-size, 0.56px letter-spacing, 21.3×16.8 px bounding box, no console errors.
+
+  **Closes:** Phase B4 sub-task of KB-0028. Three phases remain on the pickleball-parity roadmap (B5-B7). Also closes KB-0007 (long-deferred PNG icons).
+- **Status:** Closed (B4 complete; B4 sub-task of KB-0028 marked done; KB-0007 closed)
+- **Cross-ref:** scripts/build-icons.js · app/icons/ · app/index.html · app/manifest.webmanifest · app/sw.js · app/styles/main.css · app/js/components/error-messages.js · app/js/app.js · app/js/tabs/players.js · package.json · KB-0007 (closed) · KB-0028 (B4 done) · KB-0030 (B3 — APP_VERSION pairing rule introduced) · pickleball KB-0021 (error-messages source pattern) · pickleball KB-0016 (date-utils source — audit determined skip)
+
 ### KB-0019 | Recent-form 14-day window
 - **Type:** Reference
 - **Date:** 2026-04-19
@@ -521,12 +592,11 @@ Static types (Reference, Decision, Limitation) omit Tier.
 ## Quick Index
 
 **Open items (with tier where applicable):**
-- KB-0007 — PNG icon set for iOS — Action, **T3** (will close in Phase B4 per KB-0028)
 - KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
 - KB-0020 — Public on-demand refresh — Action, **T2** (Cloudflare Worker proxy; partially overlaps B6 Worker setup)
-- KB-0021 — Auto-reload on service-worker update — Action, **T2** (could fold into B4)
+- KB-0021 — Auto-reload on service-worker update — Action, **T2** (still open after B4 — not folded in)
 - KB-0024 — Submission Worker — Action (code ready, will revive in Phase B6 for AI proxy use case)
-- KB-0028 — Pickleball-parity multi-phase plan (B2-B7) — Decision, **T2** (active roadmap)
+- KB-0028 — Pickleball-parity multi-phase plan (B5-B7) — Decision, **T2** (active roadmap; B1-B4 done)
 
 **Closed:**
-KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029, KB-0030
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0007, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029, KB-0030, KB-0031

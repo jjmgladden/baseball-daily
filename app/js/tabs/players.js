@@ -7,6 +7,7 @@
 import { loadPlayerIndex } from '../data-loader.js';
 import { getFavorites, isFavorite, toggleFavorite } from '../components/favorites.js';
 import { addToComparison, renderComparison, resetComparison } from '../components/comparison.js';
+import { errorBannerHtml } from '../components/error-messages.js';
 
 const MAX_RESULTS = 50;
 
@@ -19,11 +20,11 @@ export async function renderPlayers(root) {
   catch (err) {
     root.innerHTML = `
       <h1>Players</h1>
+      ${errorBannerHtml('index-missing')}
       <div class="card">
         <h3>Player index not yet built</h3>
         <p class="muted">Run the one-time build to create <code>data/master/player-index.json</code>:</p>
         <pre>node scripts/build-player-index.js</pre>
-        <p class="muted">Error: ${escapeHtml(err.message || '')}</p>
       </div>
     `;
     return;

@@ -28,6 +28,10 @@ desktop.ini
 *.swp
 *~
 
+# ===== Claude Code =====
+# Per-machine permission state — must NOT be committed
+.claude/settings.local.json
+
 # ===== Local-only notes =====
 sessions/private/
 notes-private.md

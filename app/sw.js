@@ -10,12 +10,19 @@
  * GitHub Pages subpath (/baseball-daily/app/).
  */
 
-const CACHE = 'baseball-daily-shell-v15';
+// CACHE name and APP_VERSION (in app/js/app.js) MUST stay in lockstep — bump both together.
+const CACHE = 'baseball-daily-shell-v16';
 
 const SHELL_FILES = [
   './',
   './index.html',
   './icon.svg',
+  './icons/apple-touch-icon-180x180.png',
+  './icons/apple-touch-icon-167x167.png',
+  './icons/apple-touch-icon-152x152.png',
+  './icons/apple-touch-icon-120x120.png',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
   './manifest.webmanifest',
   './styles/main.css',
   './js/app.js',
@@ -36,6 +43,7 @@ const SHELL_FILES = [
   './js/components/suggest.js',
   './js/components/story-state.js',
   './js/components/splash.js',
+  './js/components/error-messages.js',
 ];
 
 self.addEventListener('install', event => {

@@ -71,6 +71,36 @@ a:hover { text-decoration: underline; }
 }
 .brand-icon { font-size: 1.4rem; }
 
+.app-version {
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Soft banner — user-friendly notice (not an alert) */
+.soft-banner {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-info);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.85rem;
+  margin: 0.5rem 0 0.85rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+.freshness-tag {
+  font-size: 0.8rem;
+  margin: 0.25rem 0 0.5rem;
+  opacity: 0.85;
+}
+
 .tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; }
 .tab {
   background: transparent;

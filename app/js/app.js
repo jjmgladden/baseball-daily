@@ -16,6 +16,12 @@ import { renderCardinals } from './tabs/cardinals.js';
 import { renderTrivia } from './tabs/trivia.js';
 import { attachSuggestHandler } from './components/suggest.js';
 import { showSplash } from './components/splash.js';
+import { errorBannerHtml } from './components/error-messages.js';
+
+// APP_VERSION must stay in sync with `CACHE` in app/sw.js. When a shell-file change rolls the
+// SW cache, bump APP_VERSION here to match — that's the user-visible signal in the header pill
+// that a returning visitor's PWA reloaded onto the new shell.
+const APP_VERSION = 'v16';
 
 const state = {
   snapshot: null,
@@ -65,9 +71,13 @@ async function activateTab(name) {
   }
 }
 
-function renderNoSnapshot(panel) {
+function renderNoSnapshot(panel, err) {
+  const banner = err
+    ? errorBannerHtml('fetch-failed', { source: 'Daily snapshot' })
+    : errorBannerHtml('snapshot-missing');
   panel.innerHTML = `
     <h1>Daily Report</h1>
+    ${banner}
     <div class="card">
       <h3>No snapshot yet</h3>
       <p class="muted">Run the daily ingestion to generate your first snapshot:</p>
@@ -91,9 +101,14 @@ async function main() {
   registerServiceWorker();
   attachSuggestHandler('[data-suggest]');
 
+  const versionEl = document.getElementById('app-version');
+  if (versionEl) versionEl.textContent = APP_VERSION;
+
+  let loadError = null;
   try {
     state.snapshot = await loadLatestSnapshot();
   } catch (err) {
+    loadError = err;
     console.error('[app] Failed to load snapshot:', err);
   }
 
@@ -103,7 +118,7 @@ async function main() {
     const el = document.getElementById('last-updated');
     if (el) el.textContent = `Updated ${d.toLocaleString()}`;
   } else {
-    renderNoSnapshot(document.getElementById('tab-daily'));
+    renderNoSnapshot(document.getElementById('tab-daily'), loadError);
   }
   state.rendered.daily = true;
 }
