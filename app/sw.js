@@ -11,7 +11,7 @@
  */
 
 // CACHE name and APP_VERSION (in app/js/app.js) MUST stay in lockstep — bump both together.
-const CACHE = 'baseball-daily-shell-v16';
+const CACHE = 'baseball-daily-shell-v17';
 
 const SHELL_FILES = [
   './',
@@ -34,7 +34,10 @@ const SHELL_FILES = [
   './js/tabs/history.js',
   './js/tabs/stories.js',
   './js/tabs/trivia.js',
+  './js/tabs/news.js',
   './js/components/favorites.js',
+  './js/components/news-card.js',
+  './js/components/confidence-badge.js',
   './js/components/trivia.js',
   './js/components/streak.js',
   './js/components/comparison.js',

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "fetch:daily": "node ingestion/fetch-daily.js",
+    "fetch:news": "node ingestion/fetch-news.js",
     "serve": "node scripts/serve.js",
     "check-secrets": "node scripts/check-secrets.js",
     "check:esm": "node scripts/check-esm.js",

@@ -18,6 +18,12 @@ export async function loadLatestSnapshot() {
   return res.json();
 }
 
+export async function loadNewsSnapshot() {
+  const res = await fetch('../data/snapshots/news-latest.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error(`News snapshot load failed: HTTP ${res.status}`);
+  return res.json();
+}
+
 export async function loadSnapshot(date) {
   const res = await fetch(`../data/snapshots/${date}.json`);
   if (!res.ok) throw new Error(`Snapshot ${date} load failed: HTTP ${res.status}`);

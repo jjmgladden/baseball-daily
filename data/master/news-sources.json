@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-02T00:00:00Z",
+  "note": "RSS news feeds for the daily news ingestion (B5). Tiers: T1 = official authoritative (MLB.com, ESPN's straight reporting), T2 = reliable creator (SBNation beats, trusted aggregators). Scopes: 'league' = MLB-wide, 'cardinals' = Cards-focused, 'nationals' = Nats-focused. Feeds with `enabled: false` are documented but not fetched (e.g. MASN — no public RSS endpoint located). Per-source errors are recorded in news-latest.json without failing the run.",
+  "sources": [
+    {
+      "id": "mlb-com",
+      "displayName": "MLB.com",
+      "scope": "league",
+      "tier": "T1",
+      "feedUrl": "https://www.mlb.com/feeds/news/rss.xml",
+      "enabled": true
+    },
+    {
+      "id": "mlb-trade-rumors",
+      "displayName": "MLB Trade Rumors",
+      "scope": "league",
+      "tier": "T1",
+      "feedUrl": "https://www.mlbtraderumors.com/feed",
+      "enabled": true
+    },
+    {
+      "id": "espn-mlb",
+      "displayName": "ESPN MLB",
+      "scope": "league",
+      "tier": "T1",
+      "feedUrl": "https://www.espn.com/espn/rss/mlb/news",
+      "enabled": true
+    },
+    {
+      "id": "viva-el-birdos",
+      "displayName": "Viva El Birdos",
+      "scope": "cardinals",
+      "tier": "T2",
+      "feedUrl": "https://www.vivaelbirdos.com/rss/index.xml",
+      "enabled": true
+    },
+    {
+      "id": "cardinals-com",
+      "displayName": "Cardinals.com",
+      "scope": "cardinals",
+      "tier": "T2",
+      "feedUrl": "https://www.mlb.com/cardinals/feeds/news/rss.xml",
+      "enabled": true
+    },
+    {
+      "id": "federal-baseball",
+      "displayName": "Federal Baseball",
+      "scope": "nationals",
+      "tier": "T2",
+      "feedUrl": "https://www.federalbaseball.com/rss/index.xml",
+      "enabled": true
+    },
+    {
+      "id": "masn",
+      "displayName": "MASN Sports (Nationals)",
+      "scope": "nationals",
+      "tier": "T2",
+      "feedUrl": null,
+      "enabled": false,
+      "note": "No public RSS endpoint located as of 2026-05-02. Documented placeholder. Re-enable when a feed URL is found."
+    }
+  ],
+  "caveats": [
+    "MLB.com feed URL pattern not formally documented; the standard guess is `/feeds/news/rss.xml`. Per-source error handling means a wrong URL only suppresses that source — never blocks the whole run.",
+    "MLB Trade Rumors is rumors-tier by name, but its sourcing on trades and signings is well-corroborated. Tier T1 per kickoff.",
+    "Cardinals.com is an MLB.com sub-feed (official); listed T2 per kickoff so league-wide MLB.com can stay distinct as the headline T1 source."
+  ]
+}

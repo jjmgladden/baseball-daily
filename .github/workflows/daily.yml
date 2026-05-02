@@ -38,6 +38,13 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
 
+      - name: Fetch news headlines
+        # RSS pull from data/master/news-sources.json. Per-source errors are
+        # logged inside news-latest.json without failing the run, so a flaky
+        # feed never blocks the morning briefing.
+        if: success()
+        run: node ingestion/fetch-news.js
+
       - name: Commit and push snapshot
         # Retry-with-rebase on push rejection. Two runs started close together
         # can race at push time; the loser rebases on the winner and retries.

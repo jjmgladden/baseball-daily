@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 /**
- * send-email — v2
+ * send-email — v3
  *
- * Sends the morning briefing via Resend. Runs after fetch-daily.js and the
- * snapshot commit in .github/workflows/daily.yml. Locally, runs via
- * `node ingestion/send-email.js` with env vars set.
+ * Sends the morning briefing via Resend. Runs after fetch-daily.js +
+ * fetch-news.js and the snapshot commit in .github/workflows/daily.yml.
+ * Locally, runs via `node ingestion/send-email.js` with env vars set.
  *
- * v2: signature unchanged; rendering moved to email-template.js v2 which
- * adds Today's Schedule, highlight thumbnails, all-NL+AL standings,
- * notable games one-liners, and recap details (W/L/Sv + first scoring
- * play) inside the Cards/Nats pins. Requires snapshot schemaVersion >= 5
- * (Today's Schedule section appears only when v6+ snapshot is present).
+ * v3: reads BOTH the main snapshot and the separate news snapshot
+ * (`data/snapshots/news-latest.json`) and passes both to buildEmail.
+ * If news-latest.json is missing or unparseable, the email still sends —
+ * the Top News section is simply omitted.
+ *
+ * v2 baseline (unchanged): rendering in email-template.js v3 includes
+ * Today's Schedule, highlight thumbnails, all-NL+AL standings, notable
+ * games one-liners, and recap details (W/L/Sv + first scoring play)
+ * inside the Cards/Nats pins. Requires snapshot schemaVersion >= 5.
  *
  * Required env:
  *   RESEND_API_KEY      — from resend.com dashboard
@@ -42,6 +46,7 @@ const { buildEmail } = require('./lib/email-template');
 const DEFAULT_FROM = "Ozark Joe's Baseball Daily <onboarding@resend.dev>";
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const SNAPSHOT_PATH = path.join(PROJECT_ROOT, 'data', 'snapshots', 'latest.json');
+const NEWS_SNAPSHOT_PATH = path.join(PROJECT_ROOT, 'data', 'snapshots', 'news-latest.json');
 
 async function main() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -66,7 +71,24 @@ async function main() {
   }
 
   const snapshot = JSON.parse(fs.readFileSync(SNAPSHOT_PATH, 'utf8'));
-  const { subject, html, text } = buildEmail(snapshot);
+
+  // News is optional — missing or unparseable means "no Top News section",
+  // not a failure. fetch-news.js writes this file alongside the daily snapshot.
+  let newsData = null;
+  if (fs.existsSync(NEWS_SNAPSHOT_PATH)) {
+    try {
+      newsData = JSON.parse(fs.readFileSync(NEWS_SNAPSHOT_PATH, 'utf8'));
+      const itemCount = newsData?.items?.length || 0;
+      console.log(`[send-email] News: ${itemCount} item${itemCount === 1 ? '' : 's'} loaded from news-latest.json`);
+    } catch (err) {
+      console.log(`[send-email] News: parse error in news-latest.json (${err.message}) — omitting Top News`);
+      newsData = null;
+    }
+  } else {
+    console.log('[send-email] News: news-latest.json not present — omitting Top News');
+  }
+
+  const { subject, html, text } = buildEmail(snapshot, newsData);
 
   console.log(`[send-email] Recipients: ${recipients.length}  From: ${from}`);
   console.log(`[send-email] Subject: ${subject}`);

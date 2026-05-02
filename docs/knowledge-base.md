@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-02 (Session 7 — Phase B4 complete: KB-0031 added (UI polish: APP_VERSION pill + iOS PNG icons + error-messages component); B4 sub-task on KB-0028 marked done; KB-0007 closed; SW cache rolled v15 → v16; APP_VERSION pill introduced — pairing rule now active going forward; **3-recipient email verification CLEARED — owner confirmed all 3 morning inboxes received the v2 scheduled-cron send, closing the triple-deferral from Sessions 5+6+7**)
+**Last updated:** 2026-05-02 (Session 8 — Phase B5 complete: KB-0032 added (News tab: rss-parser + fetch-news + 7-source set + news tab + email v3 Top News section); B5 sub-task on KB-0028 marked done; SW cache rolled v16 → v17; APP_VERSION pill rolled to v17; email template archived v2 → v3; **all 6 enabled news sources returned items on first run (40 total)**)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -376,7 +376,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
   | **B2 — Email upgrade** | `email-template.js` v1 → v2: Cards/Nats pins gain scoring play + W/L/Sv decisions · Today's Schedule (Cards+Nats + 3-5 league marquee games) · Top Highlights with thumbnails (mqdefault.jpg) · all-NL+AL standings (top 3 per division — 18 rows compact) · Notable Games one-liners · existing On This Day · footer | ~3-4 hr | **✓ DONE Session 5 (path β: schema bumped v5 → v6 to add `todaysSchedule[]`; KB-0029)** |
   | **B3 — Process improvements** | `docs/credentials.md` ported from pickleball · CLAUDE.md v12 → v13 (adds Session-End Step 2 credentials-update mandate + APP_VERSION pairing rule for SW cache bumps) · `scripts/check-esm.js` standalone runtime-import script + `npm run check:esm` · `app/js/app.js` `typeof document` guard so check:esm exits 0 (mirrors pickleball pattern) · SW cache v14 → v15 | ~2-3 hr | **✓ DONE Session 6 (KB-0030)** |
   | **B4 — UI polish** | APP_VERSION pill in app header (paired with SW CACHE constant; pill text = `v16`, sunsets the v13 "B4 forward-debt" escape clause) · iOS PNG icon set via `scripts/build-icons.js` + `sharp` (closes KB-0007; 4 apple-touch-icon variants + 2 manifest PNGs) · `error-messages.js` component (severity-gated soft-banner ported from pickleball) + soft-banner/freshness-tag CSS · daily-tab snapshot-load failure + players-tab index-missing failure now use soft-banner · `date-utils.js` audit found no off-by-one risk in baseball, port skipped · SW cache v15 → v16 | ~2-3 hr | **✓ DONE Session 7 (KB-0031)** |
-  | **B5 — News tab** | Direct port of pickleball KB-0035: `ingestion/lib/rss-parser.js` (RSS 2.0 + Atom 1.0 auto-detection) · `ingestion/fetch-news.js` · 7 sources (T1+T2 mix): MLB.com + MLB Trade Rumors + ESPN MLB + Viva El Birdos + Cardinals.com + Federal Baseball + MASN · `app/js/components/news-card.js` + `confidence-badge.js` · `app/js/tabs/news.js` · Top News section appended to email v2 | ~3-4 hr | Open |
+  | **B5 — News tab** | Direct port of pickleball KB-0035: `ingestion/lib/rss-parser.js` (RSS 2.0 + Atom 1.0 auto-detection) · `ingestion/fetch-news.js` · 7 sources (T1+T2 mix): MLB.com + MLB Trade Rumors + ESPN MLB + Viva El Birdos + Cardinals.com + Federal Baseball + MASN · `app/js/components/news-card.js` + `confidence-badge.js` · `app/js/tabs/news.js` · Top News section appended to email v2 | ~3-4 hr | **✓ DONE Session 8 (KB-0032; 6 of 7 sources active; MASN documented as disabled placeholder pending RSS endpoint)** |
   | **B6 — AI Q&A** | Mirrors pickleball KB-0008 architecture: `ingestion/build-ai-context.js` produces `data/snapshots/ai-context.json` · new Cloudflare Worker `baseball-daily-api.jjmgladden.workers.dev` (revives KB-0024 with new purpose — submission route stays scaffolded behind kill switch, AI route becomes primary) · Anthropic Haiku 4.5 with prompt caching · cost guards (spend cap $5/mo, per-IP rate limit 10/hr + 50/day, env-var kill switch `AI_DISABLED`) · `app/js/tabs/ask.js` chat tab (would be 8th nav slot) · `data/master/ai-config.json` browser-side gate | ~6-8 hr | Open (largest phase) |
   | **B7 — TOC + accordion backport** | Copy `.tab-toc` / `.tab-section` / `.tab-callout` CSS from pickleball KB-0040 Phase L1 (~104 lines) into `app/styles/main.css` · Refactor `app/js/tabs/cardinals.js` (sections: Retired Numbers · HOFers · Historic Seasons · Traditions · Legends deep-dive) · Refactor `app/js/tabs/history.js` (sections: On This Day · Iconic Moments · Strangest Plays · Franchise Lineages) · Refactor B5's new `app/js/tabs/news.js` (today/this-week/recent buckets) · SW cache + APP_VERSION bump · Pre-push ESM check | ~3-4 hr | Open (depends on B5) |
 
@@ -580,6 +580,93 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed (B4 complete; B4 sub-task of KB-0028 marked done; KB-0007 closed)
 - **Cross-ref:** scripts/build-icons.js · app/icons/ · app/index.html · app/manifest.webmanifest · app/sw.js · app/styles/main.css · app/js/components/error-messages.js · app/js/app.js · app/js/tabs/players.js · package.json · KB-0007 (closed) · KB-0028 (B4 done) · KB-0030 (B3 — APP_VERSION pairing rule introduced) · pickleball KB-0021 (error-messages source pattern) · pickleball KB-0016 (date-utils source — audit determined skip)
 
+### KB-0032 | Phase B5 — News tab + email v3 Top News section
+- **Type:** Action
+- **Date:** 2026-05-02 (Session 8 — Phase B5)
+- **Category:** Features / Ingestion / Email / Pickleball-parity
+- **Tags:** news, rss, atom, rss-parser, fetch-news, email-v3, pickleball-parity, b5
+- **Source:** Session 8 chat 2026-05-02 — owner ATP'd Phase B5 from the Session 8 kickoff (`ATP Phase B5`)
+- **Finding:** Pickleball-parity Phase B5 executed end-to-end. Eight deliverables shipped together:
+
+  **(1) `ingestion/lib/rss-parser.js` (NEW; ~190 lines)** — direct port of pickleball's rss-parser.js. RSS 2.0 + Atom 1.0 with auto-detection (`isAtomFeed` checks for `xmlns="http://www.w3.org/2005/Atom"` or `<feed><entry>` pattern). No dependencies — uses native `https`/`http` + regex. Handles: CDATA unwrapping, HTML entity decoding (`&amp; / &lt; / &#x... / &#nnn;`), one-redirect following, 12s timeout, `User-Agent: BaseballDailyBot/1.0`. Extracts per item: id (guid or link), title, url, summary (≤280 chars stripped of HTML), author, categories, imageUrl (from `media:content` / `media:thumbnail`), publishedAt (ISO from `pubDate`/`published`/`updated`). Per-item shape includes `tier` + `scope` (NEW vs pickleball — for Cardinals/Nationals/league bucketing).
+
+  **(2) `data/master/news-sources.json` (NEW)** — 7 sources defined; 6 enabled, 1 placeholder:
+  - `mlb-com` — MLB.com — league — T1 — `https://www.mlb.com/feeds/news/rss.xml`
+  - `mlb-trade-rumors` — MLB Trade Rumors — league — T1 — `https://www.mlbtraderumors.com/feed`
+  - `espn-mlb` — ESPN MLB — league — T1 — `https://www.espn.com/espn/rss/mlb/news`
+  - `viva-el-birdos` — Viva El Birdos — cardinals — T2 — SBNation feed
+  - `cardinals-com` — Cardinals.com — cardinals — T2 — MLB.com sub-feed
+  - `federal-baseball` — Federal Baseball — nationals — T2 — SBNation feed
+  - `masn` — MASN Sports — nationals — T2 — `enabled: false` (no public RSS endpoint located; documented placeholder for re-enable when found)
+
+  Schema includes `enabled` flag so future disable/re-enable doesn't require code changes. Caveats section flags MLB Trade Rumors' rumors-tier-by-name (T1 per kickoff is owner's call) and Cardinals.com's MLB.com sub-feed posture.
+
+  **(3) `ingestion/fetch-news.js` (NEW; ~115 lines) + `npm run fetch:news` script.** Reads news-sources.json, iterates enabled sources, calls `rss-parser.fetchFeed`, applies `MAX_PER_SOURCE=15` cap per source, dedupes across sources by URL + normalized title (lowercase + strip non-alphanumeric, first 80 chars), sorts newest-first (items missing `publishedAt` drop to back), applies `MAX_ITEMS=40` total cap. Writes to `data/snapshots/news-latest.json` (separate file per kickoff — independent freshness from main snapshot). Per-source errors recorded inside the output without failing the run; `ok: true` if any source returned items, `ok: false` only if all failed. Output schema: `{ schemaVersion: 1, generatedAt, ok, sources: [{ sourceId, sourceName, tier, scope, ok, count, error? }], items: [...], errors: [...] }`.
+
+  **(4) `app/js/components/confidence-badge.js` (NEW; ~17 lines)** — direct port. Exports `escapeHtml` + `confidenceBadgeHtml(tier)`. T1 = no badge (default render); T2 = `<span class="badge-confidence t2">T2</span>`; T3 = "editorial" badge; "developing" = "developing" badge.
+
+  **(5) `app/js/components/news-card.js` (NEW; ~58 lines)** — port adapted for baseball. Drops the unused `date-utils.js` import from pickleball (audit determined no off-by-one risk in baseball — Session 7 KB-0031). Exports `renderNewsCard(item)` (article card with headline link + source/tier/relative-date meta line + author + summary) and `bucketNews(items)` (Today / This Week / Recent buckets by `publishedAt` against local midnight). Local `fmtRelative(iso)` produces "5h ago" / "3d ago" labels.
+
+  **(6) `app/js/tabs/news.js` (NEW; ~56 lines)** — async tab module. Loads via `loadNewsSnapshot()` from data-loader; on fetch error renders `errorBannerHtml('fetch-failed')`. Renders `<h1>News</h1>` + sources line ("From: MLB.com (15) · ESPN MLB (15) · ..."), then Today / This Week / Recent sections (each with `<h2>` heading + grid of news-cards). Per-source errors render as a bottom muted line. Empty-state message when no items returned.
+
+  **(7) Wired into app shell:**
+  - `app/index.html` — added `<button class="tab" data-tab="news">News</button>` (8th nav slot) + `<section id="tab-news" class="panel"></section>`.
+  - `app/js/app.js` — imports `renderNews`, adds `case 'news': await renderNews(panel); break;` to switch. APP_VERSION bumped `'v16'` → `'v17'`.
+  - `app/js/data-loader.js` — adds `loadNewsSnapshot()` exporting `fetch('../data/snapshots/news-latest.json', { cache: 'no-store' })`.
+  - `app/sw.js` — CACHE bumped `v16` → `v17`; SHELL_FILES extended with `./js/tabs/news.js`, `./js/components/news-card.js`, `./js/components/confidence-badge.js`.
+  - `app/styles/main.css` — added News tab block (`.news-list`, `.news-card`, `.news-card-link`, `.news-headline`, `.news-meta`, `.news-summary`, `.news-sources-line`, `.badge-confidence` + `.t2` / `.t3` / `.developing` variants). Adapted to baseball's CSS-variable names.
+
+  **(8) Email template v2 → v3 + send-email v3 + archive:**
+  - `archive/email-template_v2.js` — v2 archived per whole-number versioning rule.
+  - `ingestion/lib/email-template.js` — v2 → v3. `buildEmail(snapshot, newsData?)` signature change (newsData optional; second arg). New `topNewsHtml(items)` renders top 4 news items between Notable Games and On This Day. Each item gets a soft-banner-style card with `border-left` color-coded by tier (T1 = info-blue, T2 = gold, lower = muted), title + source + relative date + tier badge + summary. Plain-text fallback gets a `TOP NEWS` section with title + source · date + URL per item.
+  - `ingestion/send-email.js` — v2 → v3. Loads news-latest.json defensively (graceful skip with logged reason if missing or unparseable). Passes newsData to buildEmail.
+  - `.github/workflows/daily.yml` — added `Fetch news headlines` step between `Fetch daily data` and `Commit and push snapshot`. Cloud cron will populate news-latest.json each morning before email sends. Existing `git add data/snapshots/` already covers the new file.
+
+  **Files changed/added (this session):**
+  ```
+  A  ingestion/lib/rss-parser.js                 (NEW; ~190 lines)
+  A  ingestion/fetch-news.js                     (NEW; ~115 lines)
+  A  data/master/news-sources.json               (NEW; 7 sources, 6 enabled)
+  A  app/js/components/confidence-badge.js       (NEW; ~17 lines)
+  A  app/js/components/news-card.js              (NEW; ~58 lines)
+  A  app/js/tabs/news.js                         (NEW; ~56 lines)
+  A  archive/email-template_v2.js                (v2 archive)
+  M  app/index.html                              (+News tab + panel)
+  M  app/js/app.js                               (+renderNews import + case; APP_VERSION v16 → v17)
+  M  app/js/data-loader.js                       (+loadNewsSnapshot)
+  M  app/sw.js                                   (CACHE v16 → v17; +3 SHELL_FILES)
+  M  app/styles/main.css                         (+News tab CSS block + badge-confidence variants)
+  M  ingestion/lib/email-template.js             (v2 → v3; +topNewsHtml + plain-text TOP NEWS section)
+  M  ingestion/send-email.js                     (v2 → v3; loads news-latest.json defensively)
+  M  package.json                                (+fetch:news script)
+  M  .github/workflows/daily.yml                 (+Fetch news headlines step)
+  M  docs/knowledge-base.md                      (this entry; KB-0028 B5 done; Last-updated bumped)
+  A  data/snapshots/news-latest.json             (NEW; first cloud run will overwrite — locally generated for verification)
+  ```
+
+  **Triggers per CLAUDE.md Critical Rules:**
+  - SW cache rule: **TRIGGERED** — CACHE bumped v16 → v17 paired with APP_VERSION v17.
+  - APP_VERSION pairing rule (v13): **TRIGGERED** and applied — both rolled together in same commit.
+  - Pre-push ESM check: TRIGGERED → `npm run check:esm` exits 0 with **22 OK modules** (was 19; +confidence-badge.js, +news-card.js, +news.js).
+  - Whole-number version bump: applied to email template (v2 → archive; in-tree promoted to v3) and SW/APP_VERSION (v16 → v17).
+  - Session-End Step 2 (credentials.md): NOT triggered (no credential changes).
+
+  **Verification:**
+  - `npm run fetch:news` (local) — wrote 40 items from 6/6 enabled sources to news-latest.json. All sources returned full caps (15) except SBNation pair (10 each — feed depth).
+  - `npm run check:esm` — exit 0 with all 22 modules importing clean.
+  - Local email dry-run (`EMAIL_DRY_RUN=1`) — rendered 32,704 bytes (was 27,322 in v2; +5,382 bytes for Top News section); plain-text TOP NEWS block present with all 4 items + URLs; subject line unchanged ("⚾ Cardinals win 7-2 vs Los Angeles Dodgers — Friday, May 1, 2026").
+  - Live browser smoke test via Claude Preview MCP (port 1882): cleared old SW cache → reload picked up v17 shell. APP_VERSION pill renders "V17". News tab in nav (8th slot). Activated News tab via direct call (splash overlay had to be removed for click to register, normal). Rendered: "From: MLB.com (15) · MLB Trade Rumors (15) · ESPN MLB (15) · Viva El Birdos (10) · Cardinals.com (15) · Federal Baseball (10)" — 6 sources line. Today + This Week h2 sections present. 40 news-card articles rendered. 6 `.badge-confidence.t2` badges with computed color `rgb(0, 180, 216)` (= --accent-info), background `rgba(0, 180, 216, 0.18)`, font-size 11.2px. First card: "White Sox rookie Murakami hits MLB-best 13th HR" from ESPN MLB with "1m ago" relative timestamp. Card background `rgb(30, 49, 72)` (= --bg-card). No console errors.
+
+  **Closes:** Phase B5 sub-task of KB-0028. Two phases remain on the pickleball-parity roadmap (B6 = AI Q&A, B7 = TOC + accordion backport).
+
+  **Decisions deviating from kickoff:**
+  - **MASN as disabled placeholder, not omitted.** Kickoff said "TBD URL; flag if not findable." Schema-supported `enabled: false` keeps MASN documented + auditable in news-sources.json without breaking the fetcher. Re-enable is a one-line config edit when an RSS endpoint is found.
+  - **News stored separate from main snapshot.** Per kickoff: "Writes to `data/snapshots/news-latest.json` (separate from main snapshot — independent freshness)." Send-email v3 reads both files defensively; if news-latest.json is missing the email still sends with Top News section omitted.
+  - **`renderNewsCardCompact` skipped.** Pickleball's component exports a compact variant for the daily-tab Top News module. Baseball's daily tab doesn't need a Top News module (Top News appears in email + News tab; daily tab stays MLB-stats-focused). Drop avoids dead code.
+  - **`date-utils.js` not introduced.** Session 7 audit (KB-0031) determined baseball has zero off-by-one risk. News-card uses `new Date(iso)` only on full ISO strings from RSS publishedAt (parsed by rss-parser via `new Date(pubDate).toISOString()`); already safe. The unused pickleball import was dropped during port.
+- **Status:** Closed (B5 complete; B5 sub-task of KB-0028 marked done)
+- **Cross-ref:** ingestion/lib/rss-parser.js · ingestion/fetch-news.js · data/master/news-sources.json · app/js/tabs/news.js · app/js/components/news-card.js · app/js/components/confidence-badge.js · ingestion/lib/email-template.js · archive/email-template_v2.js · app/sw.js · app/js/app.js · KB-0028 (B5 done) · KB-0031 (Session 7 — date-utils audit referenced) · pickleball KB-0035 (rss-parser + fetch-news source pattern)
+
 ### KB-0019 | Recent-form 14-day window
 - **Type:** Reference
 - **Date:** 2026-04-19
@@ -597,7 +684,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - KB-0020 — Public on-demand refresh — Action, **T2** (Cloudflare Worker proxy; partially overlaps B6 Worker setup)
 - KB-0021 — Auto-reload on service-worker update — Action, **T2** (still open after B4 — not folded in)
 - KB-0024 — Submission Worker — Action (code ready, will revive in Phase B6 for AI proxy use case)
-- KB-0028 — Pickleball-parity multi-phase plan (B5-B7) — Decision, **T2** (active roadmap; B1-B4 done)
+- KB-0028 — Pickleball-parity multi-phase plan (B6-B7) — Decision, **T2** (active roadmap; B1-B5 done)
 
 **Closed:**
-KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0007, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029, KB-0030, KB-0031
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0007, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029, KB-0030, KB-0031, KB-0032

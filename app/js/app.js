@@ -14,6 +14,7 @@ import { renderHistory } from './tabs/history.js';
 import { renderStories } from './tabs/stories.js';
 import { renderCardinals } from './tabs/cardinals.js';
 import { renderTrivia } from './tabs/trivia.js';
+import { renderNews } from './tabs/news.js';
 import { attachSuggestHandler } from './components/suggest.js';
 import { showSplash } from './components/splash.js';
 import { errorBannerHtml } from './components/error-messages.js';
@@ -21,7 +22,7 @@ import { errorBannerHtml } from './components/error-messages.js';
 // APP_VERSION must stay in sync with `CACHE` in app/sw.js. When a shell-file change rolls the
 // SW cache, bump APP_VERSION here to match — that's the user-visible signal in the header pill
 // that a returning visitor's PWA reloaded onto the new shell.
-const APP_VERSION = 'v16';
+const APP_VERSION = 'v17';
 
 const state = {
   snapshot: null,
@@ -59,6 +60,7 @@ async function activateTab(name) {
       case 'history':   await renderHistory(panel, state.snapshot); break;
       case 'stories':   await renderStories(panel); break;
       case 'trivia':    await renderTrivia(panel); break;
+      case 'news':      await renderNews(panel); break;
       case 'cardinals': await renderCardinals(panel, state.snapshot); break;
       default:          panel.innerHTML = `<h1>${name}</h1>`;
     }

@@ -1,28 +1,25 @@
 /**
- * Email template builder — v3
+ * Email template builder — v2
  *
  * Builds the rich HTML body + plain-text fallback + subject for the
- * morning email from a fresh daily snapshot + a separate news snapshot.
- * No external dependencies.
+ * morning email from a fresh daily snapshot. No external dependencies.
  *
- * v3 changes from v2: adds Top News section between Notable Games and
- * On This Day. News is sourced from a SECOND argument (news-latest.json)
- * rather than the main snapshot — independent freshness, separate file.
- * buildEmail now accepts (snapshot, newsData) where newsData is optional.
- *
- * v3 sections (in display order):
+ * v2 sections (in display order):
  *   1. Header
- *   2. Cardinals pin       — scoring play + W/L/Sv decisions
- *   3. Nationals pin       — scoring play + W/L/Sv decisions
- *   4. Today's Schedule    — Cards/Nats + up to 3 league marquee games
- *   5. Top Highlights      — Cards + Nats highlights with mqdefault thumbnails
- *   6. Division Standings  — All NL + AL, top 3 per division (18 rows)
- *   7. Notable Games       — One-liners from snapshot.notableGames
- *   8. Top News (NEW v3)   — Top 4 items from news-latest.json with source +
- *                              tier badge + relative date + summary
- *   9. On This Day         — top 2 entries
- *  10. CTA button
- *  11. Stats footer
+ *   2. Cardinals pin       — adds scoring play + W/L/Sv decisions
+ *   3. Nationals pin       — adds scoring play + W/L/Sv decisions
+ *   4. Today's Schedule    — NEW. Cards/Nats + up to 3 league marquee games
+ *                              with probable pitchers (snapshot v6+)
+ *   5. Top Highlights      — NEW. Cards + Nats highlights with mqdefault
+ *                              thumbnails (120×68) and click-out links
+ *   6. Division Standings  — NEW. All NL + AL, top 3 per division (18 rows)
+ *                              Cards highlighted in NL Central; Nats in NL East
+ *   7. Notable Games       — NEW. One-liners from snapshot.notableGames
+ *                              (one-run / shutout / blowout / slugfest /
+ *                              pitchers' duel)
+ *   8. On This Day         — top 2 entries (unchanged)
+ *   9. CTA button          — unchanged
+ *  10. Stats footer        — unchanged
  *
  * Design goals (unchanged):
  *   - Renders well in Gmail, Outlook, Apple Mail, mobile clients
@@ -76,12 +73,11 @@ const COLORS = {
 };
 
 /**
- * Build email fields from a snapshot + optional news snapshot.
+ * Build email fields from a snapshot.
  * @param {object} snapshot  — parsed data/snapshots/latest.json
- * @param {object} [newsData]  — parsed data/snapshots/news-latest.json (v3+)
  * @returns {{ subject: string, html: string, text: string }}
  */
-function buildEmail(snapshot, newsData) {
+function buildEmail(snapshot) {
   const date = snapshot?.date || new Date().toISOString().slice(0, 10);
   const dateFormatted = formatLongDate(date);
 
@@ -89,8 +85,8 @@ function buildEmail(snapshot, newsData) {
   const natsLine = oneLineGameResult(snapshot?.nationals?.game, NATS_ID, 'Nationals');
 
   const subject = buildSubject(cardsLine, natsLine, dateFormatted);
-  const html = buildHtml(snapshot, dateFormatted, cardsLine, natsLine, newsData);
-  const text = buildPlainText(snapshot, dateFormatted, cardsLine, natsLine, newsData);
+  const html = buildHtml(snapshot, dateFormatted, cardsLine, natsLine);
+  const text = buildPlainText(snapshot, dateFormatted, cardsLine, natsLine);
 
   return { subject, html, text };
 }
@@ -114,7 +110,7 @@ function buildSubject(cardsLine, natsLine, dateFormatted) {
 // HTML BODY
 // ---------------------------------------------------------------------------
 
-function buildHtml(snap, dateFormatted, cardsLine, natsLine, newsData) {
+function buildHtml(snap, dateFormatted, cardsLine, natsLine) {
   const onThisDay = (snap?.onThisDay || []).slice(0, 2);
   const tradesCount = (snap?.trades || []).length;
   const injuriesCount = (snap?.injuries || []).length;
@@ -122,8 +118,6 @@ function buildHtml(snap, dateFormatted, cardsLine, natsLine, newsData) {
 
   const cardsRecap = snap?.cardinals?.recap;
   const natsRecap = snap?.nationals?.recap;
-
-  const newsItems = (newsData?.items || []).slice(0, 4);
 
   return `
 <!DOCTYPE html>
@@ -157,8 +151,6 @@ function buildHtml(snap, dateFormatted, cardsLine, natsLine, newsData) {
     ${standingsHtml(snap)}
 
     ${notableGamesHtml(snap)}
-
-    ${topNewsHtml(newsItems)}
 
     ${onThisDayHtml(onThisDay)}
 
@@ -475,50 +467,6 @@ function notableIcon(reason) {
   return '◆';
 }
 
-// --- Top News (v3) ---------------------------------------------------------
-
-function topNewsHtml(items) {
-  if (!items.length) return '';
-  const rows = items.map(n => {
-    const url = n.url || '#';
-    const dateLabel = n.publishedAt ? formatRelativeShort(n.publishedAt) : '';
-    const tier = (n.tier || '').toLowerCase();
-    const accent = tier === 't1' ? COLORS.accent
-                 : tier === 't2' ? COLORS.cardsGold
-                 : COLORS.textDim;
-    const tierBadge = tier === 't2'
-      ? `<span style="background:rgba(0,180,216,0.18); color:${COLORS.accent}; border:1px solid ${COLORS.accent}; border-radius:3px; padding:1px 5px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; margin-left:4px;">T2</span>`
-      : '';
-    const meta = [n.sourceName, dateLabel].filter(Boolean).join(' · ');
-    return `
-      <a href="${escapeHtml(url)}" style="display:block; text-decoration:none; color:inherit; margin-top:10px;">
-        <div style="background:${COLORS.cardLow}; border:1px solid ${COLORS.border}; border-left:3px solid ${accent}; border-radius:6px; padding:10px 14px;">
-          <div style="font-size:14px; color:${COLORS.white}; font-weight:600; line-height:1.35;">${escapeHtml(n.title || '')}</div>
-          ${meta ? `<div style="font-size:12px; color:${COLORS.textDim}; margin-top:4px;">${escapeHtml(meta)}${tierBadge}</div>` : ''}
-          ${n.summary ? `<div style="font-size:13px; color:${COLORS.text}; margin-top:6px; line-height:1.45;">${escapeHtml(n.summary)}</div>` : ''}
-        </div>
-      </a>`;
-  }).join('');
-  return `
-    <div style="margin-top:24px;">
-      <div style="font-size:15px; font-weight:600; color:${COLORS.cardsGold}; text-transform:uppercase; letter-spacing:0.08em;">Top News</div>
-      ${rows}
-    </div>`;
-}
-
-function formatRelativeShort(iso) {
-  if (!iso) return '';
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return '';
-  const diffMs = Date.now() - d.getTime();
-  const diffH = diffMs / 36e5;
-  if (diffH < 1) return Math.max(1, Math.floor(diffMs / 60000)) + 'm ago';
-  if (diffH < 24) return Math.floor(diffH) + 'h ago';
-  const diffD = Math.floor(diffH / 24);
-  if (diffD < 7) return diffD + 'd ago';
-  return formatShortDate(iso.slice(0, 10));
-}
-
 // --- On This Day -----------------------------------------------------------
 
 function onThisDayHtml(entries) {
@@ -539,7 +487,7 @@ function onThisDayHtml(entries) {
 // PLAIN TEXT FALLBACK
 // ---------------------------------------------------------------------------
 
-function buildPlainText(snap, dateFormatted, cardsLine, natsLine, newsData) {
+function buildPlainText(snap, dateFormatted, cardsLine, natsLine) {
   const lines = [];
 
   lines.push(`OZARK JOE'S BASEBALL DAILY — ${dateFormatted}`);
@@ -624,20 +572,6 @@ function buildPlainText(snap, dateFormatted, cardsLine, natsLine, newsData) {
     for (const g of notable) {
       const reason = (g.notableReasons || [])[0] || '';
       lines.push(`  • ${teamShortName(g.away?.name)} ${g.away?.score ?? '—'}, ${teamShortName(g.home?.name)} ${g.home?.score ?? '—'} (${reason})`);
-    }
-    lines.push('');
-  }
-
-  // Top News (v3)
-  const news = (newsData?.items || []).slice(0, 4);
-  if (news.length) {
-    lines.push('TOP NEWS');
-    for (const n of news) {
-      lines.push(`  • ${n.title || ''}`);
-      const dateLabel = n.publishedAt ? n.publishedAt.slice(0, 10) : '';
-      const meta = [n.sourceName, dateLabel].filter(Boolean).join(' · ');
-      if (meta) lines.push(`    ${meta}`);
-      if (n.url) lines.push(`    ${n.url}`);
     }
     lines.push('');
   }
