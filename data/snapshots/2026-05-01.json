@@ -1,7 +1,7 @@
 {
   "schemaVersion": 6,
   "date": "2026-05-01",
-  "generatedAt": "2026-05-02T01:00:36.074Z",
+  "generatedAt": "2026-05-02T01:06:00.625Z",
   "season": 2026,
   "youtubeEnabled": true,
   "scoreboard": [
@@ -129,7 +129,7 @@
       "away": {
         "id": 110,
         "name": "Baltimore Orioles",
-        "score": 1,
+        "score": 2,
         "record": {
           "wins": 15,
           "losses": 16,
@@ -237,7 +237,7 @@
       "away": {
         "id": 141,
         "name": "Toronto Blue Jays",
-        "score": 2,
+        "score": 3,
         "record": {
           "wins": 14,
           "losses": 17,
@@ -281,7 +281,7 @@
       "home": {
         "id": 115,
         "name": "Colorado Rockies",
-        "score": 3,
+        "score": 5,
         "record": {
           "wins": 14,
           "losses": 18,
@@ -1222,7 +1222,7 @@
             "name": "Iván Herrera",
             "position": "DH",
             "stats": {
-              "summary": "1-1 | R",
+              "summary": "1-2 | K, R",
               "gamesPlayed": 1,
               "flyOuts": 0,
               "groundOuts": 0,
@@ -1231,18 +1231,18 @@
               "doubles": 0,
               "triples": 0,
               "homeRuns": 0,
-              "strikeOuts": 0,
+              "strikeOuts": 1,
               "baseOnBalls": 0,
               "intentionalWalks": 0,
               "hits": 1,
               "hitByPitch": 0,
-              "atBats": 1,
+              "atBats": 2,
               "caughtStealing": 0,
               "stolenBases": 0,
               "stolenBasePercentage": ".---",
               "groundIntoDoublePlay": 0,
               "groundIntoTriplePlay": 0,
-              "plateAppearances": 1,
+              "plateAppearances": 2,
               "totalBases": 1,
               "rbi": 0,
               "leftOnBase": 0,
@@ -1951,7 +1951,7 @@
             "id": 686218,
             "name": "Emmet Sheehan",
             "stats": {
-              "summary": "2.0 IP, 3 ER, 4 K, 0 BB",
+              "summary": "2.1 IP, 3 ER, 5 K, 0 BB",
               "gamesPlayed": 1,
               "gamesStarted": 1,
               "flyOuts": 0,
@@ -1961,17 +1961,17 @@
               "doubles": 0,
               "triples": 0,
               "homeRuns": 1,
-              "strikeOuts": 4,
+              "strikeOuts": 5,
               "baseOnBalls": 0,
               "intentionalWalks": 0,
               "hits": 4,
               "hitByPitch": 0,
-              "atBats": 10,
+              "atBats": 11,
               "caughtStealing": 0,
               "stolenBases": 0,
               "stolenBasePercentage": ".---",
-              "numberOfPitches": 43,
-              "inningsPitched": "2.0",
+              "numberOfPitches": 53,
+              "inningsPitched": "2.1",
               "wins": 0,
               "losses": 0,
               "saves": 0,
@@ -1979,23 +1979,23 @@
               "holds": 0,
               "blownSaves": 0,
               "earnedRuns": 3,
-              "battersFaced": 10,
-              "outs": 6,
+              "battersFaced": 11,
+              "outs": 7,
               "gamesPitched": 1,
               "completeGames": 0,
               "shutouts": 0,
-              "pitchesThrown": 43,
-              "balls": 14,
-              "strikes": 29,
-              "strikePercentage": ".670",
+              "pitchesThrown": 53,
+              "balls": 18,
+              "strikes": 35,
+              "strikePercentage": ".660",
               "hitBatsmen": 0,
               "balks": 1,
               "wildPitches": 0,
               "pickoffs": 0,
               "rbi": 2,
               "gamesFinished": 0,
-              "runsScoredPer9": "13.50",
-              "homeRunsPer9": "4.50",
+              "runsScoredPer9": "11.57",
+              "homeRunsPer9": "3.86",
               "inheritedRunners": 0,
               "inheritedRunnersScored": 0,
               "catchersInterference": 0,
@@ -2402,7 +2402,7 @@
         "teamName": "Washington Nationals",
         "runs": 1,
         "hits": 1,
-        "errors": 0,
+        "errors": 1,
         "batters": [
           {
             "id": 695578,
@@ -2969,7 +2969,7 @@
               "gamesPlayed": 1,
               "gamesStarted": 0,
               "flyOuts": 0,
-              "groundOuts": 0,
+              "groundOuts": 1,
               "airOuts": 0,
               "runs": 0,
               "doubles": 0,
@@ -2978,13 +2978,13 @@
               "strikeOuts": 0,
               "baseOnBalls": 0,
               "intentionalWalks": 0,
-              "hits": 0,
+              "hits": 2,
               "hitByPitch": 0,
-              "atBats": 0,
+              "atBats": 3,
               "caughtStealing": 0,
               "stolenBases": 0,
               "stolenBasePercentage": ".---",
-              "numberOfPitches": 6,
+              "numberOfPitches": 15,
               "inningsPitched": "0.0",
               "wins": 0,
               "losses": 0,
@@ -2993,15 +2993,15 @@
               "holds": 0,
               "blownSaves": 0,
               "earnedRuns": 0,
-              "battersFaced": 0,
+              "battersFaced": 3,
               "outs": 0,
               "gamesPitched": 1,
               "completeGames": 0,
               "shutouts": 0,
-              "pitchesThrown": 6,
-              "balls": 3,
-              "strikes": 3,
-              "strikePercentage": ".500",
+              "pitchesThrown": 15,
+              "balls": 5,
+              "strikes": 10,
+              "strikePercentage": ".670",
               "hitBatsmen": 0,
               "balks": 0,
               "wildPitches": 0,
@@ -3026,7 +3026,7 @@
         "teamId": 158,
         "teamName": "Milwaukee Brewers",
         "runs": 4,
-        "hits": 8,
+        "hits": 10,
         "errors": 0,
         "batters": [
           {
@@ -3301,7 +3301,7 @@
             "name": "Sal Frelick",
             "position": "RF",
             "stats": {
-              "summary": "0-3",
+              "summary": "1-4",
               "gamesPlayed": 1,
               "flyOuts": 0,
               "groundOuts": 2,
@@ -3313,16 +3313,16 @@
               "strikeOuts": 0,
               "baseOnBalls": 0,
               "intentionalWalks": 0,
-              "hits": 0,
+              "hits": 1,
               "hitByPitch": 0,
-              "atBats": 3,
+              "atBats": 4,
               "caughtStealing": 0,
               "stolenBases": 0,
               "stolenBasePercentage": ".---",
               "groundIntoDoublePlay": 0,
               "groundIntoTriplePlay": 0,
-              "plateAppearances": 3,
-              "totalBases": 0,
+              "plateAppearances": 4,
+              "totalBases": 1,
               "rbi": 0,
               "leftOnBase": 4,
               "sacBunts": 0,
@@ -3339,10 +3339,10 @@
             "name": "Blake Perkins",
             "position": "LF",
             "stats": {
-              "summary": "0-3 | K",
+              "summary": "0-4 | K",
               "gamesPlayed": 1,
               "flyOuts": 0,
-              "groundOuts": 1,
+              "groundOuts": 2,
               "airOuts": 1,
               "runs": 0,
               "doubles": 0,
@@ -3353,16 +3353,16 @@
               "intentionalWalks": 0,
               "hits": 0,
               "hitByPitch": 0,
-              "atBats": 3,
+              "atBats": 4,
               "caughtStealing": 0,
               "stolenBases": 0,
               "stolenBasePercentage": ".---",
               "groundIntoDoublePlay": 0,
               "groundIntoTriplePlay": 0,
-              "plateAppearances": 3,
+              "plateAppearances": 4,
               "totalBases": 0,
               "rbi": 0,
-              "leftOnBase": 2,
+              "leftOnBase": 3,
               "sacBunts": 0,
               "sacFlies": 0,
               "catchersInterference": 0,
@@ -3377,7 +3377,7 @@
             "name": "David Hamilton",
             "position": "SS",
             "stats": {
-              "summary": "0-2 | BB, R, SB",
+              "summary": "1-3 | BB, R, SB",
               "gamesPlayed": 1,
               "flyOuts": 1,
               "groundOuts": 0,
@@ -3389,16 +3389,16 @@
               "strikeOuts": 0,
               "baseOnBalls": 1,
               "intentionalWalks": 0,
-              "hits": 0,
+              "hits": 1,
               "hitByPitch": 0,
-              "atBats": 2,
+              "atBats": 3,
               "caughtStealing": 0,
               "stolenBases": 1,
               "stolenBasePercentage": "1.000",
               "groundIntoDoublePlay": 0,
               "groundIntoTriplePlay": 0,
-              "plateAppearances": 3,
-              "totalBases": 0,
+              "plateAppearances": 4,
+              "totalBases": 1,
               "rbi": 0,
               "leftOnBase": 1,
               "sacBunts": 0,
@@ -3606,11 +3606,11 @@
           "home": {
             "runs": 1,
             "hits": 1,
-            "errors": 0
+            "errors": 1
           },
           "away": {
             "runs": 4,
-            "hits": 8,
+            "hits": 10,
             "errors": 0
           }
         }
@@ -4388,10 +4388,10 @@
     }
   },
   "seasonProgress": {
-    "regularSeasonPct": 0.2034072243379132,
-    "daysToAllStar": 74,
-    "daysToPlayoffs": 149,
-    "daysToWorldSeriesEnd": 183,
+    "regularSeasonPct": 0.20454751281859818,
+    "daysToAllStar": 73,
+    "daysToPlayoffs": 148,
+    "daysToWorldSeriesEnd": 182,
     "phase": "first-half",
     "source": "api",
     "dates": {
@@ -31999,125 +31999,158 @@
   ],
   "onThisDay": [
     {
-      "date": "05-01",
-      "year": 1863,
+      "date": "05-02",
+      "year": 1939,
+      "type": "milestone",
+      "title": "Lou Gehrig ends his consecutive-games streak",
+      "description": "Gehrig voluntarily benched himself after 2,130 consecutive games, a record that stood until 1995.",
+      "tags": [
+        "yankees",
+        "record"
+      ]
+    },
+    {
+      "date": "05-02",
+      "year": 1887,
       "type": "birthday",
-      "title": "Frank Foreman born",
-      "description": "Frank Foreman, 19 MLB seasons (1884-1902).",
+      "title": "Eddie Collins born",
+      "description": "Eddie Collins, 25 MLB seasons (1906-1930).",
       "tags": [
         "birthday"
       ],
-      "playerId": 114311
+      "playerId": 112506
     },
     {
-      "date": "05-01",
-      "year": 1885,
-      "type": "birthday",
-      "title": "George McQuillan born",
-      "description": "George McQuillan, 12 MLB seasons (1907-1918).",
-      "tags": [
-        "birthday"
-      ],
-      "playerId": 118867
-    },
-    {
-      "date": "05-01",
+      "date": "05-02",
       "year": 1896,
       "type": "birthday",
-      "title": "Heinie Meine born",
-      "description": "Heinie Meine, 13 MLB seasons (1922-1934).",
+      "title": "Bill Piercy born",
+      "description": "Bill Piercy, 10 MLB seasons (1917-1926).",
       "tags": [
         "birthday"
       ],
-      "playerId": 118916
+      "playerId": 120564
     },
     {
-      "date": "05-01",
-      "year": 1917,
+      "date": "05-02",
+      "year": 1908,
       "type": "birthday",
-      "title": "Johnny Berardino born",
-      "description": "Johnny Berardino, 14 MLB seasons (1939-1952).",
+      "title": "Walter Burch born",
+      "description": "Walter Burch, 13 MLB seasons (1934-1946).",
       "tags": [
         "birthday"
       ],
-      "playerId": 110888
+      "playerId": 820280
     },
     {
-      "date": "05-01",
-      "year": 1919,
+      "date": "05-02",
+      "year": 1909,
       "type": "birthday",
-      "title": "Al Zarilla born",
-      "description": "Al Zarilla, 11 MLB seasons (1943-1953).",
+      "title": "George Giles born",
+      "description": "George Giles, 12 MLB seasons (1927-1938).",
       "tags": [
         "birthday"
       ],
-      "playerId": 124745
+      "playerId": 819385
     },
     {
-      "date": "05-01",
-      "year": 1948,
+      "date": "05-02",
+      "year": 1932,
       "type": "birthday",
-      "title": "Von Joshua born",
-      "description": "Von Joshua, 12 MLB seasons (1969-1980).",
+      "title": "Eddie Bressoud born",
+      "description": "Eddie Bressoud, 12 MLB seasons (1956-1967).",
       "tags": [
         "birthday"
       ],
-      "playerId": 116771
+      "playerId": 111435
     },
     {
-      "date": "05-01",
+      "date": "05-02",
+      "year": 1939,
+      "type": "birthday",
+      "title": "Gates Brown born",
+      "description": "Gates Brown, 13 MLB seasons (1963-1975).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 111601
+    },
+    {
+      "date": "05-02",
+      "year": 1941,
+      "type": "birthday",
+      "title": "Clay Carroll born",
+      "description": "Clay Carroll, 15 MLB seasons (1964-1978).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 112041
+    },
+    {
+      "date": "05-02",
       "year": 1954,
       "type": "birthday",
-      "title": "Roy Lee Jackson born",
-      "description": "Roy Lee Jackson, 10 MLB seasons (1977-1986).",
+      "title": "Keith Moreland born",
+      "description": "Keith Moreland, 12 MLB seasons (1978-1989).",
       "tags": [
         "birthday"
       ],
-      "playerId": 116443
+      "playerId": 119355
     },
     {
-      "date": "05-01",
-      "year": 1955,
+      "date": "05-02",
+      "year": 1965,
       "type": "birthday",
-      "title": "Ray Searage born",
-      "description": "Ray Searage, 10 MLB seasons (1981-1990).",
+      "title": "Félix José born",
+      "description": "Félix José, 16 MLB seasons (1988-2003).",
       "tags": [
         "birthday"
       ],
-      "playerId": 121956
+      "playerId": 116768
     },
     {
-      "date": "05-01",
-      "year": 1960,
+      "date": "05-02",
+      "year": 1985,
       "type": "birthday",
-      "title": "Charlie O'Brien born",
-      "description": "Charlie O'Brien, 16 MLB seasons (1985-2000).",
+      "title": "Jarrod Saltalamacchia born",
+      "description": "Jarrod Saltalamacchia, 12 MLB seasons (2007-2018).",
       "tags": [
         "birthday"
       ],
-      "playerId": 119889
+      "playerId": 457454
     },
     {
-      "date": "05-01",
-      "year": 1966,
+      "date": "05-02",
+      "year": 1988,
       "type": "birthday",
-      "title": "Armando Reynoso born",
-      "description": "Armando Reynoso, 12 MLB seasons (1991-2002).",
+      "title": "Neftalí Feliz born",
+      "description": "Neftalí Feliz, 13 MLB seasons (2009-2021).",
       "tags": [
         "birthday"
       ],
-      "playerId": 121117
+      "playerId": 491703
     },
     {
-      "date": "05-01",
+      "date": "05-02",
+      "year": 1990,
+      "type": "birthday",
+      "title": "Erasmo Ramírez born",
+      "description": "Erasmo Ramírez, 14 MLB seasons (2012-2025).",
+      "tags": [
+        "birthday"
+      ],
+      "playerId": 541640
+    },
+    {
+      "date": "05-02",
       "year": 1991,
       "type": "birthday",
-      "title": "Marcus Stroman born",
-      "description": "Marcus Stroman, 12 MLB seasons (2014-2025).",
+      "title": "Jonathan Villar born",
+      "description": "Jonathan Villar, 10 MLB seasons (2013-2022).",
       "tags": [
         "birthday"
       ],
-      "playerId": 573186
+      "playerId": 542340
     }
   ]
 }
