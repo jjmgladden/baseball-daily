@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 /**
- * fetch-daily — orchestrator v5 (adds game recaps)
+ * fetch-daily — orchestrator v6 (adds today's schedule)
  *
- * Additions over v4:
+ * Additions over v5:
+ *   - Today's scheduled games (delivery-day, NOT yesterday): pulled with
+ *     `hydrate=probablePitcher` so the morning email can show "Today: Cards
+ *     vs Cubs (Gray vs Steele)". Stored as top-level `todaysSchedule[]`.
+ *   - Emits snapshot schemaVersion: 6
+ *
+ * Carried from v5:
  *   - Cardinals + Nationals: full narrative recap via /feed/live
  *   - Other scoreboard games: classified as notable/not; notable games get recaps too
- *   - Emits snapshot schemaVersion: 5
  */
 
 // Load local .env (no-op on GitHub Actions where env vars are passed via
@@ -60,6 +65,17 @@ async function run() {
   }
   console.log(`[fetch-daily] Notable non-Cards/Nats games: ${notableGames.length}`);
 
+  // --- Today's schedule (v6) ---
+  // Delivery-day schedule. Used by the email template to surface
+  // "Today's Games" (Cards/Nats + 3-5 marquee league matchups).
+  const todayDate = cache.todayISO();
+  const todaySched = await safeRun('todays-schedule',
+    () => mlb.getSchedule(todayDate, 'probablePitcher')
+  );
+  const todaysGames = todaySched?.dates?.[0]?.games || [];
+  const todaysSchedule = todaysGames.map(summarizeScheduledGame);
+  console.log(`[fetch-daily] Today's (${todayDate}) schedule: ${todaysSchedule.length} games`);
+
   const standings = await mlb.getStandings(season);
 
   const [
@@ -80,13 +96,15 @@ async function run() {
   const trades = (transactions || []).filter(t => t.typeCode === 'TR');
 
   const snapshot = {
-    schemaVersion: 5,
+    schemaVersion: 6,
     date,
     generatedAt: new Date().toISOString(),
     season,
     youtubeEnabled: Boolean(process.env.YOUTUBE_API_KEY),
     scoreboard: scoreboardGames,
     notableGames,
+    todaysSchedule,
+    todaysScheduleDate: todayDate,
     cardinals: {
       game: cardsGame ? summarizeGame(cardsGame) : null,
       boxscore: cardsBox ? summarizeBox(cardsBox) : null,
@@ -177,6 +195,40 @@ function summarizeGame(g) {
     venue: g.venue?.name || null,
     gameType: g.gameType || null,
     dayNight: g.dayNight || null,
+  };
+}
+
+/**
+ * Compact summary of a SCHEDULED (not-yet-played) game.
+ * Includes probable pitchers when MLB has posted them; otherwise null.
+ */
+function summarizeScheduledGame(g) {
+  const pp = (side) => {
+    const t = g.teams?.[side];
+    const p = t?.probablePitcher;
+    if (!p) return null;
+    return { id: p.id, name: p.fullName || p.firstLastName || null };
+  };
+  return {
+    gamePk: g.gamePk,
+    status: g.status?.detailedState || g.status?.abstractGameState || 'Scheduled',
+    gameDate: g.gameDate || null, // ISO timestamp w/ TZ — first pitch
+    home: {
+      id: g.teams?.home?.team?.id,
+      name: g.teams?.home?.team?.name,
+      record: g.teams?.home?.leagueRecord || null,
+      probablePitcher: pp('home'),
+    },
+    away: {
+      id: g.teams?.away?.team?.id,
+      name: g.teams?.away?.team?.name,
+      record: g.teams?.away?.leagueRecord || null,
+      probablePitcher: pp('away'),
+    },
+    venue: g.venue?.name || null,
+    gameType: g.gameType || null,
+    dayNight: g.dayNight || null,
+    seriesDescription: g.seriesDescription || null,
   };
 }
 

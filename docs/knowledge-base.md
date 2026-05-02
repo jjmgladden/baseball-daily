@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-01 (Session 4 — Phase B1 complete: KB-0025 + KB-0022 + KB-0005 closed; KB-0027 + KB-0028 added; pickleball-parity multi-phase plan B1-B7 locked in)
+**Last updated:** 2026-05-02 (Session 5 — Phase B2 complete: KB-0029 added (email v2 + snapshot schema v6); B2 sub-task on KB-0028 marked done)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -381,7 +381,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
   | Phase | Scope | Effort | Status |
   |---|---|---|---|
   | **B1 — Activation** | Email Path A activation (KB-0025 close) · Actions @v6/@v6 bumps (KB-0022 close) · push-race retry-with-rebase port (KB-0027) | ~30 min owner + ~45 min Claude | **✓ DONE Session 4 (commit `1fb2520` + workflow run `25228703199`)** |
-  | **B2 — Email upgrade** | `email-template.js` v1 → v2: Cards/Nats pins gain scoring play + W/L/Sv decisions · Today's Schedule (Cards+Nats + 3-5 league marquee games) · Top Highlights with thumbnails (mqdefault.jpg) · all-NL+AL standings (top 3 per division — 18 rows compact) · Notable Games one-liners · existing On This Day · footer | ~3-4 hr | Open (next session candidate) |
+  | **B2 — Email upgrade** | `email-template.js` v1 → v2: Cards/Nats pins gain scoring play + W/L/Sv decisions · Today's Schedule (Cards+Nats + 3-5 league marquee games) · Top Highlights with thumbnails (mqdefault.jpg) · all-NL+AL standings (top 3 per division — 18 rows compact) · Notable Games one-liners · existing On This Day · footer | ~3-4 hr | **✓ DONE Session 5 (path β: schema bumped v5 → v6 to add `todaysSchedule[]`; KB-0029)** |
   | **B3 — Process improvements** | `docs/credentials.md` skeleton ported from pickleball KB-0029 · CLAUDE.md v12 → v13 (adds Session-End Step 2 credentials-update mandate + APP_VERSION pairing rule for SW cache bumps) · `scripts/check-esm.js` standalone runtime-import script · cross-link to pickleball's `docs/concepts-primer.md` (no duplication) | ~2-3 hr | Open |
   | **B4 — UI polish** | APP_VERSION pill in app header (paired with SW CACHE constant) · iOS PNG icon set via `scripts/build-icons.js` + `sharp` (closes KB-0007) · `error-messages.js` component retrofit (severity-gated soft-banner from pickleball KB-0021 item 4) · `date-utils.js` audit + parseLocalDate/fmtDateShort port if any baseball date renders off-by-one | ~2-3 hr | Open |
   | **B5 — News tab** | Direct port of pickleball KB-0035: `ingestion/lib/rss-parser.js` (RSS 2.0 + Atom 1.0 auto-detection) · `ingestion/fetch-news.js` · 7 sources (T1+T2 mix): MLB.com + MLB Trade Rumors + ESPN MLB + Viva El Birdos + Cardinals.com + Federal Baseball + MASN · `app/js/components/news-card.js` + `confidence-badge.js` · `app/js/tabs/news.js` · Top News section appended to email v2 | ~3-4 hr | Open |
@@ -410,6 +410,54 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Open (B1 done; B2-B7 awaiting per-phase ATP)
 - **Cross-ref:** sessions/BASEBALL_Handoff_Prompt_V4.md · sessions/BASEBALL_Kickoff_Prompt_Session5.md · KB-0007 · KB-0024 · KB-0025 · KB-0027 · pickleball KB-0008 · pickleball KB-0023 · pickleball KB-0027 · pickleball KB-0029 · pickleball KB-0035 · pickleball KB-0040
 
+### KB-0029 | Email template v2 + snapshot schema v6 (Today's Schedule)
+- **Type:** Action
+- **Date:** 2026-05-02 (Session 5 — Phase B2)
+- **Category:** Features / Email / Schema
+- **Tags:** email, schema-bump, v6, todays-schedule, marquee, highlights, standings, notable-games, pickleball-parity
+- **Source:** Session 5 chat 2026-05-02 — owner ATP'd Phase B2 (path β, full v2 with schema bump)
+- **Finding:** Pickleball-parity Phase B2 executed end-to-end. Two coupled deliverables shipped together in one commit:
+
+  **(1) Snapshot schema v5 → v6.** `ingestion/fetch-daily.js` rolled v5 → v6, adds two new top-level fields:
+  - `todaysSchedule[]` — delivery-day (NOT yesterday) scheduled games via `mlb.getSchedule(todayISO, 'probablePitcher')`. Each entry: `gamePk`, `status`, `gameDate` (ISO + TZ), `home/away.{id, name, record, probablePitcher.{id, name}}`, `venue`, `gameType`, `dayNight`, `seriesDescription`. Probable pitchers may be null when MLB hasn't posted them yet.
+  - `todaysScheduleDate` — the YYYY-MM-DD date the schedule fetch targeted (== `cache.todayISO()` at fetch time).
+
+  Why coupled with the email-template change: the kickoff prescribed `snapshot.scoreboard filtered for today` for the email's "Today's Games" section, but `scoreboard` only ever held yesterday's games (per `cache.yesterdayISO()` used in fetch-daily). Owner chose path β (extend ingestion now) over path α (defer Today's Games to a follow-up).
+
+  Helper added: `summarizeScheduledGame()` mirrors the existing `summarizeGame()` shape. `mlb.getSchedule()` extended to accept an optional `hydrate` query param (mlb-api.js stays at v3 since signature is backward-compatible with optional 2nd arg).
+
+  **(2) Email template v1 → v2.** `ingestion/lib/email-template.js` rewritten with these section additions (v1 archived to `archive/email-template_v1.js` per whole-number versioning):
+  - **Cardinals/Nationals pins** — now show W/L/Sv pitcher line (`recap.decisions.{winner, loser, save}`) + first scoring play (`recap.scoringPlays[0]`) with inning prefix
+  - **Today's Games (NEW)** — Cards/Nats games always pinned at top with team-color tag chips; up to 3 marquee league games selected by signal priority: division-leader-vs-division-leader (+100) → both teams ≥ .550 winPct (+50) → classic rivalry (+30) → combined record tiebreaker. Caps at 5 total. Probable pitchers shown when available; ET game time formatted via `Intl.DateTimeFormat` with `America/New_York` timezone.
+  - **Top Highlights (NEW)** — Cards + Nats highlights merged + deduped by videoId; up to 5; rendered as `<table>` rows with 120×68 `i.ytimg.com/vi/{id}/mqdefault.jpg` thumbnails + title + channel/date metadata. Click-outs to youtube.com (MLB channel still disables third-party embedding per pickleball KB-0013 baseball-side note).
+  - **Division Standings (NEW)** — All 6 divisions, top 3 per division (18 rows). Cards highlighted in NL Central with red left-border; Nats highlighted in NL East with red left-border. Display order: AL East/Central/West, then NL East/Central/West.
+  - **Notable Games (NEW)** — One-liners from `snapshot.notableGames` (cap 5). Symbol icons per `notableReasons` type (◐ one-run, ○ shutout, ★ blowout, ⚡ slugfest, ◇ pitchers' duel, ↻ extra innings, ✦ walk-off).
+  - On This Day, CTA, stats footer — preserved verbatim from v1.
+
+  **Bonus accuracy fix (carried inadvertently from v1 but corrected here):** `oneLineGameResult()` now requires `status` to match `/^Final/i` before declaring a Won/Lost result. In-progress games render as "In Progress vs Opponent (current: 3-1)" in dim-text style instead of misleadingly claiming a win. Real cron-time impact = zero (3 AM EDT cron always runs after games are Final), but local dry-runs and any rare delayed-game scenarios now render accurately. Aligns with CLAUDE.md "Be Accurate" rule.
+
+  **Files:**
+  ```
+  M  ingestion/fetch-daily.js          (v5 → v6; +todaysSchedule fetch + summarizeScheduledGame helper)
+  M  ingestion/lib/mlb-api.js          (getSchedule gains optional hydrate param)
+  M  ingestion/lib/email-template.js   (v1 → v2; full rewrite, ~570 lines)
+  M  ingestion/send-email.js           (header comment v1 → v2; signature unchanged)
+  A  archive/email-template_v1.js      (v1 archive per whole-number versioning rule)
+  M  README.md                         (added "Daily morning email" + "Snapshot schema" sections)
+  M  docs/knowledge-base.md            (this entry; Quick Index updated)
+  ```
+
+  **Triggers per CLAUDE.md Critical Rules:**
+  - SW cache rule: NOT triggered (no `app/` changes).
+  - Pre-push ESM check: NOT triggered (CommonJS, not ESM).
+  - Whole-number version bump: applied (v1 → archive).
+
+  **Verification:** Local dry-run via `EMAIL_DRY_RUN=1 node ingestion/send-email.js` rendered cleanly: 5 Today's Games (Cards-Dodgers, Nats-Brewers, 3 marquee), 5 highlights with thumbnails, all 6 divisions × 3 rows of standings (Cards 3rd in NL Central with red highlight, Nats 3rd in NL East with red highlight), 1 notable game, 2 On This Day. HTML size 27,322 bytes (vs 4,282 in v1 — ~6.4× larger as expected for the richer content). End-to-end Resend send pending workflow_dispatch verification.
+
+  **Closes:** Phase B2 sub-task of KB-0028. Six phases remain on the pickleball-parity roadmap (B3-B7).
+- **Status:** Closed (B2 complete; B2 sub-task of KB-0028 marked done)
+- **Cross-ref:** ingestion/fetch-daily.js · ingestion/lib/email-template.js · archive/email-template_v1.js · KB-0025 (parent email feature) · KB-0028 (pickleball-parity roadmap) · KB-0023 (snapshot v5 baseline) · pickleball KB-0007 (email template v2 source pattern)
+
 ### KB-0019 | Recent-form 14-day window
 - **Type:** Reference
 - **Date:** 2026-04-19
@@ -431,4 +479,4 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - KB-0028 — Pickleball-parity multi-phase plan (B2-B7) — Decision, **T2** (active roadmap)
 
 **Closed:**
-KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029

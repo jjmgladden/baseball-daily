@@ -96,6 +96,31 @@ All real, no hallucination. See [docs/data-sources.md](docs/data-sources.md) for
 
 ---
 
+## Daily morning email
+
+A briefing email goes out every morning at ~3 AM Eastern (07:00 UTC) right after the snapshot commits, sent via [Resend](https://resend.com) from `baseball@glad-fam.com`. **Email template v2** (live since Session 5, May 2026) includes:
+
+- Cardinals + Nationals pin lines (with W/L/Sv decisions and the first scoring play of the game)
+- **Today's Games** — Cards/Nats matchups + up to 3 marquee league games with probable pitchers (snapshot schema v6+)
+- **Top Highlights** with click-out YouTube thumbnails
+- **Division standings** — top 3 per division, all 6 divisions (Cards/Nats highlighted)
+- **Notable games** one-liners (one-run / shutout / blowout / slugfest / pitchers' duel)
+- On This Day, CTA, stats footer
+
+Configured via 3 GitHub Secrets: `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_RECIPIENTS`. If `RESEND_API_KEY` is unset, the workflow skips email silently — adding/removing recipients is a Secrets edit, no code change.
+
+See [`ingestion/lib/email-template.js`](ingestion/lib/email-template.js) for layout and [`docs/Daily-Email-Setup-Guide.docx`](docs/Daily-Email-Setup-Guide.docx) for the full setup walkthrough.
+
+---
+
+## Snapshot schema
+
+Current schema: **v6** (added `todaysSchedule[]` + `todaysScheduleDate`). Older snapshots in `data/snapshots/` may be earlier versions; the app + email template degrade gracefully.
+
+Schema history: v1 (initial scoreboard) → v2 (Cardinals deep) → v3 (`recentForm`, `seasonProgress.source`) → v4 (`highlights`) → v5 (`recap`, `notableGames`) → **v6 (`todaysSchedule`)**.
+
+---
+
 ## Secret safety
 
 - `.env` is gitignored. Never commit it.

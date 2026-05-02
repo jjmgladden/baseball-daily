@@ -34,9 +34,16 @@ async function get(path, params = {}) {
 /**
  * Schedule for a single date (YYYY-MM-DD).
  * Returns dates[].games[].
+ *
+ * Optional `hydrate` argument enriches the response. Common values:
+ *   - 'probablePitcher'  — adds teams.{home,away}.probablePitcher.{id,fullName}
+ *   - 'team,linescore'   — adds team metadata + live linescore
+ *   - 'broadcasts'       — adds TV/radio listings
  */
-async function getSchedule(date) {
-  return get('/schedule', { sportId: 1, date });
+async function getSchedule(date, hydrate) {
+  const params = { sportId: 1, date };
+  if (hydrate) params.hydrate = hydrate;
+  return get('/schedule', params);
 }
 
 /**

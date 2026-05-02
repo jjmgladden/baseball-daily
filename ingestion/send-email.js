@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 /**
- * send-email — v1
+ * send-email — v2
  *
  * Sends the morning briefing via Resend. Runs after fetch-daily.js and the
  * snapshot commit in .github/workflows/daily.yml. Locally, runs via
  * `node ingestion/send-email.js` with env vars set.
+ *
+ * v2: signature unchanged; rendering moved to email-template.js v2 which
+ * adds Today's Schedule, highlight thumbnails, all-NL+AL standings,
+ * notable games one-liners, and recap details (W/L/Sv + first scoring
+ * play) inside the Cards/Nats pins. Requires snapshot schemaVersion >= 5
+ * (Today's Schedule section appears only when v6+ snapshot is present).
  *
  * Required env:
  *   RESEND_API_KEY      — from resend.com dashboard
