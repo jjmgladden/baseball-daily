@@ -1,14 +1,14 @@
 {
-  "name": "baseball-daily-submit",
-  "version": "1.0.0",
+  "name": "baseball-daily-api",
+  "version": "2.0.0",
   "private": true,
-  "description": "Cloudflare Worker that receives submissions from the Baseball Daily site and opens GitHub Issues.",
+  "description": "Cloudflare Worker serving the Baseball Daily AI Q&A proxy + submission form endpoint.",
   "scripts": {
     "deploy": "npx wrangler deploy",
     "dev": "npx wrangler dev",
     "tail": "npx wrangler tail"
   },
   "devDependencies": {
-    "wrangler": "^3.0.0"
+    "wrangler": "^4.85.0"
   }
 }

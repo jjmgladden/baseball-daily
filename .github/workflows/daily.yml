@@ -45,6 +45,14 @@ jobs:
         if: success()
         run: node ingestion/fetch-news.js
 
+      - name: Build AI context bundle
+        # Distills latest.json + news-latest.json + master/* into the curated
+        # ~5-7K-token text bundle the Cloudflare Worker ships to Anthropic.
+        # KB-0033. Cheap (~50ms) and safe — file regenerates from snapshot
+        # data already on disk, no network calls.
+        if: success()
+        run: node ingestion/build-ai-context.js
+
       - name: Commit and push snapshot
         # Retry-with-rebase on push rejection. Two runs started close together
         # can race at push time; the loser rebases on the winner and retries.

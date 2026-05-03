@@ -1,0 +1,5 @@
+{
+  "workerBaseUrl": "",
+  "aiEnabled": false,
+  "note": "Until the Cloudflare Worker baseball-daily-api is deployed, aiEnabled stays false and the Ask tab renders a 'being configured' soft-banner instead of the chat UI. Once the owner runs `npx wrangler deploy` from the worker/ directory, paste the printed URL into workerBaseUrl, set aiEnabled to true, and commit. To rotate the Worker URL after a redeploy, update workerBaseUrl. To disable the Ask tab without redeploying the Worker, flip aiEnabled to false here. The Worker also has its own env.AI_DISABLED kill switch (in wrangler.toml) — that one disables at the server side, this one disables at the browser side."
+}

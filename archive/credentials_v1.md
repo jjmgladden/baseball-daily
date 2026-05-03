@@ -1,6 +1,6 @@
 # Credentials Inventory
 
-**Version:** 2 | **Last updated:** 2026-05-03 (Session 9 — Phase B6 in flight: AI Q&A code shipped; `ANTHROPIC_API_KEY` row reflects active build status; Worker renamed `baseball-daily-submit` → `baseball-daily-api` reflecting dual-route purpose; awaiting owner-side credential creation + Worker deploy to flip status to ✅)
+**Version:** 1 | **Last updated:** 2026-05-02 (Session 6 — initial creation per pickleball-parity Phase B3; baseline of 4 active credentials + 1 owned domain + accounts)
 
 This is the canonical, living record of every credential (API key, token, account login) that the **baseball-daily** project uses. Updated whenever a credential is added, rotated, or revoked.
 
@@ -72,9 +72,9 @@ Quick-reference table. Detailed sections below.
 | **`RESEND_API_KEY`** | API key (Resend) | ✅ Active | 2026-05-01 (Session 4 — Phase B1) | `ingestion/send-email.js` | GitHub Secret | [Resend → API Keys](https://resend.com/api-keys) |
 | **`EMAIL_RECIPIENTS`** | Plain config | ✅ Active (3 recipients) | 2026-05-01 (Session 4 — initial 1 recipient) | `ingestion/send-email.js` | GitHub Secret | [Repo Secrets](https://github.com/jjmgladden/baseball-daily/settings/secrets/actions) |
 | **`EMAIL_FROM`** | Plain config (sender address) | ✅ Active | 2026-05-01 (Session 4) | `ingestion/send-email.js` | GitHub Secret | [Repo Secrets](https://github.com/jjmgladden/baseball-daily/settings/secrets/actions) |
-| **`ANTHROPIC_API_KEY`** | API key (Anthropic) | ⏸ Phase B6 — code shipped, awaiting owner creation | — | Cloudflare Worker `baseball-daily-api` `/ai` route (KB-0033) | Will be: Local `.env` + GitHub Secret + Cloudflare Worker secret | [console.anthropic.com → API keys](https://console.anthropic.com/settings/keys) |
+| **`ANTHROPIC_API_KEY`** | API key (Anthropic) | ⏸ Phase B6 | — | Future Cloudflare Worker `/ai` route (KB-0028 Phase B6) | Will be: Local `.env` + GitHub Secret + Cloudflare Worker secret | [console.anthropic.com → API keys](https://console.anthropic.com/settings/keys) |
 | **`glad-fam.com`** (domain) | Owned domain | ✅ Active (shared with pickleball) | 2026-04-24 (pickleball Session 6) | Resend sender (`baseball@glad-fam.com`) | Cloudflare Registrar (account credentials in owner's password manager) | [Cloudflare Registrar](https://dash.cloudflare.com/?to=/:account/registrar) |
-| **`GITHUB_TOKEN`** (Worker — submission route) | Fine-grained PAT | ⏸ Pending owner deploy (KB-0024 — optional for Phase B6) | — | `worker/src/index.js` (`/submit` route — scaffolded; AI route is the primary B6 use case) | Cloudflare Worker secret | [GitHub PAT settings](https://github.com/settings/personal-access-tokens) |
+| **`GITHUB_TOKEN`** (Worker — submission route) | Fine-grained PAT | ⏸ Pending owner deploy (KB-0024) | — | `worker/src/index.js` (`/submit` route) | Cloudflare Worker secret | [GitHub PAT settings](https://github.com/settings/personal-access-tokens) |
 | **Anthropic Console account** | Account credentials | ✅ Active (created during pickleball Session 8) | 2026-04-26 | Holds the future `ANTHROPIC_API_KEY` + spend cap + billing | Owner's password manager | https://console.anthropic.com |
 | **Cloudflare account login** | Account credentials | ✅ Active (created during pickleball Session 6) | 2026-04-24 | Owns `glad-fam.com` + DNS + future baseball Worker | Owner's password manager + wrangler OAuth | [Cloudflare dashboard](https://dash.cloudflare.com) |
 | **Google Cloud account** | Account credentials | ✅ Active (pre-existing) | (pre-existing) | Hosts the YouTube key project | Owner's password manager | [Google Cloud Console](https://console.cloud.google.com) |
@@ -217,10 +217,10 @@ If a credential has been lost or is suspected compromised (committed to git acci
 - **Maintenance log:**
   - 2026-05-01 (Session 4) — first set; reuses `glad-fam.com` domain verified on Resend during pickleball Session 6 (no DNS work needed; any sender on the domain is pre-authorized).
 
-### `ANTHROPIC_API_KEY` (Phase B6 — code shipped, awaiting owner-side creation)
+### `ANTHROPIC_API_KEY` (Phase B6 — not yet created)
 
 - **Type:** Anthropic API key (Workspace-scoped).
-- **Used by:** Cloudflare Worker `baseball-daily-api` `/ai` route (KB-0033 Phase B6 — AI Q&A layer). Mirrors pickleball's KB-0008 architecture.
+- **Used by:** Future Cloudflare Worker `/ai` route (KB-0028 Phase B6 — AI Q&A layer). Mirrors pickleball's KB-0008 architecture.
 - **Storage (when created):**
   - Local `.env` (for local test scripts that hit the API directly during build/verification)
   - GitHub Secret named `ANTHROPIC_API_KEY` (kept available for future workflow-side AI tooling)
@@ -237,7 +237,7 @@ If a credential has been lost or is suspected compromised (committed to git acci
 - **Restrictions to apply at creation:** Workspace = Default. Permissions = Default / All.
 - **If lost or compromised (when active):** Anthropic Console → API keys → click the trash icon next to the key name to revoke immediately. Then create a new key (same name + suffix `-v2`), paste new value into the three storage locations above, dispatch a smoke test against the Worker `/ai` route, confirm response, then delete the revoked key entry.
 - **Rotation history:** N/A — not yet created.
-- **Cross-reference:** [KB-0033](knowledge-base.md#kb-0033--phase-b6--ai-qa-layer) · [KB-0028 Phase B6](knowledge-base.md#kb-0028--pickleball-parity-multi-phase-plan-b1---b2---b3-b7-pending) · pickleball KB-0008 (architecture parent) · pickleball KB-0042 (cost posture)
+- **Cross-reference:** [KB-0028 Phase B6](knowledge-base.md#kb-0028--pickleball-parity-multi-phase-plan-b1---b2---b3-b7-pending) · pickleball KB-0008 (architecture parent) · pickleball KB-0042 (cost posture)
 
 ### `GITHUB_TOKEN` (Worker — fine-grained PAT, KB-0024)
 
@@ -340,7 +340,6 @@ Significant credential events worth recording:
 - **2026-05-01 (Session 4 — Phase B1)** — `RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_RECIPIENTS` first added to baseball's GitHub Secrets via `gh secret set` from local `.env` (option β walkthrough — owner pasted values once into local `.env`, Claude piped each to the GitHub API without echoing to chat). `RESEND_API_KEY` value already in use by pickleball since 2026-04-23 — same key reused. `EMAIL_FROM = "Ozark Joe's Baseball Daily <baseball@glad-fam.com>"` reuses `glad-fam.com` domain verified by pickleball Session 6. `EMAIL_RECIPIENTS` = 1 recipient (smoke test). First send via run `25228703199`, Resend id `328b5393-a842-4939-ab8d-27c49bd725e9`. KB-0025 closed.
 - **2026-05-02 (Session 5 — Phase B2)** — `EMAIL_RECIPIENTS` expanded from 1 to 3 recipients via owner direct edit of GitHub Secret in the UI (owner + brother + brother's wife). Resend trio (`RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_RECIPIENTS`) removed from local `.env` to enforce single source-of-truth posture (matches pickleball's posture). Verification of 3-recipient send deferred to next 07:00 UTC scheduled cron.
 - **2026-05-02 (Session 6 — Phase B3)** — This document created as the canonical credentials inventory for baseball-daily. Initial baseline = 4 active credentials (`YOUTUBE_API_KEY`, `RESEND_API_KEY`, `EMAIL_RECIPIENTS`, `EMAIL_FROM`) + 1 owned domain (`glad-fam.com`, shared with pickleball) + accounts (Resend, Google Cloud, GitHub, Cloudflare, Anthropic). No credentials added or rotated this session — pure documentation port from pickleball's `docs/credentials.md`.
-- **2026-05-03 (Session 9 — Phase B6 in flight)** — Doc rolled v1 → v2. Worker rewritten + renamed `baseball-daily-submit` → `baseball-daily-api` (dual-route: AI Q&A primary, submission route scaffolded). `ANTHROPIC_API_KEY` row updated from "not yet created" to "code shipped, awaiting owner creation". `GITHUB_TOKEN` (Worker) row clarified as optional for Phase B6 (AI route doesn't need it). No credential VALUES changed this session — owner-side creation + Worker deploy + secret upload are the next steps to flip both `ANTHROPIC_API_KEY` and (optionally) `GITHUB_TOKEN` to ✅. KB-0033 added.
 
 ---
 
