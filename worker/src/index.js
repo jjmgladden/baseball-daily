@@ -156,6 +156,9 @@ async function handleAi(request, env, corsHeaders) {
     }
   ];
 
+  const reqBody = JSON.stringify({ model, max_tokens: 600, system, messages });
+  console.log('[ai] Request: model=' + model + ', body bytes=' + reqBody.length + ', context chars=' + (context.content || '').length);
+
   let apiRes;
   try {
     apiRes = await fetch('https://api.anthropic.com/v1/messages', {
@@ -163,9 +166,11 @@ async function handleAi(request, env, corsHeaders) {
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
+        'anthropic-version': '2023-06-01',
+        'User-Agent': 'baseball-daily-api/1.0',
+        'Accept': 'application/json'
       },
-      body: JSON.stringify({ model, max_tokens: 600, system, messages })
+      body: reqBody
     });
   } catch (e) {
     return json({ error: 'Anthropic API call failed: ' + (e.message || e) }, 502, corsHeaders);
@@ -173,7 +178,9 @@ async function handleAi(request, env, corsHeaders) {
 
   if (!apiRes.ok) {
     const errText = await apiRes.text();
-    console.error('Anthropic ' + apiRes.status + ' body: ' + errText);
+    console.error('[ai] Anthropic status=' + apiRes.status + ', errText length=' + errText.length);
+    console.error('[ai] errText body BEGIN >>>' + errText + '<<< END');
+    console.error('[ai] response headers:', JSON.stringify(Object.fromEntries(apiRes.headers)));
     return json({ error: 'Anthropic API ' + apiRes.status + '. Try again later.' }, 502, corsHeaders);
   }
 
