@@ -17,13 +17,14 @@ import { renderTrivia } from './tabs/trivia.js';
 import { renderNews } from './tabs/news.js';
 import { renderAsk } from './tabs/ask.js';
 import { attachSuggestHandler } from './components/suggest.js';
+import { attachRefreshHandler } from './components/refresh.js';
 import { showSplash } from './components/splash.js';
 import { errorBannerHtml } from './components/error-messages.js';
 
 // APP_VERSION must stay in sync with `CACHE` in app/sw.js. When a shell-file change rolls the
 // SW cache, bump APP_VERSION here to match — that's the user-visible signal in the header pill
 // that a returning visitor's PWA reloaded onto the new shell.
-const APP_VERSION = 'v18';
+const APP_VERSION = 'v22';
 
 const state = {
   snapshot: null,
@@ -94,6 +95,21 @@ function renderNoSnapshot(panel, err) {
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'file:') return;  // SW needs http(s)
+
+  // KB-0021: auto-reload when a new SW takes control. Without this, returning
+  // visitors (especially on mobile) can see yesterday's cached shell + stale
+  // data until they manually refresh. controllerchange fires once when the
+  // new SW activates and clients.claim() runs — refreshing flag is a one-shot
+  // guard so we don't loop. Only reloads on UPDATES (wasControlled=true);
+  // first-time installs skip the reload since the user is already on fresh code.
+  const wasControlled = !!navigator.serviceWorker.controller;
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing || !wasControlled) return;
+    refreshing = true;
+    window.location.reload();
+  });
+
   navigator.serviceWorker.register('sw.js')
     .then(reg => console.log('[app] SW registered:', reg.scope))
     .catch(err => console.warn('[app] SW registration failed:', err));
@@ -104,6 +120,7 @@ async function main() {
   bindTabs();
   registerServiceWorker();
   attachSuggestHandler('[data-suggest]');
+  attachRefreshHandler('[data-refresh]', '#refresh-status');
 
   const versionEl = document.getElementById('app-version');
   if (versionEl) versionEl.textContent = APP_VERSION;

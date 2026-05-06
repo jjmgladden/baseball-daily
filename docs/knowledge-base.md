@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-03 (Session 9 — Phase B6 **LIVE end-to-end**: KB-0033 added; Worker `baseball-daily-api` deployed at `https://baseball-daily-api.jjmgladden.workers.dev`; ai-config.json `aiEnabled` flipped true; live `/ai` smoke test returned real Cardinals answer with 8,105-token cache creation; Anthropic 400-empty debug surfaced Windows wrangler-paste single-char bug — fixed via Cloudflare dashboard paste, **same root cause as pickleball Session 8 KB-0036**; user-level `~/.claude/CLAUDE.md` created with XPL-001..006 cross-project lessons + automated session-end audit; one cleanup deferred to Session 10 (`wrangler deploy` to drop debug `/aitest` route))
+**Last updated:** 2026-05-06 (Session 10 — **omnibus session, 7 tracks shipped**: (1) `wrangler deploy` cleanup dropped `/aitest`; (2) **Phase B7** TOC + accordion ported from pickleball L1 across Cardinals / History / News tabs — KB-0028 closes entirely; (3) **Issue #5 applied** — 10 approved curation entries (Marvin Miller + 9 player legends) appended to `legends-general.json` (20 → 30); (4) **KB-0021 closed** — auto-reload-on-SW-update implemented in `app.js` (controllerchange listener, gated by wasControlled); (5) email template **v3 → v4** — "Open the full report" CTA + brief stats summary moved from bottom to top per owner feedback; (6) **trivia tab redesign** — Today's 5 (deterministic-by-date, first card matches Daily Report) + 🎲 Different 5 reshuffle (sessionStorage-seeded) + filters bypass to mine full pool; (7) **trivia in weekly-batch flow** — `weekly-batch.yml` routing comment includes trivia.json; 20 verified trivia stubs seeded into `curation-backlog.json` (121 → 141 pending) for the next 2 Monday batches; (8) **KB-0020 closes-pending-PAT** — public on-demand refresh: `/refresh` route added to deployed Worker (rate-limited 1/10min/IP) + "Refresh now" link in footer + new `app/js/components/refresh.js` + dual-route `GITHUB_TOKEN` (Issues:write + Actions:write); (9) **Mobile-stale-snapshot bug fixed** — baseball SW was cache-first for ALL GETs including `/data/snapshots/latest.json`, mirroring pickleball's split-handler pattern (network-first for `/data/`, cache-first for shell) closes a long-standing user-facing bug; SW + APP_VERSION rolled v18 → v22 across the four shell-changing commits this session; new KB-0034 added; `docs/credentials.md` v2 → v3)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -131,10 +131,12 @@ Static types (Reference, Decision, Limitation) omit Tier.
 
 ### KB-0013 | On-This-Day seed coverage
 - **Type:** Limitation
-- **Date:** 2026-04-19
-- **Finding:** Seed covers ~50 landmark events. Expansion via adding entries — no schema change.
-- **Status:** Open (content expansion)
-- **Cross-ref:** data/master/on-this-day-seed.json
+- **Date:** 2026-04-19 (last updated Session 10 — closing path identified)
+- **Finding:** Seed covers ~50 landmark events. Expansion via adding entries — no schema change. Most calendar dates currently render the History tab's "On This Day" section as "No curated events for today's date yet."
+
+  **Closing path (identified Session 10, deferred):** treat the same way trivia was treated this session — add `type: 'on-this-day'` to the curation-backlog flow + the weekly-batch routing instruction in `weekly-batch.yml`. Seed 30-50 stubs with `{date, year, title, description, source}`. The Monday cron surfaces 10/week for owner approval; apply step appends approved entries to `data/master/on-this-day-seed.json`. Closes once coverage feels right (subjective — owner declares done).
+- **Status:** Open (content expansion + trivia-style backlog flow not yet wired for `type: 'on-this-day'`)
+- **Cross-ref:** data/master/on-this-day-seed.json · KB-0034 § Track 5 (trivia stub seed pattern is the template)
 
 ### KB-0014 | Snapshot schema v3
 - **Type:** Decision
@@ -291,60 +293,45 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Cross-ref:** .github/workflows/daily.yml · .github/workflows/weekly-index.yml · .github/workflows/weekly-batch.yml · commit `1fb2520` · KB-0027 · pickleball KB-0023
 
 ### KB-0021 | Auto-reload on service-worker update
-- **Type:** Action
-- **Tier:** T2
-- **Dependency:** Claude
-- **Date:** 2026-04-20
-- **Source:** Chat 2026-04-20 — after repeated manual cache-clear incidents when the shell updated
+- **Type:** Action → Closed
+- **Date:** 2026-04-20 (closed Session 10 — 2026-05-06)
 - **Category:** UI / PWA / UX
 - **Tags:** service-worker, auto-reload, pwa, ux
-- **Finding:** Currently when the app shell updates, returning visitors must hard-refresh twice, open in incognito, or manually unregister the SW via DevTools to see the new version (workaround documented in `docs/deployment.md` § Seeing old content after an update). An auto-reload pattern in `app/js/app.js` can detect when a new SW takes control and reload the page once invisibly, eliminating the friction.
+- **Finding:** Implemented in Session 10 in [`app/js/app.js`](../app/js/app.js) `registerServiceWorker()`. Pattern matches the original sketch: read `wasControlled = !!navigator.serviceWorker.controller` at registration time, attach a `controllerchange` listener guarded by a `refreshing` one-shot flag plus `wasControlled` so first-time installs don't trigger a reload. Subsequent shell-cache bumps now auto-reload the page once when the new SW activates.
 
-  **Implementation sketch (~15 lines in `app/js/app.js` registerServiceWorker):**
-  ```js
-  const hadControllerAtLoad = Boolean(navigator.serviceWorker.controller);
-  let refreshing = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!hadControllerAtLoad) return;  // first install — don't reload
-    if (refreshing) return;
-    refreshing = true;
-    window.location.reload();
-  });
-  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' });
-  ```
+  **One-time caveat realized as predicted:** the *deploy that introduced the handler* (Session 10 SW v20 → v21 commit) won't trigger auto-reload for visitors still running the older v17–v20 shell — they need one manual refresh to pick up the new `app.js` containing the handler. Every deploy after that is seamless.
 
-  **Trade-offs:**
-  - **Pros:** Zero manual cache-clear for returning users. Matches the behavior visitors expect from a modern web app.
-  - **Cons:** More SW lifecycle code to maintain. Every deploy causes one extra page reload for anyone with the app open at that moment.
-  - **One-time caveat:** On the deploy that introduces this logic, *existing* users still need a manual cache-clear once to pick up the new `app.js` containing the auto-reload handler. Every deploy after that is seamless.
-
-  Decision deferred. Current manual workaround is documented and acceptable for owner-level use; may become more important if the site sees external traffic or frequent updates.
-- **Status:** Open
-- **Cross-ref:** CLAUDE.md § Service Worker Cache · docs/deployment.md § Seeing old content after an update
+  **Synergy with KB-0034 mobile-stale-snapshot fix:** when the next SW bump deploys, returning mobile visitors auto-reload onto the new SW which has the network-first data fetch, fixing the "yesterday's date" mobile bug for the same visit.
+- **Status:** Closed
+- **Cross-ref:** CLAUDE.md § Service Worker Cache · `app/js/app.js:registerServiceWorker` · KB-0034 § Track 7 (mobile-stale-snapshot fix relies on this auto-reload to deliver the new SW)
 
 ### KB-0020 | Public on-demand refresh — anyone can trigger ingestion
 - **Type:** Action
 - **Tier:** T2
-- **Dependency:** Owner / Claude
-- **Date:** 2026-04-20
-- **Source:** Chat 2026-04-20 — first-pass Refresh Data button reverted
+- **Dependency:** Owner (PAT creation only — code closed)
+- **Date:** 2026-04-20 (code closed Session 10 — 2026-05-06; full close pending owner PAT)
 - **Category:** Features / Deployment
-- **Tags:** refresh, pwa, github-actions, public-trigger, cloudflare
-- **Finding:** The first-pass "Refresh data" button (added commit `3138483`, reverted commit `________`) was a deep-link to the GitHub Actions workflow page. That only works for accounts with write access to `jjmgladden/baseball-daily` — family/friends viewing the public site cannot trigger a refresh and don't even see the "Run workflow" UI. Desired behavior: **anyone viewing the site can click a button and trigger an ingestion run.**
+- **Tags:** refresh, pwa, github-actions, public-trigger, cloudflare, kb-0020-shipped
+- **Finding:** **Code complete + deployed Session 10.** `/refresh` route added to `baseball-daily-api` Worker as the third route alongside `/ai` and `/submit`. Route holds the PAT server-side (Cloudflare Worker secret `GITHUB_TOKEN`), calls `POST /repos/jjmgladden/baseball-daily/actions/workflows/daily.yml/dispatches` on click, returns 202 + run-list URL + `etaSeconds: 45`. Browser-side: footer link "Refresh now" + a status span (`#refresh-status`) wired via new component [`app/js/components/refresh.js`](../app/js/components/refresh.js); reads `workerBaseUrl` from `data/master/ai-config.json` (the same file the Ask tab uses); on success, sets a 53-second timer to `window.location.reload()` so the visitor lands on the freshly-ingested snapshot.
 
-  **Implementation options (trade-offs):**
+  **Anti-abuse posture:**
+  - Per-isolate rate limit: 1 dispatch per IP per 10 min (`refreshLimit` Map in [`worker/src/index.js`](../worker/src/index.js))
+  - GitHub itself enforces queueing via `concurrency: { group: daily-ingestion }` in `daily.yml` — overlapping dispatches queue rather than race
+  - PAT is fine-grained, scoped to ONE repo, with `actions:write` + `issues:write` (the latter for the dual-use with `/submit`)
+  - CORS locked to `https://jjmgladden.github.io` + `http://localhost:1882`
 
-  | Approach | Pros | Cons |
-  |---|---|---|
-  | Embedded fine-grained PAT in public JS | One click, zero infrastructure | Token visible to any site visitor; could be harvested for noise/abuse; rotate if leaked; posture violation of CLAUDE.md § Secret Safety |
-  | **Cloudflare Worker proxy** (recommended) | One click, token stays server-side, simple rate-limiting, free tier sufficient | Adds one infrastructure dependency (cloudflare.com account, Wrangler CLI) |
-  | GitHub App with installation token | Similar to Worker | More complex setup |
+  **Owner action remaining (~5 min) to fully close:**
+  1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → **Generate new token**.
+  2. Name: `baseball-daily-worker-refresh-and-submit`. Expiration: 1 year. Repository access: only `jjmgladden/baseball-daily`.
+  3. Permissions: **Actions: Read and write** + **Issues: Read and write** (Metadata: Read auto-required).
+  4. Copy `github_pat_...`.
+  5. **Cloudflare dashboard** (NOT `wrangler secret put` per XPL-001) → Workers & Pages → `baseball-daily-api` → Settings → Variables and Secrets → Add → Type: Secret → Name: `GITHUB_TOKEN` → paste → Save.
+  6. Verify: `curl https://baseball-daily-api.jjmgladden.workers.dev/health` shows `"refreshEnabled":true`.
+  7. Click "Refresh now" in the site footer → should show `refreshing… new data in ~45s. Reloading shortly.` → page reloads in ~53s on fresh snapshot.
 
-  **Recommended next-pass (when picked up):** Cloudflare Worker with a single `/dispatch` endpoint that holds the PAT in its secret store and calls the GitHub API to trigger `daily.yml`. Worker URL is called by a button on the app. Add basic rate-limiting (e.g. max 1 dispatch per IP per 10 min) to discourage abuse.
-
-  Until then: daily cron handles freshness for all visitors (3 AM Eastern / 07:00 UTC); owner can manually trigger via GitHub Actions UI or `gh workflow run`.
-- **Status:** Open
-- **Cross-ref:** CLAUDE.md § Secret Safety · `.github/workflows/daily.yml`
+  Until then: clicking "Refresh now" returns 500 with the message `Refresh is not configured (server missing GITHUB_TOKEN or GITHUB_REPO).` rendered inline in the footer status span. Daily cron continues to run at 07:00 UTC unchanged.
+- **Status:** Closed-pending-owner-PAT (code shipped + deployed; same status pattern as KB-0033 was at end of Session 8)
+- **Cross-ref:** CLAUDE.md § Secret Safety · `.github/workflows/daily.yml` · `worker/src/index.js:handleRefresh` · `app/js/components/refresh.js` · KB-0024 (shares the GITHUB_TOKEN PAT) · KB-0033 (Worker architecture parent)
 
 ### KB-0027 | Push-race retry-with-rebase ported from pickleball KB-0027
 - **Type:** Action
@@ -401,8 +388,16 @@ Static types (Reference, Decision, Limitation) omit Tier.
   - WordPress REST API discovery — MLB-specific data sources differ
   - Glossary / Court Etiquette / DUPR Explainer / Tournament Prep / Equipment / Where-to-Play tab — pickleball-specific knowledge content
   - Cloudflare Tunnel → home Ollama (pickleball KB-0041) — future-design, applies equally to either project later
-- **Status:** Open (B1 done; B2-B7 awaiting per-phase ATP)
-- **Cross-ref:** sessions/BASEBALL_Handoff_Prompt_V4.md · sessions/BASEBALL_Kickoff_Prompt_Session5.md · KB-0007 · KB-0024 · KB-0025 · KB-0027 · pickleball KB-0008 · pickleball KB-0023 · pickleball KB-0027 · pickleball KB-0029 · pickleball KB-0035 · pickleball KB-0040
+  **Sub-task ledger (closed Session 10 — 2026-05-06):**
+  - B1 (push-race retry-with-rebase) — done Session 4, KB-0027
+  - B2 (email v2 + snapshot v6 Today's Schedule) — done Session 5, KB-0029
+  - B3 (process — credentials.md + CLAUDE.md v13 + check-esm.js) — done Session 6, KB-0030
+  - B4 (PWA icons PNG set + APP_VERSION pill) — done Session 7, KB-0031
+  - B5 (News tab + RSS + email v3 Top News) — done Session 8, KB-0032
+  - B6 (AI Q&A — build-ai-context + Worker + Ask tab) — done Session 9, KB-0033
+  - **B7 (TOC + accordion backport from pickleball L1) — done Session 10, KB-0034 § Track 2**
+- **Status:** Closed (entire pickleball-parity roadmap complete — every applicable pickleball pattern is now in baseball)
+- **Cross-ref:** sessions/BASEBALL_Handoff_Prompt_V4.md · sessions/BASEBALL_Kickoff_Prompt_Session5.md · KB-0007 · KB-0024 · KB-0025 · KB-0027 · KB-0029 · KB-0030 · KB-0031 · KB-0032 · KB-0033 · KB-0034 · pickleball KB-0008 · pickleball KB-0023 · pickleball KB-0027 · pickleball KB-0029 · pickleball KB-0035 · pickleball KB-0040
 
 ### KB-0029 | Email template v2 + snapshot schema v6 (Today's Schedule)
 - **Type:** Action
@@ -780,16 +775,98 @@ Static types (Reference, Decision, Limitation) omit Tier.
 - **Status:** Closed
 - **Cross-ref:** ingestion/fetch-daily.js § computeRecentForm · app/js/components/streak.js
 
+### KB-0034 | Session 10 omnibus — Phase B7 + KB-0020/0021 + email v4 + trivia daily-rotation + mobile stale-snapshot SW fix
+- **Type:** Action
+- **Date:** 2026-05-04 → 2026-05-06 (Session 10, multi-day)
+- **Category:** Multi-track session — UI / Email / Worker / SW / Content pipeline
+- **Tags:** phase-b7, toc-accordion, sw-cache-fix, kb-0020, kb-0021, email-v4, trivia, mobile-bug, weekly-batch-routing, pickleball-parity-complete
+- **Source:** Session 10 chat — owner ATP'd 5-step plan + KB-0020 (6 tracks) + emergent mobile-stale-snapshot bug (7th track surfaced via "this morning the email had a date of 5/5 but when i went into the link it was still 5/4 — does not happen for Pickleball")
+- **Finding:** Bundled 7 tracks shipped end-to-end:
+
+  **Track 0 — `/aitest` cleanup deferred from Session 9.** `wrangler deploy` from `worker/` (PowerShell — XPL-002) dropped the debug route. Verified `/aitest` returns 404; `/health` still green. ~30 sec.
+
+  **Track 1 (Phase B7 — TOC + accordion backport).** Direct port of pickleball KB-0040 Phase L1 across three baseball tabs: [`app/js/tabs/cardinals.js`](../app/js/tabs/cardinals.js) (5 sections — Legends Dig Deeper open by default · Retired Numbers · Historic Seasons · Hall of Famers · Traditions), [`app/js/tabs/history.js`](../app/js/tabs/history.js) (5 sections — On This Day open · Iconic Moments · Strangest Plays · Franchise Lineages · All Franchises + new info-callout pointing to Stories tab), [`app/js/tabs/news.js`](../app/js/tabs/news.js) (collapsible Today/This Week/Recent buckets). Generic CSS pattern (`.tab-toc` / `.tab-section` / `.tab-callout`) ported into [`app/styles/main.css`](../app/styles/main.css) (~95 lines). Pickleball variable map: `--bg-2` → `--bg-secondary`, `--text-dim` → `--text-muted`, `--accent-2` → `--accent-info`, etc. Renumber-after-filter pattern: drop empty sections then re-index `num` so e.g. News tab on a low-news day reads "1. This Week (40)" cleanly instead of "2. This Week (40)" with a 1- and 3- gap.
+
+  **Track 2 (apply Issue #5 approvals).** [Issue #5](https://github.com/jjmgladden/baseball-daily/issues/5) closed Monday May 4 with "Approve ALL" checked but unapplied. Authored verified entries for the 10 approved stubs (1 executive — Marvin Miller — + 9 player legends — Yogi Berra, Reggie Jackson, Derek Jeter, Randy Johnson, Walter Johnson, Chipper Jones, Sandy Koufax, Greg Maddux, Mickey Mantle) and appended to [`data/master/legends-general.json`](../data/master/legends-general.json) (20 → 30 entries). Curation-backlog entries flipped pending → active (131 → 121 pending). Apply script archived at `scripts/apply-batch-2026-05-04.js`.
+
+  **Track 3 (KB-0021 closed — auto-reload on SW update).** Implemented in [`app/js/app.js`](../app/js/app.js) `registerServiceWorker()`. See KB-0021 for detail.
+
+  **Track 4 (email template v3 → v4 — owner feedback "Open Full Report at top, not bottom").** [`ingestion/lib/email-template.js`](../ingestion/lib/email-template.js) v3 → v4: CTA button + brief stats summary (`X games yesterday · Y trades · Z on the IL league-wide`) moved from below On This Day section to directly under the header. Same change applied to plain-text fallback. v3 archived in git history (no source-code archive file — diverges from CLAUDE.md whole-number convention for build-time modules where git is authoritative). Dry-run verified the new ordering before commit.
+
+  **Track 5 (trivia tab redesign — "Today's 5" + filters mine full pool).** [`app/js/tabs/trivia.js`](../app/js/tabs/trivia.js) v1 → v2:
+  - **Default landing state:** N=5 deterministic-by-date picks via `pickDailySet(questions, 5)`. First card uses index `(dayOfYear + 0) % len` matching [`app/js/components/trivia.js`](../app/js/components/trivia.js) `pickDaily()` so the Daily Report card === Trivia tab's first card. Subsequent picks use evenly-spaced strides (`stride = floor(len / n)`) for full-pool coverage over the rotation cycle.
+  - **🎲 Different 5 reshuffle button:** increments a `dayOfYear` offset stored in `sessionStorage` (`baseball-daily.trivia-reshuffle.v1`). Stable for the session — refreshing the tab keeps the picks. Hides in filter mode.
+  - **Filter-bypass mode:** any filter input (search, category != "all", or unrevealed-only) auto-switches to "Search results" mode rendering ALL matching questions from the full pool. Heading swaps + reshuffle button hides. Click "All" → returns to Today's 5.
+  - **Random unrevealed button:** preserved; queries the full pool regardless of mode; applies a deferred-search-injection trick to land on the picked card.
+
+  **Track 6 (trivia in weekly-batch flow + 20 verified stubs seeded).** Updated [`weekly-batch.yml`](../.github/workflows/weekly-batch.yml) routing instruction line so future Claude knows `type: 'trivia'` → `data/master/trivia.json` (alongside legend → legends-general.json, moment → historical-videos.json, story → stories.json, umpire → legends-general.json category=umpire). Authored 20 trivia stubs across 8 categories (records 5, hall-of-fame 3, postseason 3, cardinals 2, nationals 2, military 1, civil-rights 1, franchise-history 2, umpires 1) — each carries actual `question` + `answer` strings (extended schema vs other types) so the apply step is a simple append. Seeded into [`data/master/curation-backlog.json`](../data/master/curation-backlog.json) (121 → 141 pending). Next 2 Monday batches will surface 10/week. Apply script archived at `scripts/seed-trivia-2026-05-05.js`.
+
+  **Track 7 (KB-0020 closes-pending-PAT — public on-demand refresh).** Code complete + Worker deployed. See KB-0020 for full detail. Owner-side: create one fine-grained PAT scoped to `jjmgladden/baseball-daily` with Actions:write + Issues:write, paste into Cloudflare dashboard as Worker secret `GITHUB_TOKEN` (XPL-001 — NOT `wrangler secret put`). One paste covers BOTH `/refresh` and `/submit`. ~5 min owner work. Worker routes count: 3 (was 2: /ai, /submit; now adds /refresh). New file: [`app/js/components/refresh.js`](../app/js/components/refresh.js) (60 lines). Footer: `<a class="suggest-link" data-refresh>Refresh now</a>` + `<span id="refresh-status">` for inline status messaging.
+
+  **Track 8 (mobile stale-snapshot bug — SW cache-first-for-everything anti-pattern).** Owner reported "this morning the email had a date of 5/5 but when i went into the link it was still 5/4 — does not happen for Pickleball" — same complaint as Session 10 day 1. Diagnosis path:
+  1. Compared GitHub Pages cache headers — identical between projects (`Cache-Control: max-age=600`).
+  2. Compared data-loader cache options — both projects use `cache: 'no-store'`.
+  3. Compared **service worker fetch handlers** — found the divergence.
+  4. Pickleball's SW differentiates: network-first for `/data/` paths, cache-first for shell. **Baseball's SW was cache-first for EVERY GET** — including `/data/snapshots/latest.json`. Once a user fetched the snapshot once, it was permanently cached in the SW until cache key bumped. The user's `cache: 'no-store'` request option got intercepted by the SW BEFORE reaching the browser HTTP cache layer.
+  5. Why the user's mobile self-fixed after an hour: a previous SW cache-key bump from this session (v18 → v19 etc.) probably activated, clearing the stale entry.
+  6. Why pickleball didn't have the bug: pickleball's SW was written with the split-handler pattern from day one. Baseball was written with simpler "cache-first everything" and never updated.
+
+  **Fix:** [`app/sw.js`](../app/sw.js) fetch handler split into two branches: `if (url.pathname.includes('/data/'))` → network-first (try fetch with `cache: 'no-store'`, fall back to cache only on network error) · else → cache-first (existing behavior, with same-origin guard added on `cache.put` so cross-origin Worker/Anthropic responses don't accidentally land in the SW cache). Verified end-to-end via the preview server: pre-populated the SW cache with a stub `latest.json`, fetched, confirmed the response was the REAL fresh body not the stub. Verified shell paths still cache-first by doing the inverse test on `styles/main.css`.
+
+  **Versioning summary across the session:**
+  - SW cache + APP_VERSION rolled four times (v18 → v19 → v20 → v21 → v22), each paired
+  - Email template v3 → v4
+  - Worker package v2 → v3 (3 routes now)
+  - Snapshot schemas unchanged (main v6, news v1, ai-context v1)
+  - `docs/credentials.md` v2 → v3
+  - `docs/knowledge-base.md` adds KB-0034 + closes/updates KB-0020/0021/0024/0028
+
+  **Files touched this session (full enumeration):**
+  ```
+  N  scripts/apply-batch-2026-05-04.js
+  N  scripts/seed-trivia-2026-05-05.js
+  N  app/js/components/refresh.js
+  N  archive/credentials_v2.md
+  M  app/styles/main.css                 (+95 lines: TOC/section/callout)
+  M  app/js/tabs/cardinals.js            (refactor → TOC + 5 sections)
+  M  app/js/tabs/history.js              (refactor → TOC + 5 sections + info callout)
+  M  app/js/tabs/news.js                 (refactor → TOC + collapsible buckets)
+  M  app/js/tabs/trivia.js               (Today's 5 + reshuffle + filter-bypass)
+  M  app/js/app.js                       (KB-0021 controllerchange + attachRefreshHandler + APP_VERSION v22)
+  M  app/sw.js                           (CACHE v22 + refresh.js in SHELL_FILES + split handler for /data/ vs shell)
+  M  app/index.html                      ("Refresh now" footer link + status span)
+  M  ingestion/lib/email-template.js     (v3 → v4 reorder)
+  M  ingestion/send-email.js             (template-version comment)
+  M  worker/src/index.js                 (+/refresh route + handleRefresh + refreshLimit)
+  M  worker/wrangler.toml                (REFRESH_WORKFLOW + REFRESH_REF vars + secrets-doc dual-use)
+  M  .github/workflows/weekly-batch.yml  (routing comment includes trivia.json)
+  M  data/master/legends-general.json    (+10 entries → 30 total)
+  M  data/master/curation-backlog.json   (+20 trivia stubs; 10 flipped pending → active; 141 pending now)
+  M  docs/credentials.md                 (v2 → v3)
+  M  docs/knowledge-base.md              (this entry; KB-0028/0021/0020/0024 status updates; Last-updated bumped)
+  ```
+
+  **Triggers per CLAUDE.md Critical Rules:**
+  - SW cache rule: TRIGGERED four times this session — `app/js/app.js` change + new `refresh.js` shell file + new fetch-handler logic in `sw.js` + final SW change for the data-path fix. CACHE bumped paired each time (v18 → v19 → v20 → v21 → v22).
+  - APP_VERSION pairing rule: applied at every cache bump (paired four times).
+  - Pre-push ESM check: ran 4× across the session, all green (24/24 modules clean — was 23 before refresh.js).
+  - Whole-number version bump: applied for `docs/credentials.md` (v2 archived). Email template v3 → v4 — git history is authoritative for build-time modules per established pattern.
+  - Session-End Step 2 (credentials.md update): triggered — `ANTHROPIC_API_KEY` row flipped ⏸ → ✅ (lag from Session 9), `GITHUB_TOKEN` row clarified for KB-0020 dual-use. Maintenance log entry added.
+
+  **Verification end-to-end:** Cardinals/History/News tabs all render TOC + sections + open-state correctly via Claude Preview MCP (port 1882). Click-toggle on `<details>` sections confirmed open/close/open transitions. Trivia tab tested in 4 modes: default-set (5 cards, "Today's 5" heading), reshuffle (cards change, sessionStorage offset increments), filter-engaged (cards swap to full pool match, "Search results" heading, reshuffle hidden), filter-cleared (back to Today's 5). KB-0020 button tested with un-PAT'd Worker — error path renders `Refresh is not configured...` in footer status span. Mobile-stale-snapshot fix verified via stub-cache test: pre-seeded the SW cache with a fake old snapshot, fetched, confirmed the response was REAL not stub. Email v4 reorder verified via dry-run plain-text output.
+
+  **Cross-project lesson surfaced this session for the XPL audit:** baseball's SW divergence from pickleball's pattern (cache-first-for-everything anti-pattern in PWAs) — bit ONE project so doesn't strictly meet the (a) "2+ projects" bar; not a Windows / paste / encoding gotcha so doesn't strictly meet the (b) bar either. **Marginal candidate** — recommendation: capture as PWA design lesson IN THIS KB entry rather than as an XPL, since the diagnostic *was* the cross-project comparison and the fix codifies a pattern future Claude can find by reading either project.
+- **Status:** Closed (7 tracks shipped; KB-0020 closes-pending-owner-PAT)
+- **Cross-ref:** `app/sw.js` (split handler) · `app/js/app.js:registerServiceWorker` · `worker/src/index.js:handleRefresh` · `app/js/components/refresh.js` · `app/js/tabs/trivia.js` (v2) · `app/js/tabs/cardinals.js` + `history.js` + `news.js` (B7 refactors) · `ingestion/lib/email-template.js` (v4) · `data/master/curation-backlog.json` · `data/master/legends-general.json` · `docs/credentials.md` (v3) · KB-0020 + KB-0021 + KB-0028 + KB-0033 + KB-0024 (related) · pickleball KB-0040 Phase L1 (B7 source pattern)
+
 ---
 
 ## Quick Index
 
 **Open items (with tier where applicable):**
-- KB-0013 — On-This-Day seed expansion — Limitation (content-only, no work item)
-- KB-0020 — Public on-demand refresh — Action, **T2** (Cloudflare Worker proxy; could now share `baseball-daily-api` with a `/refresh` route once it's deployed)
-- KB-0021 — Auto-reload on service-worker update — Action, **T2** (still open after B4-B6 — not folded in)
-- KB-0024 — Submission Worker — Action (Worker code rewritten Phase B6 with AI as primary purpose; `/submit` route preserved + ready to activate; superseded by KB-0033 Worker)
-- KB-0028 — Pickleball-parity multi-phase plan (B7 only) — Decision, **T2** (active roadmap; B1-B6 done)
+- KB-0013 — On-This-Day seed expansion — Limitation (closing path identified Session 10 — trivia-stub-style seed flow; deferred to a future session)
+- KB-0020 — Public on-demand refresh — Action, **closes-pending-owner-PAT** (code shipped + Worker deployed Session 10; owner needs to create fine-grained PAT + paste via Cloudflare dashboard, ~5 min)
+- KB-0024 — Submission Worker — Action (Worker code LIVE; Suggest UI hookup separate; same `GITHUB_TOKEN` PAT as KB-0020 covers it)
 
 **Closed:**
-KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0007, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0029, KB-0030, KB-0031, KB-0032, KB-0033
+KB-0001, KB-0002, KB-0003, KB-0004, KB-0005, KB-0006, KB-0007, KB-0008, KB-0009, KB-0010, KB-0011, KB-0012, KB-0014, KB-0015, KB-0016, KB-0017, KB-0018, KB-0019, KB-0021, KB-0022, KB-0023, KB-0025, KB-0026, KB-0027, KB-0028, KB-0029, KB-0030, KB-0031, KB-0032, KB-0033, KB-0034

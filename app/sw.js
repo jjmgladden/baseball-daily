@@ -11,7 +11,7 @@
  */
 
 // CACHE name and APP_VERSION (in app/js/app.js) MUST stay in lockstep — bump both together.
-const CACHE = 'baseball-daily-shell-v18';
+const CACHE = 'baseball-daily-shell-v22';
 
 const SHELL_FILES = [
   './',
@@ -45,6 +45,7 @@ const SHELL_FILES = [
   './js/components/highlights.js',
   './js/components/recap.js',
   './js/components/suggest.js',
+  './js/components/refresh.js',
   './js/components/story-state.js',
   './js/components/splash.js',
   './js/components/error-messages.js',
@@ -66,20 +67,51 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
+// KB-0034 (Session 11): differentiate data paths from shell paths.
+// Previously this handler did cache-first for EVERY GET — including
+// /data/snapshots/latest.json — which meant the daily snapshot got stuck
+// in cache the first time a user visited and was never refreshed until
+// the SW cache key bumped. On mobile this manifested as "the email says
+// today's date but the app still shows yesterday." Mirrors pickleball's
+// pattern (KB-0040 reference) for parity across the two PWAs.
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  event.respondWith(cacheFirst(event.request));
-});
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
 
-async function cacheFirst(req) {
-  const cache = await caches.open(CACHE);
-  const cached = await cache.match(req);
-  if (cached) return cached;
-  try {
-    const fresh = await fetch(req);
-    if (fresh.ok) cache.put(req, fresh.clone());
-    return fresh;
-  } catch {
-    return cached || new Response('Offline and not cached', { status: 503 });
+  // Network-first for /data/ — always try the wire; fall back to cache only if
+  // the network fails (offline). The cache here is incidental (last-known-good)
+  // not authoritative.
+  if (url.pathname.includes('/data/')) {
+    event.respondWith((async () => {
+      try {
+        return await fetch(req, { cache: 'no-store' });
+      } catch {
+        const cached = await caches.match(req);
+        return cached || new Response(
+          JSON.stringify({ error: 'offline-no-cache' }),
+          { status: 503, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    })());
+    return;
   }
-}
+
+  // Cache-first for shell — fast paint on returning visits, network on miss.
+  // Only same-origin successful responses get written to the cache (avoids
+  // accidentally caching cross-origin Worker / Anthropic / GitHub responses).
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    const cached = await cache.match(req);
+    if (cached) return cached;
+    try {
+      const fresh = await fetch(req);
+      if (fresh.ok && url.origin === location.origin) {
+        cache.put(req, fresh.clone());
+      }
+      return fresh;
+    } catch {
+      return cached || new Response('Offline and not cached', { status: 503 });
+    }
+  })());
+});

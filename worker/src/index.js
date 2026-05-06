@@ -1,9 +1,10 @@
 /**
- * Baseball Daily — API Worker (KB-0033 + KB-0024)
+ * Baseball Daily — API Worker (KB-0033 + KB-0024 + KB-0020)
  *
- * Two routes:
- *   POST /submit  — public submission → GitHub Issue (KB-0024, scaffolded)
- *   POST /ai      — AI Q&A proxy → Anthropic Messages API (KB-0033)
+ * Three routes:
+ *   POST /submit   — public submission → GitHub Issue (KB-0024, scaffolded)
+ *   POST /ai       — AI Q&A proxy → Anthropic Messages API (KB-0033)
+ *   POST /refresh  — public on-demand refresh → workflow_dispatch (KB-0020)
  *
  * Anti-abuse on /ai:
  *   - Per-isolate rate limit: 10/hr/IP, 50/day/IP
@@ -14,12 +15,21 @@
  * Anti-abuse on /submit:
  *   - Honeypot field (`website`) silently drops bot submissions
  *   - Per-isolate rate limit: 3/10min/IP
+ *
+ * Anti-abuse on /refresh:
+ *   - Per-isolate rate limit: 1/10min/IP (dispatching the workflow is cheap;
+ *     rate-limit is to discourage abuse rather than prevent overload)
+ *   - Cross-isolate ceiling: GITHUB_TOKEN scoped to actions:write on this
+ *     one repo only — worst case is the workflow runs more often
+ *   - GitHub itself enforces queueing via concurrency: { group: daily-ingestion }
+ *     in daily.yml — no risk of overlapping ingestion runs
  */
 
 // ===== Per-isolate rate-limit state (resets on Worker restart) =====
-const submitLimit = new Map();
-const aiHourLimit = new Map();
-const aiDayLimit  = new Map();
+const submitLimit  = new Map();
+const aiHourLimit  = new Map();
+const aiDayLimit   = new Map();
+const refreshLimit = new Map();
 
 const SUBMIT_WINDOW_MS = 10 * 60 * 1000;
 const SUBMIT_MAX = 3;
@@ -28,6 +38,9 @@ const AI_HOUR_WINDOW_MS = 60 * 60 * 1000;
 const AI_HOUR_MAX = 10;
 const AI_DAY_WINDOW_MS = 24 * 60 * 60 * 1000;
 const AI_DAY_MAX = 50;
+
+const REFRESH_WINDOW_MS = 10 * 60 * 1000;
+const REFRESH_MAX = 1;
 
 const DEFAULT_TYPES = ['player', 'moment', 'other'];
 const DEFAULT_AI_MODEL = 'claude-haiku-4-5-20251001';
@@ -56,8 +69,9 @@ export default {
       return json({
         ok: true,
         worker: env.WORKER_NAME || 'baseball-daily-api',
-        routes: ['POST /submit', 'POST /ai'],
-        aiEnabled: env.AI_DISABLED !== 'true'
+        routes: ['POST /submit', 'POST /ai', 'POST /refresh'],
+        aiEnabled: env.AI_DISABLED !== 'true',
+        refreshEnabled: !!env.GITHUB_TOKEN
       }, 200, { 'Access-Control-Allow-Origin': '*' });
     }
 
@@ -66,8 +80,9 @@ export default {
       return json({ error: 'Origin not allowed' }, 403, corsHeaders);
     }
 
-    if (path === '/submit') return handleSubmit(request, env, corsHeaders);
-    if (path === '/ai')     return handleAi(request, env, corsHeaders);
+    if (path === '/submit')  return handleSubmit(request, env, corsHeaders);
+    if (path === '/ai')      return handleAi(request, env, corsHeaders);
+    if (path === '/refresh') return handleRefresh(request, env, corsHeaders);
 
     return json({ error: 'Not found' }, 404, corsHeaders);
   }
@@ -309,6 +324,76 @@ async function createGitHubIssue(body, env) {
     throw new Error('GitHub API ' + res.status + ': ' + text.slice(0, 200));
   }
   return res.json();
+}
+
+// =====================================================================
+// /refresh handler — KB-0020 public on-demand ingestion trigger
+// =====================================================================
+//
+// Anyone with the site open can hit this route to fire a workflow_dispatch
+// on daily.yml. The Worker holds a fine-grained PAT (Worker secret
+// GITHUB_TOKEN, scoped to actions:write on jjmgladden/baseball-daily only),
+// so the credential never leaves server-side. GitHub's concurrency group
+// in daily.yml ensures dispatched runs queue rather than overlap with cron
+// or each other.
+//
+// Returns 202 + the run-list URL so the caller can show "fetching... new
+// data in ~30s" and optionally reload after the run completes.
+async function handleRefresh(request, env, corsHeaders) {
+  if (request.method !== 'POST') {
+    return json({ error: 'Method not allowed' }, 405, corsHeaders);
+  }
+
+  const repo = env.GITHUB_REPO;
+  const token = env.GITHUB_TOKEN;
+  if (!repo || !token) {
+    return json({ error: 'Refresh is not configured (server missing GITHUB_TOKEN or GITHUB_REPO).' }, 500, corsHeaders);
+  }
+
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const lim = checkLimit(refreshLimit, ip, REFRESH_WINDOW_MS, REFRESH_MAX);
+  if (!lim.ok) {
+    return json({ error: 'A refresh was just triggered. Try again in ' + lim.retryMin + ' min.' }, 429, corsHeaders);
+  }
+
+  const workerName = env.WORKER_NAME || 'baseball-daily-api';
+  const workflow = env.REFRESH_WORKFLOW || 'daily.yml';
+  const ref = env.REFRESH_REF || 'main';
+
+  const url = 'https://api.github.com/repos/' + repo + '/actions/workflows/' + workflow + '/dispatches';
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': workerName,
+        'Content-Type': 'application/json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      },
+      body: JSON.stringify({ ref })
+    });
+  } catch (e) {
+    console.error('[refresh] dispatch fetch failed:', e);
+    return json({ error: 'Could not reach GitHub.' }, 502, corsHeaders);
+  }
+
+  if (res.status !== 204) {
+    const text = await res.text().catch(() => '');
+    console.error('[refresh] GitHub status=' + res.status + ' body=' + text.slice(0, 300));
+    return json({ error: 'GitHub dispatch ' + res.status + '. Try again later.' }, 502, corsHeaders);
+  }
+
+  const runsUrl = 'https://github.com/' + repo + '/actions/workflows/' + workflow;
+  return json({
+    ok: true,
+    dispatched: true,
+    workflow,
+    ref,
+    etaSeconds: 45,
+    runsUrl
+  }, 202, corsHeaders);
 }
 
 // =====================================================================

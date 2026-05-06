@@ -1536,3 +1536,95 @@ pre { padding: 0.75rem; overflow-x: auto; border: 1px solid var(--border); }
   font-size: 0.78rem;
   font-family: var(--font-mono);
 }
+
+/* ---------- TOC + collapsible sections + callouts (Phase B7) ---------- */
+/* Generic pattern reused across Cardinals / History / News tabs.
+   Ported from pickleball KB-0040 Phase L1; baseball variable mapping. */
+
+.tab-toc {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 18px;
+}
+.tab-toc-title {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.tab-toc ol {
+  margin: 0;
+  padding-left: 22px;
+  color: var(--text-primary);
+}
+.tab-toc ol li { margin: 4px 0; }
+.tab-toc a { color: var(--accent-info); text-decoration: none; }
+.tab-toc a:hover { color: var(--accent-cards); text-decoration: underline; }
+
+.tab-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  scroll-margin-top: 12px;
+}
+.tab-section > summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+  list-style: none;
+  background: var(--bg-card);
+  transition: background 0.15s;
+  user-select: none;
+}
+.tab-section > summary:hover { background: rgba(0, 180, 216, 0.10); }
+.tab-section > summary::-webkit-details-marker { display: none; }
+.tab-section > summary::before {
+  content: '▶ ';
+  color: var(--accent-info);
+  font-size: 0.8em;
+  margin-right: 6px;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+.tab-section[open] > summary::before { transform: rotate(90deg); }
+.tab-section-body {
+  padding: 14px 18px 18px;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+.tab-section-body > h2:first-child,
+.tab-section-body > h3:first-child,
+.tab-section-body > h4:first-child { margin-top: 0; }
+.tab-section-body p { margin: 8px 0; }
+
+.tab-callout {
+  border-left: 3px solid var(--accent-cards);
+  background: rgba(196, 30, 58, 0.08);
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+.tab-callout.info {
+  border-left-color: var(--accent-info);
+  background: rgba(0, 180, 216, 0.08);
+}
+.tab-callout.tip {
+  border-left-color: var(--accent-good);
+  background: rgba(74, 222, 128, 0.08);
+}
+.tab-callout-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}

@@ -1,9 +1,9 @@
 /**
- * Cardinals tab — v2
+ * Cardinals tab — v3
  *
- * Dedicated Cardinals content: franchise snapshot, retired numbers grid,
- * Hall of Famers roll, historic seasons, traditions, and a curated
- * "Legends — dig deeper" section with external links per player.
+ * Phase B7: TOC + collapsible sections (pattern ported from pickleball KB-0040 Phase L1).
+ * Snapshot panel stays pinned at top; the rest collapses into numbered sections
+ * with a "Jump to section" TOC for fast nav.
  */
 
 import { loadMaster, loadFranchises, loadCardinalsLinks } from '../data-loader.js';
@@ -29,14 +29,42 @@ export async function renderCardinals(root, snap) {
 
   const franchise = (franchises.franchises || []).find(f => f.id === CARDS_ID);
 
+  const sections = [
+    { id: 'cards-legends',    title: 'Legends — Dig Deeper', body: renderLegendsDeepDiveBody(links),                     open: true },
+    { id: 'cards-retired',    title: 'Retired Numbers',      body: renderRetiredNumbersBody(deep.retiredNumbers || []) },
+    { id: 'cards-seasons',    title: 'Historic Seasons',     body: renderHistoricSeasonsBody(deep.historicSeasons || []) },
+    { id: 'cards-hofers',     title: 'Hall of Famers',       body: renderHallOfFamersBody(deep.hallOfFamers || []) },
+    { id: 'cards-traditions', title: 'Traditions',           body: renderTraditionsBody(deep.traditions || []) },
+  ].filter(s => s.body).map((s, i) => ({ ...s, num: i + 1 })); // drop empty sections then renumber so TOC reads cleanly
+
   root.innerHTML = `
     <h1>St. Louis Cardinals</h1>
     ${renderSnapshotPanel(snap, franchise)}
-    ${renderLegendsDeepDive(links)}
-    ${renderRetiredNumbers(deep.retiredNumbers || [])}
-    ${renderHistoricSeasons(deep.historicSeasons || [])}
-    ${renderHallOfFamers(deep.hallOfFamers || [])}
-    ${renderTraditions(deep.traditions || [])}
+    ${tocHtml(sections)}
+    ${sections.map(sectionHtml).join('')}
+  `;
+}
+
+function tocHtml(sections) {
+  if (!sections.length) return '';
+  const items = sections.map(s =>
+    `<li><a href="#${s.id}">${s.num}. ${escapeHtml(s.title)}</a></li>`
+  ).join('');
+  return `
+    <nav class="tab-toc" aria-label="Cardinals tab sections">
+      <div class="tab-toc-title">Jump to section</div>
+      <ol>${items}</ol>
+    </nav>
+  `;
+}
+
+function sectionHtml(s) {
+  const open = s.open ? ' open' : '';
+  return `
+    <details class="tab-section" id="${s.id}"${open}>
+      <summary>${s.num}. ${escapeHtml(s.title)}</summary>
+      <div class="tab-section-body">${s.body}</div>
+    </details>
   `;
 }
 
@@ -88,7 +116,7 @@ function formatGameResult(g) {
   return `${win ? 'W' : 'L'} ${us.score}-${them.score} ${homeIsUs ? 'vs' : '@'} ${escapeHtml(them?.name || '')}`;
 }
 
-function renderLegendsDeepDive(links) {
+function renderLegendsDeepDiveBody(links) {
   if (!links || !links.legends?.length) return '';
 
   // Featured entries (those with featured: true) render first with a deep-dive card
@@ -96,7 +124,6 @@ function renderLegendsDeepDive(links) {
   const standard = links.legends.filter(l => !l.featured);
 
   return `
-    <h2>Legends — Dig Deeper</h2>
     <p class="muted" style="margin-bottom: 1rem;">
       External links to authoritative sources — Baseball Reference, SABR BioProject, Hall of Fame, MLB.com, Wikipedia, and curated YouTube search.
     </p>
@@ -164,10 +191,9 @@ function renderLinkPills(links) {
   `;
 }
 
-function renderRetiredNumbers(nums) {
+function renderRetiredNumbersBody(nums) {
   if (!nums.length) return '';
   return `
-    <h2>Retired Numbers</h2>
     <div class="card">
       <div class="retired-grid">
         ${nums.map(n => `
@@ -182,10 +208,9 @@ function renderRetiredNumbers(nums) {
   `;
 }
 
-function renderHistoricSeasons(seasons) {
+function renderHistoricSeasonsBody(seasons) {
   if (!seasons.length) return '';
   return `
-    <h2>Historic Seasons</h2>
     <div class="grid grid-2">
       ${seasons.map(s => `
         <div class="card">
@@ -201,10 +226,10 @@ function renderHistoricSeasons(seasons) {
   `;
 }
 
-function renderHallOfFamers(hofers) {
+function renderHallOfFamersBody(hofers) {
   if (!hofers.length) return '';
   return `
-    <h2>Hall of Famers <span class="muted">(${hofers.length})</span></h2>
+    <p class="muted" style="margin: 0 0 0.75rem;">${hofers.length} inductees with significant time as Cardinals.</p>
     <div class="card">
       <table class="hof-table">
         <thead>
@@ -232,10 +257,9 @@ function renderHallOfFamers(hofers) {
   `;
 }
 
-function renderTraditions(traditions) {
+function renderTraditionsBody(traditions) {
   if (!traditions.length) return '';
   return `
-    <h2>Traditions</h2>
     <div class="grid grid-2">
       ${traditions.map(t => `
         <div class="card">

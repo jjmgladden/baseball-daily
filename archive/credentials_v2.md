@@ -1,6 +1,6 @@
 # Credentials Inventory
 
-**Version:** 3 | **Last updated:** 2026-05-06 (Session 10 — Phase B6 LIVE end-to-end and now retroactively reflected: `ANTHROPIC_API_KEY` flipped ⏸ → ✅ (was created, deployed, debugged, and used in Session 9 — doc lagged); KB-0020 public on-demand refresh shipped — `GITHUB_TOKEN` Worker secret is now needed for BOTH `/submit` (KB-0024) and `/refresh` (KB-0020), so the row description was updated to reflect dual-route use; one fine-grained PAT covers both routes when owner creates it)
+**Version:** 2 | **Last updated:** 2026-05-03 (Session 9 — Phase B6 in flight: AI Q&A code shipped; `ANTHROPIC_API_KEY` row reflects active build status; Worker renamed `baseball-daily-submit` → `baseball-daily-api` reflecting dual-route purpose; awaiting owner-side credential creation + Worker deploy to flip status to ✅)
 
 This is the canonical, living record of every credential (API key, token, account login) that the **baseball-daily** project uses. Updated whenever a credential is added, rotated, or revoked.
 
@@ -72,9 +72,9 @@ Quick-reference table. Detailed sections below.
 | **`RESEND_API_KEY`** | API key (Resend) | ✅ Active | 2026-05-01 (Session 4 — Phase B1) | `ingestion/send-email.js` | GitHub Secret | [Resend → API Keys](https://resend.com/api-keys) |
 | **`EMAIL_RECIPIENTS`** | Plain config | ✅ Active (3 recipients) | 2026-05-01 (Session 4 — initial 1 recipient) | `ingestion/send-email.js` | GitHub Secret | [Repo Secrets](https://github.com/jjmgladden/baseball-daily/settings/secrets/actions) |
 | **`EMAIL_FROM`** | Plain config (sender address) | ✅ Active | 2026-05-01 (Session 4) | `ingestion/send-email.js` | GitHub Secret | [Repo Secrets](https://github.com/jjmgladden/baseball-daily/settings/secrets/actions) |
-| **`ANTHROPIC_API_KEY`** | API key (Anthropic) | ✅ Active (KB-0033, Phase B6 LIVE since Session 9 — doc lagged until Session 10) | 2026-05-03 (Session 9 — created Anthropic Console; deployed via Cloudflare dashboard after `wrangler secret put` paste-mangling per XPL-001) | Cloudflare Worker `baseball-daily-api` `/ai` route (KB-0033) — proxied; never returned to browser | Cloudflare Worker secret + GitHub Secret (mirror) | [console.anthropic.com → API keys](https://console.anthropic.com/settings/keys) |
+| **`ANTHROPIC_API_KEY`** | API key (Anthropic) | ⏸ Phase B6 — code shipped, awaiting owner creation | — | Cloudflare Worker `baseball-daily-api` `/ai` route (KB-0033) | Will be: Local `.env` + GitHub Secret + Cloudflare Worker secret | [console.anthropic.com → API keys](https://console.anthropic.com/settings/keys) |
 | **`glad-fam.com`** (domain) | Owned domain | ✅ Active (shared with pickleball) | 2026-04-24 (pickleball Session 6) | Resend sender (`baseball@glad-fam.com`) | Cloudflare Registrar (account credentials in owner's password manager) | [Cloudflare Registrar](https://dash.cloudflare.com/?to=/:account/registrar) |
-| **`GITHUB_TOKEN`** (Worker — dual-use: /submit + /refresh) | Fine-grained PAT | ⏸ Pending owner creation (KB-0020 + KB-0024 — required for `/refresh` to dispatch workflows; optional until then) | — | `worker/src/index.js` `/submit` (issues:write — KB-0024) AND `/refresh` (actions:write — KB-0020). One PAT scoped to `jjmgladden/baseball-daily` only, with both permissions, covers both routes. | Cloudflare Worker secret | [GitHub PAT settings](https://github.com/settings/personal-access-tokens) |
+| **`GITHUB_TOKEN`** (Worker — submission route) | Fine-grained PAT | ⏸ Pending owner deploy (KB-0024 — optional for Phase B6) | — | `worker/src/index.js` (`/submit` route — scaffolded; AI route is the primary B6 use case) | Cloudflare Worker secret | [GitHub PAT settings](https://github.com/settings/personal-access-tokens) |
 | **Anthropic Console account** | Account credentials | ✅ Active (created during pickleball Session 8) | 2026-04-26 | Holds the future `ANTHROPIC_API_KEY` + spend cap + billing | Owner's password manager | https://console.anthropic.com |
 | **Cloudflare account login** | Account credentials | ✅ Active (created during pickleball Session 6) | 2026-04-24 | Owns `glad-fam.com` + DNS + future baseball Worker | Owner's password manager + wrangler OAuth | [Cloudflare dashboard](https://dash.cloudflare.com) |
 | **Google Cloud account** | Account credentials | ✅ Active (pre-existing) | (pre-existing) | Hosts the YouTube key project | Owner's password manager | [Google Cloud Console](https://console.cloud.google.com) |
@@ -217,53 +217,44 @@ If a credential has been lost or is suspected compromised (committed to git acci
 - **Maintenance log:**
   - 2026-05-01 (Session 4) — first set; reuses `glad-fam.com` domain verified on Resend during pickleball Session 6 (no DNS work needed; any sender on the domain is pre-authorized).
 
-### `ANTHROPIC_API_KEY` (LIVE — KB-0033 Phase B6)
+### `ANTHROPIC_API_KEY` (Phase B6 — code shipped, awaiting owner-side creation)
 
 - **Type:** Anthropic API key (Workspace-scoped).
-- **Used by:** Cloudflare Worker `baseball-daily-api` `/ai` route (KB-0033 Phase B6 — AI Q&A layer). Mirrors pickleball's KB-0008 architecture. Key value never returned to the browser; Worker proxies all calls to Anthropic.
-- **Storage:**
-  - Cloudflare Worker secret on `baseball-daily-api` (the load-bearing copy — Worker reads it for every `/ai` request)
-  - GitHub Secret `ANTHROPIC_API_KEY` (mirror — kept for future workflow-side AI tooling)
-  - Local `.env` — owner removed post-deploy in Session 9 per cleanup protocol; not needed locally since the Worker holds the runtime copy
+- **Used by:** Cloudflare Worker `baseball-daily-api` `/ai` route (KB-0033 Phase B6 — AI Q&A layer). Mirrors pickleball's KB-0008 architecture.
+- **Storage (when created):**
+  - Local `.env` (for local test scripts that hit the API directly during build/verification)
+  - GitHub Secret named `ANTHROPIC_API_KEY` (kept available for future workflow-side AI tooling)
+  - Cloudflare Worker secret (set via `wrangler secret put` from `worker/` after Worker deploys)
 - **Source dashboard:** [console.anthropic.com → Organization settings → API keys](https://console.anthropic.com/settings/keys)
 - **Format:** `sk-ant-api03-` followed by ~95 alphanumeric characters (mixed case + symbols).
 - **Account:** Workspace = "Default" (the only workspace on the owner's account). Created during pickleball Session 8.
-- **Created:** 2026-05-03 (Session 9, baseball). Key name in console: `baseball-daily-worker`.
-- **Deploy quirk** (Session 9): `wrangler secret put` on Windows mangled the paste, sending only the first character to Cloudflare → Anthropic returned `400` with empty body for ~30 minutes of debug. **Fix:** re-pasted via Cloudflare dashboard's Variables and Secrets page (browser inputs handle paste correctly). Now codified as XPL-001 in `~/.claude/CLAUDE.md` so future sessions skip straight to the dashboard. Same root cause as pickleball Session 8.
 - **Spend posture (account-level, shared with pickleball):**
   - $20 prepaid credit balance (purchased during pickleball Session 8 — 2026-04-26; expires 1 year after purchase per Anthropic policy)
   - Monthly spend cap: $20 (Anthropic Console → Organization settings → Limits → Spend limits)
   - Auto-reload: **OFF** (kept off so the spend cap is a true ceiling, not a refill trigger)
   - Email alerts at $1 / $5 / $15 of monthly spend
-- **Sharing:** ❌ Key VALUE is independent of pickleball's `pickleball-daily-prod` key — different Workspace key strings so either can be revoked without affecting the other. The Anthropic *account* is shared (one billing relationship + one spend cap covering both projects). [XPL-005]
-- **Worker-side anti-abuse (KB-0033):** per-IP rate limit 10/hr + 50/day, AI_DISABLED kill switch (env var settable from dashboard), prompt-cached context bundle (~5-7K tokens) so first call writes the cache and subsequent calls hit it.
-- **If lost or compromised:** Anthropic Console → API keys → revoke (trash icon). Create new key with same `baseball-daily-worker` name + suffix `-v2`. Paste new value into Cloudflare dashboard (XPL-001 — NOT `wrangler secret put` from Windows). Smoke-test `/ai` route. Delete the revoked key entry.
-- **Rotation history:** Session 9 (2026-05-03): created.
-- **Cross-reference:** [KB-0033](knowledge-base.md#kb-0033--phase-b6--ai-qa-layer-build-ai-context--worker--ask-tab) · pickleball KB-0008 (architecture parent) · pickleball KB-0042 (cost posture) · `~/.claude/CLAUDE.md` XPL-001 (paste fix) · XPL-005 (Anthropic account sharing)
+- **Sharing:** ❌ Key VALUE will be a fresh key (`baseball-daily-prod` or similar) so it can be revoked independently of pickleball's `pickleball-daily-prod` key. The Anthropic *account* is shared (one billing relationship + one spend cap covering both projects).
+- **Restrictions to apply at creation:** Workspace = Default. Permissions = Default / All.
+- **If lost or compromised (when active):** Anthropic Console → API keys → click the trash icon next to the key name to revoke immediately. Then create a new key (same name + suffix `-v2`), paste new value into the three storage locations above, dispatch a smoke test against the Worker `/ai` route, confirm response, then delete the revoked key entry.
+- **Rotation history:** N/A — not yet created.
+- **Cross-reference:** [KB-0033](knowledge-base.md#kb-0033--phase-b6--ai-qa-layer) · [KB-0028 Phase B6](knowledge-base.md#kb-0028--pickleball-parity-multi-phase-plan-b1---b2---b3-b7-pending) · pickleball KB-0008 (architecture parent) · pickleball KB-0042 (cost posture)
 
-### `GITHUB_TOKEN` (Worker — fine-grained PAT, dual-use: /submit + /refresh)
+### `GITHUB_TOKEN` (Worker — fine-grained PAT, KB-0024)
 
 - **Type:** Fine-grained GitHub Personal Access Token.
-- **Used by:** `worker/src/index.js` — TWO routes share the same token:
-  - **`/submit`** (KB-0024): creates Issues from form submissions ("Suggest a player or moment" footer link). Needs **Issues: Read and write**.
-  - **`/refresh`** (KB-0020): dispatches `daily.yml` workflow_dispatch on demand from the public site. Needs **Actions: Read and write**.
-  - One PAT scoped to `jjmgladden/baseball-daily` only, with both permissions, covers both routes.
-- **Storage:** Cloudflare Worker secret (set via the **Cloudflare dashboard** — XPL-001: do NOT use `wrangler secret put` on Windows). One paste covers both routes.
+- **Used by:** `worker/src/index.js` `/submit` route — creates Issues from form submissions ("Suggest a player or moment" footer link).
+- **Storage:** Cloudflare Worker secret (will be set via `npx wrangler secret put GITHUB_TOKEN` from `worker/` once Worker is deployed).
 - **Source dashboard:** https://github.com/settings/personal-access-tokens
 - **Format:** `github_pat_` followed by ~80 alphanumeric characters.
-- **Status:** ⏸ Not yet created — code shipped + Worker deployed (Session 10) so both routes return 500 with a clear "Refresh is not configured" / "Failed to create submission" message until the secret is set. As soon as owner pastes the PAT, both routes light up.
+- **Status:** Not yet created — Worker not deployed (KB-0024 awaiting owner deploy; will revive in Phase B6 alongside the AI Q&A Worker).
 - **When created, scope must be:**
   - **Repository access:** Only select repositories → choose `jjmgladden/baseball-daily` (single repo, not "all repositories")
-  - **Repository permissions:**
-    - **Issues:** Read and write (for `/submit`)
-    - **Actions:** Read and write (for `/refresh` workflow_dispatch)
-    - **Metadata:** Read (auto-required, leave default)
+  - **Repository permissions → Issues:** Read and write
   - **All other permissions:** leave at "No access"
   - **Expiration:** 1 year recommended.
-- **Sharing:** ❌ Separate from pickleball's Worker PAT. Each Worker gets its own fine-grained PAT scoped to its own repo only.
-- **If lost:** revoke at the GitHub PAT settings page, create new with identical scope, paste new value into Cloudflare dashboard. Verify both routes (curl the Worker `/refresh` endpoint, submit a test form via the Suggest UI when it's wired).
-- **Verification after creation:** `curl https://baseball-daily-api.jjmgladden.workers.dev/health` should show `"refreshEnabled":true` once the secret is set.
-- **Cross-reference:** [KB-0020](knowledge-base.md#kb-0020--public-on-demand-refresh--anyone-can-trigger-ingestion) · [KB-0024](knowledge-base.md#kb-0024--curation-pipeline-weekly-batch-workflow--public-submission-worker) · `worker/README.md` · `~/.claude/CLAUDE.md` XPL-001
+- **Sharing:** ❌ Separate from pickleball's eventual Worker PAT. Each Worker gets its own fine-grained PAT scoped to its own repo only.
+- **If lost:** revoke at the GitHub PAT settings page, create new with identical scope, run `npx wrangler secret put GITHUB_TOKEN` from `worker/` to update the Worker, submit a test form to verify.
+- **Cross-reference:** [KB-0024](knowledge-base.md#kb-0024--curation-pipeline-weekly-batch-workflow--public-submission-worker) · `worker/README.md`
 
 ### Cloudflare account login
 
@@ -350,14 +341,6 @@ Significant credential events worth recording:
 - **2026-05-02 (Session 5 — Phase B2)** — `EMAIL_RECIPIENTS` expanded from 1 to 3 recipients via owner direct edit of GitHub Secret in the UI (owner + brother + brother's wife). Resend trio (`RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_RECIPIENTS`) removed from local `.env` to enforce single source-of-truth posture (matches pickleball's posture). Verification of 3-recipient send deferred to next 07:00 UTC scheduled cron.
 - **2026-05-02 (Session 6 — Phase B3)** — This document created as the canonical credentials inventory for baseball-daily. Initial baseline = 4 active credentials (`YOUTUBE_API_KEY`, `RESEND_API_KEY`, `EMAIL_RECIPIENTS`, `EMAIL_FROM`) + 1 owned domain (`glad-fam.com`, shared with pickleball) + accounts (Resend, Google Cloud, GitHub, Cloudflare, Anthropic). No credentials added or rotated this session — pure documentation port from pickleball's `docs/credentials.md`.
 - **2026-05-03 (Session 9 — Phase B6 in flight)** — Doc rolled v1 → v2. Worker rewritten + renamed `baseball-daily-submit` → `baseball-daily-api` (dual-route: AI Q&A primary, submission route scaffolded). `ANTHROPIC_API_KEY` row updated from "not yet created" to "code shipped, awaiting owner creation". `GITHUB_TOKEN` (Worker) row clarified as optional for Phase B6 (AI route doesn't need it). No credential VALUES changed this session — owner-side creation + Worker deploy + secret upload are the next steps to flip both `ANTHROPIC_API_KEY` and (optionally) `GITHUB_TOKEN` to ✅. KB-0033 added.
-
-  _Then later in Session 9 (same date)_: owner created `ANTHROPIC_API_KEY` in Anthropic Console (`baseball-daily-worker`), uploaded to GitHub Secret + Cloudflare Worker (Worker upload via `wrangler secret put` mangled the paste → re-pasted via Cloudflare dashboard, fixed; codified as XPL-001). Worker deployed. `/ai` route returned a real Cardinals answer end-to-end. **Session 9 effectively flipped `ANTHROPIC_API_KEY` from ⏸ to ✅** — but the doc-side update was lagged and is reflected only in this Session 10 entry.
-
-- **2026-05-06 (Session 10 — Phase B6 LIVE retroactively reflected + KB-0020 ships)** — Doc rolled v2 → v3. Two row changes:
-  - `ANTHROPIC_API_KEY` flipped ⏸ → ✅ (Session 9 created + deployed it; Session 10 brings the doc into sync). Detail section updated to record the 30-min Anthropic-400-empty debug + dashboard re-paste fix.
-  - `GITHUB_TOKEN` (Worker) row description expanded — KB-0020 (`/refresh` route, public on-demand ingestion trigger) shipped this session. The same single fine-grained PAT now serves BOTH `/submit` (Issues:write) AND `/refresh` (Actions:write) on `baseball-daily-api`. One PAT → one paste covers both routes. Status remains ⏸ (PAT still not yet created — owner action) but instructions updated to specify both permissions on creation.
-  - No credential VALUES changed this session. `wrangler deploy` of the new Worker code happened twice this session (drop `/aitest` debug + add `/refresh` route); each deploy preserves existing secrets unchanged.
-  - KB-0020 implementation is closed-pending-PAT; KB-0021, KB-0028, KB-0024 (superseded), KB-0033 all closed; new KB-0034 added (Session 10 omnibus).
 
 ---
 

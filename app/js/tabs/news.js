@@ -1,5 +1,7 @@
 // news.js (tab) — curated MLB headlines from RSS sources.
-// Today / This Week / Recent buckets. Each item links out to the source.
+//
+// Phase B7: Today / This Week / Recent buckets become collapsible sections
+// with a TOC for fast nav (pattern ported from pickleball KB-0040 Phase L1).
 
 import { escapeHtml } from '../components/confidence-badge.js';
 import { renderNewsCard, bucketNews } from '../components/news-card.js';
@@ -39,25 +41,49 @@ export async function renderNews(root) {
 
   const { today, thisWeek, recent } = bucketNews(items);
 
+  const sections = [
+    { id: 'news-today',  title: `Today (${today.length})`,        body: bucketBody(today),    open: today.length > 0 },
+    { id: 'news-week',   title: `This Week (${thisWeek.length})`, body: bucketBody(thisWeek), open: today.length === 0 && thisWeek.length > 0 },
+    { id: 'news-recent', title: `Recent (${recent.length})`,      body: bucketBody(recent) },
+  ].filter(s => s.body).map((s, i) => ({ ...s, num: i + 1 }));
+
   let html = '<h1>News</h1>';
   if (sourceLine) html += '<div class="muted news-sources-line">From: ' + sourceLine + '</div>';
 
-  if (today.length) {
-    html += '<h2>Today</h2>';
-    html += '<div class="news-list">' + today.map(renderNewsCard).join('') + '</div>';
-  }
-  if (thisWeek.length) {
-    html += '<h2>This Week</h2>';
-    html += '<div class="news-list">' + thisWeek.map(renderNewsCard).join('') + '</div>';
-  }
-  if (recent.length) {
-    html += '<h2>Recent</h2>';
-    html += '<div class="news-list">' + recent.map(renderNewsCard).join('') + '</div>';
-  }
+  html += tocHtml(sections);
+  html += sections.map(sectionHtml).join('');
 
   if (errors.length) html += errorListHtml(errors);
 
   root.innerHTML = html;
+}
+
+function bucketBody(items) {
+  if (!items.length) return '';
+  return '<div class="news-list">' + items.map(renderNewsCard).join('') + '</div>';
+}
+
+function tocHtml(sections) {
+  if (!sections.length) return '';
+  const items = sections.map(s =>
+    '<li><a href="#' + s.id + '">' + s.num + '. ' + escapeHtml(s.title) + '</a></li>'
+  ).join('');
+  return (
+    '<nav class="tab-toc" aria-label="News tab sections">' +
+      '<div class="tab-toc-title">Jump to section</div>' +
+      '<ol>' + items + '</ol>' +
+    '</nav>'
+  );
+}
+
+function sectionHtml(s) {
+  const open = s.open ? ' open' : '';
+  return (
+    '<details class="tab-section" id="' + s.id + '"' + open + '>' +
+      '<summary>' + s.num + '. ' + escapeHtml(s.title) + '</summary>' +
+      '<div class="tab-section-body">' + s.body + '</div>' +
+    '</details>'
+  );
 }
 
 function errorListHtml(errors) {

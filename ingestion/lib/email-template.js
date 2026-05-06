@@ -1,28 +1,33 @@
 /**
- * Email template builder — v3
+ * Email template builder — v4
  *
  * Builds the rich HTML body + plain-text fallback + subject for the
  * morning email from a fresh daily snapshot + a separate news snapshot.
  * No external dependencies.
  *
- * v3 changes from v2: adds Top News section between Notable Games and
+ * v4 changes from v3: "Open the full report" CTA + the day's brief stats
+ * line (games / trades / injuries) move from the bottom of the email to
+ * the top — directly under the header. The CTA was previously buried under
+ * 9 sections; readers reaching for the link via mobile had to scroll past
+ * everything. Same change applied to plain-text fallback.
+ *
+ * v3 baseline (unchanged): adds Top News section between Notable Games and
  * On This Day. News is sourced from a SECOND argument (news-latest.json)
  * rather than the main snapshot — independent freshness, separate file.
- * buildEmail now accepts (snapshot, newsData) where newsData is optional.
+ * buildEmail accepts (snapshot, newsData) where newsData is optional.
  *
- * v3 sections (in display order):
+ * v4 sections (in display order):
  *   1. Header
- *   2. Cardinals pin       — scoring play + W/L/Sv decisions
- *   3. Nationals pin       — scoring play + W/L/Sv decisions
- *   4. Today's Schedule    — Cards/Nats + up to 3 league marquee games
- *   5. Top Highlights      — Cards + Nats highlights with mqdefault thumbnails
- *   6. Division Standings  — All NL + AL, top 3 per division (18 rows)
- *   7. Notable Games       — One-liners from snapshot.notableGames
- *   8. Top News (NEW v3)   — Top 4 items from news-latest.json with source +
- *                              tier badge + relative date + summary
- *   9. On This Day         — top 2 entries
- *  10. CTA button
- *  11. Stats footer
+ *   2. CTA + brief stats summary  (MOVED to top in v4)
+ *   3. Cardinals pin       — scoring play + W/L/Sv decisions
+ *   4. Nationals pin       — scoring play + W/L/Sv decisions
+ *   5. Today's Schedule    — Cards/Nats + up to 3 league marquee games
+ *   6. Top Highlights      — Cards + Nats highlights with mqdefault thumbnails
+ *   7. Division Standings  — All NL + AL, top 3 per division (18 rows)
+ *   8. Notable Games       — One-liners from snapshot.notableGames
+ *   9. Top News            — Top 4 items from news-latest.json
+ *  10. On This Day         — top 2 entries
+ *  11. Meta footer         — site URL + subscription text
  *
  * Design goals (unchanged):
  *   - Renders well in Gmail, Outlook, Apple Mail, mobile clients
@@ -134,6 +139,20 @@ function buildHtml(snap, dateFormatted, cardsLine, natsLine, newsData) {
 
     ${headerHtml(dateFormatted)}
 
+    <!-- Call-to-action button (moved to top in v4) -->
+    <div style="text-align:center; margin:24px 0 8px;">
+      <a href="${SITE_URL}" style="background:${COLORS.cardsRed}; color:${COLORS.white}; text-decoration:none; padding:14px 28px; border-radius:8px; font-size:16px; font-weight:600; display:inline-block;">
+        Open the full report →
+      </a>
+    </div>
+
+    <!-- Brief stats summary (under the CTA) -->
+    <div style="text-align:center; font-size:12px; color:${COLORS.textDim}; margin-bottom:24px;">
+      ${gamesCount} game${gamesCount === 1 ? '' : 's'} yesterday
+      ${tradesCount ? ` · ${tradesCount} trade${tradesCount === 1 ? '' : 's'}` : ''}
+      ${injuriesCount ? ` · ${injuriesCount} on the IL league-wide` : ''}
+    </div>
+
     ${teamPinHtml({
       label: 'St. Louis Cardinals',
       accent: COLORS.cardsRed,
@@ -161,20 +180,6 @@ function buildHtml(snap, dateFormatted, cardsLine, natsLine, newsData) {
     ${topNewsHtml(newsItems)}
 
     ${onThisDayHtml(onThisDay)}
-
-    <!-- Call-to-action button -->
-    <div style="text-align:center; margin:32px 0 20px;">
-      <a href="${SITE_URL}" style="background:${COLORS.cardsRed}; color:${COLORS.white}; text-decoration:none; padding:14px 28px; border-radius:8px; font-size:16px; font-weight:600; display:inline-block;">
-        Open the full report →
-      </a>
-    </div>
-
-    <!-- Stats footer -->
-    <div style="text-align:center; font-size:12px; color:${COLORS.textDim}; margin-top:20px;">
-      ${gamesCount} game${gamesCount === 1 ? '' : 's'} yesterday
-      ${tradesCount ? ` · ${tradesCount} trade${tradesCount === 1 ? '' : 's'}` : ''}
-      ${injuriesCount ? ` · ${injuriesCount} on the IL league-wide` : ''}
-    </div>
 
     <!-- Meta footer -->
     <div style="border-top:1px solid ${COLORS.border}; padding-top:16px; margin-top:28px; font-size:11px; color:${COLORS.textDim}; text-align:center;">
@@ -545,6 +550,17 @@ function buildPlainText(snap, dateFormatted, cardsLine, natsLine, newsData) {
   lines.push(`OZARK JOE'S BASEBALL DAILY — ${dateFormatted}`);
   lines.push('');
 
+  // CTA + brief stats summary moved to top in v4
+  lines.push(`Open the full report: ${SITE_URL}`);
+  const gamesCount = (snap?.scoreboard || []).length;
+  const tradesCount = (snap?.trades || []).length;
+  const injuriesCount = (snap?.injuries || []).length;
+  const summaryParts = [`${gamesCount} game${gamesCount === 1 ? '' : 's'} yesterday`];
+  if (tradesCount)   summaryParts.push(`${tradesCount} trade${tradesCount === 1 ? '' : 's'}`);
+  if (injuriesCount) summaryParts.push(`${injuriesCount} on the IL league-wide`);
+  lines.push(summaryParts.join(' · '));
+  lines.push('');
+
   // Cardinals pin
   lines.push('ST. LOUIS CARDINALS');
   lines.push(cardsLine ? formatGameLineText(cardsLine) : '  No game scheduled');
@@ -653,9 +669,8 @@ function buildPlainText(snap, dateFormatted, cardsLine, natsLine, newsData) {
     lines.push('');
   }
 
-  lines.push(`Open the full report: ${SITE_URL}`);
-  lines.push('');
   lines.push("— Ozark Joe's Baseball Daily Intelligence Report");
+  lines.push(`  ${SITE_URL}`);
 
   return lines.join('\n');
 }

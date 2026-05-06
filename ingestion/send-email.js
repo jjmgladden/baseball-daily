@@ -1,17 +1,20 @@
 #!/usr/bin/env node
 /**
- * send-email — v3
+ * send-email — v3 (template v4)
  *
  * Sends the morning briefing via Resend. Runs after fetch-daily.js +
  * fetch-news.js and the snapshot commit in .github/workflows/daily.yml.
  * Locally, runs via `node ingestion/send-email.js` with env vars set.
+ *
+ * Template version is independent of this script. Current template is v4
+ * (CTA + brief stats summary at top of email instead of bottom).
  *
  * v3: reads BOTH the main snapshot and the separate news snapshot
  * (`data/snapshots/news-latest.json`) and passes both to buildEmail.
  * If news-latest.json is missing or unparseable, the email still sends —
  * the Top News section is simply omitted.
  *
- * v2 baseline (unchanged): rendering in email-template.js v3 includes
+ * v2 baseline (unchanged): rendering in email-template.js v4 includes
  * Today's Schedule, highlight thumbnails, all-NL+AL standings, notable
  * games one-liners, and recap details (W/L/Sv + first scoring play)
  * inside the Cards/Nats pins. Requires snapshot schemaVersion >= 5.

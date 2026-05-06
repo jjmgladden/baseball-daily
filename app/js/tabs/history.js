@@ -1,11 +1,8 @@
 /**
- * History tab — v2
+ * History tab — v3
  *
- * Sections:
- *   - On-This-Day (from today's snapshot)
- *   - Iconic Moments (curated historical videos/links)
- *   - Franchise Lineages (multi-lineage teams with Explore link-outs)
- *   - All Franchises (compact list with link-outs)
+ * Phase B7: TOC + collapsible sections (pattern ported from pickleball KB-0040 Phase L1).
+ * "On This Day" stays open by default; the rest collapses to keep the page short.
  */
 
 import { loadFranchises, loadHistoryLinks, loadHistoricalVideos, loadStrangePlays } from '../data-loader.js';
@@ -31,50 +28,65 @@ export async function renderHistory(root, snap) {
   const events = snap?.onThisDay || [];
   const franchiseLinks = historyLinks?.franchiseLinks || {};
   const moments = videos?.moments || [];
+  const lineageFranchises = franchises
+    .filter(f => (f.history || []).length > 1)
+    .sort((a, b) => a.founded - b.founded);
+  const allFranchises = franchises.slice().sort((a, b) => a.founded - b.founded);
+
+  const sections = [
+    { id: 'hist-on-this-day', title: 'On This Day',                                                                  body: renderOnThisDayBody(events), open: true },
+    { id: 'hist-iconic',      title: 'Iconic Moments',                                                               body: renderIconicMomentsBody(moments) },
+    { id: 'hist-strange',     title: `Strangest Plays in History (${(strangePlays?.plays || []).length})`,           body: renderStrangePlaysBody(strangePlays?.plays || []) },
+    { id: 'hist-lineages',    title: 'Franchise Lineages',                                                           body: renderLineagesBody(lineageFranchises, franchiseLinks) },
+    { id: 'hist-all',         title: `All Franchises (${allFranchises.length})`,                                     body: renderAllFranchisesBody(allFranchises, franchiseLinks) },
+  ].filter(s => s.body).map((s, i) => ({ ...s, num: i + 1 }));
 
   root.innerHTML = `
     <h1>History</h1>
 
-    ${renderOnThisDay(events)}
-
-    ${renderIconicMoments(moments)}
-
-    ${renderStrangePlays(strangePlays?.plays || [])}
-
-    <div class="card" style="border-left: 3px solid var(--accent-info);">
-      <p class="muted" style="margin: 0;">Looking for legends (Vin Scully, Josh Gibson, Ken Griffey Jr., etc.) or brothers in baseball (DiMaggios, Alous, Waners, etc.)? They live on the <strong><a href="#" onclick="document.querySelector('[data-tab=stories]').click(); return false;">Stories</a></strong> tab now — fully searchable and filterable.</p>
+    <div class="tab-callout info">
+      <div class="tab-callout-label">Looking for player stories?</div>
+      Legends (Vin Scully, Josh Gibson, Ken Griffey Jr.) and brothers in baseball (DiMaggios, Alous, Waners) live on the <strong><a href="#" onclick="document.querySelector('[data-tab=stories]').click(); return false;">Stories</a></strong> tab — fully searchable and filterable.
     </div>
 
-    <h2>Franchise Lineages</h2>
-    <p class="muted" style="margin-bottom: 1rem;">
-      Franchises with relocations or major name changes. Click any "Explore" link to dive into that team's full history.
-    </p>
-    <div class="grid grid-2">
-      ${franchises
-        .filter(f => (f.history || []).length > 1)
-        .sort((a, b) => a.founded - b.founded)
-        .map(f => renderLineageCard(f, franchiseLinks[String(f.id)]))
-        .join('')}
-    </div>
+    ${tocHtml(sections)}
 
-    <h2 style="margin-top: 2rem;">All Franchises <span class="muted">(${franchises.length})</span></h2>
-    <div class="grid grid-3">
-      ${franchises.slice().sort((a, b) => a.founded - b.founded).map(f => renderCompactFranchise(f, franchiseLinks[String(f.id)])).join('')}
-    </div>
+    ${sections.map(sectionHtml).join('')}
   `;
 }
 
-function renderOnThisDay(events) {
+function tocHtml(sections) {
+  if (!sections.length) return '';
+  const items = sections.map(s =>
+    `<li><a href="#${s.id}">${s.num}. ${escapeHtml(s.title)}</a></li>`
+  ).join('');
+  return `
+    <nav class="tab-toc" aria-label="History tab sections">
+      <div class="tab-toc-title">Jump to section</div>
+      <ol>${items}</ol>
+    </nav>
+  `;
+}
+
+function sectionHtml(s) {
+  const open = s.open ? ' open' : '';
+  return `
+    <details class="tab-section" id="${s.id}"${open}>
+      <summary>${s.num}. ${escapeHtml(s.title)}</summary>
+      <div class="tab-section-body">${s.body}</div>
+    </details>
+  `;
+}
+
+function renderOnThisDayBody(events) {
   if (!events.length) {
     return `
-      <h2>On This Day</h2>
       <div class="card">
         <p class="muted">No curated events for today's date yet. Expand the seed at <code>data/master/on-this-day-seed.json</code>.</p>
       </div>
     `;
   }
   return `
-    <h2>On This Day</h2>
     <div class="card">
       <ul class="on-this-day-list">
         ${events.map(e => `
@@ -92,10 +104,9 @@ function renderOnThisDay(events) {
   `;
 }
 
-function renderStrangePlays(plays) {
+function renderStrangePlaysBody(plays) {
   if (!plays.length) return '';
   return `
-    <h2>Strangest Plays in History <span class="muted">(${plays.length})</span></h2>
     <p class="muted" style="margin-bottom: 1rem;">
       Oddities, bizarre feats, and you-have-to-see-it-to-believe-it moments.
     </p>
@@ -115,10 +126,9 @@ function renderStrangePlays(plays) {
   `;
 }
 
-function renderIconicMoments(moments) {
+function renderIconicMomentsBody(moments) {
   if (!moments.length) return '';
   return `
-    <h2>Iconic Moments</h2>
     <p class="muted" style="margin-bottom: 1rem;">
       Curated historical plays and milestones. Each entry links to video footage and authoritative sources.
     </p>
@@ -134,6 +144,27 @@ function renderIconicMoments(moments) {
           ${renderLinkPills(m.links)}
         </div>
       `).join('')}
+    </div>
+  `;
+}
+
+function renderLineagesBody(lineageFranchises, franchiseLinks) {
+  if (!lineageFranchises.length) return '';
+  return `
+    <p class="muted" style="margin-bottom: 1rem;">
+      Franchises with relocations or major name changes. Click any "Explore" link to dive into that team's full history.
+    </p>
+    <div class="grid grid-2">
+      ${lineageFranchises.map(f => renderLineageCard(f, franchiseLinks[String(f.id)])).join('')}
+    </div>
+  `;
+}
+
+function renderAllFranchisesBody(allFranchises, franchiseLinks) {
+  if (!allFranchises.length) return '';
+  return `
+    <div class="grid grid-3">
+      ${allFranchises.map(f => renderCompactFranchise(f, franchiseLinks[String(f.id)])).join('')}
     </div>
   `;
 }
