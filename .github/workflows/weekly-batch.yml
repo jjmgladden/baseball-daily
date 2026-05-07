@@ -63,7 +63,7 @@ jobs:
             '2. Leave unchecked for entries you want to skip (they stay in the backlog for future weeks).',
             '3. **Close the Issue** when done (or add a comment like `done`).',
             '',
-            'Claude reads the checkbox state on the next session and applies approved entries to the relevant master file based on `type`: `legend`/`broadcaster`/`coach`/`executive` → `legends-general.json`; `moment` → `historical-videos.json`; `story` → `stories.json`; `umpire` → `legends-general.json` (category=umpire); `trivia` → `trivia.json`.',
+            'Claude reads the checkbox state on the next session and applies approved entries to the relevant master file based on `type`: `legend`/`broadcaster`/`coach`/`executive` → `legends-general.json`; `moment` → `historical-videos.json`; `story` → `stories.json`; `umpire` → `legends-general.json` (category=umpire); `trivia` → `trivia.json`; `on-this-day` → `on-this-day-seed.json` (apply step lifts `seedEntry` block).',
             '',
             '## Batch',
             '',

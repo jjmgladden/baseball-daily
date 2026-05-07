@@ -2,7 +2,7 @@
 
 Living record of decisions, open issues, and action items. Updated every session.
 
-**Last updated:** 2026-05-06 (Session 10 — **omnibus session, 7 tracks shipped**: (1) `wrangler deploy` cleanup dropped `/aitest`; (2) **Phase B7** TOC + accordion ported from pickleball L1 across Cardinals / History / News tabs — KB-0028 closes entirely; (3) **Issue #5 applied** — 10 approved curation entries (Marvin Miller + 9 player legends) appended to `legends-general.json` (20 → 30); (4) **KB-0021 closed** — auto-reload-on-SW-update implemented in `app.js` (controllerchange listener, gated by wasControlled); (5) email template **v3 → v4** — "Open the full report" CTA + brief stats summary moved from bottom to top per owner feedback; (6) **trivia tab redesign** — Today's 5 (deterministic-by-date, first card matches Daily Report) + 🎲 Different 5 reshuffle (sessionStorage-seeded) + filters bypass to mine full pool; (7) **trivia in weekly-batch flow** — `weekly-batch.yml` routing comment includes trivia.json; 20 verified trivia stubs seeded into `curation-backlog.json` (121 → 141 pending) for the next 2 Monday batches; (8) **KB-0020 closes-pending-PAT** — public on-demand refresh: `/refresh` route added to deployed Worker (rate-limited 1/10min/IP) + "Refresh now" link in footer + new `app/js/components/refresh.js` + dual-route `GITHUB_TOKEN` (Issues:write + Actions:write); (9) **Mobile-stale-snapshot bug fixed** — baseball SW was cache-first for ALL GETs including `/data/snapshots/latest.json`, mirroring pickleball's split-handler pattern (network-first for `/data/`, cache-first for shell) closes a long-standing user-facing bug; SW + APP_VERSION rolled v18 → v22 across the four shell-changing commits this session; new KB-0034 added; `docs/credentials.md` v2 → v3)
+**Last updated:** 2026-05-06 (Session 11 — **single-track focused session — Option C executed (KB-0013 closing path in flight)**: (1) `.github/workflows/weekly-batch.yml` routing comment extended to include `on-this-day` → `on-this-day-seed.json` (apply step lifts `seedEntry` block); (2) `scripts/seed-on-this-day-2026-05-06.js` — 33 verified OTD stubs seeded into `curation-backlog.json` (141 → 174 pending; 19 priority-1, 14 priority-2; clusters: 5 Cardinals, 4 debuts/firsts, 10 single-game performances, 5 postseason, 4 cultural, 4 records, 1 bizarre); (3) **broken `on-this-day-seed.json` line 46 fixed** — replaced fictitious "Twins UTP 1990" composite (Billy Ripken / Carlos Baerga draft typo that shipped) with verified Bill Wambsganss UTP in Game 5 of the 1920 World Series (10-10-1920) — only UTP in WS history; (4) KB-0013 status flipped Open(deferred) → Open(in flight) with full Session 11 progress block; Quick Index updated. Player birthdays deliberately excluded from OTD stubs (Chadwick auto-surfaces HOF-caliber births; would double-render). No version rolls (CLAUDE.md, schemas, SW, APP_VERSION, email, Worker, credentials all unchanged). KB-0020 PAT upload still pending owner action. Session 10 → 11)
 
 **Tier convention (dynamic types only — adopted from MODR):**
 - **T1** — Critical / production-impacting; fix first
@@ -131,12 +131,21 @@ Static types (Reference, Decision, Limitation) omit Tier.
 
 ### KB-0013 | On-This-Day seed coverage
 - **Type:** Limitation
-- **Date:** 2026-04-19 (last updated Session 10 — closing path identified)
-- **Finding:** Seed covers ~50 landmark events. Expansion via adding entries — no schema change. Most calendar dates currently render the History tab's "On This Day" section as "No curated events for today's date yet."
+- **Date:** 2026-04-19 (last updated Session 11 — closing path **in flight**)
+- **Finding:** Seed covers 51 landmark events. Expansion via adding entries — no schema change. Most calendar dates currently render the History tab's "On This Day" section as "No curated events for today's date yet."
 
-  **Closing path (identified Session 10, deferred):** treat the same way trivia was treated this session — add `type: 'on-this-day'` to the curation-backlog flow + the weekly-batch routing instruction in `weekly-batch.yml`. Seed 30-50 stubs with `{date, year, title, description, source}`. The Monday cron surfaces 10/week for owner approval; apply step appends approved entries to `data/master/on-this-day-seed.json`. Closes once coverage feels right (subjective — owner declares done).
-- **Status:** Open (content expansion + trivia-style backlog flow not yet wired for `type: 'on-this-day'`)
-- **Cross-ref:** data/master/on-this-day-seed.json · KB-0034 § Track 5 (trivia stub seed pattern is the template)
+  **Closing path (identified Session 10, in flight Session 11):** treat the same way trivia was treated in Session 10 — add `type: 'on-this-day'` to the curation-backlog flow + the weekly-batch routing instruction in `weekly-batch.yml`. Seed 30-50 stubs carrying a nested `seedEntry` block (the future apply step lifts that block into `data/master/on-this-day-seed.json`). The Monday cron surfaces 10/week for owner approval. Closes once coverage feels right (subjective — owner declares done).
+
+  **Session 11 progress (2026-05-06):**
+  - `weekly-batch.yml` routing comment updated to include `on-this-day` → `on-this-day-seed.json` (apply step lifts `seedEntry` block).
+  - `scripts/seed-on-this-day-2026-05-06.js` — 33 verified stubs seeded into `curation-backlog.json` (priorities 1-2; categories: 5 Cardinals, 4 debuts/firsts, 10 single-game performances, 5 postseason, 4 cultural, 4 records, 1 bizarre).
+  - Schema for OTD stubs: top-level `{id, type:'on-this-day', category, name, summary, source, priority, status}` + nested `seedEntry: {date, year, type, title, description, tags}`. Distinct from trivia's flat `{question, answer}` extension because OTD needs more fields and clean apply semantics.
+  - Player birthdays **deliberately excluded** from curated stubs — `ingestion/on-this-day.js` already auto-surfaces HOF-caliber births from Chadwick (≥10 MLB seasons), so curated birthday stubs would double-render on the daily report.
+  - Backlog is now 174 pending: 33 on-this-day · 20 trivia · 121 other (legend / moment / story / etc.). Next Monday's batch (May 11) will surface 10 entries sorted by priority then id — 19 of the 33 OTDs are priority 1, so the next 1-2 batches will likely be all OTD until the priority-1 set is consumed.
+
+  **Closing trigger:** owner declares coverage feels right. With 33 stubs in backlog → 10/week applied → ~3-4 weeks of OTD-heavy batches before coverage is roughly doubled (52 → ~85 entries).
+- **Status:** Open (in flight — stubs seeded; weekly cron pipeline now handles the type; awaiting owner approvals via Issue checkbox flow over coming Mondays)
+- **Cross-ref:** data/master/on-this-day-seed.json · scripts/seed-on-this-day-2026-05-06.js · .github/workflows/weekly-batch.yml · KB-0034 § Track 5 (trivia stub seed pattern was the template)
 
 ### KB-0014 | Snapshot schema v3
 - **Type:** Decision
@@ -864,7 +873,7 @@ Static types (Reference, Decision, Limitation) omit Tier.
 ## Quick Index
 
 **Open items (with tier where applicable):**
-- KB-0013 — On-This-Day seed expansion — Limitation (closing path identified Session 10 — trivia-stub-style seed flow; deferred to a future session)
+- KB-0013 — On-This-Day seed expansion — Limitation (closing path **in flight** Session 11 — 33 stubs seeded into curation-backlog; weekly-batch.yml routes `type:'on-this-day'`; owner approvals via Monday Issue checkbox flow)
 - KB-0020 — Public on-demand refresh — Action, **closes-pending-owner-PAT** (code shipped + Worker deployed Session 10; owner needs to create fine-grained PAT + paste via Cloudflare dashboard, ~5 min)
 - KB-0024 — Submission Worker — Action (Worker code LIVE; Suggest UI hookup separate; same `GITHUB_TOKEN` PAT as KB-0020 covers it)
 
